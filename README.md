@@ -1,9 +1,11 @@
 # Kartelli-Purkaja (`kartelli-tutka`) — Julkisten Hankintojen (38,7 Mrd €/v) Röntgen & 1-Click Oikeusohjus
 
-* **Tekijä / Ylläpitäjä:** [`@libertaari-suomalainen`](https://github.com/libertaari-suomalainen)
-* **Lisenssi:** MIT (100 % vapaa avoin lähdekoodi)
-* **Live-selainversio (GitHub Pages):** `https://libertaari-suomalainen.github.io/kartelli-tutka/`
-* **Valmis CFO / VM Excel-leikkuri:** [`dist/Sote_ja_Kunta_Kartelli_Matriisi_2026.xlsx`](dist/Sote_ja_Kunta_Kartelli_Matriisi_2026.xlsx)
+### 🌐 **[AVAA LIVE-SOVELLUS SELAIMESSA: https://libertaari-suomalainen.github.io/kartelli-tutka/](https://libertaari-suomalainen.github.io/kartelli-tutka/)**
+
+* **Live-verkkosivu (GitHub Pages):** [https://libertaari-suomalainen.github.io/kartelli-tutka/](https://libertaari-suomalainen.github.io/kartelli-tutka/)
+* **Valmis CFO / VM Excel-leikkuri (`.xlsx`):** [`dist/Sote_ja_Kunta_Kartelli_Matriisi_2026.xlsx`](https://github.com/libertaari-suomalainen/kartelli-tutka/raw/main/dist/Sote_ja_Kunta_Kartelli_Matriisi_2026.xlsx)
+* **Sisartyökalu (Yritys- ja järjestötukien 11,5 Mrd €/v leikkuri):** [`tukipalkkio-purku`](https://github.com/libertaari-suomalainen/tukipalkkio-purku) ([Live-sovellus](https://libertaari-suomalainen.github.io/tukipalkkio-purku/))
+* **Tekijä / Ylläpitäjä:** [`@libertaari-suomalainen`](https://github.com/libertaari-suomalainen) | **Lisenssi:** MIT (100 % vapaa avoin lähdekoodi)
 
 ---
 
