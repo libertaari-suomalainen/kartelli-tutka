@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kartelli-tutka"
+version = "2026.10.1"
+description = "Kartelli-Purkaja: Finnish Public Procurement (38.7B EUR) Cartel X-Ray, P25 Price Arbitrage & 1-Click 0-EUR Legal Filing Engine"
+readme = "README.md"
+authors = [{ name = "libertaari-suomalainen" }]
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
