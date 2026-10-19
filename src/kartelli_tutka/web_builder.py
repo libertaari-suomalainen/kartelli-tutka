@@ -425,7 +425,13 @@ def build_static_web_app(output_path: Path) -> Path:
     .hero-card, .section-block {{ padding: 22px 18px; }}
   }}
   @media (max-width: 640px) {{
-    .container {{ padding: 18px 12px 56px; }}
+    html, body {{ overflow-x: hidden; max-width: 100%; }}
+    .container {{ padding: 16px 12px 56px; }}
+    .hero-card, .section-block {{ padding: 18px 14px; }}
+    .hero-title {{ font-size: 24px; line-height: 1.22; }}
+    .kpi-grid, .cards-grid, .flow-steps {{ grid-template-columns: 1fr; }}
+    .filter-col {{ min-width: 100%; }}
+    .badge {{ white-space: normal; text-align: right; }}
     .modal-backdrop {{ padding: 10px; align-items: flex-end; }}
     .modal-card {{ padding: 22px 18px; max-height: 92vh; border-radius: 12px 12px 0 0; }}
     .metrics-strip {{ grid-template-columns: 1fr; }}
