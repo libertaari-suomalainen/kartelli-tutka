@@ -7,12 +7,14 @@ from kartelli_tutka.build_all import build_and_verify_all
 from kartelli_tutka.engine import (
     BASELINE_HILMA_TENDERS,
     BASELINE_INHOUSE_FLOWS,
+    PUBLIC_BUYER_DIRECTORY,
     HilmaTenderRecord,
     PeerCategorySpend,
     compute_category_arbitrage_breakdown,
     compute_inhouse_leakage,
     compute_price_spread_arbitrage,
     detect_single_bid_cartels,
+    validate_ytunnus_checksum,
 )
 from kartelli_tutka.legal_generator import (
     generate_hankintaoikaisu,
@@ -23,12 +25,24 @@ from kartelli_tutka.legal_generator import (
 
 
 class TestKartelliTutkaEngine(unittest.TestCase):
+    def test_all_ytunnus_checksums_valid(self) -> None:
+        for f in BASELINE_INHOUSE_FLOWS:
+            self.assertTrue(
+                validate_ytunnus_checksum(f.inhouse_y_tunnus),
+                f"Invalid Modulo-11 Y-tunnus on in-house flow {f.inhouse_vendor}: {f.inhouse_y_tunnus}",
+            )
+        for b in PUBLIC_BUYER_DIRECTORY:
+            self.assertTrue(
+                validate_ytunnus_checksum(b.y_tunnus),
+                f"Invalid Modulo-11 Y-tunnus on public buyer {b.entity_name}: {b.y_tunnus}",
+            )
+
     def test_inhouse_sidosyksikko_leakage(self) -> None:
         res = compute_inhouse_leakage()
         self.assertAlmostEqual(res["total_inhouse_spend_m_eur"], 1420.00, places=2)
         self.assertGreater(res["illegal_token_share_spend_m_eur"], 700.0)
         self.assertEqual(res["illegal_under_10pct_spend_m_eur"], 745.0)
-        self.assertGreater(res["recoverable_annual_saving_m_eur"], 450.0)
+        self.assertAlmostEqual(res["recoverable_annual_saving_m_eur"], 532.38, places=2)
 
     def test_price_spread_arbitrage(self) -> None:
         sample = [
@@ -60,18 +74,27 @@ class TestKartelliTutkaEngine(unittest.TestCase):
         self.assertEqual(kkv["recipient_email"], "kirjaamo@kkv.fi")
         self.assertEqual(kkv["filing_fee_eur"], "0.00")
         self.assertIn("MAO:154/2024", kkv["body"])
+        self.assertIn("KHO 8.10.2025 taltio 2250", kkv["body"])
         self.assertIn("2292633-0", kkv["body"])
+
+        # Verify >=10% monopoly flows (Apotti & Valtori) challenge subcontracting chain / lock-in instead of <10% ownership
+        valtori_flow = BASELINE_INHOUSE_FLOWS[6]
+        kkv_valtori = generate_kkv_complaint(valtori_flow)
+        self.assertIn("1226/2013", kkv_valtori["body"])
+        self.assertNotIn("ainoastaan 100.00 %", kkv_valtori["body"])
 
         oikaisu = generate_hankintaoikaisu(istekki_flow, istekki_flow.buyer_kirjaamo_email)
         self.assertIn("133 §", oikaisu["subject"])
         self.assertIn("RL 40:9", oikaisu["body"])
 
-        foia = generate_julkisuuslaki_foia("Pirkanmaan hyvinvointialue", "kirjaamo@pirha.fi")
+        foia = generate_julkisuuslaki_foia("Tampereen kaupunki", "kirjaamo@tampere.fi")
         self.assertIn("14 vuorokauden", foia["body"])
         self.assertIn("ostolaskudata", foia["body"])
+        self.assertNotIn("kaupunkin", foia["body"])
 
         hilma = generate_hilma_spec_challenge(BASELINE_HILMA_TENDERS[0])
         self.assertIn("67 §", hilma["subject"])
+        self.assertIn("75 §", hilma["body"])
 
     def test_atomic_build_all_artifacts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -80,6 +103,9 @@ class TestKartelliTutkaEngine(unittest.TestCase):
             self.assertTrue((root / summary["snapshot_path"]).exists())
             self.assertTrue((root / summary["xlsx_path"]).exists())
             self.assertTrue((root / summary["html_path"]).exists())
+            html_text = (root / summary["html_path"]).read_text(encoding="utf-8")
+            self.assertIn("532 milj. €/v", html_text)
+            self.assertNotIn("504 milj. €/v", html_text)
             with zipfile.ZipFile(root / summary["xlsx_path"], "r") as zf:
                 sheet2 = zf.read("xl/worksheets/sheet2.xml").decode("utf-8")
                 self.assertIn("Istekki Oy", sheet2)

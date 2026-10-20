@@ -64,7 +64,7 @@ class PublicBuyerProfile:
 # Y-tunnus IDs verified via PRH Open Data API (avoindata.prh.fi)
 BASELINE_INHOUSE_FLOWS: List[InHouseContractFlow] = [
     InHouseContractFlow(
-        "Uusimaa / HUS / Vantaa-Kerava",
+        "Uusimaa / HUS / Helsinki / Vantaa-Kerava",
         12.5,
         "Oy Apotti Ab",
         "2699989-5",
@@ -73,10 +73,10 @@ BASELINE_INHOUSE_FLOWS: List[InHouseContractFlow] = [
         28.0,
         32.0,
         "kirjaamo@hus.fi",
-        "Ylihintainen lukkoon sidottu sidosyksikkö (Epic-lisenssi + välityskate)",
+        "Ylihintainen lukkoon sidottu sidosyksikkö (Epic-lisenssi + 28 % välityskate + ketjutettu alihankinta)",
     ),
     InHouseContractFlow(
-        "Pohjois-Savo, Pirha & 15 hyvinvointialuetta",
+        "Vähemmistöomistaja-HVA:t & >150 kuntaa (pääomistajat Pirha & Pshyva)",
         0.4,
         "Istekki Oy",
         "2292633-0",
@@ -85,10 +85,10 @@ BASELINE_INHOUSE_FLOWS: List[InHouseContractFlow] = [
         24.0,
         26.0,
         "kirjaamo@pirha.fi",
-        "Laiton suorahankinta — 0,40 % näennäisomistus (Hankintalaki 15 § & MAO:154/2024)",
+        "Laiton suorahankinta — vähemmistöosakkaiden 0,40 % näennäisomistus (Hankintalaki 15 §, MAO:154/2024 & KHO 8.10.2025)",
     ),
     InHouseContractFlow(
-        "Varsinais-Suomi, Satakunta & 12 aluetta",
+        "Lapha, Kanta-Häme & 12 vähemmistöomistaja-HVA:ta (pääomistajat Varha & Sata)",
         0.8,
         "2M-IT Oy",
         "2859795-3",
@@ -97,7 +97,7 @@ BASELINE_INHOUSE_FLOWS: List[InHouseContractFlow] = [
         22.0,
         25.0,
         "kirjaamo@varha.fi",
-        "Laiton suorahankinta — 0,80 % näennäisomistus (Hankintalaki 15 § & MAO:154/2024)",
+        "Laiton suorahankinta — vähemmistöosakkaiden 0,80 % näennäisomistus (Hankintalaki 15 §, MAO:154/2024 & KHO 8.10.2025)",
     ),
     InHouseContractFlow(
         "18 hyvinvointialuetta & yli 200 kuntaa",
@@ -109,10 +109,10 @@ BASELINE_INHOUSE_FLOWS: List[InHouseContractFlow] = [
         26.0,
         24.0,
         "kirjaamo@vakehyva.fi",
-        "Todettu laittomaksi suorahankinnaksi (MAO:154/2024 & KHO — 0,04–0,05 % omistus)",
+        "Todettu laittomaksi suorahankinnaksi (MAO:154/2024 & KHO 8.10.2025 taltio 2250 — 0,04–0,05 % omistus)",
     ),
     InHouseContractFlow(
-        "Pohjois-Pohjanmaa, Keski-Suomi & 4 aluetta",
+        "Monetra-emoyhtiön vähemmistöomistajakunnat & -hyvinvointialueet (Pohde, Hyvaks ym.)",
         1.2,
         "Monetra Oy",
         "2930159-5",
@@ -121,7 +121,7 @@ BASELINE_INHOUSE_FLOWS: List[InHouseContractFlow] = [
         21.0,
         22.0,
         "kirjaamo@pohde.fi",
-        "Laiton suorahankinta — 1,20 % näennäisomistus (<10 % lakiraja)",
+        "Laiton suorahankinta — 1,20 % näennäisomistus emoyhtiössä (<10 % lakiraja)",
     ),
     InHouseContractFlow(
         "Yli 260 kuntaa ja kuntayhtymää",
@@ -139,13 +139,13 @@ BASELINE_INHOUSE_FLOWS: List[InHouseContractFlow] = [
         "Valtion virastot ja laitokset (yli 60 kpl)",
         100.0,
         "Valtori",
-        "2594476-3",
+        "2574261-7",
         "Tieto Finland Oy (1962361-1) / CGI Suomi Oy (0357502-9) / Elisa Oyj",
         480.0,
         30.0,
         28.0,
         "kirjaamo@valtori.fi",
-        "Lakisääteinen valtion IT-monopoli (30 % sisäinen hallintolisä + ketjutettu konsultointi)",
+        "Lakisääteinen valtion IT-monopoli (Laki 1226/2013 — 30 % sisäinen hallintolisä + ketjutettu konsultointi)",
     ),
 ]
 
@@ -242,11 +242,11 @@ BASELINE_HILMA_TENDERS: List[HilmaTenderRecord] = [
 
 
 PUBLIC_BUYER_DIRECTORY: List[PublicBuyerProfile] = [
-    PublicBuyerProfile("HUS-yhtymä", "HUS", "1567535-0", "kirjaamo@hus.fi", 1480.0, False, "Oy Apotti Ab, Valtori"),
+    PublicBuyerProfile("HUS-yhtymä", "HUS", "1567535-0", "kirjaamo@hus.fi", 1480.0, True, "Oy Apotti Ab, Valtori"),
     PublicBuyerProfile("Pirkanmaan hyvinvointialue (Pirha)", "HVA", "3221308-6", "kirjaamo@pirha.fi", 1320.0, True, "Istekki Oy, Numera/Sarastia, Monetra"),
     PublicBuyerProfile("Varsinais-Suomen hyvinvointialue (Varha)", "HVA", "3221065-1", "kirjaamo@varha.fi", 1190.0, False, "2M-IT Oy, Numera/Sarastia"),
     PublicBuyerProfile("Pohjois-Pohjanmaan hyvinvointialue (Pohde)", "HVA", "3221326-2", "kirjaamo@pohde.fi", 1080.0, False, "Monetra Oy, Istekki Oy, Esko Systems"),
-    PublicBuyerProfile("Länsi-Uudenmaan hyvinvointialue (Luvn)", "HVA", "3221347-3", "kirjaamo@luvn.fi", 1040.0, False, "2M-IT Oy, Numera/Sarastia, Oy Apotti Ab"),
+    PublicBuyerProfile("Länsi-Uudenmaan hyvinvointialue (Luvn)", "HVA", "3221347-3", "kirjaamo@luvn.fi", 1040.0, False, "2M-IT Oy, Numera/Sarastia, Tiera Oy"),
     PublicBuyerProfile("Vantaan ja Keravan hyvinvointialue (Vake)", "HVA", "3221356-1", "kirjaamo@vakehyva.fi", 790.0, False, "Oy Apotti Ab, Numera/Sarastia"),
     PublicBuyerProfile("Keski-Suomen hyvinvointialue (Hyvaks)", "HVA", "3221318-2", "kirjaamo@hyvaks.fi", 690.0, False, "Istekki Oy, Monetra Oy, 2M-IT Oy"),
     PublicBuyerProfile("Pohjois-Savon hyvinvointialue (Pshyva)", "HVA", "3221316-6", "kirjaamo@pshyva.fi", 660.0, False, "Istekki Oy, Numera/Sarastia"),
@@ -255,6 +255,25 @@ PUBLIC_BUYER_DIRECTORY: List[PublicBuyerProfile] = [
     PublicBuyerProfile("Espoon kaupunki", "Kunta", "0101263-6", "kirjaamo@espoo.fi", 1120.0, True, "Tiera Oy, Numera/Sarastia"),
     PublicBuyerProfile("Tampereen kaupunki", "Kunta", "0211675-2", "kirjaamo@tampere.fi", 980.0, True, "Monetra Pirkanmaa, Istekki Oy, Tiera Oy"),
 ]
+
+
+def validate_ytunnus_checksum(y_tunnus: str) -> bool:
+    """
+    Validates Finnish Business ID (Y-tunnus) Modulo-11 checksum.
+    Weights: [7, 9, 10, 5, 8, 4, 2]
+    """
+    if len(y_tunnus) != 9 or y_tunnus[7] != "-":
+        return False
+    body, check_str = y_tunnus[:7], y_tunnus[8]
+    if not (body.isdigit() and check_str.isdigit()):
+        return False
+    weights = [7, 9, 10, 5, 8, 4, 2]
+    total = sum(int(d) * w for d, w in zip(body, weights))
+    rem = total % 11
+    if rem == 1:
+        return False
+    expected = 0 if rem == 0 else 11 - rem
+    return int(check_str) == expected
 
 
 def compute_inhouse_leakage(
