@@ -100,23 +100,24 @@ def build_static_web_app(output_path: Path) -> Path:
     background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border);
-    padding: 12px 20px;
+    padding: 10px 20px;
   }}
   .topbar-inner {{
-    max-width: 1140px;
+    max-width: 1180px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }}
   .brand {{
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     text-decoration: none;
     color: var(--text);
+    min-width: 0;
   }}
   .brand-mark {{
     width: 36px;
@@ -126,47 +127,60 @@ def build_static_web_app(output_path: Path) -> Path:
     color: #fff;
     font-family: 'DM Sans', sans-serif;
     font-weight: 800;
-    font-size: 14px;
+    font-size: 13.5px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }}
+  .brand-text {{ min-width: 0; }}
   .brand-text strong {{
     display: block;
     font-family: 'DM Sans', sans-serif;
-    font-size: 15.5px;
+    font-size: 15px;
     font-weight: 700;
     line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }}
-  .brand-text span {{ display: block; font-size: 12px; color: var(--muted); }}
-  .nav-actions {{ display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }}
+  .brand-text span {{
+    display: block;
+    font-size: 11.5px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }}
+  .nav-actions {{ display: flex; align-items: center; gap: 6px; flex-shrink: 0; }}
   .lang-btn {{
     background: var(--stone);
     border: 1px solid var(--border-strong);
     color: var(--text);
-    padding: 8px 13px;
+    padding: 6px 10px;
     border-radius: 6px;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 600;
     cursor: pointer;
-    min-height: 40px;
+    min-height: 36px;
+    white-space: nowrap;
   }}
   .lang-btn.active {{ background: var(--accent); color: #fff; border-color: var(--accent); }}
   .btn-primary {{
     background: var(--accent);
     color: #fff;
     text-decoration: none;
-    padding: 9px 15px;
+    padding: 7px 13px;
     border-radius: 6px;
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    min-height: 40px;
+    gap: 5px;
+    min-height: 36px;
     border: none;
     cursor: pointer;
+    white-space: nowrap;
   }}
   .btn-primary:hover {{ background: var(--accent-dark); }}
   .btn-secondary {{
@@ -174,25 +188,26 @@ def build_static_web_app(output_path: Path) -> Path:
     color: var(--text);
     border: 1px solid var(--border-strong);
     text-decoration: none;
-    padding: 9px 14px;
+    padding: 7px 12px;
     border-radius: 6px;
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    min-height: 40px;
+    gap: 5px;
+    min-height: 36px;
     cursor: pointer;
+    white-space: nowrap;
   }}
   .btn-secondary:hover {{ background: var(--stone); }}
-  .container {{ max-width: 1140px; margin: 0 auto; padding: 32px 20px 80px; }}
+  .container {{ max-width: 1180px; margin: 0 auto; padding: 28px 20px 80px; }}
   .hero-card {{
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 40px;
+    padding: 38px 40px;
     box-shadow: var(--shadow);
-    margin-bottom: 32px;
+    margin-bottom: 28px;
   }}
   .kicker {{
     display: inline-block;
@@ -206,14 +221,14 @@ def build_static_web_app(output_path: Path) -> Path:
     border-radius: 4px;
     margin-bottom: 16px;
   }}
-  .hero-title {{ font-size: clamp(26px, 4vw, 40px); line-height: 1.16; font-weight: 800; margin-bottom: 16px; }}
-  .hero-lead {{ font-size: clamp(16px, 2vw, 18.5px); color: var(--body); max-width: 860px; margin-bottom: 24px; }}
+  .hero-title {{ font-size: clamp(26px, 4vw, 38px); line-height: 1.16; font-weight: 800; margin-bottom: 16px; }}
+  .hero-lead {{ font-size: clamp(16px, 2vw, 18px); color: var(--body); max-width: 880px; margin-bottom: 22px; }}
   .callout-stone {{
     background: var(--stone);
     border-left: 4px solid var(--accent);
     padding: 18px 22px;
     border-radius: 0 8px 8px 0;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
   }}
   .callout-stone h3 {{ font-size: 16.5px; margin-bottom: 6px; }}
   .callout-stone p {{ font-size: 15px; color: var(--body); }}
@@ -256,6 +271,81 @@ def build_static_web_app(output_path: Path) -> Path:
   .kpi-val.red {{ color: var(--red); }}
   .kpi-val.green {{ color: var(--accent-dark); }}
   .kpi-sub {{ font-size: 13.5px; color: var(--body); }}
+
+  /* Search & Quick-Filter Hub */
+  .search-hub {{
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    padding: 22px 26px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+  }}
+  .search-hub label {{
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-dark);
+    margin-bottom: 6px;
+  }}
+  .input-box {{
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15.5px;
+    font-family: inherit;
+  }}
+  .input-box:focus {{
+    outline: 2px solid var(--accent);
+    background: #fff;
+  }}
+  .quick-chips {{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+    align-items: center;
+  }}
+  .chip-label {{
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-right: 4px;
+  }}
+  .chip {{
+    background: var(--stone);
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    padding: 5px 11px;
+    border-radius: 99px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }}
+  .chip:hover, .chip.active {{
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }}
+  .search-status {{
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    display: none;
+  }}
+
   .section-block {{
     background: var(--surface);
     border: 1px solid var(--border);
@@ -266,7 +356,7 @@ def build_static_web_app(output_path: Path) -> Path:
   }}
   .section-head {{ margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }}
   .section-head h2 {{ font-size: clamp(20px, 2.8vw, 26px); margin-bottom: 6px; }}
-  .section-head p {{ font-size: 15.5px; color: var(--muted); max-width: 820px; }}
+  .section-head p {{ font-size: 15.5px; color: var(--muted); max-width: 840px; }}
   .flow-steps {{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 12px; }}
   .flow-step {{ background: var(--stone); border: 1px solid var(--border-strong); border-radius: 8px; padding: 18px; }}
   .flow-step.danger {{ background: var(--red-soft); border-color: var(--red-border); }}
@@ -283,12 +373,12 @@ def build_static_web_app(output_path: Path) -> Path:
   .flow-step.danger .flow-badge {{ background: var(--red); }}
   .flow-step h4 {{ font-size: 16px; margin-bottom: 6px; }}
   .flow-step p {{ font-size: 14px; color: var(--body); }}
-  .cards-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 18px; }}
+  .cards-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; }}
   .story-card {{
     background: var(--bg);
     border: 1px solid var(--border-strong);
     border-radius: 8px;
-    padding: 22px;
+    padding: 20px 22px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -297,48 +387,84 @@ def build_static_web_app(output_path: Path) -> Path:
   .story-card.amber-accent {{ border-left: 4px solid var(--amber); }}
   .story-card.green-accent {{ border-left: 4px solid var(--accent); }}
   .story-top {{ margin-bottom: 14px; }}
-  .story-header {{ display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 8px; }}
-  .story-card h3 {{ font-size: 18px; line-height: 1.3; }}
-  .story-meta {{ font-size: 13px; color: var(--muted); margin-bottom: 10px; }}
-  .story-commentary {{ font-size: 14.5px; color: var(--body); margin-bottom: 14px; }}
+  .card-kicker-row {{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }}
+  .card-id-pill {{
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }}
+  .story-card h3 {{
+    font-size: 18px;
+    line-height: 1.28;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    word-break: normal;
+  }}
+  .story-subtitle {{
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 8px;
+    line-height: 1.38;
+  }}
+  .story-commentary {{ font-size: 14px; color: var(--body); line-height: 1.52; margin-bottom: 4px; }}
   .metrics-strip {{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 8px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 6px;
     padding: 10px 12px;
   }}
-  .metrics-strip div span {{ display: block; font-size: 11px; color: var(--muted); }}
-  .metrics-strip div strong {{ font-family: 'DM Sans', sans-serif; font-size: 14.5px; color: var(--text); }}
+  .metrics-strip div {{ min-width: 0; }}
+  .metrics-strip div span {{
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+  }}
+  .metrics-strip div strong {{
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+  }}
   .badge {{ display: inline-block; padding: 4px 10px; border-radius: 99px; font-size: 11.5px; font-weight: 700; white-space: nowrap; }}
   .badge-red {{ background: var(--red-soft); color: var(--red); border: 1px solid var(--red-border); }}
   .badge-amber {{ background: var(--amber-soft); color: var(--amber); border: 1px solid var(--amber-border); }}
   .badge-green {{ background: var(--accent-soft); color: var(--accent-dark); border: 1px solid #A7F3D0; }}
-  .filter-bar {{
+  .empty-box {{
     background: var(--stone);
-    border: 1px solid var(--border);
+    border: 1px dashed var(--border-strong);
     border-radius: 8px;
     padding: 16px 20px;
+    font-size: 14px;
+    color: var(--body);
     display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: 24px;
-  }}
-  .filter-col {{ flex: 1; min-width: 240px; }}
-  .filter-col label {{ display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }}
-  .input-box, .select-box {{
-    width: 100%;
-    min-height: 44px;
-    padding: 10px 14px;
-    border-radius: 6px;
-    border: 1px solid var(--border-strong);
-    background: var(--surface);
-    color: var(--text);
-    font-size: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    grid-column: 1 / -1;
   }}
   .modal-backdrop {{
     position: fixed;
@@ -381,7 +507,7 @@ def build_static_web_app(output_path: Path) -> Path:
     align-items: center;
     justify-content: center;
   }}
-  .modal-card h2 {{ font-size: 24px; margin-bottom: 8px; padding-right: 44px; }}
+  .modal-card h2 {{ font-size: 23px; margin-bottom: 8px; padding-right: 44px; }}
   .modal-sub {{ font-size: 14px; color: var(--muted); margin-bottom: 20px; }}
   .modal-section {{
     background: var(--bg);
@@ -390,7 +516,7 @@ def build_static_web_app(output_path: Path) -> Path:
     padding: 18px 20px;
     margin-bottom: 16px;
   }}
-  .modal-section h4 {{ font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-dark); margin-bottom: 8px; }}
+  .modal-section h4 {{ font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-dark); margin-bottom: 8px; }}
   .modal-section p, .modal-section li {{ font-size: 15px; color: var(--body); line-height: 1.6; }}
   .modal-section ul {{ padding-left: 20px; }}
   .modal-section li {{ margin-bottom: 6px; }}
@@ -408,7 +534,7 @@ def build_static_web_app(output_path: Path) -> Path:
     margin: 10px 0 12px;
   }}
   footer {{
-    max-width: 1140px;
+    max-width: 1180px;
     margin: 0 auto;
     padding: 28px 20px 60px;
     border-top: 1px solid var(--border);
@@ -420,21 +546,27 @@ def build_static_web_app(output_path: Path) -> Path:
     gap: 16px;
   }}
   footer a {{ color: var(--accent-dark); font-weight: 600; text-decoration: none; }}
-  @media (max-width: 900px) {{
-    .flow-steps {{ grid-template-columns: 1fr; }}
+  @media (max-width: 960px) {{
+    .topbar {{ position: relative; }}
+    .topbar-inner {{ flex-wrap: wrap; }}
+    .nav-actions {{ width: 100%; justify-content: flex-start; flex-wrap: wrap; }}
+    .flow-steps {{ grid-template-columns: minmax(0, 1fr); }}
     .hero-card, .section-block {{ padding: 22px 18px; }}
   }}
   @media (max-width: 640px) {{
-    html, body {{ overflow-x: hidden; max-width: 100%; }}
-    .container {{ padding: 16px 12px 56px; }}
-    .hero-card, .section-block {{ padding: 18px 14px; }}
-    .hero-title {{ font-size: 24px; line-height: 1.22; }}
-    .kpi-grid, .cards-grid, .flow-steps {{ grid-template-columns: 1fr; }}
-    .filter-col {{ min-width: 100%; }}
-    .badge {{ white-space: normal; text-align: right; }}
+    html, body {{ overflow-x: hidden; max-width: 100vw; width: 100%; }}
+    .topbar {{ position: relative; padding: 10px 12px; max-width: 100vw; overflow: hidden; }}
+    .brand-text strong {{ white-space: normal; font-size: 14px; line-height: 1.22; }}
+    .brand-text span {{ display: none; }}
+    .btn-primary, .btn-secondary, .lang-btn {{ white-space: normal; font-size: 12px; padding: 6px 10px; min-height: 34px; }}
+    .container {{ padding: 14px 12px 56px; max-width: 100vw; overflow-x: hidden; }}
+    .hero-card, .section-block, .search-hub {{ padding: 18px 14px; min-width: 0; max-width: 100%; overflow: hidden; }}
+    .hero-title {{ font-size: 22px; line-height: 1.22; word-wrap: break-word; }}
+    .kpi-grid, .cards-grid, .flow-steps {{ grid-template-columns: minmax(0, 1fr); }}
+    .story-card, .kpi-card {{ min-width: 0; max-width: 100%; }}
+    .input-box {{ max-width: 100%; min-width: 0; font-size: 14px; }}
     .modal-backdrop {{ padding: 10px; align-items: flex-end; }}
     .modal-card {{ padding: 22px 18px; max-height: 92vh; border-radius: 12px 12px 0 0; }}
-    .metrics-strip {{ grid-template-columns: 1fr; }}
   }}
 </style>
 </head>
@@ -445,21 +577,21 @@ def build_static_web_app(output_path: Path) -> Path:
       <div class="brand-mark">STI</div>
       <div class="brand-text">
         <strong data-i18n="brand_title">Suomen Talousinstituutti · Julkisten Hankintojen Tutkimus</strong>
-        <span data-i18n="brand_sub">Tutkimusraportti · Klikkaa mitä tahansa korttia avataksesi selkokielisen analyysin</span>
+        <span data-i18n="brand_sub">Tutkimusraportti 2026 · Sidosyksiköt, alueelliset ylihinnat &amp; 0 € viranomaisilmoitukset</span>
       </div>
     </a>
     <div class="nav-actions">
       <button class="lang-btn active" id="btn-fi" onclick="setLang('fi')">Suomi</button>
       <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
-      <a class="btn-secondary" href="https://libertaari-suomalainen.github.io/tukipalkkio-purku/" data-i18n="nav_sister">← Tutkimus I: Yritys- & järjestötuet (11,5 mrd. €)</a>
-      <a class="btn-primary" href="Sote_ja_Kunta_Kartelli_Matriisi_2026.xlsx" download data-i18n="nav_xlsx">Lataa Excel-malli (.xlsx)</a>
+      <a class="btn-secondary" href="https://libertaari-suomalainen.github.io/tukipalkkio-purku/" data-i18n="nav_sister">← Tutkimus I: Yritys- &amp; järjestötuet (11,5 mrd. €)</a>
+      <a class="btn-primary" href="Sote_ja_Kunta_Kartelli_Matriisi_2026.xlsx" download data-i18n="nav_xlsx">⬇ Lataa Excel-aineisto (.xlsx)</a>
     </div>
   </div>
 </header>
 
 <main class="container">
   <section class="hero-card">
-    <div class="kicker" data-i18n="hero_kicker">JULKISET HANKINNAT · TUTKIMUSRAPORTTI 2026</div>
+    <div class="kicker" data-i18n="hero_kicker">JULKISET HANKINNAT · TUTKIMUSRAPORTTI 2026 · 38,7 MRD. €/V</div>
     <h1 class="hero-title" data-i18n="hero_title">38,7 miljardin euron ostokartelli: Miksi kuntien ja hyvinvointialueiden rahat eivät riitä hoitajiin?</h1>
     <p class="hero-lead" data-i18n="hero_lead">
       Valtio, 21 hyvinvointialuetta ja 308 kuntaa ostavat ulkopuolisilta yrityksiltä IT-järjestelmiä, hoivapalveluita ja urakoita <strong>38,7 miljardilla eurolla vuodessa</strong>. Tutkimuksemme osoittaa, että tästä potista <strong>1,5–3,5 miljardia euroa vuodessa</strong> hupenee laittomiin ”in-house”-välikäsiin, 2–3-kertaisiin alueellisiin ylihintoihin ja yhden tarjouksen näennäiskilpailutuksiin.
@@ -467,7 +599,7 @@ def build_static_web_app(output_path: Path) -> Path:
     <div class="callout-stone">
       <h3 data-i18n="summary_box_title">Miten luet tätä julkaisua? (Kaikki kortit ovat klikattavia)</h3>
       <p data-i18n="summary_box_body">
-        <strong>Klikkaa mitä tahansa lukukorttia, kaavion vaihetta, IT-/talousyhtiötä, hintavertailua tai kilpailutusta</strong>. Saat esiin selkokielisen selityksen siitä, miten järjestely toimii — sekä halutessasi valmiin, maksuttoman (0 €) viranomaisilmoituksen Kilpailu- ja kuluttajavirastolle (KKV) tai omalle hyvinvointialueellesi.
+        <strong>Klikkaa mitä tahansa lukukorttia, IT-/talousyhtiötä (Istekki, Apotti, Sarastia, 2M-IT, Monetra, Tiera, Valtori), alueellista hintavertailua tai Hilma-kilpailutusta</strong>. Saat esiin selkokielisen selityksen sekä valmiin, maksuttoman (0 €) viranomaisilmoituksen Kilpailu- ja kuluttajavirastolle (KKV) tai hyvinvointialueen kirjaamoon.
       </p>
     </div>
 
@@ -510,11 +642,34 @@ def build_static_web_app(output_path: Path) -> Path:
     </div>
   </section>
 
+  <!-- GLOBAL SEARCH & QUICK FILTERS -->
+  <section class="search-hub" id="haku">
+    <div>
+      <label for="search-box" data-i18n="lbl_search">Hae sidosyksikköä, hyvinvointialuetta, kuntaa, toimittajaa tai palvelua</label>
+      <input id="search-box" type="search" class="input-box" placeholder="Kokeile esim. Istekki, Apotti, Sarastia, 2M-IT, Tiera, HUS, Pirha, Varha, Lapha, Tieto, CGI, Mehiläinen..." />
+    </div>
+    <div class="quick-chips">
+      <span class="chip-label" data-i18n="chip_lbl">Pikavalinnat:</span>
+      <button type="button" class="chip active" onclick="setSearch('')" data-i18n="chip_all">Näytä kaikki</button>
+      <button type="button" class="chip" onclick="setSearch('Istekki')">Istekki Oy</button>
+      <button type="button" class="chip" onclick="setSearch('Apotti')">Oy Apotti Ab</button>
+      <button type="button" class="chip" onclick="setSearch('Sarastia')">Sarastia / Numera</button>
+      <button type="button" class="chip" onclick="setSearch('2M-IT')">2M-IT Oy</button>
+      <button type="button" class="chip" onclick="setSearch('Tiera')">Kuntien Tiera</button>
+      <button type="button" class="chip" onclick="setSearch('Pirha')">Pirha (Pirkanmaa)</button>
+      <button type="button" class="chip" onclick="setSearch('HUS')">HUS &amp; Vake</button>
+      <button type="button" class="chip" onclick="setSearch('Varha')">Varha (Varsinais-Suomi)</button>
+      <button type="button" class="chip" onclick="setSearch('Lapha')">Lapha (Lappi)</button>
+      <button type="button" class="chip" onclick="setSearch('LocumMD')">Vuokralääkärit</button>
+    </div>
+    <div class="search-status" id="search-status"></div>
+  </section>
+
   <section class="section-block" id="sec-inhouse">
     <div class="section-head">
-      <h2 data-i18n="s1_title">1. Miten ”kuoriosakkeella” kierretään kilpailutuslaki? (Klikkaa vaihetta tai yhtiötä)</h2>
+      <h2 data-i18n="s1_title">1. Miten ”kuoriosakkeella” kierretään kilpailutuslaki? (7 sidosyksikköjättiä = 1,42 mrd. €/v)</h2>
       <p data-i18n="s1_sub">
-        Korkein hallinto-oikeus ja markkinaoikeus (päätös MAO:154/2024) linjasivat, ettei hyvinvointialue saa ostaa palveluita ilman kilpailutusta yhtiöltä, josta se omistaa vain nimellisen murto-osan eikä käytä todellista määräysvaltaa.
+        Korkein hallinto-oikeus ja markkinaoikeus (päätös MAO:154/2024) linjasivat, ettei hyvinvointialue saa ostaa palveluita ilman kilpailutusta yhtiöltä, josta se omistaa vain nimellisen murto-osan eikä käytä todellista määräysvaltaa. Klikkaa vaihetta tai yhtiökorttia.
       </p>
     </div>
 
@@ -541,14 +696,7 @@ def build_static_web_app(output_path: Path) -> Path:
       </div>
     </div>
 
-    <div class="filter-bar" style="margin-top:20px;">
-      <div class="filter-col">
-        <label for="search-box" data-i18n="lbl_search">Hae yhtiötä, hyvinvointialuetta tai palvelua</label>
-        <input id="search-box" type="text" class="input-box" placeholder="Hae esim. Istekki, Apotti, Sarastia, Pirkanmaa, HUS, Lapha..." />
-      </div>
-    </div>
-
-    <h3 style="font-size:19px; margin-bottom:12px;" data-i18n="inhouse_heading">Klikkaa sidosyksikköyhtiötä nähdäksesi rahan reitin ja valmiin 0 € KKV-ilmoituksen:</h3>
+    <h3 style="font-size:19px; margin: 20px 0 12px;" data-i18n="inhouse_heading">Klikkaa sidosyksikköyhtiötä nähdäksesi rahan reitin ja valmiin 0 € KKV-ilmoituksen:</h3>
     <div class="cards-grid" id="inhouse-cards"></div>
   </section>
 
@@ -564,7 +712,7 @@ def build_static_web_app(output_path: Path) -> Path:
 
   <section class="section-block" id="sec-hilma">
     <div class="section-head">
-      <h2 data-i18n="s3_title">3. Räätälöidyt tarjouskilpailut: Yhden tarjouksen näennäiskilpailutukset</h2>
+      <h2 data-i18n="s3_title">3. Räätälöidyt tarjouskilpailut: Yhden tarjouksen näennäiskilpailutukset (Hilma)</h2>
       <p data-i18n="s3_sub">
         Klikkaa kilpailutuskorttia nähdäksesi, millä keinotekoisella ehdolla muut tarjoajat suljettiin ulos ja miten pk-yrittäjä voi vaatia syrjivän ehdon poistamista maksutta.
       </p>
@@ -593,9 +741,10 @@ def build_static_web_app(output_path: Path) -> Path:
 <footer>
   <div>
     <strong>Suomen Talousinstituutti · Avoin Tutkimusjulkaisu (2026)</strong><br/>
-    Lähdeaineisto: Tutkihankintoja.fi, Hilma, KKV sidosyksikköselvitykset, MAO:154/2024 & PRH YTJ.
+    Lähdeaineisto: Tutkihankintoja.fi, Hilma, KKV sidosyksikköselvitykset, MAO:154/2024 &amp; PRH YTJ.
   </div>
   <div>
+    <a href="Sote_ja_Kunta_Kartelli_Matriisi_2026.xlsx" download>Lataa Excel-aineisto (.xlsx)</a> ·
     <a href="https://github.com/libertaari-suomalainen/kartelli-tutka">Avoin lähdekoodi (GitHub)</a> ·
     <a href="https://libertaari-suomalainen.github.io/tukipalkkio-purku/">Tutkimus I: Yritys- ja järjestötukien läpivalaisu (11,5 mrd. €)</a>
   </div>
@@ -607,19 +756,58 @@ const APP = {json_blob};
 let LANG = 'fi';
 
 const fmtM = (n) => Number(n).toLocaleString('fi-FI', {{minimumFractionDigits: 2, maximumFractionDigits: 2}}) + ' milj. €';
+const fmtCardM = (n) => {{
+  const m = Number(n);
+  if (!m || Math.abs(m) < 0.005) return '0 €';
+  const digits = Math.abs(m) >= 100 ? 0 : 1;
+  return m.toLocaleString('fi-FI', {{minimumFractionDigits: digits, maximumFractionDigits: digits}}) + ' M€';
+}};
 const fmtEUR = (n) => Math.round(Number(n)).toLocaleString('fi-FI') + ' €';
+
+const CPV_NAMES = {{
+  "85121000-LocumMD": {{
+    fi: "Vuokralääkärit & päivystys (CPV 85121000)",
+    en: "Locum Physicians & ER Staffing (CPV 85121000)",
+    unit_fi: "tunti",
+    unit_en: "hour"
+  }},
+  "72260000-ITWorkstation": {{
+    fi: "IT-työasemat & lähituki (CPV 72260000)",
+    en: "IT Workstations & Support (CPV 72260000)",
+    unit_fi: "työntekijä/v",
+    unit_en: "FTE/year"
+  }},
+  "48814000-EHR": {{
+    fi: "Potilastietojärjestelmät APTJ (CPV 48814000)",
+    en: "EHR Patient Information Systems (CPV 48814000)",
+    unit_fi: "lääkäri/hoitaja/v",
+    unit_en: "clinician/year"
+  }},
+  "85311100-ElderlyCare": {{
+    fi: "Ympärivuorokautinen hoiva (CPV 85311100)",
+    en: "24/7 Elderly Assisted Living (CPV 85311100)",
+    unit_fi: "hoitopäivä",
+    unit_en: "resident-day"
+  }},
+  "60130000-SoteTransport": {{
+    fi: "Sote- ja koulukuljetukset (CPV 60130000)",
+    en: "Statutory Sote & School Transport (CPV 60130000)",
+    unit_fi: "matka",
+    unit_en: "trip"
+  }}
+}};
 
 const I18N = {{
   fi: {{
     brand_title: "Suomen Talousinstituutti · Julkisten Hankintojen Tutkimus",
-    brand_sub: "Tutkimusraportti · Klikkaa mitä tahansa korttia avataksesi selkokielisen analyysin",
+    brand_sub: "Tutkimusraportti 2026 · Sidosyksiköt, alueelliset ylihinnat & 0 € viranomaisilmoitukset",
     nav_sister: "← Tutkimus I: Yritys- & järjestötuet (11,5 mrd. €)",
-    nav_xlsx: "Lataa Excel-malli (.xlsx)",
-    hero_kicker: "JULKISET HANKINNAT · TUTKIMUSRAPORTTI 2026",
+    nav_xlsx: "⬇ Lataa Excel-aineisto (.xlsx)",
+    hero_kicker: "JULKISET HANKINNAT · TUTKIMUSRAPORTTI 2026 · 38,7 MRD. €/V",
     hero_title: "38,7 miljardin euron ostokartelli: Miksi kuntien ja hyvinvointialueiden rahat eivät riitä hoitajiin?",
     hero_lead: "Valtio, 21 hyvinvointialuetta ja 308 kuntaa ostavat ulkopuolisilta yrityksiltä IT-järjestelmiä, hoivapalveluita ja urakoita <strong>38,7 miljardilla eurolla vuodessa</strong>. Tutkimuksemme osoittaa, että tästä potista <strong>1,5–3,5 miljardia euroa vuodessa</strong> hupenee laittomiin ”in-house”-välikäsiin, 2–3-kertaisiin alueellisiin ylihintoihin ja yhden tarjouksen näennäiskilpailutuksiin.",
     summary_box_title: "Miten luet tätä julkaisua? (Kaikki kortit ovat klikattavia)",
-    summary_box_body: "<strong>Klikkaa mitä tahansa lukukorttia, kaavion vaihetta, IT-/talousyhtiötä, hintavertailua tai kilpailutusta</strong>. Saat esiin selkokielisen selityksen siitä, miten järjestely toimii — sekä halutessasi valmiin, maksuttoman (0 €) viranomaisilmoituksen Kilpailu- ja kuluttajavirastolle (KKV) tai omalle hyvinvointialueellesi.",
+    summary_box_body: "<strong>Klikkaa mitä tahansa lukukorttia, IT-/talousyhtiötä (Istekki, Apotti, Sarastia, 2M-IT, Monetra, Tiera, Valtori), alueellista hintavertailua tai Hilma-kilpailutusta</strong>. Saat esiin selkokielisen selityksen sekä valmiin, maksuttoman (0 €) viranomaisilmoituksen Kilpailu- ja kuluttajavirastolle (KKV) tai hyvinvointialueen kirjaamoon.",
     kpi1_lbl: "Julkiset ulkoiset ostot",
     kpi1_sub: "Valtion, hyvinvointialueiden ja kuntien vuotuiset ostot yrityksiltä",
     click_1: "Klikkaa: Minne 38,7 mrd. € menee? →",
@@ -632,8 +820,11 @@ const I18N = {{
     kpi4_lbl: "Yhden tarjouksen kilpailutukset",
     kpi4_sub: "Räätälöidyt tarjousehdot sulkevat pk-yritykset ulos ja nostavat hintoja 15–30 %",
     click_4: "Klikkaa: Miten ehdot räätälöidään? →",
-    s1_title: "1. Miten ”kuoriosakkeella” kierretään kilpailutuslaki? (Klikkaa vaihetta tai yhtiötä)",
-    s1_sub: "Korkein hallinto-oikeus ja markkinaoikeus (päätös MAO:154/2024) linjasivat, ettei hyvinvointialue saa ostaa palveluita ilman kilpailutusta yhtiöltä, josta se omistaa vain nimellisen murto-osan eikä käytä todellista määräysvaltaa.",
+    lbl_search: "Hae sidosyksikköä, hyvinvointialuetta, kuntaa, toimittajaa tai palvelua",
+    chip_lbl: "Pikavalinnat:",
+    chip_all: "Näytä kaikki",
+    s1_title: "1. Miten ”kuoriosakkeella” kierretään kilpailutuslaki? (7 sidosyksikköjättiä = 1,42 mrd. €/v)",
+    s1_sub: "Korkein hallinto-oikeus ja markkinaoikeus (päätös MAO:154/2024) linjasivat, ettei hyvinvointialue saa ostaa palveluita ilman kilpailutusta yhtiöltä, josta se omistaa vain nimellisen murto-osan eikä käytä todellista määräysvaltaa. Klikkaa vaihetta tai yhtiökorttia.",
     f1_step: "Vaihe 1 · Klikkaa",
     f1_title: "0,04 % nimellinen ”kuoriosake”",
     f1_desc: "Kunta tai hyvinvointialue ostaa muutaman sadan euron nimellisen osakkeen yhteisestä IT- tai talousyhtiöstä (esim. Sarastia, Istekki tai Tiera).",
@@ -646,25 +837,24 @@ const I18N = {{
     f4_step: "Vaihe 4 · Lopputulos",
     f4_title: "504 milj. €/v ylihintaa veronmaksajille",
     f4_desc: "Paikalliset pk-yritykset eivät pääse tarjoamaan lainkaan, ja hyvinvointialue joutuu säästämään hoitajista maksaakseen IT-välikäsien laskut.",
-    lbl_search: "Hae yhtiötä, hyvinvointialuetta tai palvelua",
     inhouse_heading: "Klikkaa sidosyksikköyhtiötä nähdäksesi rahan reitin ja valmiin 0 € KKV-ilmoituksen:",
     s2_title: "2. Alueellinen hintavertailu: Miksi sama palvelu maksaa naapurialueella 2–3 kertaa enemmän?",
     s2_sub: "Klikkaa mitä tahansa hintavertailukorttia nähdäksesi, kuinka paljon kyseinen hyvinvointialue maksaa ylihintaa verrattuna Suomen edullisimpaan neljännekseen (P25-vertailuhinta).",
-    s3_title: "3. Räätälöidyt tarjouskilpailut: Yhden tarjouksen näennäiskilpailutukset",
+    s3_title: "3. Räätälöidyt tarjouskilpailut: Yhden tarjouksen näennäiskilpailutukset (Hilma)",
     s3_sub: "Klikkaa kilpailutuskorttia nähdäksesi, millä keinotekoisella ehdolla muut tarjoajat suljettiin ulos ja miten pk-yrittäjä voi vaatia syrjivän ehdon poistamista maksutta.",
     s4_title: "4. Vaadi oman hyvinvointialueesi tai kuntasi ostolaskut julkisiksi (0 € tietopyyntö)",
     s4_sub: "Julkisuuslain (621/1999) mukaan jokaisella kansalaisella on oikeus saada hyvinvointialueen ja kunnan ostolaskut koneluettavassa muodossa 14 vuorokauden kuluessa. Klikkaa aluetta avataksesi valmiin tietopyynnön."
   }},
   en: {{
     brand_title: "Finnish Economic Institute (STI) · Public Procurement Audit",
-    brand_sub: "Interactive Policy Report · Click any card for a plain-English explanation & 0 € legal action",
+    brand_sub: "2026 Empirical Report · In-House Monopolies, Regional Markups & €0 Legal Filings",
     nav_sister: "← Study I: Corporate & NGO Subsidies (€11.5B)",
-    nav_xlsx: "Download Excel Model (.xlsx)",
-    hero_kicker: "PUBLIC PROCUREMENT · RESEARCH REPORT 2026",
+    nav_xlsx: "⬇ Download Excel Dataset (.xlsx)",
+    hero_kicker: "PUBLIC PROCUREMENT · RESEARCH REPORT 2026 · €38.7B/YR",
     hero_title: "The €38.7 Billion Procurement Cartel: Why Public Money Never Reaches Frontline Care",
     hero_lead: "Finland's state, 21 Wellbeing Counties, and 308 municipalities spend <strong>€38.7 billion per year</strong> buying IT systems, healthcare services, and contracts from outside vendors. Our research shows that <strong>€1.5B–€3.5B per year</strong> is lost to illegal 'in-house' middlemen, 2–3x regional price markups, and tailored single-bid tenders.",
     summary_box_title: "How to Read This Interactive Report (Every Card Is Clickable)",
-    summary_box_body: "<strong>Click any metric card, flowchart step, IT/admin company, regional price comparison, or tender below</strong> to open a plain-English explanation of how the scheme works—plus a ready-to-send, zero-fee (€0) official filing to the Competition Authority (KKV) or your Wellbeing County.",
+    summary_box_body: "<strong>Click any metric card, IT/admin company (Istekki, Apotti, Sarastia, 2M-IT, Monetra, Tiera, Valtori), regional price comparison, or tender below</strong> to open a plain-English explanation—plus a ready-to-send, zero-fee (€0) official filing to the Competition Authority (KKV) or your Wellbeing County.",
     kpi1_lbl: "Total Public External Purchases",
     kpi1_sub: "Annual purchases by the state, 21 Wellbeing Counties, and 308 municipalities",
     click_1: "Click: Where does the €38.7B go? →",
@@ -677,7 +867,10 @@ const I18N = {{
     kpi4_lbl: "Single-Bid 'Rigged' Tenders",
     kpi4_sub: "Tailored requirements lock out SMEs and inflate prices by 15–30%",
     click_4: "Click: How are tender specs rigged? →",
-    s1_title: "1. How a 0.04% 'Token Share' Bypasses Procurement Law (Click Any Step or Company)",
+    lbl_search: "Search in-house company, Wellbeing County, municipality, vendor, or category",
+    chip_lbl: "Quick filters:",
+    chip_all: "Show all",
+    s1_title: "1. How a 0.04% 'Token Share' Bypasses Procurement Law (7 In-House Giants = €1.42B/yr)",
     s1_sub: "Finland's Market Court (MAO:154/2024) ruled that a public authority cannot buy services without competitive bidding from an in-house company in which it holds only a nominal token share and exercises no real control.",
     f1_step: "Step 1 · Click",
     f1_title: "0.04% Nominal 'Token Share'",
@@ -691,11 +884,10 @@ const I18N = {{
     f4_step: "Step 4 · Outcome",
     f4_title: "€504M/yr Overcharge to Taxpayers",
     f4_desc: "Local SMEs are locked out of the market, and counties cut frontline nurses to pay inflated IT and administrative bills.",
-    lbl_search: "Search company, Wellbeing County, or service category",
     inhouse_heading: "Click any in-house intermediary to inspect the money trail & ready-to-send €0 KKV complaint:",
     s2_title: "2. Regional Price Audit: Why Does the Exact Same Service Cost 2–3x More Next Door?",
     s2_sub: "Click any regional price card to see how much that Wellbeing County overpays compared to Finland's best-performing quartile (P25 benchmark).",
-    s3_title: "3. Tailored Tenders: Single-Bid 'Fake Competitions'",
+    s3_title: "3. Tailored Tenders: Single-Bid 'Fake Competitions' (Hilma)",
     s3_sub: "Click any tender card to see which artificial requirement locked out competitors and how any entrepreneur can demand its removal for €0.",
     s4_title: "4. Demand Your Wellbeing County's Purchase Invoices Under the Freedom of Information Act (€0)",
     s4_sub: "Under Finland's Openness of Government Activities Act (621/1999), every citizen has the right to receive machine-readable purchase invoice data within 14 days. Click any authority to open a ready-to-send request."
@@ -734,7 +926,7 @@ function openKpiModal(key) {{
       `<div class="modal-section">
         <h4>${{fi ? "Selkokielinen kokonaiskuva" : "Plain-English Overview"}}</h4>
         <p>${{fi
-          ? "Suomen julkisyhteisöt käyttävät joka vuosi 38,7 miljardia euroa tavaroiden, IT-järjestelmien, hoivapalveluiden, kuljetusten ja rakennusurakoiden ostamiseen yksityisiltä ja julkisomisteisilta yrityksiltä. Tämä on Suomen suurin yksittäinen verovarojen erä.Jo 5–9 prosentin tehostaminen kilpailua avaamalla säästää 2–3,5 miljardia euroa vuodessa."
+          ? "Suomen julkisyhteisöt käyttävät joka vuosi 38,7 miljardia euroa tavaroiden, IT-järjestelmien, hoivapalveluiden, kuljetusten ja rakennusurakoiden ostamiseen yksityisiltä ja julkisomisteisilta yrityksiltä. Tämä on Suomen suurin yksittäinen verovarojen erä. Jo 5–9 prosentin tehostaminen kilpailua avaamalla säästää 2–3,5 miljardia euroa vuodessa."
           : "Finland's public sector spends €38.7 billion every year buying goods, IT systems, healthcare services, and construction from external vendors. Opening this market to genuine competition saves €2B–€3.5B per year without cutting a single frontline worker."}}</p>
       </div>`
     );
@@ -807,7 +999,7 @@ function openFlowModal(step) {{
 }}
 
 function openInhouseModal(idx) {{
-  const f = APP.ssot.inhouse_leakage.flows[idx];
+  const f = APP.ssot.inhouse_flows[idx];
   const kkv = APP.kkv_filings[f.inhouse_y_tunnus];
   const oik = APP.oikaisu_filings[f.inhouse_y_tunnus];
   const fi = LANG === 'fi';
@@ -815,13 +1007,13 @@ function openInhouseModal(idx) {{
   const mailtoOik = `mailto:${{oik.recipient_email}}?subject=${{encodeURIComponent(oik.subject)}}&body=${{encodeURIComponent(oik.body)}}`;
 
   openModalHtml(
-    `${{f.inhouse_name}} (Y-tunnus: ${{f.inhouse_y_tunnus}})`,
-    `${{f.buyer_name}} · ${{fi ? "Omistusosuus" : "Buyer Ownership"}}: ${{f.buyer_ownership_pct}} %`,
+    `${{f.inhouse_vendor}} (Y-tunnus: ${{f.inhouse_y_tunnus}})`,
+    `${{f.buyer_name}} · ${{fi ? "Omistusosuus" : "Buyer Ownership"}}: ${{f.buyer_equity_share_pct}} %`,
     `<div class="modal-section">
       <h4>${{fi ? "Selkokielinen kuvaus järjestelystä" : "Plain-English Explanation of This Arrangement"}}</h4>
       <p>${{fi
-        ? `<strong>${{f.buyer_name}}</strong> ostaa <strong>${{f.inhouse_name}}</strong> -yhtiöltä palveluita <strong>${{fmtM(f.annual_direct_spend_m_eur)}}</strong> arvosta vuodessa ilman avointa kilpailutusta, vaikka ostajan omistusosuus yhtiöstä on vain <strong>${{f.buyer_ownership_pct}} %</strong>. Välikäsi perii arviolta <strong>${{f.intermediary_margin_pct}} %</strong> sisäisen katteen ja ketjuttaa työtä suoraan yksityisille suuryrityksille (<strong>${{f.private_subcontractors}}</strong>). Avoin kilpailutus säästäisi arviolta <strong>${{fmtM(f.estimated_annual_saving_m_eur)}}</strong> vuodessa.`
-        : `<strong>${{f.buyer_name}}</strong> awards <strong>${{fmtM(f.annual_direct_spend_m_eur)}}/year</strong> without open tenders to <strong>${{f.inhouse_name}}</strong> despite holding only a <strong>${{f.buyer_ownership_pct}}%</strong> ownership share. The intermediary charges an estimated <strong>${{f.intermediary_margin_pct}}%</strong> markup while subcontracting to <strong>${{f.private_subcontractors}}</strong>. Open competition would save <strong>${{fmtM(f.estimated_annual_saving_m_eur)}}/year</strong>.`}}</p>
+        ? `<strong>${{f.buyer_name}}</strong> ostaa <strong>${{f.inhouse_vendor}}</strong> -yhtiöltä palveluita <strong>${{fmtM(f.annual_spend_m_eur)}}</strong> arvosta vuodessa ilman avointa kilpailutusta, vaikka ostajan omistusosuus yhtiöstä on vain <strong>${{f.buyer_equity_share_pct}} %</strong> (${{f.legal_status}}). Välikäsi perii arviolta <strong>${{f.inhouse_markup_pct}} %</strong> sisäisen katteen ja ketjuttaa työtä suoraan yksityisille suuryrityksille (<strong>${{f.subcontractor_vendor}}</strong>). Avoin kilpailutus säästäisi arviolta <strong>${{fmtM(f.recoverable_saving_m_eur)}}</strong> vuodessa.`
+        : `<strong>${{f.buyer_name}}</strong> awards <strong>${{fmtM(f.annual_spend_m_eur)}}/year</strong> without open tenders to <strong>${{f.inhouse_vendor}}</strong> despite holding only a <strong>${{f.buyer_equity_share_pct}}%</strong> ownership share. The intermediary charges an estimated <strong>${{f.inhouse_markup_pct}}%</strong> markup while subcontracting to <strong>${{f.subcontractor_vendor}}</strong>. Open competition would save <strong>${{fmtM(f.recoverable_saving_m_eur)}}/year</strong>.`}}</p>
     </div>
     <div class="modal-section">
       <h4>${{fi ? "Valmis 0,00 € toimenpidepyyntö Kilpailu- ja kuluttajavirastolle (KKV) tai oikaisuvaatimus" : "Ready-to-Send €0.00 Official Complaint (KKV or Rectification Demand)"}}</h4>
@@ -839,34 +1031,35 @@ function openInhouseModal(idx) {{
 }}
 
 function openArbitrageModal(idx) {{
-  const r = APP.ssot.price_arbitrage.rows[idx];
+  const r = APP.ssot.arbitrage_rows[idx];
   const fi = LANG === 'fi';
+  const catMeta = CPV_NAMES[r.cpv_category] || {{ fi: r.cpv_category, en: r.cpv_category, unit_fi: r.unit_name, unit_en: r.unit_name }};
   openModalHtml(
-    `${{r.entity_name}} — ${{r.cpv_category.split(' ')[1] || r.cpv_category}}`,
-    `${{fi ? "Alueellinen yksikköhintavertailu" : "Regional Unit-Price Comparison"}} · ${{r.cpv_category}}`,
+    `${{r.entity_name}}`,
+    `${{fi ? catMeta.fi : catMeta.en}} · ${{r.kirjaamo_email}}`,
     `<div class="modal-section">
-      <h4>${{fi ? "Mistä ylihinta syntyy?" : "Why Is This Region Overpaying?"}}</h4>
+      <h4>${{fi ? "Mistä alueellinen ylihinta syntyy?" : "Why Is This Region Overpaying?"}}</h4>
       <p>${{fi
-        ? `<strong>${{r.entity_name}}</strong> maksaa tästä palvelusta <strong>${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} € / ${{r.unit_name}}</strong>, kun Suomen edullisimman neljänneksen (P25-vertailutaso) yksikköhinta samalle palvelulle on <strong>${{Number(r.p25_benchmark_unit_price_eur).toLocaleString('fi-FI')}} € / ${{r.unit_name}}</strong> (+${{r.overprice_pct}} % ylihintaa). Jos alue kilpailuttaisi sopimuksen parhaan neljänneksen hintatasolle, veronmaksajat säästäisivät <strong>${{fmtEUR(r.annual_saving_eur)}}</strong> joka vuosi.`
-        : `<strong>${{r.entity_name}}</strong> pays <strong>€${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} per ${{r.unit_name}}</strong>, whereas Finland's top-quartile (P25) benchmark price for the exact same service is <strong>€${{Number(r.p25_benchmark_unit_price_eur).toLocaleString('fi-FI')}}</strong> (+${{r.overprice_pct}}% markup). Matching the P25 benchmark saves <strong>${{fmtEUR(r.annual_saving_eur)}}/year</strong>.`}}</p>
+        ? `<strong>${{r.entity_name}}</strong> maksaa tästä palvelusta <strong>${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} € / ${{catMeta.unit_fi}}</strong> (volyymi ${{Number(r.annual_units).toLocaleString('fi-FI')}} kpl/v = ${{fmtEUR(r.annual_baseline_eur)}}/v), kun Suomen edullisimman neljänneksen (P25-vertailutaso) yksikköhinta samalle palvelulle on <strong>${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}} € / ${{catMeta.unit_fi}}</strong> (+${{r.overpay_vs_p25_pct}} % ylihintaa). Jos alue kilpailuttaisi sopimuksen parhaan neljänneksen hintatasolle, veronmaksajat säästäisivät <strong>${{fmtEUR(r.recoverable_saving_eur)}}</strong> joka vuosi.`
+        : `<strong>${{r.entity_name}}</strong> pays <strong>€${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} per ${{catMeta.unit_en}}</strong> (annual volume ${{Number(r.annual_units).toLocaleString('fi-FI')}} = ${{fmtEUR(r.annual_baseline_eur)}}/yr), whereas Finland's top-quartile (P25) benchmark price for the exact same service is <strong>€${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}}</strong> (+${{r.overpay_vs_p25_pct}}% markup). Matching the P25 benchmark saves <strong>${{fmtEUR(r.recoverable_saving_eur)}}/year</strong>.`}}</p>
     </div>`
   );
 }}
 
 function openHilmaModal(idx) {{
-  const t = APP.ssot.single_bid_cartels[idx];
+  const t = APP.ssot.flagged_hilma_tenders[idx];
   const fil = APP.hilma_filings[t.tender_id];
   const fi = LANG === 'fi';
   const mailto = `mailto:${{fil.recipient_email}}?subject=${{encodeURIComponent(fil.subject)}}&body=${{encodeURIComponent(fil.body)}}`;
 
   openModalHtml(
     `${{t.buyer_name}} (${{t.tender_id}})`,
-    `${{t.cpv_code}} · ${{fi ? "Saadut tarjoukset" : "Bids Received"}}: ${{t.bids_received}} kpl`,
+    `${{t.cpv_code}} · ${{fi ? "Saadut tarjoukset" : "Bids Received"}}: ${{t.bids_received}} kpl · ${{fi ? "Valittu toimittaja" : "Incumbent"}}: ${{t.incumbent_vendor}}`,
     `<div class="modal-section">
       <h4>${{fi ? "Miten kilpailutus rajattiin yhdelle tarjoajalle?" : "How Competitors Were Locked Out"}}</h4>
       <p>${{fi
-        ? `Tässä <strong>${{fmtEUR(t.estimated_value_eur)}}</strong> arvoisessa hankinnassa saatiin vain <strong>${{t.bids_received}} tarjous(ta)</strong> (tarjousaika ${{t.days_open}} pv). Tarjouspyyntöön oli kirjattu rajoittava ehto: <em>”${{t.tailored_requirement_note}}”</em>. Kun muut yritykset eivät voineet jättää tarjousta, hinta jäi arviolta 25 % kilpailtua markkinahintaa korkeammaksi (vuosisäästöpotentiaali <strong>${{fmtEUR(t.expected_annual_saving_eur)}}</strong>).`
-        : `This <strong>${{fmtEUR(t.estimated_value_eur)}}</strong> procurement received only <strong>${{t.bids_received}} bid(s)</strong> (${{t.days_open}} days open) due to a tailored requirement: <em>"${{t.tailored_requirement_note}}"</em>. Opening the tender to SMEs saves an estimated <strong>${{fmtEUR(t.expected_annual_saving_eur)}}/year</strong>.`}}</p>
+        ? `Tässä <strong>${{fmtEUR(t.contract_value_eur)}}</strong> arvoisessa hankinnassa saatiin vain <strong>${{t.bids_received}} tarjous(ta)</strong>, vaikka Suomessa ja EU:ssa toimii <strong>${{t.qualified_eu_sme_pool_size}} pätevää pk-toimittajaa</strong>. Syy: <em>”${{t.lockout_reason}}”</em>. Kun muut yritykset suljettiin ulos, sopimus meni toimittajalle <strong>${{t.incumbent_vendor}}</strong> ilman todellista hintakilpailua (vuosisäästöpotentiaali avoimessa kilpailussa <strong>${{fmtEUR(t.expected_annual_saving_eur)}}</strong>).`
+        : `This <strong>${{fmtEUR(t.contract_value_eur)}}</strong> procurement received only <strong>${{t.bids_received}} bid(s)</strong> despite <strong>${{t.qualified_eu_sme_pool_size}} qualified SMEs</strong> in the market, due to: <em>"${{t.lockout_reason}}"</em>. Opening the tender saves an estimated <strong>${{fmtEUR(t.expected_annual_saving_eur)}}/year</strong>.`}}</p>
     </div>
     <div class="modal-section">
       <h4>${{fi ? "Valmis 0,00 € vaatimus syrjivän tarjousehdon poistamiseksi (Hankintalaki 67 §)" : "Ready-to-Send €0.00 Demand to Remove Tailored Spec (Procurement Act § 67)"}}</h4>
@@ -891,8 +1084,8 @@ function openBuyerFoiaModal(idx) {{
     `<div class="modal-section">
       <h4>${{fi ? "Mitä tämä asiakirja velvoittaa viranomaisen tekemään?" : "What Does This Request Require the Authority to Do?"}}</h4>
       <p>${{fi
-        ? `Tämä valmis tietopyyntö velvoittaa <strong>${{b.entity_name}}</strong> -viranomaisen luovuttamaan 14 vuorokauden kuluessa koneluettavan ostolaskuaineiston (CSV/XLSX) sekä sidosyksikköjen osakassopimukset ja suorahankintapäätökset maksutta.`
-        : `This statutory request requires <strong>${{b.entity_name}}</strong> to release machine-readable purchase invoice ledgers (CSV/XLSX) and in-house shareholder agreements within 14 days at zero cost.`}}</p>
+        ? `Tämä valmis tietopyyntö velvoittaa <strong>${{b.entity_name}}</strong> -viranomaisen (vuosiostot <strong>${{fmtM(b.annual_purchases_m_eur)}}</strong>, keskeiset sidosyksiköt: <em>${{b.primary_inhouse_shells}}</em>) luovuttamaan 14 vuorokauden kuluessa koneluettavan ostolaskuaineiston (CSV/XLSX) sekä sidosyksikköjen osakassopimukset ja suorahankintapäätökset maksutta.`
+        : `This statutory request requires <strong>${{b.entity_name}}</strong> (annual purchases <strong>${{fmtM(b.annual_purchases_m_eur)}}</strong>, primary in-house shells: <em>${{b.primary_inhouse_shells}}</em>) to release machine-readable purchase invoice ledgers (CSV/XLSX) and in-house shareholder agreements within 14 days at zero cost.`}}</p>
       <textarea id="active-legal-textarea" class="legal-box" readonly>${{fil.body}}</textarea>
       <div style="display:flex; gap:10px; flex-wrap:wrap;">
         <button class="btn-primary" onclick="copyLegalBox(this)">${{fi ? "Kopioi tietopyyntö leikepöydälle" : "Copy FOIA Request"}}</button>
@@ -900,6 +1093,16 @@ function openBuyerFoiaModal(idx) {{
       </div>
     </div>`
   );
+}}
+
+function setSearch(val) {{
+  const box = document.getElementById('search-box');
+  box.value = val;
+  document.querySelectorAll('.chip').forEach(btn => {{
+    const txt = btn.textContent.trim().toLowerCase();
+    btn.classList.toggle('active', (val === '' && (txt.includes('kaikki') || txt.includes('all'))) || (val !== '' && txt.includes(val.toLowerCase())));
+  }});
+  renderAll();
 }}
 
 function setLang(l) {{
@@ -914,117 +1117,171 @@ function setLang(l) {{
 }}
 
 function renderAll() {{
-  const q = (document.getElementById('search-box').value || '').toLowerCase().trim();
+  const rawQ = (document.getElementById('search-box').value || '').trim();
+  const q = rawQ.toLowerCase();
   const fi = LANG === 'fi';
 
   // 1. In-house cards
+  let inMatches = 0;
   let inHtml = '';
-  APP.ssot.inhouse_leakage.flows.forEach((f, idx) => {{
-    const txt = (f.inhouse_name + ' ' + f.inhouse_y_tunnus + ' ' + f.buyer_name + ' ' + f.private_subcontractors).toLowerCase();
+  APP.ssot.inhouse_flows.forEach((f, idx) => {{
+    const txt = `${{f.inhouse_vendor}} ${{f.inhouse_y_tunnus}} ${{f.buyer_name}} ${{f.subcontractor_vendor}} ${{f.legal_status}}`.toLowerCase();
     if (q && !txt.includes(q)) return;
-    const isToken = f.legal_status.includes('LAITON_KUORIOSAKE');
+    inMatches++;
+    const isToken = f.is_illegal_under_10pct;
+    const eqStr = Number(f.buyer_equity_share_pct).toLocaleString('fi-FI');
     const accent = isToken ? 'red-accent' : 'amber-accent';
     const badge = isToken
-      ? `<span class="badge badge-red">${{fi ? 'Kuoriosake (' + f.buyer_ownership_pct + ' %)' : 'Token Share (' + f.buyer_ownership_pct + '%)'}}</span>`
+      ? `<span class="badge badge-red">${{fi ? 'Kuoriosake ' + eqStr + ' %' : 'Token Share ' + eqStr + '%'}}</span>`
       : `<span class="badge badge-amber">${{fi ? 'Suorahankintamonopoli' : 'In-House Monopoly'}}</span>`;
+    const inComment = isToken
+      ? (fi
+          ? `Omistusosuus vain ${{eqStr}} %, suoraosto ilman kilpailutusta ${{fmtCardM(f.annual_spend_m_eur)}}/v. Ketjuttaa työtä: ${{f.subcontractor_vendor}}.`
+          : `Buyer owns just ${{eqStr}}% yet awards ${{fmtCardM(f.annual_spend_m_eur)}}/yr without tenders. Subcontracted to: ${{f.subcontractor_vendor}}.`)
+      : (fi
+          ? `${{f.legal_status}}. Suoraosto ilman kilpailutusta ${{fmtCardM(f.annual_spend_m_eur)}}/v. Ketjuttaa työtä: ${{f.subcontractor_vendor}}.`
+          : `Uncompeted in-house monopoly (${{eqStr}}% equity), ${{fmtCardM(f.annual_spend_m_eur)}}/yr direct spend. Subcontracted to: ${{f.subcontractor_vendor}}.`);
     inHtml += `<div class="story-card ${{accent}} clickable-card" onclick="openInhouseModal(${{idx}})">
       <div class="story-top">
-        <div class="story-header">
-          <h3>${{f.inhouse_name}}</h3>
+        <div class="card-kicker-row">
           ${{badge}}
+          <span class="card-id-pill">Y: ${{f.inhouse_y_tunnus}}</span>
         </div>
-        <div class="story-meta">Y-tunnus: ${{f.inhouse_y_tunnus}} · ${{fi ? 'Tilaaja:' : 'Buyer:'}} ${{f.buyer_name}}</div>
-        <p class="story-commentary">${{fi
-          ? `${{f.buyer_name}} omistaa yhtiöstä vain ${{f.buyer_ownership_pct}} %, mutta ostaa siltä ilman kilpailutusta ${{fmtM(f.annual_direct_spend_m_eur)}}/v. Välikäsi ketjuttaa työtä pörssiyhtiöille (${{f.private_subcontractors}}).`
-          : `${{f.buyer_name}} owns just ${{f.buyer_ownership_pct}}% yet awards ${{fmtM(f.annual_direct_spend_m_eur)}}/yr without tenders. Subcontracted to ${{f.private_subcontractors}}.`}}</p>
+        <h3>${{f.inhouse_vendor}}</h3>
+        <div class="story-subtitle">${{fi ? 'Tilaajat:' : 'Buyers:'}} ${{f.buyer_name}}</div>
+        <p class="story-commentary">${{inComment}}</p>
       </div>
       <div>
         <div class="metrics-strip">
-          <div><span>${{fi ? 'Suora osto / v' : 'Direct Spend'}}</span><strong>${{fmtM(f.annual_direct_spend_m_eur)}}</strong></div>
-          <div><span>${{fi ? 'Välikäden kate' : 'Markup'}}</span><strong style="color:var(--amber)">${{f.intermediary_margin_pct}} %</strong></div>
-          <div><span>${{fi ? 'Vuosisäästö' : 'Annual Saving'}}</span><strong style="color:var(--red)">${{fmtM(f.estimated_annual_saving_m_eur)}}</strong></div>
+          <div><span>${{fi ? 'Suora osto / v' : 'Direct Spend'}}</span><strong>${{fmtCardM(f.annual_spend_m_eur)}}</strong></div>
+          <div><span>${{fi ? 'Välikäden kate' : 'Markup'}}</span><strong style="color:var(--amber)">${{f.inhouse_markup_pct}} %</strong></div>
+          <div><span>${{fi ? 'Vuosisäästö' : 'Annual Saving'}}</span><strong style="color:var(--red)">-${{fmtCardM(f.recoverable_saving_m_eur)}}</strong></div>
         </div>
-        <div class="click-hint">${{fi ? 'Klikkaa: Avaa analyysi & valmis 0 € KKV-ilmoitus →' : 'Click: Open analysis & €0 KKV complaint →'}}</div>
+        <div class="click-hint">${{fi ? 'Klikkaa: Rahan reitti & 0 € KKV-ilmoitus →' : 'Click: Money trail & €0 KKV complaint →'}}</div>
       </div>
     </div>`;
   }});
+  if (!inHtml) {{
+    inHtml = `<div class="empty-box"><span>${{fi ? `Ei sidosyksikköosumia haulle ”${{rawQ}}”. Katso osiot 2–4 alla.` : `No in-house matches for "${{rawQ}}". Check Sections 2–4 below.`}}</span><button type="button" class="btn-secondary" onclick="setSearch('')">${{fi ? 'Näytä kaikki' : 'Show all'}}</button></div>`;
+  }}
   document.getElementById('inhouse-cards').innerHTML = inHtml;
 
-  // 2. Arbitrage cards (show only rows where overprice_pct > 0 so every card is an actionable finding)
+  // 2. Arbitrage cards (show rows where overpay_vs_p25_pct > 0)
+  let arbMatches = 0;
   let arbHtml = '';
-  APP.ssot.price_arbitrage.rows.forEach((r, idx) => {{
-    if (r.overprice_pct <= 0) return;
-    const txt = (r.entity_name + ' ' + r.cpv_category).toLowerCase();
+  APP.ssot.arbitrage_rows.forEach((r, idx) => {{
+    if (r.overpay_vs_p25_pct <= 0) return;
+    const catMeta = CPV_NAMES[r.cpv_category] || {{ fi: r.cpv_category, en: r.cpv_category, unit_fi: r.unit_name, unit_en: r.unit_name }};
+    const txt = `${{r.entity_name}} ${{r.cpv_category}} ${{catMeta.fi}} ${{catMeta.en}}`.toLowerCase();
     if (q && !txt.includes(q)) return;
+    arbMatches++;
+    const unitLbl = fi ? catMeta.unit_fi : catMeta.unit_en;
     arbHtml += `<div class="story-card amber-accent clickable-card" onclick="openArbitrageModal(${{idx}})">
       <div class="story-top">
-        <div class="story-header">
-          <h3>${{r.entity_name}}</h3>
-          <span class="badge badge-red">+${{r.overprice_pct}} % ${{fi ? 'ylihinta' : 'markup'}}</span>
+        <div class="card-kicker-row">
+          <span class="badge badge-red">+${{r.overpay_vs_p25_pct}} % ${{fi ? 'ylihinta' : 'markup'}}</span>
+          <span class="card-id-pill">${{r.cpv_category.split('-')[0]}}</span>
         </div>
-        <div class="story-meta">${{r.cpv_category}}</div>
+        <h3>${{r.entity_name}}</h3>
+        <div class="story-subtitle">${{fi ? catMeta.fi : catMeta.en}}</div>
         <p class="story-commentary">${{fi
-          ? `Maksaa ${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} € / ${{r.unit_name}}, kun parhaan neljänneksen (P25) vertailuhinta Suomessa on ${{Number(r.p25_benchmark_unit_price_eur).toLocaleString('fi-FI')}} €.`
-          : `Pays €${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} per ${{r.unit_name}} vs. top-quartile (P25) benchmark of €${{Number(r.p25_benchmark_unit_price_eur).toLocaleString('fi-FI')}}.`}}</p>
+          ? `Maksaa ${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} € / ${{unitLbl}}, kun Suomen edullisimman neljänneksen (P25) vertailuhinta on ${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}} €.`
+          : `Pays €${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} per ${{unitLbl}} vs. top-quartile (P25) benchmark of €${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}}.`}}</p>
       </div>
       <div>
         <div class="metrics-strip">
           <div><span>${{fi ? 'Alueen hinta' : 'Unit Price'}}</span><strong style="color:var(--red)">${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} €</strong></div>
-          <div><span>${{fi ? 'P25-vertailu' : 'P25 Benchmark'}}</span><strong style="color:var(--accent-dark)">${{Number(r.p25_benchmark_unit_price_eur).toLocaleString('fi-FI')}} €</strong></div>
-          <div><span>${{fi ? 'Säästö / v' : 'Saving / yr'}}</span><strong>${{fmtM(r.annual_saving_eur / 1e6)}}</strong></div>
+          <div><span>${{fi ? 'P25-vertailu' : 'P25 Benchmark'}}</span><strong style="color:var(--accent-dark)">${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}} €</strong></div>
+          <div><span>${{fi ? 'Säästö / v' : 'Saving / yr'}}</span><strong style="color:var(--red)">-${{fmtCardM(r.recoverable_saving_eur / 1e6)}}</strong></div>
         </div>
-        <div class="click-hint">${{fi ? 'Klikkaa: Katso yksikköhintojen erittely →' : 'Click: Inspect unit-price breakdown →'}}</div>
+        <div class="click-hint">${{fi ? 'Klikkaa: Yksikköhintojen erittely →' : 'Click: Inspect unit-price breakdown →'}}</div>
       </div>
     </div>`;
   }});
+  if (!arbHtml) {{
+    arbHtml = `<div class="empty-box"><span>${{fi ? `Ei hintavertailuosumia haulle ”${{rawQ}}”.` : `No price benchmark matches for "${{rawQ}}".`}}</span><button type="button" class="btn-secondary" onclick="setSearch('')">${{fi ? 'Näytä kaikki' : 'Show all'}}</button></div>`;
+  }}
   document.getElementById('arbitrage-cards').innerHTML = arbHtml;
 
   // 3. Hilma single-bid cards
+  let hilmaMatches = 0;
   let hilmaHtml = '';
-  APP.ssot.single_bid_cartels.forEach((t, idx) => {{
-    const txt = (t.buyer_name + ' ' + t.tender_id + ' ' + t.cpv_code + ' ' + t.tailored_requirement_note).toLowerCase();
+  APP.ssot.flagged_hilma_tenders.forEach((t, idx) => {{
+    const txt = `${{t.buyer_name}} ${{t.tender_id}} ${{t.cpv_code}} ${{t.incumbent_vendor}} ${{t.lockout_reason}}`.toLowerCase();
     if (q && !txt.includes(q)) return;
+    hilmaMatches++;
+    const bidBadge = t.is_direct_award
+      ? `<span class="badge badge-red">${{fi ? '0 tarjousta (Suorahankinta)' : '0 Bids (Direct Award)'}}</span>`
+      : `<span class="badge badge-red">${{t.bids_received}} ${{fi ? 'tarjous(ta)' : 'bid(s)'}}</span>`;
     hilmaHtml += `<div class="story-card red-accent clickable-card" onclick="openHilmaModal(${{idx}})">
       <div class="story-top">
-        <div class="story-header">
-          <h3>${{t.buyer_name}}</h3>
-          <span class="badge badge-red">${{t.bids_received}} ${{fi ? 'tarjous(ta)' : 'bid(s)'}}</span>
+        <div class="card-kicker-row">
+          ${{bidBadge}}
+          <span class="card-id-pill">${{t.tender_id}}</span>
         </div>
-        <div class="story-meta">${{t.tender_id}} · ${{t.cpv_code}}</div>
-        <p class="story-commentary">${{t.tailored_requirement_note}}</p>
+        <h3>${{t.buyer_name}}</h3>
+        <div class="story-subtitle">${{t.incumbent_vendor}}</div>
+        <p class="story-commentary">${{t.lockout_reason}}</p>
       </div>
       <div>
         <div class="metrics-strip">
-          <div><span>${{fi ? 'Hankinnan arvo' : 'Contract Value'}}</span><strong>${{fmtM(t.estimated_value_eur / 1e6)}}</strong></div>
-          <div><span>${{fi ? 'Tarjousaika' : 'Days Open'}}</span><strong>${{t.days_open}} pv</strong></div>
-          <div><span>${{fi ? 'Säästöpotentiaali' : 'Est. Saving'}}</span><strong style="color:var(--red)">${{fmtM(t.expected_annual_saving_eur / 1e6)}}</strong></div>
+          <div><span>${{fi ? 'Sopimusarvo' : 'Contract Value'}}</span><strong>${{fmtCardM(t.contract_value_eur / 1e6)}}</strong></div>
+          <div><span>${{fi ? 'Estetyt PK:t' : 'Locked SMEs'}}</span><strong>${{t.qualified_eu_sme_pool_size}} kpl</strong></div>
+          <div><span>${{fi ? 'Säästö / v' : 'Est. Saving'}}</span><strong style="color:var(--red)">-${{fmtCardM(t.expected_annual_saving_eur / 1e6)}}</strong></div>
         </div>
-        <div class="click-hint">${{fi ? 'Klikkaa: Avaa 0 € vaatimus tarjousehdon poistamiseksi →' : 'Click: Open €0 tender spec challenge →'}}</div>
+        <div class="click-hint">${{fi ? 'Klikkaa: 0 € vaatimus tarjousehdon poistamiseksi →' : 'Click: Open €0 tender spec challenge →'}}</div>
       </div>
     </div>`;
   }});
+  if (!hilmaHtml) {{
+    hilmaHtml = `<div class="empty-box"><span>${{fi ? `Ei Hilma-kilpailutusosumia haulle ”${{rawQ}}”.` : `No Hilma tender matches for "${{rawQ}}".`}}</span><button type="button" class="btn-secondary" onclick="setSearch('')">${{fi ? 'Näytä kaikki' : 'Show all'}}</button></div>`;
+  }}
   document.getElementById('hilma-cards').innerHTML = hilmaHtml;
 
   // 4. Buyer FOIA directory cards
+  let buyerMatches = 0;
   let buyerHtml = '';
   APP.ssot.public_buyer_directory.forEach((b, idx) => {{
-    const txt = (b.entity_name + ' ' + b.y_tunnus + ' ' + b.kirjaamo_email).toLowerCase();
+    const txt = `${{b.entity_name}} ${{b.y_tunnus}} ${{b.kirjaamo_email}} ${{b.primary_inhouse_shells}}`.toLowerCase();
     if (q && !txt.includes(q)) return;
+    buyerMatches++;
     buyerHtml += `<div class="story-card green-accent clickable-card" onclick="openBuyerFoiaModal(${{idx}})">
       <div class="story-top">
-        <div class="story-header">
-          <h3>${{b.entity_name}}</h3>
-          <span class="badge badge-green">0,00 € FOIA</span>
+        <div class="card-kicker-row">
+          <span class="badge badge-green">0,00 € FOIA · Julkisuuslaki</span>
+          <span class="card-id-pill">Y: ${{b.y_tunnus}}</span>
         </div>
-        <div class="story-meta">Y-tunnus: ${{b.y_tunnus}} · ${{b.kirjaamo_email}}</div>
+        <h3>${{b.entity_name}}</h3>
+        <div class="story-subtitle">${{fi ? 'Sidosyksiköt:' : 'In-House Shells:'}} ${{b.primary_inhouse_shells}}</div>
         <p class="story-commentary">${{fi
-          ? `Vaadi viranomaisen ostolaskut (CSV/XLSX) ja sidosyksikköjen suorahankintasopimukset julkisuuslain 13 §:n nojalla 14 vuorokaudessa.`
-          : `Demand machine-readable purchase invoices (CSV/XLSX) and in-house contracts within 14 days under the Openness Act.`}}</p>
+          ? `Vuosiostot ${{fmtCardM(b.annual_purchases_m_eur)}} · Vaadi ostolaskut (CSV/XLSX) ja suorahankintasopimukset julkisuuslain 13 §:n nojalla.`
+          : `Annual spend ${{fmtCardM(b.annual_purchases_m_eur)}} · Demand machine-readable purchase invoices (CSV/XLSX) within 14 days.`}}</p>
       </div>
-      <div class="click-hint">${{fi ? 'Klikkaa: Avaa valmis tietopyyntö (' + b.kirjaamo_email + ') →' : 'Click: Open ready-to-send FOIA request →'}}</div>
+      <div>
+        <div class="metrics-strip">
+          <div><span>${{fi ? 'Ulkoiset ostot' : 'Annual Spend'}}</span><strong>${{fmtCardM(b.annual_purchases_m_eur)}}</strong></div>
+          <div><span>${{fi ? 'Avoimet laskut' : 'Open Ledger'}}</span><strong style="color:${{b.publishes_open_invoices ? 'var(--accent-dark)' : 'var(--red)'}}">${{b.publishes_open_invoices ? (fi ? 'Kyllä' : 'Yes') : (fi ? 'Salattu' : 'Hidden')}}</strong></div>
+          <div><span>${{fi ? 'Vastausaika' : 'Statutory SLA'}}</span><strong>14 vrk</strong></div>
+        </div>
+        <div class="click-hint">${{fi ? 'Klikkaa: Valmis tietopyyntö (' + b.kirjaamo_email + ') →' : 'Click: Ready-to-send FOIA request →'}}</div>
+      </div>
     </div>`;
   }});
+  if (!buyerHtml) {{
+    buyerHtml = `<div class="empty-box"><span>${{fi ? `Ei kirjaamo-osumia haulle ”${{rawQ}}”.` : `No public buyer matches for "${{rawQ}}".`}}</span><button type="button" class="btn-secondary" onclick="setSearch('')">${{fi ? 'Näytä kaikki' : 'Show all'}}</button></div>`;
+  }}
   document.getElementById('buyer-cards').innerHTML = buyerHtml;
+
+  // Update Search Status Banner
+  const statusEl = document.getElementById('search-status');
+  if (q) {{
+    statusEl.style.display = 'block';
+    statusEl.innerHTML = fi
+      ? `Hakutulokset haulle <strong>”${{rawQ}}”</strong>: <strong>${{inMatches}}</strong> sidosyksikköä (Osio 1), <strong>${{arbMatches}}</strong> hintavertailua (Osio 2), <strong>${{hilmaMatches}}</strong> Hilma-kilpailutusta (Osio 3) ja <strong>${{buyerMatches}}</strong> kirjaamoa (Osio 4). <a href="javascript:void(0)" onclick="setSearch('')" style="color:var(--accent-dark);margin-left:10px;">✕ Tyhjennä haku</a>`
+      : `Search results for <strong>"${{rawQ}}"</strong>: <strong>${{inMatches}}</strong> in-house flows (Sec 1), <strong>${{arbMatches}}</strong> price benchmarks (Sec 2), <strong>${{hilmaMatches}}</strong> Hilma tenders (Sec 3), and <strong>${{buyerMatches}}</strong> buyer registries (Sec 4). <a href="javascript:void(0)" onclick="setSearch('')" style="color:var(--accent-dark);margin-left:10px;">✕ Clear search</a>`;
+  }} else {{
+    statusEl.style.display = 'none';
+  }}
 }}
 
 document.getElementById('search-box').addEventListener('input', renderAll);

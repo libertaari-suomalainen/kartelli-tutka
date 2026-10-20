@@ -30,7 +30,7 @@
       "prh_registration_date": "2015-07-07"
     },
     {
-      "buyer_name": "Pohjois-Savo / Pirha / 15 Counties",
+      "buyer_name": "Pohjois-Savo, Pirha & 15 hyvinvointialuetta",
       "buyer_equity_share_pct": 0.4,
       "inhouse_vendor": "Istekki Oy",
       "inhouse_y_tunnus": "2292633-0",
@@ -47,7 +47,7 @@
       "prh_registration_date": "2009-10-14"
     },
     {
-      "buyer_name": "Varsinais-Suomi / Satakunta / 12 Counties",
+      "buyer_name": "Varsinais-Suomi, Satakunta & 12 aluetta",
       "buyer_equity_share_pct": 0.8,
       "inhouse_vendor": "2M-IT Oy",
       "inhouse_y_tunnus": "2859795-3",
@@ -64,7 +64,7 @@
       "prh_registration_date": "2017-09-22"
     },
     {
-      "buyer_name": "18 Counties & 200+ Municipalities",
+      "buyer_name": "18 hyvinvointialuetta & yli 200 kuntaa",
       "buyer_equity_share_pct": 0.05,
       "inhouse_vendor": "Numera Palvelut Oy (Sarastia)",
       "inhouse_y_tunnus": "2360731-5",
@@ -79,7 +79,7 @@
       "is_illegal_under_10pct": true
     },
     {
-      "buyer_name": "Pohjois-Pohjanmaa / Keski-Suomi / 4 Counties",
+      "buyer_name": "Pohjois-Pohjanmaa, Keski-Suomi & 4 aluetta",
       "buyer_equity_share_pct": 1.2,
       "inhouse_vendor": "Monetra Oy",
       "inhouse_y_tunnus": "2930159-5",
@@ -96,7 +96,7 @@
       "prh_registration_date": "2012-01-12"
     },
     {
-      "buyer_name": "260+ Municipalities",
+      "buyer_name": "Yli 260 kuntaa ja kuntayhtymää",
       "buyer_equity_share_pct": 0.04,
       "inhouse_vendor": "Tiera Oy (Kuntien Tiera)",
       "inhouse_y_tunnus": "2362180-3",
@@ -111,7 +111,7 @@
       "is_illegal_under_10pct": true
     },
     {
-      "buyer_name": "Central Government Agencies (60+)",
+      "buyer_name": "Valtion virastot ja laitokset (yli 60 kpl)",
       "buyer_equity_share_pct": 100.0,
       "inhouse_vendor": "Valtori",
       "inhouse_y_tunnus": "2594476-3",

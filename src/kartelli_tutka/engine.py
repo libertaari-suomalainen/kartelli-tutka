@@ -76,7 +76,7 @@ BASELINE_INHOUSE_FLOWS: List[InHouseContractFlow] = [
         "Ylihintainen lukkoon sidottu sidosyksikkö (Epic-lisenssi + välityskate)",
     ),
     InHouseContractFlow(
-        "Pohjois-Savo / Pirha / 15 Counties",
+        "Pohjois-Savo, Pirha & 15 hyvinvointialuetta",
         0.4,
         "Istekki Oy",
         "2292633-0",
@@ -88,7 +88,7 @@ BASELINE_INHOUSE_FLOWS: List[InHouseContractFlow] = [
         "Laiton suorahankinta — 0,40 % näennäisomistus (Hankintalaki 15 § & MAO:154/2024)",
     ),
     InHouseContractFlow(
-        "Varsinais-Suomi / Satakunta / 12 Counties",
+        "Varsinais-Suomi, Satakunta & 12 aluetta",
         0.8,
         "2M-IT Oy",
         "2859795-3",
@@ -100,7 +100,7 @@ BASELINE_INHOUSE_FLOWS: List[InHouseContractFlow] = [
         "Laiton suorahankinta — 0,80 % näennäisomistus (Hankintalaki 15 § & MAO:154/2024)",
     ),
     InHouseContractFlow(
-        "18 Counties & 200+ Municipalities",
+        "18 hyvinvointialuetta & yli 200 kuntaa",
         0.05,
         "Numera Palvelut Oy (Sarastia)",
         "2360731-5",
@@ -112,7 +112,7 @@ BASELINE_INHOUSE_FLOWS: List[InHouseContractFlow] = [
         "Todettu laittomaksi suorahankinnaksi (MAO:154/2024 & KHO — 0,04–0,05 % omistus)",
     ),
     InHouseContractFlow(
-        "Pohjois-Pohjanmaa / Keski-Suomi / 4 Counties",
+        "Pohjois-Pohjanmaa, Keski-Suomi & 4 aluetta",
         1.2,
         "Monetra Oy",
         "2930159-5",
@@ -124,7 +124,7 @@ BASELINE_INHOUSE_FLOWS: List[InHouseContractFlow] = [
         "Laiton suorahankinta — 1,20 % näennäisomistus (<10 % lakiraja)",
     ),
     InHouseContractFlow(
-        "260+ Municipalities",
+        "Yli 260 kuntaa ja kuntayhtymää",
         0.04,
         "Tiera Oy (Kuntien Tiera)",
         "2362180-3",
@@ -136,7 +136,7 @@ BASELINE_INHOUSE_FLOWS: List[InHouseContractFlow] = [
         "Laiton suorahankinta — 0,04 % murto-osaomistus ilman määräysvaltaa",
     ),
     InHouseContractFlow(
-        "Central Government Agencies (60+)",
+        "Valtion virastot ja laitokset (yli 60 kpl)",
         100.0,
         "Valtori",
         "2594476-3",
