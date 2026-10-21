@@ -26,6 +26,8 @@ from kartelli_tutka.legal_generator import (
 
 class TestKartelliTutkaEngine(unittest.TestCase):
     def test_all_ytunnus_checksums_valid(self) -> None:
+        self.assertEqual(len(BASELINE_INHOUSE_FLOWS), 15)
+        self.assertEqual(len(PUBLIC_BUYER_DIRECTORY), 43)
         for f in BASELINE_INHOUSE_FLOWS:
             self.assertTrue(
                 validate_ytunnus_checksum(f.inhouse_y_tunnus),
@@ -39,10 +41,10 @@ class TestKartelliTutkaEngine(unittest.TestCase):
 
     def test_inhouse_sidosyksikko_leakage(self) -> None:
         res = compute_inhouse_leakage()
-        self.assertAlmostEqual(res["total_inhouse_spend_m_eur"], 1420.00, places=2)
-        self.assertGreater(res["illegal_token_share_spend_m_eur"], 700.0)
-        self.assertEqual(res["illegal_under_10pct_spend_m_eur"], 745.0)
-        self.assertAlmostEqual(res["recoverable_annual_saving_m_eur"], 532.38, places=2)
+        self.assertAlmostEqual(res["total_inhouse_spend_m_eur"], 1980.00, places=2)
+        self.assertGreater(res["illegal_token_share_spend_m_eur"], 1100.0)
+        self.assertEqual(res["illegal_under_10pct_spend_m_eur"], 1207.0)
+        self.assertAlmostEqual(res["recoverable_annual_saving_m_eur"], 699.95, places=2)
 
     def test_price_spread_arbitrage(self) -> None:
         sample = [
@@ -60,12 +62,12 @@ class TestKartelliTutkaEngine(unittest.TestCase):
 
     def test_single_bid_cartel_detector(self) -> None:
         tenders = [
-            HilmaTenderRecord("HILMA-2026-001", "Keski-Suomen HVA", "72260000-IT", 2400000.0, 1, False, 18),
-            HilmaTenderRecord("HILMA-2026-002", "Tampere", "45233120-Infra", 5000000.0, 6, False, 25),
+            HilmaTenderRecord("MAO:292/2023", "Keski-Suomen HVA", "72260000-IT", 2400000.0, 1, False, 18),
+            HilmaTenderRecord("HILMA-OPEN", "Tampere", "45233120-Infra", 5000000.0, 6, False, 25),
         ]
         flagged = detect_single_bid_cartels(tenders)
         self.assertEqual(len(flagged), 1)
-        self.assertEqual(flagged[0]["tender_id"], "HILMA-2026-001")
+        self.assertEqual(flagged[0]["tender_id"], "MAO:292/2023")
         self.assertEqual(flagged[0]["expected_annual_saving_eur"], 600000.0)
 
     def test_zero_fee_legal_generators(self) -> None:
@@ -104,12 +106,15 @@ class TestKartelliTutkaEngine(unittest.TestCase):
             self.assertTrue((root / summary["xlsx_path"]).exists())
             self.assertTrue((root / summary["html_path"]).exists())
             html_text = (root / summary["html_path"]).read_text(encoding="utf-8")
+            self.assertIn("700 milj. €/v", html_text)
             self.assertIn("532 milj. €/v", html_text)
             self.assertNotIn("504 milj. €/v", html_text)
             with zipfile.ZipFile(root / summary["xlsx_path"], "r") as zf:
                 sheet2 = zf.read("xl/worksheets/sheet2.xml").decode("utf-8")
+                sheet5 = zf.read("xl/worksheets/sheet5.xml").decode("utf-8")
                 self.assertIn("Istekki Oy", sheet2)
                 self.assertIn("<f>ROUND(", sheet2)
+                self.assertIn("KAIKKI 43 SUURINTA JULKISTA OSTAJAA", sheet5)
 
 
 if __name__ == "__main__":

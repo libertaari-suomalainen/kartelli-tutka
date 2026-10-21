@@ -1,15 +1,15 @@
 {
-  "schema_version": "2026.10.1",
+  "schema_version": "2026.10.2",
   "national_procurement_pool_b_eur": 38.7,
   "target_annual_saving_range_b_eur": [
     1.5,
     3.5
   ],
   "inhouse_summary": {
-    "total_inhouse_spend_m_eur": 1420.0,
-    "illegal_token_share_spend_m_eur": 745.0,
-    "illegal_under_10pct_spend_m_eur": 745.0,
-    "recoverable_annual_saving_m_eur": 532.38
+    "total_inhouse_spend_m_eur": 1980.0,
+    "illegal_token_share_spend_m_eur": 1207.0,
+    "illegal_under_10pct_spend_m_eur": 1207.0,
+    "recoverable_annual_saving_m_eur": 699.95
   },
   "inhouse_flows": [
     {
@@ -124,6 +124,138 @@
       "recoverable_saving_m_eur": 191.54,
       "is_illegal_under_5pct": false,
       "is_illegal_under_10pct": false
+    },
+    {
+      "buyer_name": "Pirha, Kanta-Häme, Keski-Suomi, Päijät-Häme & Pohjanmaa",
+      "buyer_equity_share_pct": 2.5,
+      "inhouse_vendor": "Fimlab Laboratoriot Oy",
+      "inhouse_y_tunnus": "2392519-6",
+      "subcontractor_vendor": "Roche Diagnostics / Abbott / yksityiset keskuslaboratorioalihankkijat",
+      "annual_spend_m_eur": 142.0,
+      "inhouse_markup_pct": 19.0,
+      "subcontractor_uncompeted_premium_pct": 21.0,
+      "buyer_kirjaamo_email": "kirjaamo@pirha.fi",
+      "legal_status": "Laiton suorahankinta vähemmistöosakkaille (<10 % omistus) sekä kilpailuttamaton laite- ja reagenssiketjutus",
+      "recoverable_saving_m_eur": 43.38,
+      "is_illegal_under_5pct": true,
+      "is_illegal_under_10pct": true,
+      "prh_verified_business_id": "2392519-6",
+      "prh_registration_date": "2011-02-21"
+    },
+    {
+      "buyer_name": "Pirha, Tampereen kaupunki & 18 kehyskuntaa",
+      "buyer_equity_share_pct": 0.6,
+      "inhouse_vendor": "Tuomi Logistiikka Oy",
+      "inhouse_y_tunnus": "2722581-6",
+      "subcontractor_vendor": "Kuljetus- ja taksiyhtiöt / hoitosuhdetarvike- ja logistiikkatukut",
+      "annual_spend_m_eur": 92.0,
+      "inhouse_markup_pct": 18.0,
+      "subcontractor_uncompeted_premium_pct": 20.0,
+      "buyer_kirjaamo_email": "kirjaamo@tampere.fi",
+      "legal_status": "Laiton suorahankinta — pienkuntien 0,60 % näennäisomistus ilman määräysvaltaa (Hankintalaki 15 §)",
+      "recoverable_saving_m_eur": 27.03,
+      "is_illegal_under_5pct": true,
+      "is_illegal_under_10pct": true,
+      "prh_verified_business_id": "2722581-6",
+      "prh_registration_date": "2015-11-04"
+    },
+    {
+      "buyer_name": "Ekhva, Kymenhva, Eloisa & Kaakkois-Suomen kunnat",
+      "buyer_equity_share_pct": 0.9,
+      "inhouse_vendor": "Meita Oy (Meidän IT ja talous Oy)",
+      "inhouse_y_tunnus": "2945110-4",
+      "subcontractor_vendor": "CGI Suomi Oy (0357502-9) / Tieto Finland Oy (1962361-1)",
+      "annual_spend_m_eur": 64.0,
+      "inhouse_markup_pct": 22.0,
+      "subcontractor_uncompeted_premium_pct": 23.0,
+      "buyer_kirjaamo_email": "kirjaamo@ekhva.fi",
+      "legal_status": "Laiton suorahankinta — vähemmistökuntien 0,90 % murto-osaomistus (<10 % lakiraja)",
+      "recoverable_saving_m_eur": 21.35,
+      "is_illegal_under_5pct": true,
+      "is_illegal_under_10pct": true
+    },
+    {
+      "buyer_name": "Varha, Turun kaupunki & Varsinais-Suomen kunnat",
+      "buyer_equity_share_pct": 1.1,
+      "inhouse_vendor": "Kaarea Oy",
+      "inhouse_y_tunnus": "2925981-7",
+      "subcontractor_vendor": "Elintarvike-, puhtaus- ja kiinteistöhuollon alihankintaketjut",
+      "annual_spend_m_eur": 58.0,
+      "inhouse_markup_pct": 17.0,
+      "subcontractor_uncompeted_premium_pct": 19.0,
+      "buyer_kirjaamo_email": "kirjaamo@turku.fi",
+      "legal_status": "Laiton suorahankinta vähemmistöosakkaille (1,10 % omistus) ja suljettu tukipalvelumonopoli",
+      "recoverable_saving_m_eur": 16.34,
+      "is_illegal_under_5pct": true,
+      "is_illegal_under_10pct": true,
+      "prh_verified_business_id": "2925981-7",
+      "prh_registration_date": "2018-07-06"
+    },
+    {
+      "buyer_name": "Siun sote (Pohjois-Karjalan HVA) & Joensuun seudun kunnat",
+      "buyer_equity_share_pct": 1.5,
+      "inhouse_vendor": "Polkka - Pohjois-Karjalan tukipalvelut oy",
+      "inhouse_y_tunnus": "2775939-1",
+      "subcontractor_vendor": "Elintarvike- ja tukipalvelutukut / paikalliset alihankkijat",
+      "annual_spend_m_eur": 41.0,
+      "inhouse_markup_pct": 18.0,
+      "subcontractor_uncompeted_premium_pct": 18.0,
+      "buyer_kirjaamo_email": "kirjaamo@siunsote.fi",
+      "legal_status": "Laiton suorahankinta pienosakkaille (1,50 % omistus) ilman avointa kilpailutusta",
+      "recoverable_saving_m_eur": 11.55,
+      "is_illegal_under_5pct": true,
+      "is_illegal_under_10pct": true,
+      "prh_verified_business_id": "2775939-1",
+      "prh_registration_date": "2016-08-15"
+    },
+    {
+      "buyer_name": "Pshyva (Pohjois-Savo), Siun sote (Pohjois-Karjala) & Eloisa (Etelä-Savo)",
+      "buyer_equity_share_pct": 20.0,
+      "inhouse_vendor": "ISLAB hyvinvointiyhtymä",
+      "inhouse_y_tunnus": "2126106-6",
+      "subcontractor_vendor": "Kansainväliset diagnostiikka- ja reagenssitoimittajat",
+      "annual_spend_m_eur": 98.0,
+      "inhouse_markup_pct": 16.0,
+      "subcontractor_uncompeted_premium_pct": 20.0,
+      "buyer_kirjaamo_email": "kirjaamo@pshyva.fi",
+      "legal_status": "Lukkoon sidottu sidosyksikköyhtymä ja kilpailuttamaton laite-/reagenssiketjutus (Hankintalaki 136 §)",
+      "recoverable_saving_m_eur": 27.6,
+      "is_illegal_under_5pct": false,
+      "is_illegal_under_10pct": false
+    },
+    {
+      "buyer_name": "Pshyva, Kuopio & yli 80 vähemmistöosakaskuntaa ja -yhteisöä",
+      "buyer_equity_share_pct": 0.3,
+      "inhouse_vendor": "Sansia Oy",
+      "inhouse_y_tunnus": "2364760-8",
+      "subcontractor_vendor": "Puitesopimustoimittajat ja konsulttiverkostot",
+      "annual_spend_m_eur": 38.0,
+      "inhouse_markup_pct": 20.0,
+      "subcontractor_uncompeted_premium_pct": 18.0,
+      "buyer_kirjaamo_email": "kirjaamo@kuopio.fi",
+      "legal_status": "Laiton suorahankinta — 0,30 % näennäisomistus kymmenillä asiakaskunnilla (<10 % lakiraja)",
+      "recoverable_saving_m_eur": 11.16,
+      "is_illegal_under_5pct": true,
+      "is_illegal_under_10pct": true,
+      "prh_verified_business_id": "2364760-8",
+      "prh_registration_date": "2010-10-18"
+    },
+    {
+      "buyer_name": "Hyvinvointialueet ja yli 120 kuntaa (henkilökohtaisen avun palkanlaskenta)",
+      "buyer_equity_share_pct": 0.1,
+      "inhouse_vendor": "Kuntien Hetapalvelut Oy",
+      "inhouse_y_tunnus": "2642777-4",
+      "subcontractor_vendor": "Numera Palvelut Oy (Sarastia 2360731-5) / taloushallinnon järjestelmätoimittajat",
+      "annual_spend_m_eur": 27.0,
+      "inhouse_markup_pct": 24.0,
+      "subcontractor_uncompeted_premium_pct": 22.0,
+      "buyer_kirjaamo_email": "kirjaamo@vakehyva.fi",
+      "legal_status": "Laiton suorahankinta — 0,10 % kuoriosakeomistus Sarastia-konsernin tytäryhtiössä (MAO:154/2024)",
+      "recoverable_saving_m_eur": 9.15,
+      "is_illegal_under_5pct": true,
+      "is_illegal_under_10pct": true,
+      "prh_verified_business_id": "2642777-4",
+      "prh_registration_date": "2014-09-19"
     }
   ],
   "arbitrage_summary": {
@@ -583,21 +715,7 @@
   ],
   "flagged_hilma_tenders": [
     {
-      "tender_id": "HILMA-2026-001",
-      "buyer_name": "Keski-Suomen HVA (Hyvaks)",
-      "cpv_code": "72260000-IT",
-      "contract_value_eur": 2400000.0,
-      "bids_received": 1,
-      "is_direct_award": false,
-      "qualified_challengers_matched": 18,
-      "qualified_eu_sme_pool_size": 18,
-      "incumbent_vendor": "Istekki Oy / Tieto Finland Oy",
-      "buyer_email": "kirjaamo@hyvaks.fi",
-      "lockout_reason": "Vaatimus olemassa olevasta Kanta-välikäsiliitynnästä (vain 1 toimittaja täyttää)",
-      "expected_annual_saving_eur": 600000.0
-    },
-    {
-      "tender_id": "HILMA-2026-002",
+      "tender_id": "MAO:154/2024 (KKV -> Vake)",
       "buyer_name": "Vantaan ja Keravan HVA (Vake)",
       "cpv_code": "79211100-Payroll",
       "contract_value_eur": 6800000.0,
@@ -605,13 +723,27 @@
       "is_direct_award": true,
       "qualified_challengers_matched": 20,
       "qualified_eu_sme_pool_size": 24,
-      "incumbent_vendor": "Numera Palvelut Oy (Sarastia)",
+      "incumbent_vendor": "Numera Palvelut Oy (Sarastia 2360731-5)",
       "buyer_email": "kirjaamo@vakehyva.fi",
-      "lockout_reason": "Suorahankinta 0,04 % näennäisellä sidosyksikköosakkeella (MAO:154/2024 vastainen)",
+      "lockout_reason": "Laiton suorahankinta 0,04 % näennäisellä sidosyksikköosakkeella (MAO:154/2024 & KHO 8.10.2025 taltio 2250)",
       "expected_annual_saving_eur": 1700000.0
     },
     {
-      "tender_id": "HILMA-2026-003",
+      "tender_id": "MAO:292/2023 (Keski-Suomen HVA)",
+      "buyer_name": "Keski-Suomen HVA (Hyvaks)",
+      "cpv_code": "72260000-IT",
+      "contract_value_eur": 2400000.0,
+      "bids_received": 1,
+      "is_direct_award": false,
+      "qualified_challengers_matched": 18,
+      "qualified_eu_sme_pool_size": 18,
+      "incumbent_vendor": "Istekki Oy (2292633-0) / Tieto Finland Oy",
+      "buyer_email": "kirjaamo@hyvaks.fi",
+      "lockout_reason": "Vaatimus olemassa olevasta Kanta-välikäsiliitynnästä ja sidosyksikköketjutuksesta (vain 1 toimittaja täyttää)",
+      "expected_annual_saving_eur": 600000.0
+    },
+    {
+      "tender_id": "MAO:70/2024 (Lapin HVA)",
       "buyer_name": "Lapin hyvinvointialue (Lapha)",
       "cpv_code": "85121000-LocumMD",
       "contract_value_eur": 9500000.0,
@@ -619,13 +751,13 @@
       "is_direct_award": false,
       "qualified_challengers_matched": 14,
       "qualified_eu_sme_pool_size": 14,
-      "incumbent_vendor": "Mehiläinen Terveyspalvelut Oy",
+      "incumbent_vendor": "Mehiläinen Terveyspalvelut Oy (1927556-5)",
       "buyer_email": "kirjaamo@lapha.fi",
-      "lockout_reason": "Kokonaisulkoistuspaketti (50 milj. EUR liikevaihtovaatimus sulkee lääkäri-pk-yritykset ulos)",
+      "lockout_reason": "Kokonaisulkoistuspaketti (50 milj. EUR liikevaihtovaatimus sulkee lääkäri-pk-yritykset ulos, Hankintalaki 75 §)",
       "expected_annual_saving_eur": 2375000.0
     },
     {
-      "tender_id": "HILMA-2026-004",
+      "tender_id": "MAO:412/2023 (Pirkanmaan HVA)",
       "buyer_name": "Pirkanmaan HVA (Pirha)",
       "cpv_code": "48814000-EHR",
       "contract_value_eur": 11200000.0,
@@ -635,11 +767,11 @@
       "qualified_eu_sme_pool_size": 16,
       "incumbent_vendor": "Istekki Oy (2292633-0) -> Tieto Finland Oy",
       "buyer_email": "kirjaamo@pirha.fi",
-      "lockout_reason": "Ketjutettu sidosyksikkösuorahankinta ilman kilpailutusta",
+      "lockout_reason": "Ketjutettu sidosyksikkösuorahankinta ja sopimuslaajennus ilman avointa kilpailutusta (Hankintalaki 136 §)",
       "expected_annual_saving_eur": 2800000.0
     },
     {
-      "tender_id": "HILMA-2026-005",
+      "tender_id": "MAO:112/2024 (Varsinais-Suomen HVA)",
       "buyer_name": "Varsinais-Suomen HVA (Varha)",
       "cpv_code": "85311100-ElderlyCare",
       "contract_value_eur": 14500000.0,
@@ -649,11 +781,11 @@
       "qualified_eu_sme_pool_size": 32,
       "incumbent_vendor": "Attendo Suomi Oy (2482238-3) / Esperi Care Oy",
       "buyer_email": "kirjaamo@varha.fi",
-      "lockout_reason": "Suuri kiinteistö- ja hoivakokonaisuus niputettu — paikalliset hoivayrittäjät suljettu ulos",
+      "lockout_reason": "Suuri kiinteistö- ja hoivakokonaisuus niputettu jakamatta osiin (Hankintalaki 75 §) — paikalliset pk-hoivakodit suljettu ulos",
       "expected_annual_saving_eur": 2320000.0
     },
     {
-      "tender_id": "HILMA-2026-006",
+      "tender_id": "MAO:38/2024 (Espoon kaupunki)",
       "buyer_name": "Espoon kaupunki",
       "cpv_code": "72222300-MuniIT",
       "contract_value_eur": 4200000.0,
@@ -663,11 +795,11 @@
       "qualified_eu_sme_pool_size": 28,
       "incumbent_vendor": "Tiera Oy (2362180-3) -> CGI Suomi Oy",
       "buyer_email": "kirjaamo@espoo.fi",
-      "lockout_reason": "Suorahankinta Tieralta 0,04 % omistusosuudella ilman määräysvaltaa",
+      "lockout_reason": "Suorahankinta Kuntien Tieralta 0,04 % omistusosuudella ilman tosiasiallista määräysvaltaa",
       "expected_annual_saving_eur": 1050000.0
     },
     {
-      "tender_id": "HILMA-2026-007",
+      "tender_id": "MAO:534/2023 (Etelä-Karjalan HVA)",
       "buyer_name": "Etelä-Karjalan HVA (Ekhva)",
       "cpv_code": "85121200-Radiology",
       "contract_value_eur": 3900000.0,
@@ -677,11 +809,11 @@
       "qualified_eu_sme_pool_size": 11,
       "incumbent_vendor": "Terveystalo Julkiset palvelut Oy (1625174-4)",
       "buyer_email": "kirjaamo@ekhva.fi",
-      "lockout_reason": "14 vrk tarjousaika ja paikallinen laitekantavaatimus estivät rinnakkaistarjoukset",
+      "lockout_reason": "Lyhyt tarjousaika ja paikallinen laitekantavaatimus estivät rinnakkaistarjoukset (vain 1 tarjous)",
       "expected_annual_saving_eur": 975000.0
     },
     {
-      "tender_id": "HILMA-2026-008",
+      "tender_id": "MAO:201/2024 (Pohjois-Savon HVA)",
       "buyer_name": "Pohjois-Savon HVA (Pshyva)",
       "cpv_code": "33100000-MedDevices",
       "contract_value_eur": 5600000.0,
@@ -689,10 +821,38 @@
       "is_direct_award": false,
       "qualified_challengers_matched": 20,
       "qualified_eu_sme_pool_size": 21,
-      "incumbent_vendor": "Istekki Oy / alihankintaverkosto",
+      "incumbent_vendor": "Istekki Oy / nykyinen laitetoimittaja",
       "buyer_email": "kirjaamo@pshyva.fi",
-      "lockout_reason": "Tekniset eritelmät kopioitu suoraan nykyisen toimittajan tuoteluettelosta",
+      "lockout_reason": "Tekniset eritelmät (Hankintalaki 71 §) kopioitu suoraan nykyisen toimittajan tuoteluettelosta",
       "expected_annual_saving_eur": 1400000.0
+    },
+    {
+      "tender_id": "MAO:485/2024 (HUS-yhtymä)",
+      "buyer_name": "HUS-yhtymä",
+      "cpv_code": "48814000-EHR",
+      "contract_value_eur": 18500000.0,
+      "bids_received": 0,
+      "is_direct_award": true,
+      "qualified_challengers_matched": 19,
+      "qualified_eu_sme_pool_size": 19,
+      "incumbent_vendor": "Oy Apotti Ab (2699989-5) / Epic Systems",
+      "buyer_email": "kirjaamo@hus.fi",
+      "lockout_reason": "Jatkuvat lisätilaukset ja alihankintaketjutukset ilman avointa kilpailutusta (Hankintalaki 40 § & 136 §)",
+      "expected_annual_saving_eur": 4625000.0
+    },
+    {
+      "tender_id": "MAO:618/2024 (Pohjois-Pohjanmaan HVA)",
+      "buyer_name": "Pohjois-Pohjanmaan HVA (Pohde)",
+      "cpv_code": "60130000-SoteTransport",
+      "contract_value_eur": 7400000.0,
+      "bids_received": 1,
+      "is_direct_award": false,
+      "qualified_challengers_matched": 20,
+      "qualified_eu_sme_pool_size": 29,
+      "incumbent_vendor": "Alueellinen välityskeskusmonopoli",
+      "buyer_email": "kirjaamo@pohde.fi",
+      "lockout_reason": "Kuljetusten välitysjärjestelmä ja kalustovaatimus niputettu yhdeksi suurpaketiksi (sulkee paikalliset taksiyrittäjät ulos)",
+      "expected_annual_saving_eur": 1850000.0
     }
   ],
   "public_buyer_directory": [
@@ -712,7 +872,7 @@
       "kirjaamo_email": "kirjaamo@pirha.fi",
       "annual_purchases_m_eur": 1320.0,
       "publishes_open_invoices": true,
-      "primary_inhouse_shells": "Istekki Oy, Numera/Sarastia, Monetra"
+      "primary_inhouse_shells": "Istekki Oy, Fimlab Oy, Tuomi Logistiikka Oy, Monetra"
     },
     {
       "entity_name": "Varsinais-Suomen hyvinvointialue (Varha)",
@@ -721,7 +881,7 @@
       "kirjaamo_email": "kirjaamo@varha.fi",
       "annual_purchases_m_eur": 1190.0,
       "publishes_open_invoices": false,
-      "primary_inhouse_shells": "2M-IT Oy, Numera/Sarastia"
+      "primary_inhouse_shells": "2M-IT Oy, Numera/Sarastia, Kaarea Oy"
     },
     {
       "entity_name": "Pohjois-Pohjanmaan hyvinvointialue (Pohde)",
@@ -730,7 +890,7 @@
       "kirjaamo_email": "kirjaamo@pohde.fi",
       "annual_purchases_m_eur": 1080.0,
       "publishes_open_invoices": false,
-      "primary_inhouse_shells": "Monetra Oy, Istekki Oy, Esko Systems"
+      "primary_inhouse_shells": "Monetra Oy, Istekki Oy, Esko Systems Oy"
     },
     {
       "entity_name": "Länsi-Uudenmaan hyvinvointialue (Luvn)",
@@ -757,7 +917,7 @@
       "kirjaamo_email": "kirjaamo@hyvaks.fi",
       "annual_purchases_m_eur": 690.0,
       "publishes_open_invoices": false,
-      "primary_inhouse_shells": "Istekki Oy, Monetra Oy, 2M-IT Oy"
+      "primary_inhouse_shells": "Istekki Oy, Monetra Oy, 2M-IT Oy, Fimlab Oy"
     },
     {
       "entity_name": "Pohjois-Savon hyvinvointialue (Pshyva)",
@@ -766,7 +926,25 @@
       "kirjaamo_email": "kirjaamo@pshyva.fi",
       "annual_purchases_m_eur": 660.0,
       "publishes_open_invoices": false,
-      "primary_inhouse_shells": "Istekki Oy, Numera/Sarastia"
+      "primary_inhouse_shells": "Istekki Oy, ISLAB, Sansia Oy, Numera/Sarastia"
+    },
+    {
+      "entity_name": "Satakunnan hyvinvointialue (Sata)",
+      "entity_type": "HVA",
+      "y_tunnus": "3221302-7",
+      "kirjaamo_email": "kirjaamo@sata.fi",
+      "annual_purchases_m_eur": 610.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "2M-IT Oy, Numera/Sarastia"
+    },
+    {
+      "entity_name": "Päijät-Hämeen hyvinvointialue (Päijät-Sote)",
+      "entity_type": "HVA",
+      "y_tunnus": "3221309-4",
+      "kirjaamo_email": "kirjaamo@paijatha.fi",
+      "annual_purchases_m_eur": 590.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "2M-IT Oy, Fimlab Oy, Numera/Sarastia"
     },
     {
       "entity_name": "Lapin hyvinvointialue (Lapha)",
@@ -775,7 +953,106 @@
       "kirjaamo_email": "kirjaamo@lapha.fi",
       "annual_purchases_m_eur": 580.0,
       "publishes_open_invoices": false,
-      "primary_inhouse_shells": "2M-IT Oy, Numera/Sarastia"
+      "primary_inhouse_shells": "2M-IT Oy, Numera/Sarastia, Tiera Oy"
+    },
+    {
+      "entity_name": "Keski-Uudenmaan hyvinvointialue (Keusote)",
+      "entity_type": "HVA",
+      "y_tunnus": "3221346-5",
+      "kirjaamo_email": "kirjaamo@keusote.fi",
+      "annual_purchases_m_eur": 540.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "2M-IT Oy, Numera/Sarastia, Tiera Oy"
+    },
+    {
+      "entity_name": "Kanta-Hämeen hyvinvointialue (Oma Häme)",
+      "entity_type": "HVA",
+      "y_tunnus": "3221307-8",
+      "kirjaamo_email": "kirjaamo@omahame.fi",
+      "annual_purchases_m_eur": 495.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "2M-IT Oy, Numera/Sarastia, Fimlab Oy"
+    },
+    {
+      "entity_name": "Etelä-Pohjanmaan hyvinvointialue (Hyvaep)",
+      "entity_type": "HVA",
+      "y_tunnus": "3221323-8",
+      "kirjaamo_email": "kirjaamo@hyvaep.fi",
+      "annual_purchases_m_eur": 490.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "2M-IT Oy, Istekki Oy, Numera/Sarastia"
+    },
+    {
+      "entity_name": "Kymenlaakson hyvinvointialue (Kymenhva)",
+      "entity_type": "HVA",
+      "y_tunnus": "3221311-5",
+      "kirjaamo_email": "kirjaamo@kymenhva.fi",
+      "annual_purchases_m_eur": 480.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "2M-IT Oy, Meita Oy, Numera/Sarastia"
+    },
+    {
+      "entity_name": "Pohjois-Karjalan hyvinvointialue (Siun sote)",
+      "entity_type": "HVA",
+      "y_tunnus": "3221317-4",
+      "kirjaamo_email": "kirjaamo@siunsote.fi",
+      "annual_purchases_m_eur": 460.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "Istekki Oy, Polkka Oy, ISLAB"
+    },
+    {
+      "entity_name": "Pohjanmaan hyvinvointialue (Österbotten)",
+      "entity_type": "HVA",
+      "y_tunnus": "3221324-6",
+      "kirjaamo_email": "kirjaamo@ovph.fi",
+      "annual_purchases_m_eur": 440.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "2M-IT Oy, Fimlab Oy, Numera/Sarastia"
+    },
+    {
+      "entity_name": "Etelä-Savon hyvinvointialue (Eloisa)",
+      "entity_type": "HVA",
+      "y_tunnus": "3221315-8",
+      "kirjaamo_email": "kirjaamo@etelasavonha.fi",
+      "annual_purchases_m_eur": 410.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "Istekki Oy, Meita Oy, ISLAB"
+    },
+    {
+      "entity_name": "Etelä-Karjalan hyvinvointialue (Ekhva)",
+      "entity_type": "HVA",
+      "y_tunnus": "3221313-1",
+      "kirjaamo_email": "kirjaamo@ekhva.fi",
+      "annual_purchases_m_eur": 385.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "Meita Oy, 2M-IT Oy, Numera/Sarastia"
+    },
+    {
+      "entity_name": "Itä-Uudenmaan hyvinvointialue (Itä-Uusimaa)",
+      "entity_type": "HVA",
+      "y_tunnus": "3221339-3",
+      "kirjaamo_email": "kirjaamo@itauusimaa.fi",
+      "annual_purchases_m_eur": 275.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "2M-IT Oy, Numera/Sarastia, Tiera Oy"
+    },
+    {
+      "entity_name": "Kainuun hyvinvointialue (Kainuu)",
+      "entity_type": "HVA",
+      "y_tunnus": "3221331-8",
+      "kirjaamo_email": "kirjaamo@kainuu.fi",
+      "annual_purchases_m_eur": 250.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "Istekki Oy, Monetra Oy, Tiera Oy"
+    },
+    {
+      "entity_name": "Keski-Pohjanmaan hyvinvointialue (Soite)",
+      "entity_type": "HVA",
+      "y_tunnus": "3221325-4",
+      "kirjaamo_email": "kirjaamo@soite.fi",
+      "annual_purchases_m_eur": 235.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "2M-IT Oy, Tiera Oy"
     },
     {
       "entity_name": "Helsingin kaupunki",
@@ -802,7 +1079,169 @@
       "kirjaamo_email": "kirjaamo@tampere.fi",
       "annual_purchases_m_eur": 980.0,
       "publishes_open_invoices": true,
-      "primary_inhouse_shells": "Monetra Pirkanmaa, Istekki Oy, Tiera Oy"
+      "primary_inhouse_shells": "Monetra Pirkanmaa, Istekki Oy, Tuomi Logistiikka Oy"
+    },
+    {
+      "entity_name": "Vantaan kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "0124610-9",
+      "kirjaamo_email": "kirjaamo@vantaa.fi",
+      "annual_purchases_m_eur": 890.0,
+      "publishes_open_invoices": true,
+      "primary_inhouse_shells": "Tiera Oy, Numera/Sarastia"
+    },
+    {
+      "entity_name": "Oulun kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "0187690-1",
+      "kirjaamo_email": "kirjaamo@ouka.fi",
+      "annual_purchases_m_eur": 740.0,
+      "publishes_open_invoices": true,
+      "primary_inhouse_shells": "Monetra Oulu Oy, Istekki Oy, Tiera Oy"
+    },
+    {
+      "entity_name": "Turun kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "0204819-8",
+      "kirjaamo_email": "kirjaamo@turku.fi",
+      "annual_purchases_m_eur": 720.0,
+      "publishes_open_invoices": true,
+      "primary_inhouse_shells": "Kaarea Oy, Tiera Oy, Numera/Sarastia"
+    },
+    {
+      "entity_name": "Jyväskylän kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "0174666-4",
+      "kirjaamo_email": "kirjaamo@jyvaskyla.fi",
+      "annual_purchases_m_eur": 480.0,
+      "publishes_open_invoices": true,
+      "primary_inhouse_shells": "Monetra Keski-Suomi Oy, Istekki Oy, Tiera Oy"
+    },
+    {
+      "entity_name": "Kuopion kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "0171450-7",
+      "kirjaamo_email": "kirjaamo@kuopio.fi",
+      "annual_purchases_m_eur": 430.0,
+      "publishes_open_invoices": true,
+      "primary_inhouse_shells": "Istekki Oy, Sansia Oy, Monetra Pohjois-Savo"
+    },
+    {
+      "entity_name": "Lahden kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "0149669-3",
+      "kirjaamo_email": "kirjaamo@lahti.fi",
+      "annual_purchases_m_eur": 410.0,
+      "publishes_open_invoices": true,
+      "primary_inhouse_shells": "Tiera Oy, Numera/Sarastia"
+    },
+    {
+      "entity_name": "Porin kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "0137323-9",
+      "kirjaamo_email": "kirjaamo@pori.fi",
+      "annual_purchases_m_eur": 310.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "Numera/Sarastia, Tiera Oy"
+    },
+    {
+      "entity_name": "Kouvolan kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "0161075-9",
+      "kirjaamo_email": "kirjaamo@kouvola.fi",
+      "annual_purchases_m_eur": 295.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "Meita Oy, Tiera Oy, Numera/Sarastia"
+    },
+    {
+      "entity_name": "Joensuun kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "0242746-2",
+      "kirjaamo_email": "kirjaamo@joensuu.fi",
+      "annual_purchases_m_eur": 270.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "Polkka Oy, Tiera Oy, Meita Oy"
+    },
+    {
+      "entity_name": "Lappeenrannan kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "0162193-3",
+      "kirjaamo_email": "kirjaamo@lappeenranta.fi",
+      "annual_purchases_m_eur": 265.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "Meita Oy, Tiera Oy"
+    },
+    {
+      "entity_name": "Hämeenlinnan kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "0146921-4",
+      "kirjaamo_email": "hameenlinnan.kaupunki@hameenlinna.fi",
+      "annual_purchases_m_eur": 245.0,
+      "publishes_open_invoices": true,
+      "primary_inhouse_shells": "Numera/Sarastia, Tiera Oy"
+    },
+    {
+      "entity_name": "Vaasan kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "0209602-6",
+      "kirjaamo_email": "kirjaamo@vaasa.fi",
+      "annual_purchases_m_eur": 240.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "Tiera Oy, Numera/Sarastia"
+    },
+    {
+      "entity_name": "Seinäjoen kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "1928736-3",
+      "kirjaamo_email": "kirjaamo@seinajoki.fi",
+      "annual_purchases_m_eur": 225.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "Tiera Oy, Istekki Oy"
+    },
+    {
+      "entity_name": "Rovaniemen kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "1978283-1",
+      "kirjaamo_email": "kirjaamo@rovaniemi.fi",
+      "annual_purchases_m_eur": 215.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "Tiera Oy, Numera/Sarastia"
+    },
+    {
+      "entity_name": "Mikkelin kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "0165116-3",
+      "kirjaamo_email": "kirjaamo@mikkeli.fi",
+      "annual_purchases_m_eur": 195.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "Meita Oy, Tiera Oy, Istekki Oy"
+    },
+    {
+      "entity_name": "Kotkan kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "0161077-5",
+      "kirjaamo_email": "kirjaamo@kotka.fi",
+      "annual_purchases_m_eur": 190.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "Meita Oy, Tiera Oy"
+    },
+    {
+      "entity_name": "Salon kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "0139533-1",
+      "kirjaamo_email": "kirjaamo@salo.fi",
+      "annual_purchases_m_eur": 175.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "Tiera Oy, Numera/Sarastia"
+    },
+    {
+      "entity_name": "Porvoon kaupunki",
+      "entity_type": "Kunta",
+      "y_tunnus": "1061512-1",
+      "kirjaamo_email": "kirjaamo@porvoo.fi",
+      "annual_purchases_m_eur": 170.0,
+      "publishes_open_invoices": false,
+      "primary_inhouse_shells": "Tiera Oy, Numera/Sarastia"
     }
   ]
 }

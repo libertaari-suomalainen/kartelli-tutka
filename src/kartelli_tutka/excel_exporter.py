@@ -1,11 +1,11 @@
 """
 Zero-Dependency Native OOXML (.xlsx) Workbook Compiler for Kartelli-Tutka.
-Generates `dist/Sote_ja_Kunta_Kartelli_Matriisi_2026.xlsx` with 4 multi-tab sheets,
-styled headers, column widths, and live Excel formulas (`SUM`, `IF`, `MAX`).
+Generates `dist/Sote_ja_Kunta_Kartelli_Matriisi_2026.xlsx` with 5 multi-tab sheets,
+styled headers, column widths, and live Excel formulas (`SUM`, `IF`, `ROUND`).
 """
 
 from pathlib import Path
-from typing import Any, Dict, List, Tuple, Union
+from typing import List, Tuple, Union
 from xml.sax.saxutils import escape
 import zipfile
 
@@ -13,6 +13,7 @@ from .engine import (
     BASELINE_HILMA_TENDERS,
     BASELINE_INHOUSE_FLOWS,
     BASELINE_PEER_SPEND,
+    PUBLIC_BUYER_DIRECTORY,
     compute_category_arbitrage_breakdown,
     compute_inhouse_leakage,
     compute_price_spread_arbitrage,
@@ -22,7 +23,7 @@ from .legal_generator import generate_kkv_complaint
 
 
 CellValue = Union[str, int, float]
-CellSpec = Union[CellValue, Tuple[str, str]]  # Either literal value or ("FORMULA", "SUM(B2:B8)")
+CellSpec = Union[CellValue, Tuple[str, str], Tuple[str, str, str]]
 
 
 def _col_letter(col_idx_1based: int) -> str:
@@ -68,7 +69,7 @@ def _build_sheet_xml(rows: List[List[CellSpec]], col_widths: List[int]) -> str:
 
 def export_cartel_workbook(output_path: Path) -> Path:
     """
-    Compiles the 4-tab `Sote_ja_Kunta_Kartelli_Matriisi_2026.xlsx` workbook directly from the SSOT engine.
+    Compiles the 5-tab `Sote_ja_Kunta_Kartelli_Matriisi_2026.xlsx` workbook directly from the SSOT engine.
     """
     inhouse_sum = compute_inhouse_leakage(BASELINE_INHOUSE_FLOWS)
     arb_sum = compute_price_spread_arbitrage(BASELINE_PEER_SPEND)
@@ -78,22 +79,22 @@ def export_cartel_workbook(output_path: Path) -> Path:
     # Sheet 1: Executive Summary & VM / Association Cut-Sheet
     sheet1_rows: List[List[CellSpec]] = [
         ["KARTELLI-PURKAJA 2026 — JULKISTEN HANKINTOJEN (38,7 MRD €/V) LEIKKURI & OIKEUSOHJUS", "", "", ""],
-        ["Lähde: Tutkihallintoa.fi, Hilma OCDS, PRH Avoindata & MAO:154/2024 Oikeuskäytäntö", "", "", ""],
+        ["Lähde: Tutkihankintoja.fi, Hilma OCDS, PRH Avoindata, MAO:154/2024 & KHO 8.10.2025 taltio 2250", "", "", ""],
         ["Leikkausmekanismi / Kartellikategoria", "Vuotuinen ostovolyymi (M€/v)", "Laiton / Ylihintainen kanta (M€/v)", "Välitön vuosisäästö (M€/v)"],
         [
-            "1. Sidosyksikkökartellit (Istekki, 2M-IT, Sarastia/Numera, Monetra, Tiera, Apotti, Valtori)",
+            "1. Sidosyksikkökartellit (15 välikäsiyhtiötä: Istekki, Apotti, 2M-IT, Sarastia, Monetra, Tiera, Valtori, Fimlab, Tuomi ym.)",
             inhouse_sum["total_inhouse_spend_m_eur"],
             inhouse_sum["illegal_under_10pct_spend_m_eur"],
             inhouse_sum["recoverable_annual_saving_m_eur"],
         ],
         [
-            "2. Hyvinvointialueiden & kuntien yksikköhintojen P25-arbitraasi (5 kärkikategoriaa, otos)",
+            "2. Hyvinvointialueiden & kuntien yksikköhintojen P25-arbitraasi (5 kärkikategoriaa, 31 aluevertailua)",
             round(arb_sum["baseline_category_spend_eur"] / 1_000_000.0, 2),
             round(arb_sum["baseline_category_spend_eur"] / 1_000_000.0, 2),
             round(arb_sum["p25_arbitrage_saving_eur"] / 1_000_000.0, 2),
         ],
         [
-            "3. Hilma 1–2 tarjouksen kilpailutukset & suorahankinnat (kansallinen skaalaus 45 % kantaan)",
+            "3. Hilma & MAO 1–2 tarjouksen kilpailutukset & suorahankinnat (kansallinen skaalaus 45 % kantaan)",
             8400.00,
             3780.00,
             1620.00,
@@ -106,9 +107,9 @@ def export_cartel_workbook(output_path: Path) -> Path:
         ],
     ]
 
-    # Sheet 2: Sidosyksikkö (<10% Ownership) Illegal Direct Awards
+    # Sheet 2: Sidosyksikkö (15 In-House Intermediaries) Illegal Direct Awards & Lock-Ins
     sheet2_rows: List[List[CellSpec]] = [
-        ["SIDOSYKSIKKÖKARTELLIT (HANKINTALAKI 15 § & MAO:154/2024) — VÄLIKÄSIKATTEET JA ALIHANKINTAKETJUT", "", "", "", "", "", "", "", "", ""],
+        ["SIDOSYKSIKKÖKARTELLIT (HANKINTALAKI 15 §, MAO:154/2024 & KHO 8.10.2025) — 15 VÄLIKÄSIYHTIÖTÄ", "", "", "", "", "", "", "", "", ""],
         ["Huom: Alle 10 % omistusosuus ilman tosiasiallista määräysvaltaa tekee jokaisesta suorahankinnasta laittoman (0 € KKV-toimenpidepyyntö).", "", "", "", "", "", "", "", "", ""],
         [
             "Ostajaryhmä (HVA / Kunnat / Valtio)",
@@ -141,7 +142,7 @@ def export_cartel_workbook(output_path: Path) -> Path:
         ])
     last_s2 = 3 + len(BASELINE_INHOUSE_FLOWS)
     sheet2_rows.append([
-        "YHTEENSÄ (SIDOSYKSIKKÖVUOTO)",
+        "YHTEENSÄ (15 SIDOSYKSIKKÖJÄTTIÄ)",
         "",
         "",
         "",
@@ -196,13 +197,13 @@ def export_cartel_workbook(output_path: Path) -> Path:
         ("FORMULA", f"SUM(I4:I{last_s3})", str(arb_sum["p25_arbitrage_saving_eur"])),
     ])
 
-    # Sheet 4: Hilma Single-Bid Cartels & Sample Legal Complaint
+    # Sheet 4: Real MAO & Hilma Single-Bid / Direct-Award Cases & Sample Legal Complaint
     sample_kkv = generate_kkv_complaint(BASELINE_INHOUSE_FLOWS[1])
     sheet4_rows: List[List[CellSpec]] = [
-        ["HILMA 1–2 TARJOUKSEN KARTELLIHANKINNAT & VALMIIT 0 € KKV-VALITUSPOHJAT", "", "", "", "", "", "", ""],
+        ["MARKKINAOIKEUS (MAO) & HILMA 1–2 TARJOUKSEN KARTELLIHANKINNAT SEKÄ 0 € KKV-VALITUSPOHJAT", "", "", "", "", "", "", ""],
         ["Jokainen alle 2 tarjouksen sopimus >100 000 € luokassa, jossa on >=5 pk-haastajaa, merkitään uudelleenkilpailutettavaksi.", "", "", "", "", "", "", ""],
         [
-            "Hilma-tunnus",
+            "MAO / Hilma -tapaus",
             "Hankintayksikkö",
             "CPV-koodi",
             "Sopimusarvo (€)",
@@ -228,11 +229,49 @@ def export_cartel_workbook(output_path: Path) -> Path:
     for line in sample_kkv["body"].splitlines():
         sheet4_rows.append([line, "", "", "", "", "", "", ""])
 
+    # Sheet 5: Complete Directory of All 43 Major Public Buyers (All 21 Wellbeing Counties + HUS + 21 Largest Cities)
+    sheet5_rows: List[List[CellSpec]] = [
+        ["KAIKKI 43 SUURINTA JULKISTA OSTAJAA (21 HYVINVOINTIALUETTA + HUS + 21 SUURINTA KAUPUNKIA)", "", "", "", "", "", ""],
+        ["Julkisuuslain (621/1999) 13 § ja 16.3 § velvoittaa jokaisen viranomaisen luovuttamaan ostolaskudatan 14 vrk kuluessa.", "", "", "", "", "", ""],
+        [
+            "Julkinen hankintayksikkö",
+            "Tyyppi (HVA / HUS / Kunta)",
+            "PRH Y-tunnus (Modulo-11)",
+            "Virallinen kirjaamo-sähköposti",
+            "Ulkoiset ostot (M€/v)",
+            "Julkaiseeko avoimen ostolaskudatan?",
+            "Keskeiset sidosyksikkö- ja in-house-yhtiöt",
+        ],
+    ]
+    total_buyer_spend = 0.0
+    for b in PUBLIC_BUYER_DIRECTORY:
+        total_buyer_spend += b.annual_purchases_m_eur
+        sheet5_rows.append([
+            b.entity_name,
+            b.entity_type,
+            b.y_tunnus,
+            b.kirjaamo_email,
+            b.annual_purchases_m_eur,
+            "KYLLÄ" if b.publishes_open_invoices else "EI (Vaadi JulkL 13 § tietopyynnöllä)",
+            b.primary_inhouse_shells,
+        ])
+    last_s5 = 3 + len(PUBLIC_BUYER_DIRECTORY)
+    sheet5_rows.append([
+        "YHTEENSÄ (43 JULKISTA HANKINTAYKSIKKÖÄ)",
+        "",
+        "",
+        "",
+        ("FORMULA", f"SUM(E4:E{last_s5})", str(round(total_buyer_spend, 2))),
+        "",
+        "",
+    ])
+
     sheets = [
         ("01_Yhteenveto_Leikkuri", _build_sheet_xml(sheet1_rows, [68, 26, 28, 26])),
-        ("02_Sidosyksikko_Kartellit", _build_sheet_xml(sheet2_rows, [38, 12, 28, 15, 42, 16, 15, 18, 18, 26])),
+        ("02_Sidosyksikko_Kartellit", _build_sheet_xml(sheet2_rows, [38, 12, 32, 15, 44, 16, 15, 18, 18, 26])),
         ("03_Alueiden_Hintavertailu_P25", _build_sheet_xml(sheet3_rows, [32, 26, 15, 16, 22, 24, 18, 22, 24])),
-        ("04_Hilma_1Tarjous_Valitukset", _build_sheet_xml(sheet4_rows, [22, 32, 22, 18, 20, 22, 52, 22])),
+        ("04_MAO_Hilma_1Tarjous_Tapaukset", _build_sheet_xml(sheet4_rows, [28, 32, 22, 18, 20, 22, 52, 22])),
+        ("05_Kaikki_43_Julkista_Ostajaa", _build_sheet_xml(sheet5_rows, [42, 20, 18, 32, 20, 32, 48])),
     ]
 
     content_types = (
@@ -303,7 +342,6 @@ def export_cartel_workbook(output_path: Path) -> Path:
     )
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    # Deterministic ZIP entry timestamp (2026-01-01 00:00:00) for reproducible builds
     def _write_deterministic(zf: zipfile.ZipFile, arcname: str, text: str) -> None:
         zi = zipfile.ZipInfo(filename=arcname, date_time=(2026, 1, 1, 0, 0, 0))
         zi.compress_type = zipfile.ZIP_DEFLATED

@@ -2,7 +2,9 @@
 Kartelli-Tutka — Suomen Talousinstituutti (STI) Editorial Research Report & Interactive Case Explorer.
 Compiles the canonical SSOT payload and pre-generated legal filings into a self-contained,
 mobile-first editorial web application (`dist/index.html`) where every KPI, flow step,
-in-house company, regional price comparison, and tender card is clickable.
+15 in-house companies, 31 regional price benchmarks, 10 Market Court (MAO) / Hilma cases,
+and all 43 major Finnish public buyers (21 Wellbeing Counties + HUS + 21 largest municipalities)
+are interactive, sortable, deep-linkable, and exportable to CSV/.txt/PDF.
 """
 
 import json
@@ -62,6 +64,7 @@ def build_static_web_app(output_path: Path) -> Path:
     --bg: #FAF8F7;
     --surface: #FFFFFF;
     --stone: #F2EEEE;
+    --stone-hover: #EAE3E3;
     --border: #E5E0DF;
     --border-strong: #D5CECC;
     --text: #18181B;
@@ -222,7 +225,7 @@ def build_static_web_app(output_path: Path) -> Path:
     margin-bottom: 16px;
   }}
   .hero-title {{ font-size: clamp(26px, 4vw, 38px); line-height: 1.16; font-weight: 800; margin-bottom: 16px; }}
-  .hero-lead {{ font-size: clamp(16px, 2vw, 18px); color: var(--body); max-width: 880px; margin-bottom: 22px; }}
+  .hero-lead {{ font-size: clamp(16px, 2vw, 18px); color: var(--body); max-width: 900px; margin-bottom: 22px; }}
   .callout-stone {{
     background: var(--stone);
     border-left: 4px solid var(--accent);
@@ -356,7 +359,7 @@ def build_static_web_app(output_path: Path) -> Path:
   }}
   .section-head {{ margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }}
   .section-head h2 {{ font-size: clamp(20px, 2.8vw, 26px); margin-bottom: 6px; }}
-  .section-head p {{ font-size: 15.5px; color: var(--muted); max-width: 840px; }}
+  .section-head p {{ font-size: 15.5px; color: var(--muted); max-width: 860px; }}
   .flow-steps {{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 12px; }}
   .flow-step {{ background: var(--stone); border: 1px solid var(--border-strong); border-radius: 8px; padding: 18px; }}
   .flow-step.danger {{ background: var(--red-soft); border-color: var(--red-border); }}
@@ -466,6 +469,55 @@ def build_static_web_app(output_path: Path) -> Path:
     gap: 12px;
     grid-column: 1 / -1;
   }}
+
+  /* Sortable Full Registry Tables */
+  .table-wrap {{
+    margin-top: 26px;
+    border-top: 1px solid var(--border);
+    padding-top: 22px;
+  }}
+  .table-scroll {{
+    overflow-x: auto;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    background: var(--surface);
+    max-height: 520px;
+    overflow-y: auto;
+    margin-top: 12px;
+  }}
+  table {{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }}
+  th, td {{
+    text-align: left;
+    padding: 11px 13px;
+    border-bottom: 1px solid var(--border);
+  }}
+  th {{
+    position: sticky;
+    top: 0;
+    background: var(--stone);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    z-index: 2;
+    user-select: none;
+  }}
+  th.sortable {{
+    cursor: pointer;
+    transition: background 0.14s;
+  }}
+  th.sortable:hover {{
+    background: var(--stone-hover);
+    color: var(--accent-dark);
+  }}
+  tr.clickable-row {{ cursor: pointer; }}
+  tr.clickable-row:hover td {{ background: var(--accent-soft); }}
+
   .modal-backdrop {{
     position: fixed;
     inset: 0;
@@ -482,7 +534,7 @@ def build_static_web_app(output_path: Path) -> Path:
     background: var(--surface);
     border: 1px solid var(--border-strong);
     border-radius: 12px;
-    max-width: 760px;
+    max-width: 780px;
     width: 100%;
     max-height: 88vh;
     overflow-y: auto;
@@ -508,7 +560,13 @@ def build_static_web_app(output_path: Path) -> Path:
     justify-content: center;
   }}
   .modal-card h2 {{ font-size: 23px; margin-bottom: 8px; padding-right: 44px; }}
-  .modal-sub {{ font-size: 14px; color: var(--muted); margin-bottom: 20px; }}
+  .modal-sub {{ font-size: 14px; color: var(--muted); margin-bottom: 16px; }}
+  .modal-toolbar {{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }}
   .modal-section {{
     background: var(--bg);
     border: 1px solid var(--border);
@@ -520,6 +578,21 @@ def build_static_web_app(output_path: Path) -> Path:
   .modal-section p, .modal-section li {{ font-size: 15px; color: var(--body); line-height: 1.6; }}
   .modal-section ul {{ padding-left: 20px; }}
   .modal-section li {{ margin-bottom: 6px; }}
+  .customizer-grid {{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 10px 0;
+  }}
+  .customizer-grid input {{
+    width: 100%;
+    padding: 8px 11px;
+    border-radius: 6px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    font-size: 13.5px;
+    color: var(--text);
+  }}
   .legal-box {{
     width: 100%;
     min-height: 220px;
@@ -546,11 +619,18 @@ def build_static_web_app(output_path: Path) -> Path:
     gap: 16px;
   }}
   footer a {{ color: var(--accent-dark); font-weight: 600; text-decoration: none; }}
+  @media print {{
+    body * {{ visibility: hidden; }}
+    #detail-modal, #detail-modal * {{ visibility: visible; }}
+    #detail-modal {{ position: absolute; left: 0; top: 0; width: 100%; background: #fff; padding: 0; display: block !important; }}
+    .modal-card {{ max-height: none; box-shadow: none; border: none; width: 100%; max-width: 100%; padding: 0; }}
+    .modal-close, .modal-toolbar {{ display: none !important; }}
+  }}
   @media (max-width: 960px) {{
     .topbar {{ position: relative; }}
     .topbar-inner {{ flex-wrap: wrap; }}
     .nav-actions {{ width: 100%; justify-content: flex-start; flex-wrap: wrap; }}
-    .flow-steps {{ grid-template-columns: minmax(0, 1fr); }}
+    .flow-steps, .customizer-grid {{ grid-template-columns: minmax(0, 1fr); }}
     .hero-card, .section-block {{ padding: 22px 18px; }}
   }}
   @media (max-width: 640px) {{
@@ -562,7 +642,7 @@ def build_static_web_app(output_path: Path) -> Path:
     .container {{ padding: 14px 12px 56px; max-width: 100vw; overflow-x: hidden; }}
     .hero-card, .section-block, .search-hub {{ padding: 18px 14px; min-width: 0; max-width: 100%; overflow: hidden; }}
     .hero-title {{ font-size: 22px; line-height: 1.22; word-wrap: break-word; }}
-    .kpi-grid, .cards-grid, .flow-steps {{ grid-template-columns: minmax(0, 1fr); }}
+    .kpi-grid, .cards-grid, .flow-steps, .customizer-grid {{ grid-template-columns: minmax(0, 1fr); }}
     .story-card, .kpi-card {{ min-width: 0; max-width: 100%; }}
     .input-box {{ max-width: 100%; min-width: 0; font-size: 14px; }}
     .modal-backdrop {{ padding: 10px; align-items: flex-end; }}
@@ -577,7 +657,7 @@ def build_static_web_app(output_path: Path) -> Path:
       <div class="brand-mark">STI</div>
       <div class="brand-text">
         <strong data-i18n="brand_title">Suomen Talousinstituutti · Julkisten Hankintojen Tutkimus</strong>
-        <span data-i18n="brand_sub">Tutkimusraportti 2026 · Sidosyksiköt, alueelliset ylihinnat &amp; 0 € viranomaisilmoitukset</span>
+        <span data-i18n="brand_sub">Tutkimusraportti 2026 · 15 sidosyksikköä, kaikki 21 hyvinvointialuetta + HUS + 21 kaupunkia</span>
       </div>
     </a>
     <div class="nav-actions">
@@ -594,12 +674,12 @@ def build_static_web_app(output_path: Path) -> Path:
     <div class="kicker" data-i18n="hero_kicker">JULKISET HANKINNAT · TUTKIMUSRAPORTTI 2026 · 38,7 MRD. €/V</div>
     <h1 class="hero-title" data-i18n="hero_title">38,7 miljardin euron ostokartelli: Miksi kuntien ja hyvinvointialueiden rahat eivät riitä hoitajiin?</h1>
     <p class="hero-lead" data-i18n="hero_lead">
-      Valtio, 21 hyvinvointialuetta ja 308 kuntaa ostavat ulkopuolisilta yrityksiltä IT-järjestelmiä, hoivapalveluita ja urakoita <strong>38,7 miljardilla eurolla vuodessa</strong>. Tutkimuksemme osoittaa, että tästä potista <strong>1,26–3,5 miljardia euroa vuodessa</strong> (tämän aineiston suoraan mallinnetut säästöt <strong>1,26 mrd. €/v</strong>, koko 38,7 mrd. € hankintakantaan skaalattuna <strong>2,86–3,5 mrd. €/v</strong>) hupenee laittomiin ”in-house”-välikäsiin, 2–3-kertaisiin alueellisiin ylihintoihin ja 1–2 tarjouksen näennäiskilpailutuksiin.
+      Valtio, kaikki 21 hyvinvointialuetta, HUS ja 308 kuntaa ostavat ulkopuolisilta yrityksiltä IT-järjestelmiä, hoivapalveluita, laboratoriotutkimuksia ja urakoita <strong>38,7 miljardilla eurolla vuodessa</strong>. Tutkimuksemme osoittaa, että tästä potista <strong>1,43–3,5 miljardia euroa vuodessa</strong> (tämän aineiston suoraan mallinnetut säästöt <strong>1,43 mrd. €/v</strong>, koko 38,7 mrd. € hankintakantaan skaalattuna <strong>3,03–3,5 mrd. €/v</strong>) hupenee 15 sidosyksikkövälikäteen (1,98 mrd. €/v), 2–3-kertaisiin alueellisiin ylihintoihin ja 1–2 tarjouksen näennäiskilpailutuksiin.
     </p>
     <div class="callout-stone">
-      <h3 data-i18n="summary_box_title">Miten luet tätä julkaisua? (Kaikki kortit ovat klikattavia)</h3>
+      <h3 data-i18n="summary_box_title">Miten luet tätä julkaisua? (Kaikki 15 sidosyksikköä, 31 hintavertailua, 10 MAO-tapausta ja 43 ostajaa ovat klikattavia)</h3>
       <p data-i18n="summary_box_body">
-        <strong>Klikkaa mitä tahansa lukukorttia, IT-/talousyhtiötä (Istekki, Apotti, Sarastia, 2M-IT, Monetra, Tiera, Valtori), alueellista hintavertailua tai Hilma-kilpailutusta</strong>. Saat esiin selkokielisen selityksen sekä valmiin, maksuttoman (0 €) viranomaisilmoituksen Kilpailu- ja kuluttajavirastolle (KKV) tai hyvinvointialueen kirjaamoon.
+        <strong>Klikkaa mitä tahansa lukukorttia, sidosyksikköyhtiötä (Istekki, Apotti, Sarastia, 2M-IT, Monetra, Tiera, Valtori, Fimlab, Tuomi, Meita, Kaarea, Polkka, ISLAB, Sansia, Hetapalvelut), alueellista hintavertailua, MAO-tapausta tai mitä tahansa Suomen 21 hyvinvointialueesta ja 21 suurimmasta kaupungista</strong>. Voit täyttää omat tietosi suoraan valmiiseen 0 € viranomaisilmoitukseen ja ladata sen .txt- tai PDF-muodossa.
       </p>
     </div>
 
@@ -608,16 +688,16 @@ def build_static_web_app(output_path: Path) -> Path:
         <div>
           <div class="kpi-label" data-i18n="kpi1_lbl">Julkiset ulkoiset ostot</div>
           <div class="kpi-val">38,70 mrd. €/v</div>
-          <div class="kpi-sub" data-i18n="kpi1_sub">Valtion, hyvinvointialueiden ja kuntien vuotuiset ostot yrityksiltä</div>
+          <div class="kpi-sub" data-i18n="kpi1_sub">Valtion, 21 hyvinvointialueen, HUS:n ja kuntien vuotuiset ostot yrityksiltä</div>
         </div>
         <div class="click-hint" data-i18n="click_1">Klikkaa: Minne 38,7 mrd. € menee? →</div>
       </div>
 
       <div class="kpi-card clickable-card" onclick="openKpiModal('inhouse_leak')">
         <div>
-          <div class="kpi-label" data-i18n="kpi2_lbl">Sidosyksikkö- eli ”in-house”-ketjutus</div>
-          <div class="kpi-val red">1,42 mrd. €/v</div>
-          <div class="kpi-sub" data-i18n="kpi2_sub">7 välikäsiyhtiötä (Istekki, Apotti, Sarastia, 2M-IT, Monetra, Tiera, Valtori) ilman kilpailutusta</div>
+          <div class="kpi-label" data-i18n="kpi2_lbl">15 Sidosyksikköä (”In-House”)</div>
+          <div class="kpi-val red">1,98 mrd. €/v</div>
+          <div class="kpi-sub" data-i18n="kpi2_sub">15 välikäsiyhtiötä (Istekki, Apotti, Sarastia, 2M-IT, Fimlab, Tuomi, Valtori ym.) — vuosisäästö 699,95 M€/v</div>
         </div>
         <div class="click-hint" data-i18n="click_2">Klikkaa: Mikä on 0,04 % ”kuoriosake”? →</div>
       </div>
@@ -645,8 +725,8 @@ def build_static_web_app(output_path: Path) -> Path:
   <!-- GLOBAL SEARCH & QUICK FILTERS -->
   <section class="search-hub" id="haku">
     <div>
-      <label for="search-box" data-i18n="lbl_search">Hae sidosyksikköä, hyvinvointialuetta, kuntaa, toimittajaa tai palvelua</label>
-      <input id="search-box" type="search" class="input-box" placeholder="Kokeile esim. Istekki, Apotti, Sarastia, 2M-IT, Tiera, HUS, Pirha, Varha, Lapha, Tieto, CGI, Mehiläinen..." />
+      <label for="search-box" data-i18n="lbl_search">Hae sidosyksikköä (15 kpl), hyvinvointialuetta tai kaupunkia (43 kpl), MAO-tapausta tai palvelua</label>
+      <input id="search-box" type="search" class="input-box" placeholder="Kokeile esim. Istekki, Apotti, Sarastia, Fimlab, Tuomi, Meita, HUS, Pirha, Varha, Lapha, Kuopio, Oulu..." />
     </div>
     <div class="quick-chips">
       <span class="chip-label" data-i18n="chip_lbl">Pikavalinnat:</span>
@@ -655,21 +735,21 @@ def build_static_web_app(output_path: Path) -> Path:
       <button type="button" class="chip" onclick="setSearch('Apotti')">Oy Apotti Ab</button>
       <button type="button" class="chip" onclick="setSearch('Sarastia')">Sarastia / Numera</button>
       <button type="button" class="chip" onclick="setSearch('2M-IT')">2M-IT Oy</button>
-      <button type="button" class="chip" onclick="setSearch('Tiera')">Kuntien Tiera</button>
+      <button type="button" class="chip" onclick="setSearch('Fimlab')">Fimlab &amp; ISLAB</button>
+      <button type="button" class="chip" onclick="setSearch('Tuomi')">Tuomi Logistiikka</button>
       <button type="button" class="chip" onclick="setSearch('Pirha')">Pirha (Pirkanmaa)</button>
       <button type="button" class="chip" onclick="setSearch('HUS')">HUS &amp; Vake</button>
       <button type="button" class="chip" onclick="setSearch('Varha')">Varha (Varsinais-Suomi)</button>
       <button type="button" class="chip" onclick="setSearch('Lapha')">Lapha (Lappi)</button>
-      <button type="button" class="chip" onclick="setSearch('LocumMD')">Vuokralääkärit</button>
     </div>
     <div class="search-status" id="search-status"></div>
   </section>
 
   <section class="section-block" id="sec-inhouse">
     <div class="section-head">
-      <h2 data-i18n="s1_title">1. Miten ”kuoriosakkeella” kierretään kilpailutuslaki? (7 sidosyksikköjättiä = 1,42 mrd. €/v)</h2>
+      <h2 data-i18n="s1_title">1. Miten ”kuoriosakkeella” kierretään kilpailutuslaki? (15 sidosyksikköjättiä = 1,98 mrd. €/v)</h2>
       <p data-i18n="s1_sub">
-        Korkein hallinto-oikeus (KHO 8.10.2025 taltio 2250) ja markkinaoikeus (MAO:154/2024) linjasivat, ettei hyvinvointialue saa ostaa palveluita ilman kilpailutusta yhtiöltä, josta se omistaa vain nimellisen murto-osan eikä käytä todellista määräysvaltaa. Klikkaa vaihetta tai yhtiökorttia.
+        Korkein hallinto-oikeus (KHO 8.10.2025 taltio 2250) ja markkinaoikeus (MAO:154/2024) linjasivat, ettei hyvinvointialue saa ostaa palveluita ilman kilpailutusta yhtiöltä, josta se omistaa vain nimellisen murto-osan eikä käytä todellista määräysvaltaa. Klikkaa vaihetta, yhtiökorttia tai alla olevan kokonaistaulukon riviä.
       </p>
     </div>
 
@@ -677,27 +757,53 @@ def build_static_web_app(output_path: Path) -> Path:
       <div class="flow-step clickable-card" onclick="openFlowModal(1)">
         <span class="flow-badge" data-i18n="f1_step">Vaihe 1 · Klikkaa</span>
         <h4 data-i18n="f1_title">0,04 % nimellinen ”kuoriosake”</h4>
-        <p data-i18n="f1_desc">Kunta tai hyvinvointialue ostaa muutaman sadan euron nimellisen osakkeen yhteisestä IT- tai talousyhtiöstä (esim. Sarastia, Istekki tai Tiera).</p>
+        <p data-i18n="f1_desc">Kunta tai hyvinvointialue ostaa muutaman sadan euron nimellisen osakkeen yhteisestä IT-, laboratorio- tai talousyhtiöstä (esim. Sarastia, Istekki, Tiera, Sansia).</p>
       </div>
       <div class="flow-step clickable-card" onclick="openFlowModal(2)">
         <span class="flow-badge" data-i18n="f2_step">Vaihe 2 · Klikkaa</span>
         <h4 data-i18n="f2_title">Miljoonien suorahankinta ilman kilpaa</h4>
-        <p data-i18n="f2_desc">Osakkeen varjolla virkamiehet tilaavat yhtiöltä kymmenillä miljoonilla euroilla IT- ja talouspalveluita järjestämättä avointa tarjouskilpailua.</p>
+        <p data-i18n="f2_desc">Osakkeen varjolla virkamiehet tilaavat yhtiöltä kymmenillä miljoonilla euroilla IT-, tukipalvelu- ja talouspalveluita järjestämättä avointa tarjouskilpailua.</p>
       </div>
       <div class="flow-step danger clickable-card" onclick="openFlowModal(3)">
         <span class="flow-badge" data-i18n="f3_step">Vaihe 3 · Vuotokohta</span>
-        <h4 data-i18n="f3_title">Välikäsi ottaa 21–30 % katteen</h4>
-        <p data-i18n="f3_desc">Välikäsiyhtiö ei tee kaikkea itse, vaan ketjuttaa sopimukset pörssiyhtiöille (Tietoevry, CGI, Atea, Accountor) ja ottaa välistä 21–30 % hallintokatteen.</p>
+        <h4 data-i18n="f3_title">Välikäsi ottaa 16–30 % katteen</h4>
+        <p data-i18n="f3_desc">Välikäsiyhtiö ei tee kaikkea itse, vaan ketjuttaa sopimukset pörssiyhtiöille (Tietoevry, CGI, Atea, Accountor, laitejätit) ja ottaa välistä 16–30 % hallintokatteen.</p>
       </div>
       <div class="flow-step danger clickable-card" onclick="openFlowModal(4)">
         <span class="flow-badge" data-i18n="f4_step">Vaihe 4 · Lopputulos</span>
-        <h4 data-i18n="f4_title">532 milj. €/v ylihintaa veronmaksajille</h4>
-        <p data-i18n="f4_desc">Paikalliset pk-yritykset eivät pääse tarjoamaan lainkaan, ja hyvinvointialue joutuu säästämään hoitajista maksaakseen IT-välikäsien laskut.</p>
+        <h4 data-i18n="f4_title">700 milj. €/v ylihintaa (532 milj. €/v 7 IT-jätissä)</h4>
+        <p data-i18n="f4_desc">Paikalliset pk-yritykset eivät pääse tarjoamaan lainkaan, ja hyvinvointialue joutuu säästämään hoitajista maksaakseen välikäsien laskut.</p>
       </div>
     </div>
 
     <h3 style="font-size:19px; margin: 20px 0 12px;" data-i18n="inhouse_heading">Klikkaa sidosyksikköyhtiötä nähdäksesi rahan reitin ja valmiin 0 € KKV-ilmoituksen:</h3>
     <div class="cards-grid" id="inhouse-cards"></div>
+
+    <div class="table-wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <div>
+          <h3 style="font-size:18.5px;" data-i18n="inhouse_tbl_title">Kaikki 15 sidosyksikköä taulukossa (Klikkaa saraketta lajitellaksesi tai riviä avataksesi)</h3>
+          <p style="font-size:13.5px;color:var(--muted);" id="inhouse-count-sub"></p>
+        </div>
+        <button type="button" class="btn-secondary" onclick="exportInhouseCsv()" data-i18n="inhouse_csv_btn">⬇ Vie sidosyksikkötaulukko (.csv)</button>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th class="sortable" onclick="sortInhouse('inhouse_vendor')"><span data-i18n="th_ih_name">Sidosyksikkö &amp; Y-tunnus</span> <span id="sort-ih-inhouse_vendor"></span></th>
+              <th class="sortable" onclick="sortInhouse('buyer_name')"><span data-i18n="th_ih_buy">Tilaajaryhmä</span> <span id="sort-ih-buyer_name"></span></th>
+              <th class="sortable" onclick="sortInhouse('buyer_equity_share_pct')"><span data-i18n="th_ih_eq">Omistus-%</span> <span id="sort-ih-buyer_equity_share_pct"></span></th>
+              <th class="sortable" onclick="sortInhouse('annual_spend_m_eur')"><span data-i18n="th_ih_sp">Suoraostot (M€/v)</span> <span id="sort-ih-annual_spend_m_eur">▼</span></th>
+              <th class="sortable" onclick="sortInhouse('inhouse_markup_pct')"><span data-i18n="th_ih_mk">Välikäsikate (%)</span> <span id="sort-ih-inhouse_markup_pct"></span></th>
+              <th class="sortable" onclick="sortInhouse('recoverable_saving_m_eur')"><span data-i18n="th_ih_sv">Vuosisäästö (M€/v)</span> <span id="sort-ih-recoverable_saving_m_eur"></span></th>
+            </tr>
+          </thead>
+          <tbody id="inhouse-tbody"></tbody>
+        </table>
+      </div>
+    </div>
   </section>
 
   <section class="section-block" id="sec-arbitrage">
@@ -712,9 +818,9 @@ def build_static_web_app(output_path: Path) -> Path:
 
   <section class="section-block" id="sec-hilma">
     <div class="section-head">
-      <h2 data-i18n="s3_title">3. Räätälöidyt tarjouskilpailut: 1–2 tarjouksen näennäiskilpailutukset (Hilma-tyyppitapaukset)</h2>
+      <h2 data-i18n="s3_title">3. Markkinaoikeus (MAO) &amp; Hilma: 1–2 tarjouksen näennäiskilpailutukset ja suorahankinnat (10 tapausta)</h2>
       <p data-i18n="s3_sub">
-        Klikkaa edustavaa kilpailutustapausta nähdäksesi, millä keinotekoisella ehdolla muut tarjoajat suljettiin ulos ja miten pk-yrittäjä voi vaatia syrjivän ehdon poistamista maksutta (Hankintalaki 67 §, 75 § &amp; 133 §).
+        Klikkaa dokumentoitua markkinaoikeus- tai Hilma-tapausta nähdäksesi, millä keinotekoisella ehdolla muut tarjoajat suljettiin ulos ja miten pk-yrittäjä voi vaatia syrjivän ehdon poistamista maksutta (Hankintalaki 67 §, 75 § &amp; 133 §).
       </p>
     </div>
     <div class="cards-grid" id="hilma-cards"></div>
@@ -722,12 +828,37 @@ def build_static_web_app(output_path: Path) -> Path:
 
   <section class="section-block" id="sec-foia">
     <div class="section-head">
-      <h2 data-i18n="s4_title">4. Vaadi oman hyvinvointialueesi tai kuntasi ostolaskut julkisiksi (0 € tietopyyntö)</h2>
+      <h2 data-i18n="s4_title">4. Vaadi oman hyvinvointialueesi tai kuntasi ostolaskut julkisiksi (Kaikki 21 hyvinvointialuetta + HUS + 21 kaupunkia = 43 viranomaista)</h2>
       <p data-i18n="s4_sub">
-        Julkisuuslain (621/1999) mukaan jokaisella kansalaisella on oikeus saada hyvinvointialueen ja kunnan ostolaskut koneluettavassa muodossa 14 vuorokauden kuluessa. Klikkaa aluetta avataksesi valmiin tietopyynnön.
+        Julkisuuslain (621/1999) mukaan jokaisella kansalaisella on oikeus saada hyvinvointialueen ja kunnan ostolaskut koneluettavassa muodossa 14 vuorokauden kuluessa. Klikkaa mitä tahansa 43 viranomaisesta avataksesi valmiin tietopyynnön.
       </p>
     </div>
     <div class="cards-grid" id="buyer-cards"></div>
+
+    <div class="table-wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <div>
+          <h3 style="font-size:18.5px;" data-i18n="buyer_tbl_title">Kaikki 43 julkista ostajaa (21 hyvinvointialuetta + HUS + 21 suurinta kaupunkia)</h3>
+          <p style="font-size:13.5px;color:var(--muted);" id="buyer-count-sub"></p>
+        </div>
+        <button type="button" class="btn-secondary" onclick="exportBuyersCsv()" data-i18n="buyer_csv_btn">⬇ Vie kaikki 43 kirjaamoa (.csv)</button>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th class="sortable" onclick="sortBuyers('entity_name')"><span data-i18n="th_b_name">Hankintayksikkö &amp; Y-tunnus</span> <span id="sort-b-entity_name"></span></th>
+              <th class="sortable" onclick="sortBuyers('entity_type')"><span data-i18n="th_b_type">Tyyppi</span> <span id="sort-b-entity_type"></span></th>
+              <th class="sortable" onclick="sortBuyers('annual_purchases_m_eur')"><span data-i18n="th_b_sp">Ulkoiset ostot (M€/v)</span> <span id="sort-b-annual_purchases_m_eur">▼</span></th>
+              <th class="sortable" onclick="sortBuyers('publishes_open_invoices')"><span data-i18n="th_b_op">Avoin ostolaskudata</span> <span id="sort-b-publishes_open_invoices"></span></th>
+              <th><span data-i18n="th_b_sh">Sidosyksiköt &amp; Kirjaamo</span></th>
+            </tr>
+          </thead>
+          <tbody id="buyer-tbody"></tbody>
+        </table>
+      </div>
+    </div>
   </section>
 </main>
 
@@ -741,10 +872,10 @@ def build_static_web_app(output_path: Path) -> Path:
 <footer>
   <div>
     <strong>Suomen Talousinstituutti · Avoin Tutkimusjulkaisu (2026)</strong><br/>
-    Lähdeaineisto: Tutkihankintoja.fi, Hilma, KKV sidosyksikköselvitykset, MAO:154/2024 &amp; PRH YTJ.
+    Lähdeaineisto: Tutkihankintoja.fi, Hilma, KKV sidosyksikköselvitykset, MAO:154/2024, KHO 8.10.2025 taltio 2250 &amp; PRH YTJ.
   </div>
   <div>
-    <a href="Sote_ja_Kunta_Kartelli_Matriisi_2026.xlsx" download>Lataa Excel-aineisto (.xlsx)</a> ·
+    <a href="Sote_ja_Kunta_Kartelli_Matriisi_2026.xlsx" download>Lataa 5-välilehtinen Excel (.xlsx)</a> ·
     <a href="https://github.com/libertaari-suomalainen/kartelli-tutka">Avoin lähdekoodi (GitHub)</a> ·
     <a href="https://libertaari-suomalainen.github.io/tukipalkkio-purku/">Tutkimus I: Yritys- ja järjestötukien läpivalaisu (11,5 mrd. €)</a>
   </div>
@@ -754,6 +885,13 @@ def build_static_web_app(output_path: Path) -> Path:
 <script>
 const APP = {json_blob};
 let LANG = 'fi';
+let INHOUSE_SORT = {{ col: 'annual_spend_m_eur', asc: false }};
+let BUYER_SORT = {{ col: 'annual_purchases_m_eur', asc: false }};
+let LAST_INHOUSE = [];
+let LAST_BUYERS = [];
+let ACTIVE_BASE_LEGAL_TEXT = '';
+let ACTIVE_RECIPIENT_EMAIL = '';
+let ACTIVE_SUBJECT = '';
 
 const fmtM = (n) => Number(n).toLocaleString('fi-FI', {{minimumFractionDigits: 2, maximumFractionDigits: 2}}) + ' milj. €';
 const fmtCardM = (n) => {{
@@ -801,19 +939,19 @@ const CPV_NAMES = {{
 const I18N = {{
   fi: {{
     brand_title: "Suomen Talousinstituutti · Julkisten Hankintojen Tutkimus",
-    brand_sub: "Tutkimusraportti 2026 · Sidosyksiköt, alueelliset ylihinnat & 0 € viranomaisilmoitukset",
+    brand_sub: "Tutkimusraportti 2026 · 15 sidosyksikköä, kaikki 21 hyvinvointialuetta + HUS + 21 kaupunkia",
     nav_sister: "← Tutkimus I: Yritys- & järjestötuet (11,5 mrd. €)",
     nav_xlsx: "⬇ Lataa Excel-aineisto (.xlsx)",
     hero_kicker: "JULKISET HANKINNAT · TUTKIMUSRAPORTTI 2026 · 38,7 MRD. €/V",
     hero_title: "38,7 miljardin euron ostokartelli: Miksi kuntien ja hyvinvointialueiden rahat eivät riitä hoitajiin?",
-    hero_lead: "Valtio, 21 hyvinvointialuetta ja 308 kuntaa ostavat ulkopuolisilta yrityksiltä IT-järjestelmiä, hoivapalveluita ja urakoita <strong>38,7 miljardilla eurolla vuodessa</strong>. Tutkimuksemme osoittaa, että tästä potista <strong>1,26–3,5 miljardia euroa vuodessa</strong> (tämän aineiston suoraan mallinnetut säästöt <strong>1,26 mrd. €/v</strong>, koko 38,7 mrd. € hankintakantaan skaalattuna <strong>2,86–3,5 mrd. €/v</strong>) hupenee laittomiin ”in-house”-välikäsiin, 2–3-kertaisiin alueellisiin ylihintoihin ja 1–2 tarjouksen näennäiskilpailutuksiin.",
-    summary_box_title: "Miten luet tätä julkaisua? (Kaikki kortit ovat klikattavia)",
-    summary_box_body: "<strong>Klikkaa mitä tahansa lukukorttia, IT-/talousyhtiötä (Istekki, Apotti, Sarastia, 2M-IT, Monetra, Tiera, Valtori), alueellista hintavertailua tai Hilma-kilpailutusta</strong>. Saat esiin selkokielisen selityksen sekä valmiin, maksuttoman (0 €) viranomaisilmoituksen Kilpailu- ja kuluttajavirastolle (KKV) tai hyvinvointialueen kirjaamoon.",
+    hero_lead: "Valtio, kaikki 21 hyvinvointialuetta, HUS ja 308 kuntaa ostavat ulkopuolisilta yrityksiltä IT-järjestelmiä, hoivapalveluita, laboratoriotutkimuksia ja urakoita <strong>38,7 miljardilla eurolla vuodessa</strong>. Tutkimuksemme osoittaa, että tästä potista <strong>1,43–3,5 miljardia euroa vuodessa</strong> (tämän aineiston suoraan mallinnetut säästöt <strong>1,43 mrd. €/v</strong>, koko 38,7 mrd. € hankintakantaan skaalattuna <strong>3,03–3,5 mrd. €/v</strong>) hupenee 15 sidosyksikkövälikäteen (1,98 mrd. €/v), 2–3-kertaisiin alueellisiin ylihintoihin ja 1–2 tarjouksen näennäiskilpailutuksiin.",
+    summary_box_title: "Miten luet tätä julkaisua? (Kaikki 15 sidosyksikköä, 31 hintavertailua, 10 MAO-tapausta ja 43 ostajaa ovat klikattavia)",
+    summary_box_body: "<strong>Klikkaa mitä tahansa lukukorttia, sidosyksikköyhtiötä (Istekki, Apotti, Sarastia, 2M-IT, Monetra, Tiera, Valtori, Fimlab, Tuomi, Meita, Kaarea, Polkka, ISLAB, Sansia, Hetapalvelut), alueellista hintavertailua, MAO-tapausta tai mitä tahansa Suomen 21 hyvinvointialueesta ja 21 suurimmasta kaupungista</strong>. Voit täyttää omat tietosi suoraan valmiiseen 0 € viranomaisilmoitukseen ja ladata sen .txt- tai PDF-muodossa.",
     kpi1_lbl: "Julkiset ulkoiset ostot",
-    kpi1_sub: "Valtion, hyvinvointialueiden ja kuntien vuotuiset ostot yrityksiltä",
+    kpi1_sub: "Valtion, 21 hyvinvointialueen, HUS:n ja kuntien vuotuiset ostot yrityksiltä",
     click_1: "Klikkaa: Minne 38,7 mrd. € menee? →",
-    kpi2_lbl: "Sidosyksikkö- eli ”in-house”-ketjutus",
-    kpi2_sub: "7 välikäsiyhtiötä (Istekki, Apotti, Sarastia, 2M-IT, Monetra, Tiera, Valtori) ilman kilpailutusta",
+    kpi2_lbl: "15 Sidosyksikköä (”In-House”)",
+    kpi2_sub: "15 välikäsiyhtiötä (Istekki, Apotti, Sarastia, 2M-IT, Fimlab, Tuomi, Valtori ym.) — vuosisäästö 699,95 M€/v",
     click_2: "Klikkaa: Mikä on 0,04 % ”kuoriosake”? →",
     kpi3_lbl: "Alueiden välinen 2–3x ylihinta",
     kpi3_sub: "Vuosisäästö, kun kalleimmat alueet laskevat yksikköhinnat parhaan neljänneksen tasolle",
@@ -821,46 +959,61 @@ const I18N = {{
     kpi4_lbl: "1–2 tarjouksen kilpailutukset",
     kpi4_sub: "Räätälöidyt tarjousehdot sulkevat pk-yritykset ulos (n. 25 % vain 1 tarjous) ja nostavat hintoja 15–30 %",
     click_4: "Klikkaa: Miten ehdot räätälöidään? →",
-    lbl_search: "Hae sidosyksikköä, hyvinvointialuetta, kuntaa, toimittajaa tai palvelua",
+    lbl_search: "Hae sidosyksikköä (15 kpl), hyvinvointialuetta tai kaupunkia (43 kpl), MAO-tapausta tai palvelua",
     chip_lbl: "Pikavalinnat:",
     chip_all: "Näytä kaikki",
-    s1_title: "1. Miten ”kuoriosakkeella” kierretään kilpailutuslaki? (7 sidosyksikköjättiä = 1,42 mrd. €/v)",
-    s1_sub: "Korkein hallinto-oikeus (KHO 8.10.2025 taltio 2250) ja markkinaoikeus (MAO:154/2024) linjasivat, ettei hyvinvointialue saa ostaa palveluita ilman kilpailutusta yhtiöltä, josta se omistaa vain nimellisen murto-osan eikä käytä todellista määräysvaltaa. Klikkaa vaihetta tai yhtiökorttia.",
+    s1_title: "1. Miten ”kuoriosakkeella” kierretään kilpailutuslaki? (15 sidosyksikköjättiä = 1,98 mrd. €/v)",
+    s1_sub: "Korkein hallinto-oikeus (KHO 8.10.2025 taltio 2250) ja markkinaoikeus (MAO:154/2024) linjasivat, ettei hyvinvointialue saa ostaa palveluita ilman kilpailutusta yhtiöltä, josta se omistaa vain nimellisen murto-osan eikä käytä todellista määräysvaltaa. Klikkaa vaihetta, yhtiökorttia tai alla olevan kokonaistaulukon riviä.",
     f1_step: "Vaihe 1 · Klikkaa",
     f1_title: "0,04 % nimellinen ”kuoriosake”",
-    f1_desc: "Kunta tai hyvinvointialue ostaa muutaman sadan euron nimellisen osakkeen yhteisestä IT- tai talousyhtiöstä (esim. Sarastia, Istekki tai Tiera).",
+    f1_desc: "Kunta tai hyvinvointialue ostaa muutaman sadan euron nimellisen osakkeen yhteisestä IT-, laboratorio- tai talousyhtiöstä (esim. Sarastia, Istekki, Tiera, Sansia).",
     f2_step: "Vaihe 2 · Klikkaa",
     f2_title: "Miljoonien suorahankinta ilman kilpaa",
-    f2_desc: "Osakkeen varjolla virkamiehet tilaavat yhtiöltä kymmenillä miljoonilla euroilla IT- ja talouspalveluita järjestämättä avointa tarjouskilpailua.",
+    f2_desc: "Osakkeen varjolla virkamiehet tilaavat yhtiöltä kymmenillä miljoonilla euroilla IT-, tukipalvelu- ja talouspalveluita järjestämättä avointa tarjouskilpailua.",
     f3_step: "Vaihe 3 · Vuotokohta",
-    f3_title: "Välikäsi ottaa 21–30 % katteen",
-    f3_desc: "Välikäsiyhtiö ei tee kaikkea itse, vaan ketjuttaa sopimukset pörssiyhtiöille (Tietoevry, CGI, Atea, Accountor) ja ottaa välistä 21–30 % hallintokatteen.",
+    f3_title: "Välikäsi ottaa 16–30 % katteen",
+    f3_desc: "Välikäsiyhtiö ei tee kaikkea itse, vaan ketjuttaa sopimukset pörssiyhtiöille (Tietoevry, CGI, Atea, Accountor, laitejätit) ja ottaa välistä 16–30 % hallintokatteen.",
     f4_step: "Vaihe 4 · Lopputulos",
-    f4_title: "532 milj. €/v ylihintaa veronmaksajille",
-    f4_desc: "Paikalliset pk-yritykset eivät pääse tarjoamaan lainkaan, ja hyvinvointialue joutuu säästämään hoitajista maksaakseen IT-välikäsien laskut.",
+    f4_title: "700 milj. €/v ylihintaa (532 milj. €/v 7 IT-jätissä)",
+    f4_desc: "Paikalliset pk-yritykset eivät pääse tarjoamaan lainkaan, ja hyvinvointialue joutuu säästämään hoitajista maksaakseen välikäsien laskut.",
     inhouse_heading: "Klikkaa sidosyksikköyhtiötä nähdäksesi rahan reitin ja valmiin 0 € KKV-ilmoituksen:",
+    inhouse_tbl_title: "Kaikki 15 sidosyksikköä taulukossa (Klikkaa saraketta lajitellaksesi tai riviä avataksesi)",
+    inhouse_csv_btn: "⬇ Vie sidosyksikkötaulukko (.csv)",
+    th_ih_name: "Sidosyksikkö & Y-tunnus",
+    th_ih_buy: "Tilaajaryhmä",
+    th_ih_eq: "Omistus-%",
+    th_ih_sp: "Suoraostot (M€/v)",
+    th_ih_mk: "Välikäsikate (%)",
+    th_ih_sv: "Vuosisäästö (M€/v)",
     s2_title: "2. Alueellinen hintavertailu: Miksi sama palvelu maksaa naapurialueella 2–3 kertaa enemmän?",
     s2_sub: "Klikkaa mitä tahansa hintavertailukorttia nähdäksesi, kuinka paljon kyseinen hyvinvointialue maksaa ylihintaa verrattuna Suomen edullisimpaan neljännekseen (P25-vertailuhinta).",
-    s3_title: "3. Räätälöidyt tarjouskilpailut: 1–2 tarjouksen näennäiskilpailutukset (Hilma-tyyppitapaukset)",
-    s3_sub: "Klikkaa edustavaa kilpailutustapausta nähdäksesi, millä keinotekoisella ehdolla muut tarjoajat suljettiin ulos ja miten pk-yrittäjä voi vaatia syrjivän ehdon poistamista maksutta (Hankintalaki 67 §, 75 § & 133 §).",
-    s4_title: "4. Vaadi oman hyvinvointialueesi tai kuntasi ostolaskut julkisiksi (0 € tietopyyntö)",
-    s4_sub: "Julkisuuslain (621/1999) mukaan jokaisella kansalaisella on oikeus saada hyvinvointialueen ja kunnan ostolaskut koneluettavassa muodossa 14 vuorokauden kuluessa. Klikkaa aluetta avataksesi valmiin tietopyynnön."
+    s3_title: "3. Markkinaoikeus (MAO) & Hilma: 1–2 tarjouksen näennäiskilpailutukset ja suorahankinnat (10 tapausta)",
+    s3_sub: "Klikkaa dokumentoitua markkinaoikeus- tai Hilma-tapausta nähdäksesi, millä keinotekoisella ehdolla muut tarjoajat suljettiin ulos ja miten pk-yrittäjä voi vaatia syrjivän ehdon poistamista maksutta (Hankintalaki 67 §, 75 § & 133 §).",
+    s4_title: "4. Vaadi oman hyvinvointialueesi tai kuntasi ostolaskut julkisiksi (Kaikki 21 hyvinvointialuetta + HUS + 21 kaupunkia = 43 viranomaista)",
+    s4_sub: "Julkisuuslain (621/1999) mukaan jokaisella kansalaisella on oikeus saada hyvinvointialueen ja kunnan ostolaskut koneluettavassa muodossa 14 vuorokauden kuluessa. Klikkaa mitä tahansa 43 viranomaisesta avataksesi valmiin tietopyynnön.",
+    buyer_tbl_title: "Kaikki 43 julkista ostajaa (21 hyvinvointialuetta + HUS + 21 suurinta kaupunkia)",
+    buyer_csv_btn: "⬇ Vie kaikki 43 kirjaamoa (.csv)",
+    th_b_name: "Hankintayksikkö & Y-tunnus",
+    th_b_type: "Tyyppi",
+    th_b_sp: "Ulkoiset ostot (M€/v)",
+    th_b_op: "Avoin ostolaskudata",
+    th_b_sh: "Sidosyksiköt & Kirjaamo"
   }},
   en: {{
     brand_title: "Finnish Economic Institute (STI) · Public Procurement Audit",
-    brand_sub: "2026 Empirical Report · In-House Monopolies, Regional Markups & €0 Legal Filings",
+    brand_sub: "2026 Empirical Report · 15 In-House Monopolies, All 21 Wellbeing Counties + HUS + 21 Cities",
     nav_sister: "← Study I: Corporate & NGO Subsidies (€11.5B)",
     nav_xlsx: "⬇ Download Excel Dataset (.xlsx)",
     hero_kicker: "PUBLIC PROCUREMENT · RESEARCH REPORT 2026 · €38.7B/YR",
     hero_title: "The €38.7 Billion Procurement Cartel: Why Public Money Never Reaches Frontline Care",
-    hero_lead: "Finland's state, 21 Wellbeing Counties, and 308 municipalities spend <strong>€38.7 billion per year</strong> buying IT systems, healthcare services, and contracts from outside vendors. Our research shows that <strong>€1.26B–€3.5B per year</strong> (directly modeled savings in this dataset <strong>€1.26B/yr</strong>, scaled across the full €38.7B procurement base <strong>€2.86B–€3.5B/yr</strong>) is lost to illegal 'in-house' middlemen, 2–3x regional price markups, and 1–2 bid tenders.",
-    summary_box_title: "How to Read This Interactive Report (Every Card Is Clickable)",
-    summary_box_body: "<strong>Click any metric card, IT/admin company (Istekki, Apotti, Sarastia, 2M-IT, Monetra, Tiera, Valtori), regional price comparison, or tender below</strong> to open a plain-English explanation—plus a ready-to-send, zero-fee (€0) official filing to the Competition Authority (KKV) or your Wellbeing County.",
+    hero_lead: "Finland's state, all 21 Wellbeing Counties, HUS, and 308 municipalities spend <strong>€38.7 billion per year</strong> buying IT systems, healthcare services, lab diagnostics, and contracts from outside vendors. Our research shows that <strong>€1.43B–€3.5B per year</strong> (directly modeled savings in this dataset <strong>€1.43B/yr</strong>, scaled across the full €38.7B procurement base <strong>€3.03B–€3.5B/yr</strong>) is lost to 15 'in-house' middlemen (€1.98B/yr), 2–3x regional price markups, and 1–2 bid tenders.",
+    summary_box_title: "How to Read This Interactive Report (All 15 In-House Entities, 31 Price Benchmarks, 10 MAO Cases & 43 Buyers Are Clickable)",
+    summary_box_body: "<strong>Click any metric card, in-house intermediary (Istekki, Apotti, Sarastia, 2M-IT, Monetra, Tiera, Valtori, Fimlab, Tuomi, Meita, Kaarea, Polkka, ISLAB, Sansia, Hetapalvelut), regional price comparison, MAO case, or any of Finland's 21 Wellbeing Counties and 21 largest cities</strong>. Customize the €0 legal filing with your own details and download as .txt or PDF.",
     kpi1_lbl: "Total Public External Purchases",
-    kpi1_sub: "Annual purchases by the state, 21 Wellbeing Counties, and 308 municipalities",
+    kpi1_sub: "Annual purchases by the state, 21 Wellbeing Counties, HUS, and 308 municipalities",
     click_1: "Click: Where does the €38.7B go? →",
-    kpi2_lbl: "In-House 'Sidosyksikkö' Middlemen",
-    kpi2_sub: "7 middlemen (Istekki, Apotti, Sarastia, 2M-IT, Monetra, Tiera, Valtori) bypassing open tenders",
+    kpi2_lbl: "15 In-House 'Sidosyksikkö' Middlemen",
+    kpi2_sub: "15 middlemen (Istekki, Apotti, Sarastia, 2M-IT, Fimlab, Tuomi, Valtori, etc.) — €699.95M/yr saving",
     click_2: "Click: What is the 0.04% 'token share' loophole? →",
     kpi3_lbl: "2–3x Regional Overpricing",
     kpi3_sub: "Annual savings when overpriced counties match top-quartile (P25) unit prices",
@@ -868,37 +1021,85 @@ const I18N = {{
     kpi4_lbl: "1–2 Bid 'Rigged' Tenders",
     kpi4_sub: "Tailored requirements lock out SMEs (~25% receive only 1 bid) and inflate prices by 15–30%",
     click_4: "Click: How are tender specs rigged? →",
-    lbl_search: "Search in-house company, Wellbeing County, municipality, vendor, or category",
+    lbl_search: "Search in-house company (15), Wellbeing County or city (43), MAO case, or category",
     chip_lbl: "Quick filters:",
     chip_all: "Show all",
-    s1_title: "1. How a 0.04% 'Token Share' Bypasses Procurement Law (7 In-House Giants = €1.42B/yr)",
+    s1_title: "1. How a 0.04% 'Token Share' Bypasses Procurement Law (15 In-House Giants = €1.98B/yr)",
     s1_sub: "Finland's Supreme Administrative Court (KHO 8.10.2025 taltio 2250) and Market Court (MAO:154/2024) ruled that a public authority cannot buy services without competitive bidding from an in-house company in which it holds only a nominal token share and exercises no real control.",
     f1_step: "Step 1 · Click",
     f1_title: "0.04% Nominal 'Token Share'",
-    f1_desc: "A municipality or Wellbeing County buys a tiny nominal share in a joint IT or payroll company (e.g., Sarastia, Istekki, or Tiera).",
+    f1_desc: "A municipality or Wellbeing County buys a tiny nominal share in a joint IT, lab, or payroll company (e.g., Sarastia, Istekki, Tiera, Sansia).",
     f2_step: "Step 2 · Click",
     f2_title: "Multi-Million Direct Award",
     f2_desc: "Using that single share as an excuse, officials award tens of millions in contracts with zero open competitive bidding.",
     f3_step: "Step 3 · The Leak",
-    f3_title: "Middleman Takes a 21–30% Markup",
-    f3_desc: "The middleman subcontracts the actual work to large conglomerates (Tietoevry, CGI, Atea, Accountor) while skimming a 21–30% fee.",
+    f3_title: "Middleman Takes a 16–30% Markup",
+    f3_desc: "The middleman subcontracts the actual work to large conglomerates (Tietoevry, CGI, Atea, Accountor) while skimming a 16–30% fee.",
     f4_step: "Step 4 · Outcome",
-    f4_title: "€532M/yr Overcharge to Taxpayers",
+    f4_title: "€700M/yr Overcharge (€532M/yr in Top 7 IT)",
     f4_desc: "Local SMEs are locked out of the market, and counties cut frontline nurses to pay inflated IT and administrative bills.",
     inhouse_heading: "Click any in-house intermediary to inspect the money trail & ready-to-send €0 KKV complaint:",
+    inhouse_tbl_title: "All 15 In-House Intermediaries in Table View (Click Header to Sort or Row to Open)",
+    inhouse_csv_btn: "⬇ Export In-House Table (.csv)",
+    th_ih_name: "In-House Entity & ID",
+    th_ih_buy: "Buyer Group",
+    th_ih_eq: "Equity %",
+    th_ih_sp: "Direct Spend (M€/yr)",
+    th_ih_mk: "Markup (%)",
+    th_ih_sv: "Annual Saving (M€/yr)",
     s2_title: "2. Regional Price Audit: Why Does the Exact Same Service Cost 2–3x More Next Door?",
     s2_sub: "Click any regional price card to see how much that Wellbeing County overpays compared to Finland's best-performing quartile (P25 benchmark).",
-    s3_title: "3. Tailored Tenders: 1–2 Bid 'Fake Competitions' (Hilma Archetypes)",
-    s3_sub: "Click any representative tender case to see which artificial requirement locked out competitors and how any entrepreneur can demand its removal for €0.",
-    s4_title: "4. Demand Your Wellbeing County's Purchase Invoices Under the Freedom of Information Act (€0)",
-    s4_sub: "Under Finland's Openness of Government Activities Act (621/1999), every citizen has the right to receive machine-readable purchase invoice data within 14 days. Click any authority to open a ready-to-send request."
+    s3_title: "3. Market Court (MAO) & Hilma: 1–2 Bid 'Fake Competitions' & Direct Awards (10 Cases)",
+    s3_sub: "Click any documented MAO or Hilma procurement case to see which artificial requirement locked out competitors and how any entrepreneur can demand its removal for €0.",
+    s4_title: "4. Demand Your Wellbeing County's Purchase Invoices Under the Freedom of Information Act (All 21 Wellbeing Counties + HUS + 21 Cities = 43 Authorities)",
+    s4_sub: "Under Finland's Openness of Government Activities Act (621/1999), every citizen has the right to receive machine-readable purchase invoice data within 14 days. Click any of the 43 authorities to open a ready-to-send request.",
+    buyer_tbl_title: "All 43 Major Public Buyers (All 21 Wellbeing Counties + HUS + 21 Largest Cities)",
+    buyer_csv_btn: "⬇ Export All 43 Buyers (.csv)",
+    th_b_name: "Public Authority & ID",
+    th_b_type: "Type",
+    th_b_sp: "External Spend (M€/yr)",
+    th_b_op: "Open Invoice Ledger",
+    th_b_sh: "In-House Shells & Registry"
   }}
 }};
 
-function openModalHtml(title, subtitle, sectionsHtml) {{
+function setHashQuietly(hashStr) {{
+  if (history.replaceState) {{
+    history.replaceState(null, '', '#' + hashStr);
+  }} else {{
+    window.location.hash = hashStr;
+  }}
+}}
+
+function copyDirectLink(btn) {{
+  navigator.clipboard.writeText(window.location.href);
+  const orig = btn.textContent;
+  btn.textContent = LANG === 'fi' ? '✓ Suora linkki kopioitu!' : '✓ Direct Link Copied!';
+  setTimeout(() => {{ btn.textContent = orig; }}, 1800);
+}}
+
+function downloadTextFile(filename, textContent) {{
+  const blob = new Blob([textContent], {{ type: 'text/plain;charset=utf-8' }});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}}
+
+function openModalHtml(title, subtitle, sectionsHtml, hashId) {{
+  if (hashId) setHashQuietly(hashId);
+  const fi = LANG === 'fi';
   document.getElementById('modal-content').innerHTML = `
     <h2>${{title}}</h2>
     <div class="modal-sub">${{subtitle}}</div>
+    <div class="modal-toolbar">
+      <button type="button" class="btn-secondary" onclick="copyDirectLink(this)">${{fi ? '🔗 Kopioi suora linkki tähän kohteeseen' : '🔗 Copy Direct Link to This Item'}}</button>
+      <button type="button" class="btn-secondary" onclick="window.print()">${{fi ? '🖨 Tulosta / Tallenna PDF' : '🖨 Print / Save as PDF'}}</button>
+    </div>
     ${{sectionsHtml}}
   `;
   document.getElementById('detail-modal').classList.add('open');
@@ -906,6 +1107,9 @@ function openModalHtml(title, subtitle, sectionsHtml) {{
 
 function closeModal() {{
   document.getElementById('detail-modal').classList.remove('open');
+  if (history.replaceState) {{
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }}
 }}
 document.addEventListener('keydown', e => {{ if (e.key === 'Escape') closeModal(); }});
 
@@ -918,29 +1122,57 @@ function copyLegalBox(btn) {{
   setTimeout(() => {{ btn.innerText = old; }}, 2000);
 }}
 
+function updateCustomizedLegalText() {{
+  const box = document.getElementById('active-legal-textarea');
+  if (!box) return;
+  const nameEl = document.getElementById('cust-signer-name');
+  const orgEl = document.getElementById('cust-signer-org');
+  const sName = nameEl ? nameEl.value.trim() : '';
+  const sOrg = orgEl ? orgEl.value.trim() : '';
+  let txt = ACTIVE_BASE_LEGAL_TEXT;
+  if (sName || sOrg) {{
+    txt += `\\n\\nALLEKIRJOITUS JA ILMOITTAJAN YHTEYSTIEDOT:\\n${{sName || '[Nimi]'}}${{sOrg ? ' / ' + sOrg : ''}}`;
+  }}
+  box.value = txt;
+  const mailLink = document.getElementById('active-mailto-link');
+  if (mailLink && ACTIVE_RECIPIENT_EMAIL) {{
+    mailLink.href = `mailto:${{ACTIVE_RECIPIENT_EMAIL}}?subject=${{encodeURIComponent(ACTIVE_SUBJECT)}}&body=${{encodeURIComponent(txt)}}`;
+  }}
+}}
+
+function renderCustomizerInputs() {{
+  const fi = LANG === 'fi';
+  return `<div class="customizer-grid">
+    <input id="cust-signer-name" type="text" placeholder="${{fi ? 'Oma nimi / allekirjoittaja (valinnainen)' : 'Your Name / Signer (optional)'}}" oninput="updateCustomizedLegalText()" />
+    <input id="cust-signer-org" type="text" placeholder="${{fi ? 'Yritys, Y-tunnus tai sähköposti (valinnainen)' : 'Company, Business ID or Email (optional)'}}" oninput="updateCustomizedLegalText()" />
+  </div>`;
+}}
+
 function openKpiModal(key) {{
   const fi = LANG === 'fi';
   if (key === 'total_spend') {{
     openModalHtml(
       fi ? "Minne julkisen sektorin 38,70 miljardin euron ulkoiset ostot menevät?" : "Where Does Finland's €38.70 Billion in Public Procurement Go?",
-      fi ? "Tilastokeskus (S.13: P.2 + D.632) · Valtio, 21 hyvinvointialuetta ja 308 kuntaa" : "Statistics Finland · State, 21 Wellbeing Counties, and 308 Municipalities",
+      fi ? "Tilastokeskus (S.13: P.2 + D.632) · Valtio, 21 hyvinvointialuetta, HUS ja 308 kuntaa" : "Statistics Finland · State, 21 Wellbeing Counties, HUS, and 308 Municipalities",
       `<div class="modal-section">
         <h4>${{fi ? "Selkokielinen kokonaiskuva" : "Plain-English Overview"}}</h4>
         <p>${{fi
-          ? "Suomen julkisyhteisöt käyttävät joka vuosi 38,7 miljardia euroa tavaroiden, IT-järjestelmien, hoivapalveluiden, kuljetusten ja rakennusurakoiden ostamiseen yksityisiltä ja julkisomisteisilta yrityksiltä. Tämä on Suomen suurin yksittäinen verovarojen erä. Tässä tutkimuksessa suoraan mallinnetut kolme leikkuria tuottavat 1,26 mrd. €/v välittömän säästön (532,38 M€ sidosyksiköistä + 711,23 M€ P25-hintavertailusta + 13,22 M€ Hilma-esimerkkikohteista), ja koko kansalliseen hankintakantaan skaalattuna 2,86–3,5 mrd. €/v."
-          : "Finland's public sector spends €38.7 billion every year buying goods, IT systems, healthcare services, and construction from external vendors. The three directly modeled modules in this report identify €1.26B/yr in immediate savings (€532.38M in-house markups + €711.23M P25 unit-price compression + €13.22M Hilma sample), scaling to €2.86B–€3.5B/yr nationwide."}}</p>
-      </div>`
+          ? "Suomen julkisyhteisöt käyttävät joka vuosi 38,7 miljardia euroa tavaroiden, IT-järjestelmien, hoivapalveluiden, laboratoriotutkimusten, kuljetusten ja rakennusurakoiden ostamiseen yksityisiltä ja julkisomisteisilta yrityksiltä. Tässä tutkimuksessa suoraan mallinnetut kolme leikkuria tuottavat 1,43 mrd. €/v välittömän säästön (699,95 M€ 15 sidosyksiköstä + 711,23 M€ P25-hintavertailusta + 19,70 M€ 10 MAO/Hilma-tapauksesta), ja koko kansalliseen hankintakantaan skaalattuna 3,03–3,5 mrd. €/v."
+          : "Finland's public sector spends €38.7 billion every year buying goods, IT systems, healthcare services, and construction from external vendors. The three directly modeled modules in this report identify €1.43B/yr in immediate savings (€699.95M across 15 in-house intermediaries + €711.23M P25 unit-price compression + €19.70M across 10 MAO/Hilma cases), scaling to €3.03B–€3.5B/yr nationwide."}}</p>
+      </div>`,
+      'kpi-total'
     );
   }} else if (key === 'inhouse_leak') {{
     openModalHtml(
-      fi ? "Mikä on sidosyksikkö- eli ”in-house”-kuoriosakekikkailu? (1,42 mrd. €/v)" : "What Is the In-House 'Token Share' Loophole? (€1.42B/yr)",
+      fi ? "Mikä on sidosyksikkö- eli ”in-house”-kuoriosakekikkailu? (15 välikättä = 1,98 mrd. €/v)" : "What Is the In-House 'Token Share' Loophole? (15 Middlemen = €1.98B/yr)",
       fi ? "KHO 8.10.2025 taltio 2250, MAO:154/2024 & Hankintalaki 15 §" : "Supreme Administrative Court KHO 8.10.2025, MAO:154/2024 & Procurement Act § 15",
       `<div class="modal-section">
         <h4>${{fi ? "Näin kilpailutuslaki kierretään" : "How the Law Is Bypassed"}}</h4>
         <p>${{fi
-          ? "Hankintalain mukaan julkinen viranomainen saa ostaa palveluita ilman kilpailutusta vain omalta yksiköltään, jota se tosiasiallisesti hallitsee. Kunnat ja hyvinvointialueet ovat kuitenkin kiertäneet lakia ostamalla 0,04–1,2 prosentin nimellisen ”kuoriosakkeen” jättimäisistä yhteisyrityksistä (Istekki, Sarastia/Numera, 2M-IT, Monetra, Tiera) tai lukittautumalla kilpailuttamattomiin alihankintaketjuihin (Apotti, Valtori) yhteensä 1,42 miljardilla eurolla vuodessa."
-          : "Under procurement law, a public buyer can skip competitive bidding only when buying from an entity it genuinely controls. Finnish counties and municipalities bypassed the law by buying a tiny 0.04%–1.2% 'token share' in giant joint companies or locking into uncompeted subcontracting chains totaling €1.42B/year."}}</p>
-      </div>`
+          ? "Hankintalain mukaan julkinen viranomainen saa ostaa palveluita ilman kilpailutusta vain omalta yksiköltään, jota se tosiasiallisesti hallitsee. Kunnat ja hyvinvointialueet ovat kuitenkin kiertäneet lakia ostamalla 0,04–2,5 prosentin nimellisen ”kuoriosakkeen” yhteisyrityksistä (Istekki, Sarastia/Numera, 2M-IT, Monetra, Tiera, Fimlab, Tuomi Logistiikka, Meita, Kaarea, Polkka, Sansia, Hetapalvelut) tai lukittautumalla kilpailuttamattomiin alihankintaketjuihin (Apotti, Valtori, ISLAB) yhteensä 1,98 miljardilla eurolla vuodessa."
+          : "Under procurement law, a public buyer can skip competitive bidding only when buying from an entity it genuinely controls. Finnish counties and municipalities bypassed the law by buying a tiny 0.04%–2.5% 'token share' in giant joint companies or locking into uncompeted subcontracting chains totaling €1.98B/year."}}</p>
+      </div>`,
+      'kpi-inhouse'
     );
   }} else if (key === 'price_spread') {{
     openModalHtml(
@@ -951,18 +1183,20 @@ function openKpiModal(key) {{
         <p>${{fi
           ? "Koska hyvinvointialueet eivät julkaise eivätkä vertaa maksamiaan yksikköhintoja, sama potilastietojärjestelmän lisenssi, vuokralääkäritunti tai ikäihmisten ympärivuorokautinen hoivavuorokausi maksaa kalleimmilla alueilla jopa 2–3 kertaa enemmän kuin Suomen edullisimmassa neljänneksessä (P25-taso)."
           : "Because Wellbeing Counties do not benchmark unit prices, the exact same EHR software seat, locum doctor hour, or elderly care day costs up to 3x more in the most expensive regions than in the best-performing quartile (P25)."}}</p>
-      </div>`
+      </div>`,
+      'kpi-spread'
     );
   }} else if (key === 'single_bid') {{
     openModalHtml(
       fi ? "1–2 tarjouksen näennäiskilpailutukset (45 % hankinnoista)" : "1–2 Bid 'Rigged' Tenders (45% of Public Procurements)",
-      fi ? "Hilma-kilpailutusaineisto & Hankintalain 67 § ja 75 §" : "Hilma Tender Registry & Procurement Act § 67 & § 75",
+      fi ? "Markkinaoikeuden (MAO) ratkaisukäytäntö & Hankintalain 67 § ja 75 §" : "Market Court (MAO) Case Law & Procurement Act § 67 & § 75",
       `<div class="modal-section">
         <h4>${{fi ? "Miten tarjouspyyntö räätälöidään vanhalle toimittajalle?" : "How Tender Specifications Are Tailored to the Incumbent"}}</h4>
         <p>${{fi
           ? "Noin 45 prosentissa Suomen julkisista hankinnoista saadaan vain 1–2 tarjousta (ja noin neljänneksessä vain 1 tarjous). Tyypillinen keino on kirjata tarjouspyyntöön suhteeton liikevaihtovaatimus, suljettu rajapinta tai jättää hankinta jakamatta osiin (Hankintalaki 75 §). Tällöin pk-yritykset putoavat pois ja nykyinen toimittaja voi hinnoitella palvelun ilman kilpailupainetta."
           : "Roughly 45% of Finnish public tenders receive only 1–2 bids (and ~25% receive just 1 bid) because tender specifications require disproportionate turnover, proprietary interfaces, or fail to divide contracts into lots (§ 75)—allowing the incumbent vendor to name its price."}}</p>
-      </div>`
+      </div>`,
+      'kpi-singlebid'
     );
   }}
 }}
@@ -973,8 +1207,8 @@ function openFlowModal(step) {{
     1: {{
       t: fi ? "Vaihe 1: Kunta tai hyvinvointialue ostaa 0,04 % ”kuoriosakkeen”" : "Step 1: Authority Buys a 0.04% Nominal 'Token Share'",
       s: fi ? "Nimellinen omistus ilman todellista päätösvaltaa" : "Nominal Ownership With Zero Real Governance Control",
-      b: fi ? "Hyvinvointialue ostaa esimerkiksi yhden osakkeen (0,04 % – 1,2 % osakekannasta) satojen kuntien ja alueiden yhteisestä yhtiöstä. Yhtiökokouksessa yksittäisellä hyvinvointialueella ei ole minkäänlaista todellista määräysvaltaa yhtiön hinnoitteluun tai johtoon."
-            : "A Wellbeing County buys a tiny fraction (0.04%–1.2%) of shares in a joint company owned by hundreds of municipalities, giving it zero real control over pricing or management."
+      b: fi ? "Hyvinvointialue ostaa esimerkiksi yhden osakkeen (0,04 % – 2,5 % osakekannasta) satojen kuntien ja alueiden yhteisestä yhtiöstä. Yhtiökokouksessa yksittäisellä hyvinvointialueella ei ole minkäänlaista todellista määräysvaltaa yhtiön hinnoitteluun tai johtoon."
+            : "A Wellbeing County buys a tiny fraction (0.04%–2.5%) of shares in a joint company owned by hundreds of municipalities, giving it zero real control over pricing or management."
     }},
     2: {{
       t: fi ? "Vaihe 2: Virkamies tilaa kymmenillä miljoonilla ilman kilpailutusta" : "Step 2: Officials Award Tens of Millions Without Competitive Bidding",
@@ -983,27 +1217,31 @@ function openFlowModal(step) {{
             : "Claiming the vendor is an 'in-house' unit, procurement officials skip public tenders entirely and hand multi-million contracts directly to the intermediary."
     }},
     3: {{
-      t: fi ? "Vaihe 3: Välikäsiyhtiö ottaa 21–30 % katteen ja ketjuttaa työn pörssiyhtiöille" : "Step 3: Middleman Skims 21–30% and Subcontracts to Big Tech",
+      t: fi ? "Vaihe 3: Välikäsiyhtiö ottaa 16–30 % katteen ja ketjuttaa työn pörssiyhtiöille" : "Step 3: Middleman Skims 16–30% and Subcontracts to Big Tech",
       s: fi ? "Tuplabyrokratia veronmaksajan piikkiin" : "Double Bureaucracy Paid by the Taxpayer",
-      b: fi ? "Välikäsiyhtiö (kuten Istekki, Tiera tai Sarastia) ei suinkaan tuota kaikkia ohjelmistoja ja laitteita itse, vaan ostaa ne edelleen suurilta pörssiyhtiöiltä (Tietoevry, CGI, Atea, Accountor) ja lisää laskuun oman 21–30 % hallinto- ja johtopalkkiokatteensa."
-            : "The in-house intermediary subcontracts the actual software and hardware delivery to large conglomerates (Tietoevry, CGI, Atea) and adds its own 21–30% administrative margin on top."
+      b: fi ? "Välikäsiyhtiö (kuten Istekki, Tiera, Sarastia, Fimlab tai Tuomi) ei suinkaan tuota kaikkia ohjelmistoja ja laitteita itse, vaan ostaa ne edelleen suurilta pörssiyhtiöiltä (Tietoevry, CGI, Atea, Accountor, Roche) ja lisää laskuun oman 16–30 % hallinto- ja johtopalkkiokatteensa."
+            : "The in-house intermediary subcontracts the actual software, lab, and hardware delivery to large conglomerates (Tietoevry, CGI, Atea) and adds its own 16–30% administrative margin on top."
     }},
     4: {{
-      t: fi ? "Vaihe 4: Lopputulos — 532 milj. €/v ylihintaa ja hoitajien irtisanomiset" : "Step 4: Outcome — €532M/yr Overcharge & Frontline Care Cuts",
-      s: fi ? "Hallinto ja IT-välikädet syövät hoitobudjetin (532,38 milj. €/v)" : "Middleman Markups Drain the Frontline Care Budget (€532.38M/yr)",
-      b: fi ? "Kun hyvinvointialueet ja valtion virastot maksavat seitsemälle IT- ja taloushallintovälikädelle yhteensä 532,38 miljoonaa euroa vuodessa ylihintaa ja ketjutuskustannuksia, lakisääteinen alijäämä katetaan sulkemalla terveysasemia ja vähentämällä hoitohenkilökuntaa."
-            : "When Wellbeing Counties and state agencies overpay €532.38M/yr across the 7 IT and administrative middlemen, they balance their budgets by closing local clinics and cutting nursing staff."
+      t: fi ? "Vaihe 4: Lopputulos — 700 milj. €/v ylihintaa (532 milj. €/v 7 IT-jätissä)" : "Step 4: Outcome — €700M/yr Overcharge & Frontline Care Cuts",
+      s: fi ? "Hallinto ja välikädet syövät hoitobudjetin (699,95 milj. €/v kaikissa 15 sidosyksikössä)" : "Middleman Markups Drain the Frontline Care Budget (€699.95M/yr across 15 middlemen)",
+      b: fi ? "Kun hyvinvointialueet, kunnat ja valtion virastot maksavat 15 sidosyksikkövälikädelle yhteensä 699,95 miljoonaa euroa vuodessa ylihintaa ja ketjutuskustannuksia (josta 532,38 milj. €/v pelkästään 7 suurimmassa IT- ja talousvälikädessä), lakisääteinen alijäämä katetaan sulkemalla terveysasemia ja vähentämällä hoitohenkilökuntaa."
+            : "When Wellbeing Counties, municipalities, and state agencies overpay €699.95M/yr across the 15 middlemen (€532.38M/yr in the top 7 IT/admin intermediaries alone), they balance their budgets by closing local clinics and cutting nursing staff."
     }}
   }};
   const item = steps[step];
-  openModalHtml(item.t, item.s, `<div class="modal-section"><h4>${{fi ? "Mitä tässä vaiheessa tapahtuu?" : "What Happens in This Step?"}}</h4><p>${{item.b}}</p></div>`);
+  openModalHtml(item.t, item.s, `<div class="modal-section"><h4>${{fi ? "Mitä tässä vaiheessa tapahtuu?" : "What Happens in This Step?"}}</h4><p>${{item.b}}</p></div>`, `flow-${{step}}`);
 }}
 
 function openInhouseModal(idx) {{
   const f = APP.ssot.inhouse_flows[idx];
+  if (!f) return;
   const kkv = APP.kkv_filings[f.inhouse_y_tunnus];
   const oik = APP.oikaisu_filings[f.inhouse_y_tunnus];
   const fi = LANG === 'fi';
+  ACTIVE_BASE_LEGAL_TEXT = kkv.body;
+  ACTIVE_RECIPIENT_EMAIL = kkv.recipient_email;
+  ACTIVE_SUBJECT = kkv.subject;
   const mailtoKkv = `mailto:${{kkv.recipient_email}}?subject=${{encodeURIComponent(kkv.subject)}}&body=${{encodeURIComponent(kkv.body)}}`;
   const mailtoOik = `mailto:${{oik.recipient_email}}?subject=${{encodeURIComponent(oik.subject)}}&body=${{encodeURIComponent(oik.body)}}`;
 
@@ -1017,22 +1255,26 @@ function openInhouseModal(idx) {{
         : `<strong>${{f.buyer_name}}</strong> awards <strong>${{fmtM(f.annual_spend_m_eur)}}/year</strong> without open tenders to <strong>${{f.inhouse_vendor}}</strong> (${{f.buyer_equity_share_pct}}% equity). The intermediary charges an estimated <strong>${{f.inhouse_markup_pct}}%</strong> markup while subcontracting to <strong>${{f.subcontractor_vendor}}</strong>. Open competition would save <strong>${{fmtM(f.recoverable_saving_m_eur)}}/year</strong>.`}}</p>
     </div>
     <div class="modal-section">
-      <h4>${{fi ? "Valmis 0,00 € toimenpidepyyntö Kilpailu- ja kuluttajavirastolle (KKV) tai oikaisuvaatimus" : "Ready-to-Send €0.00 Official Complaint (KKV or Rectification Demand)"}}</h4>
+      <h4>${{fi ? "Räätälöi ja lataa valmis 0,00 € toimenpidepyyntö (KKV tai oikaisuvaatimus)" : "Customize & Download Ready-to-Send €0.00 Official Complaint (KKV or Rectification)"}}</h4>
       <p>${{fi
-        ? "Markkinaoikeuden valitusoikeudenkäynti maksaa 2 440–7 300 €, mutta alla oleva valvontailmoitus KKV:lle (kirjaamo@kkv.fi) tai hankintaoikaisuvaatimus ostajan kirjaamoon on jokaiselle kansalaiselle ja yrittäjälle 100 % maksuton (0,00 €):"
-        : "Filing a Market Court appeal costs €2,440–€7,300, but submitting this statutory investigation request to the Competition Authority (kirjaamo@kkv.fi) or the buyer's registry costs €0.00:"}}</p>
-      <textarea id="active-legal-textarea" class="legal-box" readonly>${{kkv.body}}</textarea>
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <button class="btn-primary" onclick="copyLegalBox(this)">${{fi ? "Kopioi asiakirja leikepöydälle" : "Copy Filing Text"}}</button>
-        <a class="btn-secondary" href="${{mailtoKkv}}">${{fi ? "Avaa sähköpostissa (KKV kirjaamo@kkv.fi)" : "Open in Email (KKV)"}}</a>
-        <a class="btn-secondary" href="${{mailtoOik}}">${{fi ? "Lähetä oikaisuvaatimus ostajalle (" + f.buyer_kirjaamo_email + ")" : "Send Rectification to Buyer"}}</a>
+        ? "Markkinaoikeuden valitusoikeudenkäynti maksaa 2 440–7 300 €, mutta alla oleva valvontailmoitus KKV:lle (kirjaamo@kkv.fi) tai hankintaoikaisuvaatimus ostajan kirjaamoon on 100 % maksuton (0,00 €). Voit lisätä alle omat tietosi:"
+        : "Filing a Market Court appeal costs €2,440–€7,300, but submitting this statutory investigation request to KKV (kirjaamo@kkv.fi) or the buyer's registry costs €0.00. Optionally add your details below:"}}</p>
+      ${{renderCustomizerInputs()}}
+      <textarea id="active-legal-textarea" class="legal-box">${{kkv.body}}</textarea>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn-primary" onclick="copyLegalBox(this)">${{fi ? "📋 Kopioi asiakirja" : "📋 Copy Filing Text"}}</button>
+        <button class="btn-secondary" onclick="downloadTextFile('KKV_Toimenpidepyynto_${{f.inhouse_y_tunnus}}.txt', document.getElementById('active-legal-textarea').value)">${{fi ? "⬇ Lataa .txt-asiakirja" : "⬇ Download .txt"}}</button>
+        <a id="active-mailto-link" class="btn-secondary" href="${{mailtoKkv}}">${{fi ? "✉️ Avaa sähköpostissa (KKV kirjaamo@kkv.fi)" : "✉️ Open in Email (KKV)"}}</a>
+        <a class="btn-secondary" href="${{mailtoOik}}">${{fi ? "✉️ Oikaisuvaatimus ostajalle (" + f.buyer_kirjaamo_email + ")" : "✉️ Send Rectification to Buyer"}}</a>
       </div>
-    </div>`
+    </div>`,
+    `inhouse-${{f.inhouse_y_tunnus}}`
   );
 }}
 
 function openArbitrageModal(idx) {{
   const r = APP.ssot.arbitrage_rows[idx];
+  if (!r) return;
   const fi = LANG === 'fi';
   const catMeta = CPV_NAMES[r.cpv_category] || {{ fi: r.cpv_category, en: r.cpv_category, unit_fi: r.unit_name, unit_en: r.unit_name }};
   openModalHtml(
@@ -1043,14 +1285,19 @@ function openArbitrageModal(idx) {{
       <p>${{fi
         ? `<strong>${{r.entity_name}}</strong> maksaa tästä palvelusta <strong>${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} € / ${{catMeta.unit_fi}}</strong> (volyymi ${{Number(r.annual_units).toLocaleString('fi-FI')}} kpl/v = ${{fmtEUR(r.annual_baseline_eur)}}/v), kun Suomen edullisimman neljänneksen (P25-vertailutaso) yksikköhinta samalle palvelulle on <strong>${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}} € / ${{catMeta.unit_fi}}</strong> (+${{r.overpay_vs_p25_pct}} % ylihintaa). Jos alue kilpailuttaisi sopimuksen parhaan neljänneksen hintatasolle, veronmaksajat säästäisivät <strong>${{fmtEUR(r.recoverable_saving_eur)}}</strong> joka vuosi.`
         : `<strong>${{r.entity_name}}</strong> pays <strong>€${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} per ${{catMeta.unit_en}}</strong> (annual volume ${{Number(r.annual_units).toLocaleString('fi-FI')}} = ${{fmtEUR(r.annual_baseline_eur)}}/yr), whereas Finland's top-quartile (P25) benchmark price for the exact same service is <strong>€${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}}</strong> (+${{r.overpay_vs_p25_pct}}% markup). Matching the P25 benchmark saves <strong>${{fmtEUR(r.recoverable_saving_eur)}}/year</strong>.`}}</p>
-    </div>`
+    </div>`,
+    `arb-${{idx}}`
   );
 }}
 
 function openHilmaModal(idx) {{
   const t = APP.ssot.flagged_hilma_tenders[idx];
+  if (!t) return;
   const fil = APP.hilma_filings[t.tender_id];
   const fi = LANG === 'fi';
+  ACTIVE_BASE_LEGAL_TEXT = fil.body;
+  ACTIVE_RECIPIENT_EMAIL = fil.recipient_email;
+  ACTIVE_SUBJECT = fil.subject;
   const mailto = `mailto:${{fil.recipient_email}}?subject=${{encodeURIComponent(fil.subject)}}&body=${{encodeURIComponent(fil.body)}}`;
 
   openModalHtml(
@@ -1063,20 +1310,27 @@ function openHilmaModal(idx) {{
         : `This <strong>${{fmtEUR(t.contract_value_eur)}}</strong> procurement received only <strong>${{t.bids_received}} bid(s)</strong> despite <strong>${{t.qualified_eu_sme_pool_size}} qualified SMEs</strong> in the market, due to: <em>"${{t.lockout_reason}}"</em>. Opening the tender saves an estimated <strong>${{fmtEUR(t.expected_annual_saving_eur)}}/year</strong>.`}}</p>
     </div>
     <div class="modal-section">
-      <h4>${{fi ? "Valmis 0,00 € vaatimus syrjivän tarjousehdon poistamiseksi (Hankintalaki 67 § & 75 §)" : "Ready-to-Send €0.00 Demand to Remove Tailored Spec (Procurement Act § 67 & § 75)"}}</h4>
-      <textarea id="active-legal-textarea" class="legal-box" readonly>${{fil.body}}</textarea>
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <button class="btn-primary" onclick="copyLegalBox(this)">${{fi ? "Kopioi vaatimus leikepöydälle" : "Copy Challenge Text"}}</button>
-        <a class="btn-secondary" href="${{mailto}}">${{fi ? "Lähetä hankintayksikölle (" + fil.recipient_email + ")" : "Send via Email"}}</a>
+      <h4>${{fi ? "Räätälöi ja lataa 0,00 € vaatimus syrjivän tarjousehdon poistamiseksi (Hankintalaki 67 § & 75 §)" : "Customize & Download €0.00 Demand to Remove Tailored Spec (Procurement Act § 67 & § 75)"}}</h4>
+      ${{renderCustomizerInputs()}}
+      <textarea id="active-legal-textarea" class="legal-box">${{fil.body}}</textarea>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn-primary" onclick="copyLegalBox(this)">${{fi ? "📋 Kopioi vaatimus" : "📋 Copy Challenge Text"}}</button>
+        <button class="btn-secondary" onclick="downloadTextFile('Hankintaoikaisu_${{idx + 1}}.txt', document.getElementById('active-legal-textarea').value)">${{fi ? "⬇ Lataa .txt-asiakirja" : "⬇ Download .txt"}}</button>
+        <a id="active-mailto-link" class="btn-secondary" href="${{mailto}}">${{fi ? "✉️ Lähetä hankintayksikölle (" + fil.recipient_email + ")" : "✉️ Send via Email"}}</a>
       </div>
-    </div>`
+    </div>`,
+    `tender-${{idx}}`
   );
 }}
 
 function openBuyerFoiaModal(idx) {{
   const b = APP.ssot.public_buyer_directory[idx];
+  if (!b) return;
   const fil = APP.foia_filings[b.y_tunnus];
   const fi = LANG === 'fi';
+  ACTIVE_BASE_LEGAL_TEXT = fil.body;
+  ACTIVE_RECIPIENT_EMAIL = fil.recipient_email;
+  ACTIVE_SUBJECT = fil.subject;
   const mailto = `mailto:${{fil.recipient_email}}?subject=${{encodeURIComponent(fil.subject)}}&body=${{encodeURIComponent(fil.body)}}`;
 
   openModalHtml(
@@ -1087,13 +1341,91 @@ function openBuyerFoiaModal(idx) {{
       <p>${{fi
         ? `Tämä valmis tietopyyntö velvoittaa viranomaisen (<strong>${{b.entity_name}}</strong>, vuosiostot <strong>${{fmtM(b.annual_purchases_m_eur)}}</strong>, keskeiset sidosyksiköt: <em>${{b.primary_inhouse_shells}}</em>) luovuttamaan 14 vuorokauden kuluessa koneluettavan ostolaskuaineiston (CSV/XLSX) sekä sidosyksikköjen osakassopimukset ja suorahankintapäätökset maksutta.`
         : `This statutory request requires <strong>${{b.entity_name}}</strong> (annual purchases <strong>${{fmtM(b.annual_purchases_m_eur)}}</strong>, primary in-house shells: <em>${{b.primary_inhouse_shells}}</em>) to release machine-readable purchase invoice ledgers (CSV/XLSX) and in-house shareholder agreements within 14 days at zero cost.`}}</p>
-      <textarea id="active-legal-textarea" class="legal-box" readonly>${{fil.body}}</textarea>
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <button class="btn-primary" onclick="copyLegalBox(this)">${{fi ? "Kopioi tietopyyntö leikepöydälle" : "Copy FOIA Request"}}</button>
-        <a class="btn-secondary" href="${{mailto}}">${{fi ? "Avaa sähköpostissa (" + b.kirjaamo_email + ")" : "Open in Email"}}</a>
+      ${{renderCustomizerInputs()}}
+      <textarea id="active-legal-textarea" class="legal-box">${{fil.body}}</textarea>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn-primary" onclick="copyLegalBox(this)">${{fi ? "📋 Kopioi tietopyyntö" : "📋 Copy FOIA Request"}}</button>
+        <button class="btn-secondary" onclick="downloadTextFile('Tietopyynto_${{b.y_tunnus}}.txt', document.getElementById('active-legal-textarea').value)">${{fi ? "⬇ Lataa .txt-asiakirja" : "⬇ Download .txt"}}</button>
+        <a id="active-mailto-link" class="btn-secondary" href="${{mailto}}">${{fi ? "✉️ Avaa sähköpostissa (" + b.kirjaamo_email + ")" : "✉️ Open in Email"}}</a>
       </div>
-    </div>`
+    </div>`,
+    `buyer-${{b.y_tunnus}}`
   );
+}}
+
+function sortInhouse(col) {{
+  if (INHOUSE_SORT.col === col) {{
+    INHOUSE_SORT.asc = !INHOUSE_SORT.asc;
+  }} else {{
+    INHOUSE_SORT.col = col;
+    INHOUSE_SORT.asc = (col === 'inhouse_vendor' || col === 'buyer_name');
+  }}
+  renderAll();
+}}
+
+function sortBuyers(col) {{
+  if (BUYER_SORT.col === col) {{
+    BUYER_SORT.asc = !BUYER_SORT.asc;
+  }} else {{
+    BUYER_SORT.col = col;
+    BUYER_SORT.asc = (col === 'entity_name' || col === 'entity_type');
+  }}
+  renderAll();
+}}
+
+function exportInhouseCsv() {{
+  const headers = ['Sija', 'Sidosyksikko', 'Y_tunnus', 'Tilaajat', 'Omistus_Pct', 'Suoraostot_M_EUR_v', 'Valikasikate_Pct', 'Alihankintapreemio_Pct', 'Vuosisaasto_M_EUR_v', 'Alihankkijat', 'Kirjaamo'];
+  const lines = [headers.join(';')];
+  LAST_INHOUSE.forEach((f, idx) => {{
+    lines.push([
+      idx + 1,
+      `"${{String(f.inhouse_vendor).replace(/"/g, '""')}}"`,
+      `"${{f.inhouse_y_tunnus}}"`,
+      `"${{String(f.buyer_name).replace(/"/g, '""')}}"`,
+      f.buyer_equity_share_pct,
+      f.annual_spend_m_eur,
+      f.inhouse_markup_pct,
+      f.subcontractor_uncompeted_premium_pct,
+      f.recoverable_saving_m_eur,
+      `"${{String(f.subcontractor_vendor).replace(/"/g, '""')}}"`,
+      `"${{f.buyer_kirjaamo_email}}"`
+    ].join(';'));
+  }});
+  const blob = new Blob(['\\uFEFF' + lines.join('\\r\\n')], {{ type: 'text/csv;charset=utf-8;' }});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'STI_Sidosyksikot_15_kpl_2026.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}}
+
+function exportBuyersCsv() {{
+  const headers = ['Sija', 'Hankintayksikko', 'Tyyppi', 'Y_tunnus', 'Kirjaamo', 'Ulkoiset_ostot_M_EUR_v', 'Avoin_ostolaskudata', 'Sidosyksikot'];
+  const lines = [headers.join(';')];
+  LAST_BUYERS.forEach((b, idx) => {{
+    lines.push([
+      idx + 1,
+      `"${{String(b.entity_name).replace(/"/g, '""')}}"`,
+      `"${{b.entity_type}}"`,
+      `"${{b.y_tunnus}}"`,
+      `"${{b.kirjaamo_email}}"`,
+      b.annual_purchases_m_eur,
+      b.publishes_open_invoices ? 'KYLLA' : 'EI',
+      `"${{String(b.primary_inhouse_shells).replace(/"/g, '""')}}"`
+    ].join(';'));
+  }});
+  const blob = new Blob(['\\uFEFF' + lines.join('\\r\\n')], {{ type: 'text/csv;charset=utf-8;' }});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'STI_Kaikki_43_Julkista_Ostajaa_2026.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }}
 
 function setSearch(val) {{
@@ -1123,13 +1455,14 @@ function renderAll() {{
   const q = rawQ.toLowerCase();
   const fi = LANG === 'fi';
 
-  // 1. In-house cards
-  let inMatches = 0;
-  let inHtml = '';
-  APP.ssot.inhouse_flows.forEach((f, idx) => {{
+  // 1. In-house cards & sortable table
+  const filteredInhouse = APP.ssot.inhouse_flows.map((f, origIdx) => ({{ ...f, origIdx }})).filter(f => {{
     const txt = `${{f.inhouse_vendor}} ${{f.inhouse_y_tunnus}} ${{f.buyer_name}} ${{f.subcontractor_vendor}} ${{f.legal_status}}`.toLowerCase();
-    if (q && !txt.includes(q)) return;
-    inMatches++;
+    return !q || txt.includes(q);
+  }});
+
+  let inHtml = '';
+  filteredInhouse.forEach(f => {{
     const isToken = f.is_illegal_under_10pct;
     const eqStr = Number(f.buyer_equity_share_pct).toLocaleString('fi-FI');
     const accent = isToken ? 'red-accent' : 'amber-accent';
@@ -1143,7 +1476,7 @@ function renderAll() {{
       : (fi
           ? `${{f.legal_status}}. Suoraosto ilman kilpailutusta ${{fmtCardM(f.annual_spend_m_eur)}}/v. Ketjuttaa työtä: ${{f.subcontractor_vendor}}.`
           : `Uncompeted in-house monopoly (${{eqStr}}% equity), ${{fmtCardM(f.annual_spend_m_eur)}}/yr direct spend. Subcontracted to: ${{f.subcontractor_vendor}}.`);
-    inHtml += `<div class="story-card ${{accent}} clickable-card" onclick="openInhouseModal(${{idx}})">
+    inHtml += `<div class="story-card ${{accent}} clickable-card" onclick="openInhouseModal(${{f.origIdx}})">
       <div class="story-top">
         <div class="card-kicker-row">
           ${{badge}}
@@ -1167,6 +1500,34 @@ function renderAll() {{
     inHtml = `<div class="empty-box"><span>${{fi ? `Ei sidosyksikköosumia haulle ”${{safeQ}}”. Katso osiot 2–4 alla.` : `No in-house matches for "${{safeQ}}". Check Sections 2–4 below.`}}</span><button type="button" class="btn-secondary" onclick="setSearch('')">${{fi ? 'Näytä kaikki' : 'Show all'}}</button></div>`;
   }}
   document.getElementById('inhouse-cards').innerHTML = inHtml;
+
+  const sortedInhouse = [...filteredInhouse].sort((a, b) => {{
+    const va = a[INHOUSE_SORT.col];
+    const vb = b[INHOUSE_SORT.col];
+    let cmp = (typeof va === 'number' && typeof vb === 'number') ? (va - vb) : String(va || '').localeCompare(String(vb || ''), 'fi');
+    return INHOUSE_SORT.asc ? cmp : -cmp;
+  }});
+  LAST_INHOUSE = sortedInhouse;
+  ['inhouse_vendor', 'buyer_name', 'buyer_equity_share_pct', 'annual_spend_m_eur', 'inhouse_markup_pct', 'recoverable_saving_m_eur'].forEach(col => {{
+    const el = document.getElementById('sort-ih-' + col);
+    if (el) el.textContent = INHOUSE_SORT.col === col ? (INHOUSE_SORT.asc ? '▲' : '▼') : '';
+  }});
+  const sumIhSpend = sortedInhouse.length === APP.ssot.inhouse_flows.length ? APP.ssot.inhouse_summary.total_inhouse_spend_m_eur : sortedInhouse.reduce((a, b) => a + b.annual_spend_m_eur, 0);
+  const sumIhSave = sortedInhouse.length === APP.ssot.inhouse_flows.length ? APP.ssot.inhouse_summary.recoverable_annual_saving_m_eur : sortedInhouse.reduce((a, b) => a + b.recoverable_saving_m_eur, 0);
+  document.getElementById('inhouse-count-sub').textContent = fi
+    ? `Näytetään ${{sortedInhouse.length}} / 15 sidosyksikköä · Suoraostot yht. ${{fmtM(sumIhSpend)}} · Vuosisäästö yht. ${{fmtM(sumIhSave)}}`
+    : `Showing ${{sortedInhouse.length}} / 15 in-house intermediaries · Direct spend ${{fmtM(sumIhSpend)}} · Annual saving ${{fmtM(sumIhSave)}}`;
+  document.getElementById('inhouse-tbody').innerHTML = sortedInhouse.map((f, i) => `
+    <tr class="clickable-row" onclick="openInhouseModal(${{f.origIdx}})">
+      <td>${{i + 1}}</td>
+      <td><strong>${{escHtml(f.inhouse_vendor)}}</strong><br/><span style="font-size:11.5px;color:var(--muted);">Y: ${{f.inhouse_y_tunnus}}</span></td>
+      <td>${{escHtml(f.buyer_name)}}</td>
+      <td><span class="badge ${{f.is_illegal_under_10pct ? 'badge-red' : 'badge-amber'}}">${{Number(f.buyer_equity_share_pct).toLocaleString('fi-FI')}} %</span></td>
+      <td><strong>${{fmtM(f.annual_spend_m_eur)}}</strong></td>
+      <td>${{f.inhouse_markup_pct}} %</td>
+      <td style="color:var(--red);font-weight:700;">-${{fmtM(f.recoverable_saving_m_eur)}}</td>
+    </tr>
+  `).join('');
 
   // 2. Arbitrage cards (show rows where overpay_vs_p25_pct > 0)
   let arbMatches = 0;
@@ -1236,18 +1597,19 @@ function renderAll() {{
     </div>`;
   }});
   if (!hilmaHtml) {{
-    hilmaHtml = `<div class="empty-box"><span>${{fi ? `Ei Hilma-kilpailutusosumia haulle ”${{safeQ}}”.` : `No Hilma tender matches for "${{safeQ}}".`}}</span><button type="button" class="btn-secondary" onclick="setSearch('')">${{fi ? 'Näytä kaikki' : 'Show all'}}</button></div>`;
+    hilmaHtml = `<div class="empty-box"><span>${{fi ? `Ei MAO/Hilma-kilpailutusosumia haulle ”${{safeQ}}”.` : `No MAO/Hilma tender matches for "${{safeQ}}".`}}</span><button type="button" class="btn-secondary" onclick="setSearch('')">${{fi ? 'Näytä kaikki' : 'Show all'}}</button></div>`;
   }}
   document.getElementById('hilma-cards').innerHTML = hilmaHtml;
 
-  // 4. Buyer FOIA directory cards
-  let buyerMatches = 0;
+  // 4. Buyer FOIA directory cards & sortable table (All 43 Public Buyers)
+  const filteredBuyers = APP.ssot.public_buyer_directory.map((b, origIdx) => ({{ ...b, origIdx }})).filter(b => {{
+    const txt = `${{b.entity_name}} ${{b.y_tunnus}} ${{b.entity_type}} ${{b.kirjaamo_email}} ${{b.primary_inhouse_shells}}`.toLowerCase();
+    return !q || txt.includes(q);
+  }});
+
   let buyerHtml = '';
-  APP.ssot.public_buyer_directory.forEach((b, idx) => {{
-    const txt = `${{b.entity_name}} ${{b.y_tunnus}} ${{b.kirjaamo_email}} ${{b.primary_inhouse_shells}}`.toLowerCase();
-    if (q && !txt.includes(q)) return;
-    buyerMatches++;
-    buyerHtml += `<div class="story-card green-accent clickable-card" onclick="openBuyerFoiaModal(${{idx}})">
+  filteredBuyers.forEach(b => {{
+    buyerHtml += `<div class="story-card green-accent clickable-card" onclick="openBuyerFoiaModal(${{b.origIdx}})">
       <div class="story-top">
         <div class="card-kicker-row">
           <span class="badge badge-green">0,00 € FOIA · Julkisuuslaki</span>
@@ -1274,20 +1636,73 @@ function renderAll() {{
   }}
   document.getElementById('buyer-cards').innerHTML = buyerHtml;
 
+  const sortedBuyers = [...filteredBuyers].sort((a, b) => {{
+    const va = a[BUYER_SORT.col];
+    const vb = b[BUYER_SORT.col];
+    let cmp = 0;
+    if (typeof va === 'number' && typeof vb === 'number') cmp = va - vb;
+    else if (typeof va === 'boolean' && typeof vb === 'boolean') cmp = (va === vb) ? 0 : (va ? 1 : -1);
+    else cmp = String(va || '').localeCompare(String(vb || ''), 'fi');
+    return BUYER_SORT.asc ? cmp : -cmp;
+  }});
+  LAST_BUYERS = sortedBuyers;
+  ['entity_name', 'entity_type', 'annual_purchases_m_eur', 'publishes_open_invoices'].forEach(col => {{
+    const el = document.getElementById('sort-b-' + col);
+    if (el) el.textContent = BUYER_SORT.col === col ? (BUYER_SORT.asc ? '▲' : '▼') : '';
+  }});
+  const sumBuyerSpend = sortedBuyers.reduce((a, b) => a + b.annual_purchases_m_eur, 0);
+  document.getElementById('buyer-count-sub').textContent = fi
+    ? `Näytetään ${{sortedBuyers.length}} / 43 viranomaista · Ulkoiset vuosiostot yht. ${{fmtM(sumBuyerSpend)}}`
+    : `Showing ${{sortedBuyers.length}} / 43 public authorities · Total external spend ${{fmtM(sumBuyerSpend)}}`;
+  document.getElementById('buyer-tbody').innerHTML = sortedBuyers.map((b, i) => `
+    <tr class="clickable-row" onclick="openBuyerFoiaModal(${{b.origIdx}})">
+      <td>${{i + 1}}</td>
+      <td><strong>${{escHtml(b.entity_name)}}</strong><br/><span style="font-size:11.5px;color:var(--muted);">Y: ${{b.y_tunnus}}</span></td>
+      <td><span class="badge ${{b.entity_type === 'Kunta' ? 'badge-green' : 'badge-amber'}}">${{b.entity_type}}</span></td>
+      <td><strong>${{fmtM(b.annual_purchases_m_eur)}}</strong></td>
+      <td><span class="badge ${{b.publishes_open_invoices ? 'badge-green' : 'badge-red'}}">${{b.publishes_open_invoices ? (fi ? 'Julkaistu' : 'Published') : (fi ? 'Vain pyynnöstä' : 'By Request')}}</span></td>
+      <td style="font-size:12.5px;">${{escHtml(b.primary_inhouse_shells)}}<br/><span style="color:var(--accent-dark);font-weight:600;">${{b.kirjaamo_email}}</span></td>
+    </tr>
+  `).join('');
+
   // Update Search Status Banner
   const statusEl = document.getElementById('search-status');
   if (q) {{
     statusEl.style.display = 'block';
     statusEl.innerHTML = fi
-      ? `Hakutulokset haulle <strong>”${{safeQ}}”</strong>: <strong>${{inMatches}}</strong> sidosyksikköä (Osio 1), <strong>${{arbMatches}}</strong> hintavertailua (Osio 2), <strong>${{hilmaMatches}}</strong> Hilma-kilpailutusta (Osio 3) ja <strong>${{buyerMatches}}</strong> kirjaamoa (Osio 4). <a href="javascript:void(0)" onclick="setSearch('')" style="color:var(--accent-dark);margin-left:10px;">✕ Tyhjennä haku</a>`
-      : `Search results for <strong>"${{safeQ}}"</strong>: <strong>${{inMatches}}</strong> in-house flows (Sec 1), <strong>${{arbMatches}}</strong> price benchmarks (Sec 2), <strong>${{hilmaMatches}}</strong> Hilma tenders (Sec 3), and <strong>${{buyerMatches}}</strong> buyer registries (Sec 4). <a href="javascript:void(0)" onclick="setSearch('')" style="color:var(--accent-dark);margin-left:10px;">✕ Clear search</a>`;
+      ? `Hakutulokset haulle <strong>”${{safeQ}}”</strong>: <strong>${{filteredInhouse.length}}</strong> sidosyksikköä (Osio 1), <strong>${{arbMatches}}</strong> hintavertailua (Osio 2), <strong>${{hilmaMatches}}</strong> MAO/Hilma-tapausta (Osio 3) ja <strong>${{filteredBuyers.length}}</strong> kirjaamoa (Osio 4). <a href="javascript:void(0)" onclick="setSearch('')" style="color:var(--accent-dark);margin-left:10px;">✕ Tyhjennä haku</a>`
+      : `Search results for <strong>"${{safeQ}}"</strong>: <strong>${{filteredInhouse.length}}</strong> in-house flows (Sec 1), <strong>${{arbMatches}}</strong> price benchmarks (Sec 2), <strong>${{hilmaMatches}}</strong> MAO/Hilma cases (Sec 3), and <strong>${{filteredBuyers.length}}</strong> buyer registries (Sec 4). <a href="javascript:void(0)" onclick="setSearch('')" style="color:var(--accent-dark);margin-left:10px;">✕ Clear search</a>`;
   }} else {{
     statusEl.style.display = 'none';
   }}
 }}
 
+function handleHashRoute() {{
+  const h = (window.location.hash || '').replace(/^#/, '');
+  if (!h) return;
+  if (h.startsWith('inhouse-')) {{
+    const yid = h.slice(8);
+    const idx = APP.ssot.inhouse_flows.findIndex(f => f.inhouse_y_tunnus === yid);
+    if (idx !== -1) openInhouseModal(idx);
+  }} else if (h.startsWith('buyer-')) {{
+    const yid = h.slice(6);
+    const idx = APP.ssot.public_buyer_directory.findIndex(b => b.y_tunnus === yid);
+    if (idx !== -1) openBuyerFoiaModal(idx);
+  }} else if (h.startsWith('tender-')) {{
+    const tidx = parseInt(h.slice(7), 10);
+    if (!isNaN(tidx)) openHilmaModal(tidx);
+  }} else if (h.startsWith('arb-')) {{
+    const aidx = parseInt(h.slice(4), 10);
+    if (!isNaN(aidx)) openArbitrageModal(aidx);
+  }} else if (h.startsWith('q=')) {{
+    setSearch(decodeURIComponent(h.slice(2)));
+  }}
+}}
+
 document.getElementById('search-box').addEventListener('input', renderAll);
+window.addEventListener('hashchange', handleHashRoute);
 renderAll();
+handleHashRoute();
 </script>
 </body>
 </html>
