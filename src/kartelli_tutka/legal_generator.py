@@ -43,6 +43,17 @@ Vaikka tilaajaryhmän ({flow.buyer_name}) omistus- tai ohjausosuus yksikössä {
 
 Pyydämme KKV:tä arvioimaan, ovatko yksikön ({flow.inhouse_vendor}) sopimuskokonaisuudet ja lisätilaukset hankintalain 15 §:n ja 136 §:n mukaisia ja voitaisiinko osakokonaisuuksien avoimella kilpailutuksella saavuttaa arvioitu {annual_saving_m:.2f} milj. EUR/v kustannussäästö."""
 
+    if is_token_share:
+        request_section = f"""3. PYYNTÖ KILPAILU- JA KULUTTAJAVIRASTOLLE
+Pyydämme Kilpailu- ja kuluttajavirastoa hankintalain 139–141 §:n nojalla:
+1) Selvittämään, täyttävätkö pienosakkaiden ({flow.buyer_name}, viiteosuus {flow.buyer_equity_share_pct:.2f} %) suorahankinnat yksiköltä {flow.inhouse_vendor} (Y-tunnus {flow.inhouse_y_tunnus}) hankintalain 15 §:n ja KHO 8.10.2025 (taltio 2250) mukaiset määräysvaltaedellytykset;
+2) Antamaan tarvittaessa hankintalain 140 §:n mukaisen huomautuksen tai ohjauksen pienosakkaiden hankintojen saattamiseksi avoimen kilpailutuksen piiriin."""
+    else:
+        request_section = f"""3. PYYNTÖ KILPAILU- JA KULUTTAJAVIRASTOLLE
+Pyydämme Kilpailu- ja kuluttajavirastoa hankintalain 139–141 §:n nojalla:
+1) Arvioimaan, ovatko yksikön {flow.inhouse_vendor} (Y-tunnus {flow.inhouse_y_tunnus}) sopimuskauden aikaiset laajennukset ja lisätilaukset hankintalain 136 §:n mukaisia ja onko markkinoilta hankittavat osakokonaisuudet kilpailutettu hankintalain 3 §:n ja 75 §:n mukaisesti;
+2) Antamaan tarvittaessa ohjausta osakokonaisuuksien avoimen kilpailuttamisen ja rajapintojen avoimuuden edistämiseksi."""
+
     body = f"""VASTAANOTTAJA: Kilpailu- ja kuluttajavirasto (KKV) — Hankintojen valvonta (kirjaamo@kkv.fi)
 ASIA: {subject}
 KÄSITTELYMAKSU: 0,00 € (Hankintalaki 1397/2016 139 § mukainen toimenpidepyyntö)
@@ -57,10 +68,7 @@ KÄSITTELYMAKSU: 0,00 € (Hankintalaki 1397/2016 139 § mukainen toimenpidepyyn
 
 {legal_basis}
 
-3. PYYNTÖ KILPAILU- JA KULUTTAJAVIRASTOLLE
-Pyydämme Kilpailu- ja kuluttajavirastoa hankintalain 139–141 §:n nojalla:
-1) Selvittämään, täyttävätkö pienosakkaiden ({flow.buyer_name}) suorahankinnat yksiköltä {flow.inhouse_vendor} (Y-tunnus {flow.inhouse_y_tunnus}) hankintalain 15 §:n ja KHO 8.10.2025 (taltio 2250) mukaiset edellytykset;
-2) Antamaan tarvittaessa hankintalain 140 §:n mukaisen huomautuksen tai ohjauksen avoimen kilpailutuksen järjestämisestä.
+{request_section}
 """
     return {
         "recipient_email": "kirjaamo@kkv.fi",
@@ -89,15 +97,15 @@ def generate_hankintaoikaisu(flow: InHouseContractFlow, buyer_kirjaamo_email: st
     )
     body = f"""VASTAANOTTAJA: {flow.buyer_name} — Kirjaamo & Tarkastuslautakunta ({buyer_kirjaamo_email})
 ASIA: {subject}
-KÄSITTELYMAKSU: 0,00 € (Hankintalaki 133 § / Hyvinvointialuelaki 125 § / Kuntalaki 121 §)
+KÄSITTELYMAKSU: 0,00 € (Hankintalaki 133 § / Hyvinvointialuelaki 30 § & 125 § / Kuntalaki 23 § & 121 § / Hallintolaki 53 a §)
 
 1. PYYNTÖ HANKINTAMENETTELYN JA KUSTANNUSTEHOKKUUDEN ARVIOIMISEKSI
-Esitämme hankintalain (1397/2016) 133 §:n sekä hyvinvointialuelain 125 §:n (tai kuntalain 121 §:n) nojalla, että hankintayksikkö ({flow.buyer_name}) ja sen tarkastuslautakunta arvioivat yksiköltä {flow.inhouse_vendor} (Y-tunnus {flow.inhouse_y_tunnus}, kokonaisliikevaihto {flow.annual_spend_m_eur:.2f} milj. EUR/v) tehtävien sidosyksikköhankintojen lainmukaisuuden ja kustannustehokkuuden verrattuna avoimeen kilpailutukseen.
+Esitämme hankintalain (1397/2016) 133 §:n (mikäli hankintapäätöksestä on kulunut enintään 14 vrk) sekä hyvinvointialuelain 30 §:n ja 125 §:n / kuntalain 23 §:n ja 121 §:n ja hallintolain 53 a §:n nojalla, että hankintayksikkö ({flow.buyer_name}) ja sen tarkastuslautakunta arvioivat yksiköltä {flow.inhouse_vendor} (Y-tunnus {flow.inhouse_y_tunnus}, kokonaisliikevaihto {flow.annual_spend_m_eur:.2f} milj. EUR/v) tehtävien hankintojen lainmukaisuuden ja kustannustehokkuuden verrattuna avoimeen kilpailutukseen.
 
 2. OIKEUDELLISET JA TALOUDELLISET PERUSTELUT (MAO:154/2024 & KHO 8.10.2025)
 {reason_line}
 
-Pyydämme tarkastuslautakuntaa arvioimaan osana lakisääteistä tuloksellisuuden ja tarkoituksenmukaisuuden arviointiaan, kuinka suuri kustannussäästö saavutettaisiin kilpailuttamalla palvelut avoimella menettelyllä ja jakamalla hankinnat osiin hankintalain 75 §:n mukaisesti.
+Pyydämme tarkastuslautakuntaa arvioimaan osana lakisääteistä tuloksellisuuden ja tarkoituksenmukaisuuden arviointiaan (Hyvinvointialuelaki 125 § / Kuntalaki 121 §), kuinka suuri kustannussäästö saavutettaisiin kilpailuttamalla palvelut avoimella menettelyllä ja jakamalla hankinnat osiin hankintalain 75 §:n mukaisesti.
 """
     return {
         "recipient_email": buyer_kirjaamo_email,
@@ -149,7 +157,7 @@ def generate_hilma_spec_challenge(tender: HilmaTenderRecord, buyer_email: str = 
     body = f"""VASTAANOTTAJA: {tender.buyer_name} — Hankintatoimi & Kirjaamo ({buyer_email})
 ASIA: {subject}
 
-1. OIKEustapausviite JA KILPAILUN AVAAMINEN ({tender.tender_id})
+1. OIKEUSTAPAUSVIITE JA KILPAILUN AVAAMINEN ({tender.tender_id})
 Viitaten hankintatapaukseen {tender.tender_id} (CPV-luokka {tender.cpv_code}, sopimusarvo {tender.contract_value_eur:,.0f} EUR, tarjoukset: {tender.bids_received} kpl; oikeustapauskuvaus: {tender.lockout_reason}), toimialalla toimii arviolta vähintään {tender.qualified_eu_sme_pool_size} kelpoisuusehdot täyttävää suomalaista ja EU-alueen toimittajaa.
 
 Hankintalain (1397/2016) 3 §:n, 67 §:n, 71 §:n, 75 §:n ja 85 §:n mukaan hankinnat on kilpailutettava avoimesti ja jaettava tarkoituksenmukaisiin osakokonaisuuksiin siten, että myös pk-yrityksillä on tasapuolinen mahdollisuus jättää tarjous.

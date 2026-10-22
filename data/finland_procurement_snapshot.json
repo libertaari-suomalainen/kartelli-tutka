@@ -1,9 +1,9 @@
 {
-  "schema_version": "2026.10.2",
+  "schema_version": "2026.10.3",
   "national_procurement_pool_b_eur": 38.7,
   "target_annual_saving_range_b_eur": [
-    1.5,
-    3.5
+    1.1,
+    2.2
   ],
   "inhouse_summary": {
     "total_inhouse_spend_m_eur": 1963.4,
@@ -257,9 +257,9 @@
     }
   ],
   "arbitrage_summary": {
-    "baseline_category_spend_eur": 2538230000.0,
-    "p25_arbitrage_saving_eur": 594402000.0,
-    "saving_pct": 23.42
+    "baseline_category_spend_eur": 2521676000.0,
+    "p25_arbitrage_saving_eur": 582707400.0,
+    "saving_pct": 23.11
   },
   "arbitrage_rows": [
     {
@@ -529,7 +529,7 @@
       "kirjaamo_email": "kirjaamo@hyvaks.fi"
     },
     {
-      "entity_name": "Vake (Apotti-kokonaiskustannus/käyttäjä)",
+      "entity_name": "Vake (Apotti-osuus 18,7 % — kustannus/käyttäjä)",
       "cpv_category": "48814000-EHR",
       "unit_name": "clinician-year",
       "annual_units": 4800,
@@ -543,17 +543,17 @@
       "kirjaamo_email": "kirjaamo@vakehyva.fi"
     },
     {
-      "entity_name": "HUS-yhtymä (Apotti-kokonaiskustannus/käyttäjä)",
+      "entity_name": "HUS & Helsingin sote (Apotti-osuus 81,3 % — kustannus/käyttäjä)",
       "cpv_category": "48814000-EHR",
       "unit_name": "clinician-year",
-      "annual_units": 22000,
+      "annual_units": 19330,
       "unit_price_eur": 6200.0,
       "p25_benchmark_eur": 1820.0,
       "min_peer_eur": 1650.0,
       "max_peer_eur": 6200.0,
       "overpay_vs_p25_pct": 240.7,
-      "annual_baseline_eur": 136400000.0,
-      "recoverable_saving_eur": 96360000.0,
+      "annual_baseline_eur": 119846000.0,
+      "recoverable_saving_eur": 84665400.0,
       "kirjaamo_email": "kirjaamo@hus.fi"
     },
     {
@@ -763,9 +763,9 @@
       "is_direct_award": true,
       "qualified_challengers_matched": 15,
       "qualified_eu_sme_pool_size": 15,
-      "incumbent_vendor": "Matkailu- ja markkinointipalvelut (vuoden 2010 sopimuksen jatkaminen)",
+      "incumbent_vendor": "Matkailu- ja markkinointipalvelut (vuoden 2011 sopimuksen jatkaminen)",
       "buyer_email": "kirjaamo@rovaniemi.fi",
-      "lockout_reason": "KKV:n esitys: Kaupunki jatkoi matkailu- ja markkinointipalveluiden ostoja vanhan vuoden 2010 sopimuksen nojalla ilman kilpailutusta. Markkinaoikeus määräsi 40 000 € seuraamusmaksun.",
+      "lockout_reason": "KKV:n esitys: Kaupunki jatkoi matkailu- ja markkinointipalveluiden ostoja vanhan vuoden 2011 sopimuksen nojalla ilman kilpailutusta. Markkinaoikeus määräsi 40 000 € seuraamusmaksun.",
       "expected_annual_saving_eur": 190000.0
     },
     {
@@ -861,7 +861,7 @@
       "kirjaamo_email": "kirjaamo@hus.fi",
       "annual_purchases_m_eur": 1480.0,
       "publishes_open_invoices": true,
-      "primary_inhouse_shells": "Oy Apotti Ab, Valtori"
+      "primary_inhouse_shells": "Oy Apotti Ab, HUS Diagnostiikkakeskus / Hansel"
     },
     {
       "entity_name": "Pirkanmaan hyvinvointialue (Pirha)",

@@ -674,7 +674,7 @@ def build_static_web_app(output_path: Path) -> Path:
     <div class="kicker" data-i18n="hero_kicker">JULKISET HANKINNAT · TUTKIMUSRAPORTTI 2026 · 38,7 MRD. €/V</div>
     <h1 class="hero-title" data-i18n="hero_title">Julkisten hankintojen (38,7 mrd. €/v) rakenteellinen tehokkuus- ja sidosyksikköanalyysi</h1>
     <p class="hero-lead" data-i18n="hero_lead">
-      Valtio, kaikki 21 hyvinvointialuetta, HUS ja 308 kuntaa ostavat ulkopuolisilta toimittajilta IT-järjestelmiä, hoivapalveluita, laboratoriotutkimuksia ja urakoita <strong>38,7 miljardilla eurolla vuodessa</strong> (Tilastokeskus S.13). Virallisiin tilinpäätöksiin (2024–2025), THL:n ja HALI ry:n yksikkökustannusvertailuihin sekä markkinaoikeuden (MAO) ja korkeimman hallinto-oikeuden (KHO) ratkaisuihin perustuva analyysimme osoittaa <strong>844 miljoonan euron suoraan mallinnetun vuotuisen tehostamispotentiaalin</strong> (ja koko 38,7 mrd. € hankintakantaan suhteutettuna <strong>1,1–2,2 mrd. €/v</strong>). <em>Huom: Yksityiset sopimustoimittajat toimivat laillisesti; tarkastelu kohdistuu julkisen sektorin omiin hankintarakenteisiin (Hankintalaki 15 § ja 75 §).</em>
+      Valtio, kaikki 21 hyvinvointialuetta, HUS ja 308 kuntaa ostavat ulkopuolisilta toimittajilta IT-järjestelmiä, hoivapalveluita, laboratoriotutkimuksia ja urakoita <strong>38,7 miljardilla eurolla vuodessa</strong> (Tilastokeskus S.13). Virallisiin tilinpäätöksiin (2024–2025), THL:n ja HALI ry:n yksikkökustannusvertailuihin sekä markkinaoikeuden (MAO) ja korkeimman hallinto-oikeuden (KHO) ratkaisuihin perustuva analyysimme osoittaa <strong>832,63 miljoonan euron suoraan mallinnetun vuotuisen tehostamispotentiaalin</strong> (ja koko 38,7 mrd. € hankintakantaan suhteutettuna <strong>1,1–2,2 mrd. €/v</strong>). <em>Huom: Yksityiset sopimustoimittajat toimivat laillisesti; tarkastelu kohdistuu julkisen sektorin omiin hankintarakenteisiin (Hankintalaki 15 § ja 75 §).</em>
     </p>
     <div class="callout-stone">
       <h3 data-i18n="summary_box_title">Miten luet tätä julkaisua? (Kaikki 15 sidosyksikköä, 31 yksikkökustannusvertailua, 10 MAO/KHO-ratkaisua ja 43 viranomaista ovat klikattavia)</h3>
@@ -705,7 +705,7 @@ def build_static_web_app(output_path: Path) -> Path:
       <div class="kpi-card clickable-card" onclick="openKpiModal('price_spread')">
         <div>
           <div class="kpi-label" data-i18n="kpi3_lbl">Alueellinen P25-kustannusvertailu</div>
-          <div class="kpi-val green">594,40 milj. €/v</div>
+          <div class="kpi-val green">582,71 milj. €/v</div>
           <div class="kpi-sub" data-i18n="kpi3_sub">Säästöpotentiaali, kun kalleimmat alueet saavuttavat edullisimman neljänneksen (P25) yksikkökustannuksen</div>
         </div>
         <div class="click-hint" data-i18n="click_3">Klikkaa: THL / HALI yksikkökustannuserot →</div>
@@ -808,7 +808,7 @@ def build_static_web_app(output_path: Path) -> Path:
 
   <section class="section-block" id="sec-arbitrage">
     <div class="section-head">
-      <h2 data-i18n="s2_title">2. Alueellinen yksikkökustannusvertailu (THL / HALI / KKV): P25-vertailutaso (594,40 M€/v)</h2>
+      <h2 data-i18n="s2_title">2. Alueellinen yksikkökustannusvertailu (THL / HALI / KKV): P25-vertailutaso (582,71 M€/v)</h2>
       <p data-i18n="s2_sub">
         Klikkaa mitä tahansa alueellista vertailukorttia nähdäksesi, kuinka suuri säästöpotentiaali syntyy, jos yli 25. persentiilin (P25) yksikkökustannustason alueet saavuttavat edullisimman neljänneksen kustannustason.
       </p>
@@ -944,7 +944,7 @@ const I18N = {{
     nav_xlsx: "⬇ Lataa Excel-aineisto (.xlsx)",
     hero_kicker: "JULKISET HANKINNAT · TUTKIMUSRAPORTTI 2026 · 38,7 MRD. €/V",
     hero_title: "Julkisten hankintojen (38,7 mrd. €/v) rakenteellinen tehokkuus- ja sidosyksikköanalyysi",
-    hero_lead: "Valtio, kaikki 21 hyvinvointialuetta, HUS ja 308 kuntaa ostavat ulkopuolisilta toimittajilta IT-järjestelmiä, hoivapalveluita, laboratoriotutkimuksia ja urakoita <strong>38,7 miljardilla eurolla vuodessa</strong> (Tilastokeskus S.13). Virallisiin tilinpäätöksiin (2024–2025), THL:n ja HALI ry:n yksikkökustannusvertailuihin sekä markkinaoikeuden (MAO) ja korkeimman hallinto-oikeuden (KHO) ratkaisuihin perustuva analyysimme osoittaa <strong>844 miljoonan euron suoraan mallinnetun vuotuisen tehostamispotentiaalin</strong> (ja koko 38,7 mrd. € hankintakantaan suhteutettuna <strong>1,1–2,2 mrd. €/v</strong>). <em>Huom: Yksityiset sopimustoimittajat toimivat laillisesti; tarkastelu kohdistuu julkisen sektorin omiin hankintarakenteisiin (Hankintalaki 15 § ja 75 §).</em>",
+    hero_lead: "Valtio, kaikki 21 hyvinvointialuetta, HUS ja 308 kuntaa ostavat ulkopuolisilta toimittajilta IT-järjestelmiä, hoivapalveluita, laboratoriotutkimuksia ja urakoita <strong>38,7 miljardilla eurolla vuodessa</strong> (Tilastokeskus S.13). Virallisiin tilinpäätöksiin (2024–2025), THL:n ja HALI ry:n yksikkökustannusvertailuihin sekä markkinaoikeuden (MAO) ja korkeimman hallinto-oikeuden (KHO) ratkaisuihin perustuva analyysimme osoittaa <strong>832,63 miljoonan euron suoraan mallinnetun vuotuisen tehostamispotentiaalin</strong> (ja koko 38,7 mrd. € hankintakantaan suhteutettuna <strong>1,1–2,2 mrd. €/v</strong>). <em>Huom: Yksityiset sopimustoimittajat toimivat laillisesti; tarkastelu kohdistuu julkisen sektorin omiin hankintarakenteisiin (Hankintalaki 15 § ja 75 §).</em>",
     summary_box_title: "Miten luet tätä julkaisua? (Kaikki 15 sidosyksikköä, 31 yksikkökustannusvertailua, 10 MAO/KHO-ratkaisua ja 43 viranomaista ovat klikattavia)",
     summary_box_body: "<strong>Klikkaa mitä tahansa lukukorttia, sidosyksikköä tai palvelukeskusta (Istekki, Apotti, Sarastia/Numera, 2M-IT, Monetra, Tiera, Valtori, Fimlab, Tuomi, Meita, Kaarea, Polkka, ISLAB, Sansia, Hetapalvelut), alueellista yksikkökustannusvertailua, Finlex/KKV MAO-oikeustapausta tai mitä tahansa Suomen 21 hyvinvointialueesta ja 21 suurimmasta kaupungista</strong>. Voit ladata jokaisesta kohteesta valmiin hallinto-oikeudellisen tietopyynnön tai selvityspyynnön (.txt tai PDF).",
     kpi1_lbl: "Julkiset ulkoiset ostot",
@@ -985,7 +985,7 @@ const I18N = {{
     th_ih_sp: "Liikevaihto (M€/v)",
     th_ih_mk: "Koordinointi (%)",
     th_ih_sv: "Säästöpotentiaali (M€/v)",
-    s2_title: "2. Alueellinen yksikkökustannusvertailu (THL / HALI / KKV): P25-vertailutaso (594,40 M€/v)",
+    s2_title: "2. Alueellinen yksikkökustannusvertailu (THL / HALI / KKV): P25-vertailutaso (582,71 M€/v)",
     s2_sub: "Klikkaa mitä tahansa alueellista vertailukorttia nähdäksesi, kuinka suuri säästöpotentiaali syntyy, jos yli 25. persentiilin (P25) yksikkökustannustason alueet saavuttavat edullisimman neljänneksen kustannustason.",
     s3_title: "3. Markkinaoikeuden (MAO) ja KHO:n vahvistetut julkisten hankintojen ratkaisut (10 Finlex/KKV-tapausta)",
     s3_sub: "Klikkaa dokumentoitua markkinaoikeuden (MAO) tai korkeimman hallinto-oikeuden (KHO) ratkaisua (2023–2025) nähdäksesi ratkaisun oikeudellisen sisällön sekä mallipohjan avoimen kilpailutuksen ja osiin jakamisen (Hankintalaki 75 §) edistämiseksi.",
@@ -1006,7 +1006,7 @@ const I18N = {{
     nav_xlsx: "⬇ Download Excel Dataset (.xlsx)",
     hero_kicker: "PUBLIC PROCUREMENT · RESEARCH REPORT 2026 · €38.7B/YR",
     hero_title: "Structural Efficiency & In-House Governance Analysis of Finnish Public Procurement (€38.7B/yr)",
-    hero_lead: "Finland's state, all 21 Wellbeing Counties, HUS, and 308 municipalities spend <strong>€38.7 billion per year</strong> purchasing IT systems, healthcare services, lab diagnostics, and contracts (Statistics Finland S.13). Grounded in audited 2024–2025 financial statements, THL/HALI unit-cost benchmarks, and Finlex Market Court (MAO) & Supreme Administrative Court (KHO) rulings, our analysis models <strong>€844M/yr in direct structural efficiency potential</strong> (and <strong>€1.1B–€2.2B/yr</strong> across the full €38.7B procurement base). <em>Note: Private framework vendors act lawfully; the policy analysis focuses on public procurement governance (Procurement Act § 15 & § 75).</em>",
+    hero_lead: "Finland's state, all 21 Wellbeing Counties, HUS, and 308 municipalities spend <strong>€38.7 billion per year</strong> purchasing IT systems, healthcare services, lab diagnostics, and contracts (Statistics Finland S.13). Grounded in audited 2024–2025 financial statements, THL/HALI unit-cost benchmarks, and Finlex Market Court (MAO) & Supreme Administrative Court (KHO) rulings, our analysis models <strong>€832.63M/yr in direct structural efficiency potential</strong> (and <strong>€1.1B–€2.2B/yr</strong> across the full €38.7B procurement base). <em>Note: Private framework vendors act lawfully; the policy analysis focuses on public procurement governance (Procurement Act § 15 & § 75).</em>",
     summary_box_title: "How to Read This Interactive Report (All 15 In-House Entities, 31 Cost Benchmarks, 10 MAO/KHO Rulings & 43 Buyers Are Clickable)",
     summary_box_body: "<strong>Click any metric card, in-house unit (Istekki, Apotti, Sarastia/Numera, 2M-IT, Monetra, Tiera, Valtori, Fimlab, Tuomi, Meita, Kaarea, Polkka, ISLAB, Sansia, Hetapalvelut), regional unit-cost benchmark, Finlex MAO case, or any of Finland's 21 Wellbeing Counties and 21 largest cities</strong> to inspect primary-source figures and download administrative requests.",
     kpi1_lbl: "Total Public External Purchases",
@@ -1047,7 +1047,7 @@ const I18N = {{
     th_ih_sp: "Turnover (M€/yr)",
     th_ih_mk: "Coordination (%)",
     th_ih_sv: "Efficiency Potential (M€/yr)",
-    s2_title: "2. Regional Unit-Cost Benchmark (THL / HALI / KKV): P25 Quartile Comparison (€594.40M/yr)",
+    s2_title: "2. Regional Unit-Cost Benchmark (THL / HALI / KKV): P25 Quartile Comparison (€582.71M/yr)",
     s2_sub: "Click any regional benchmark card to see the modeled cost reduction if regions above the 25th percentile (P25) converge to the P25 benchmark.",
     s3_title: "3. Market Court (MAO) & Supreme Administrative Court (KHO) Rulings (10 Verified Finlex/KKV Cases)",
     s3_sub: "Click any verified MAO or KHO ruling (2023–2025) to inspect the court's legal findings and download an administrative template promoting open competition and division into lots (§ 75).",
@@ -1157,8 +1157,8 @@ function openKpiModal(key) {{
       `<div class="modal-section">
         <h4>${{fi ? "Selkokielinen kokonaiskuva" : "Plain-English Overview"}}</h4>
         <p>${{fi
-          ? "Suomen julkisyhteisöt käyttävät joka vuosi 38,7 miljardia euroa tavaroiden, IT-järjestelmien, hoivapalveluiden, laboratoriotutkimusten, kuljetusten ja rakennusurakoiden ostamiseen. Tässä tutkimuksessa mallinnetut kolme osa-aluetta osoittavat 844,32 milj. €/v suoran tehostamispotentiaalin (230,99 M€ 15 sidosyksikön ja palvelukeskuksen kilpailuttamisesta + 594,40 M€ P25-yksikkökustannusvertailusta + 18,93 M€ 10 dokumentoidusta MAO/KHO-tapauksesta), ja koko kansalliseen hankintakantaan suhteutettuna 1,1–2,2 mrd. €/v."
-          : "Finland's public sector spends €38.7 billion every year purchasing goods, IT systems, healthcare services, and construction. The three empirical modules in this report identify €844.32M/yr in direct efficiency potential (€230.99M across 15 in-house units + €594.40M P25 unit-cost convergence + €18.93M across 10 MAO/KHO rulings), scaling to €1.1B–€2.2B/yr nationwide."}}</p>
+          ? "Suomen julkisyhteisöt käyttävät joka vuosi 38,7 miljardia euroa tavaroiden, IT-järjestelmien, hoivapalveluiden, laboratoriotutkimusten, kuljetusten ja rakennusurakoiden ostamiseen. Tässä tutkimuksessa mallinnetut kolme osa-aluetta osoittavat 832,63 milj. €/v suoran tehostamispotentiaalin (230,99 M€ 15 sidosyksikön ja palvelukeskuksen kilpailuttamisesta + 582,71 M€ P25-yksikkökustannusvertailusta + 18,93 M€ 10 dokumentoidusta MAO/KHO-tapauksesta), ja koko kansalliseen hankintakantaan suhteutettuna 1,1–2,2 mrd. €/v."
+          : "Finland's public sector spends €38.7 billion every year purchasing goods, IT systems, healthcare services, and construction. The three empirical modules in this report identify €832.63M/yr in direct efficiency potential (€230.99M across 15 in-house units + €582.71M P25 unit-cost convergence + €18.93M across 10 MAO/KHO rulings), scaling to €1.1B–€2.2B/yr nationwide."}}</p>
       </div>`,
       'kpi-total'
     );
@@ -1179,10 +1179,10 @@ function openKpiModal(key) {{
       fi ? "Alueelliset yksikkökustannuserot (THL / HALI ry / KKV)" : "Regional Unit-Cost Dispersion (THL / HALI / KKV Benchmarks)",
       fi ? "Viiden keskeisen sote- ja ICT-kategorian P25-vertailu" : "P25 Benchmark Comparison Across 5 Major Healthcare & ICT Categories",
       `<div class="modal-section">
-        <h4>${{fi ? "594,40 miljoonan euron säästöpotentiaali edullisimman neljänneksen (P25) kustannustasolla" : "€594.40M Annual Efficiency Potential at the Top-Quartile (P25) Benchmark"}}</h4>
+        <h4>${{fi ? "582,71 miljoonan euron säästöpotentiaali edullisimman neljänneksen (P25) kustannustasolla" : "€582.71M Annual Efficiency Potential at the Top-Quartile (P25) Benchmark"}}</h4>
         <p>${{fi
-          ? "THL:n ja HALI ry:n julkaisemien yksikkökustannustietojen mukaan saman palvelun (kuten ikäihmisten ympärivuorokautisen palveluasumisen hoitopäivän tai potilastietojärjestelmän) yksikkökustannus vaihtelee merkittävästi alueittain ja oman tuotannon sekä ostopalvelun välillä. Kun yli 25. persentiilin (P25) kustannustason alueet saavuttavat P25-vertailutason, laskennallinen säästöpotentiaali tarkastelluissa 31 vertailupisteessä on 594,40 M€/v."
-          : "Published unit-cost statistics from THL and HALI show significant regional dispersion in identical healthcare and ICT services. Converging regions above the 25th percentile (P25) to the P25 benchmark yields €594.40M/yr across the 31 regional comparisons."}}</p>
+          ? "THL:n ja HALI ry:n julkaisemien yksikkökustannustietojen mukaan saman palvelun (kuten ikäihmisten ympärivuorokautisen palveluasumisen hoitopäivän tai potilastietojärjestelmän) yksikkökustannus vaihtelee merkittävästi alueittain ja oman tuotannon sekä ostopalvelun välillä. Kun yli 25. persentiilin (P25) kustannustason alueet saavuttavat P25-vertailutason, laskennallinen säästöpotentiaali tarkastelluissa 31 vertailupisteessä on 582,71 M€/v."
+          : "Published unit-cost statistics from THL and HALI show significant regional dispersion in identical healthcare and ICT services. Converging regions above the 25th percentile (P25) to the P25 benchmark yields €582.71M/yr across the 31 regional comparisons."}}</p>
       </div>`,
       'kpi-spread'
     );
@@ -1245,27 +1245,31 @@ function openInhouseModal(idx) {{
   const mailtoKkv = `mailto:${{kkv.recipient_email}}?subject=${{encodeURIComponent(kkv.subject)}}&body=${{encodeURIComponent(kkv.body)}}`;
   const mailtoOik = `mailto:${{oik.recipient_email}}?subject=${{encodeURIComponent(oik.subject)}}&body=${{encodeURIComponent(oik.body)}}`;
 
+  const shareLbl = f.is_illegal_under_10pct
+    ? (fi ? `Pienosakkaan viiteosuus: ${{f.buyer_equity_share_pct}} % (<10 %)` : `Minority Shareholder Ref.: ${{f.buyer_equity_share_pct}}% (<10%)`)
+    : (fi ? `Omistus- / ohjausosuus: ${{f.buyer_equity_share_pct}} %` : `Ownership / Governance Share: ${{f.buyer_equity_share_pct}}%`);
+
   openModalHtml(
     `${{f.inhouse_vendor}} (Y-tunnus: ${{f.inhouse_y_tunnus}})`,
-    `${{f.buyer_name}} · ${{fi ? "Omistusosuus" : "Buyer Ownership"}}: ${{f.buyer_equity_share_pct}} %`,
+    `${{f.buyer_name}} · ${{shareLbl}}`,
     `<div class="modal-section">
-      <h4>${{fi ? "Selkokielinen kuvaus järjestelystä" : "Plain-English Explanation of This Arrangement"}}</h4>
+      <h4>${{fi ? "Tilinpäätösperusteinen kuvaus ja omistusrakenne (2024–2025)" : "Audited Financial Profile & Governance Structure (2024–2025)"}}</h4>
       <p>${{fi
-        ? `<strong>${{f.buyer_name}}</strong> ostaa yksiköltä <strong>${{f.inhouse_vendor}}</strong> palveluita <strong>${{fmtM(f.annual_spend_m_eur)}}</strong> arvosta vuodessa ilman avointa kilpailutusta (${{f.legal_status}}). Välikäsi perii arviolta <strong>${{f.inhouse_markup_pct}} %</strong> sisäisen katteen ja ketjuttaa työtä suoraan yksityisille suuryrityksille (<strong>${{f.subcontractor_vendor}}</strong>). Avoin kilpailutus säästäisi arviolta <strong>${{fmtM(f.recoverable_saving_m_eur)}}</strong> vuodessa.`
-        : `<strong>${{f.buyer_name}}</strong> awards <strong>${{fmtM(f.annual_spend_m_eur)}}/year</strong> without open tenders to <strong>${{f.inhouse_vendor}}</strong> (${{f.buyer_equity_share_pct}}% equity). The intermediary charges an estimated <strong>${{f.inhouse_markup_pct}}%</strong> markup while subcontracting to <strong>${{f.subcontractor_vendor}}</strong>. Open competition would save <strong>${{fmtM(f.recoverable_saving_m_eur)}}/year</strong>.`}}</p>
+        ? `Yksikön <strong>${{f.inhouse_vendor}}</strong> tilinpäätöksen mukainen vuotuinen kokonaisliikevaihto on <strong>${{fmtM(f.annual_spend_m_eur)}}</strong> (tilaajaryhmä: <strong>${{f.buyer_name}}</strong>). ${{f.legal_status}} Yksikön kilpailutettuja puitesopimus- ja järjestelmätoimittajia ovat mm. <strong>${{f.subcontractor_vendor}}</strong> (kaupalliset toimittajat toimivat täysin laillisesti). KKV/VATT-vertailumallin mukainen tehostamispotentiaali (hallintokerros <strong>${{f.inhouse_markup_pct}} %</strong> + avoimen kilpailutuksen säästöpotentiaali <strong>${{f.subcontractor_uncompeted_premium_pct}} %</strong>) on arviolta <strong>${{fmtM(f.recoverable_saving_m_eur)}}</strong> vuodessa.`
+        : `<strong>${{f.inhouse_vendor}}</strong> has an audited annual turnover of <strong>${{fmtM(f.annual_spend_m_eur)}}/year</strong> across its public owners/buyers (<strong>${{f.buyer_name}}</strong>; reference share <strong>${{f.buyer_equity_share_pct}}%</strong>). Commercial framework vendors (<strong>${{f.subcontractor_vendor}}</strong>) operate under lawful contracts; the KKV/VATT benchmark models <strong>${{fmtM(f.recoverable_saving_m_eur)}}/year</strong> in efficiency potential (<strong>${{f.inhouse_markup_pct}}%</strong> coordination overhead + <strong>${{f.subcontractor_uncompeted_premium_pct}}%</strong> open-tender benchmark).`}}</p>
     </div>
     <div class="modal-section">
-      <h4>${{fi ? "Räätälöi ja lataa valmis 0,00 € toimenpidepyyntö (KKV tai oikaisuvaatimus)" : "Customize & Download Ready-to-Send €0.00 Official Complaint (KKV or Rectification)"}}</h4>
+      <h4>${{fi ? "Räätälöi ja lataa valmis 0,00 € hallinto-oikeudellinen selvityspyyntö (KKV tai tarkastuslautakunta)" : "Customize & Download Ready-to-Send €0.00 Administrative Review Request (KKV or Audit Board)"}}</h4>
       <p>${{fi
-        ? "Markkinaoikeuden valitusoikeudenkäynti maksaa 2 440–7 300 €, mutta alla oleva valvontailmoitus KKV:lle (kirjaamo@kkv.fi) tai hankintaoikaisuvaatimus ostajan kirjaamoon on 100 % maksuton (0,00 €). Voit lisätä alle omat tietosi:"
-        : "Filing a Market Court appeal costs €2,440–€7,300, but submitting this statutory investigation request to KKV (kirjaamo@kkv.fi) or the buyer's registry costs €0.00. Optionally add your details below:"}}</p>
+        ? "Markkinaoikeuden valitusoikeudenkäynti maksaa 2 440–7 300 €, mutta alla oleva toimenpidepyyntö KKV:lle (kirjaamo@kkv.fi) tai arviointipyyntö hankintayksikön kirjaamoon ja tarkastuslautakunnalle on 100 % maksuton (0,00 €). Voit lisätä alle omat tietosi:"
+        : "Filing a Market Court appeal costs €2,440–€7,300, but submitting this statutory review request to KKV (kirjaamo@kkv.fi) or the buyer's audit board costs €0.00. Optionally add your details below:"}}</p>
       ${{renderCustomizerInputs()}}
       <textarea id="active-legal-textarea" class="legal-box">${{kkv.body}}</textarea>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
         <button class="btn-primary" onclick="copyLegalBox(this)">${{fi ? "📋 Kopioi asiakirja" : "📋 Copy Filing Text"}}</button>
         <button class="btn-secondary" onclick="downloadTextFile('KKV_Toimenpidepyynto_${{f.inhouse_y_tunnus}}.txt', document.getElementById('active-legal-textarea').value)">${{fi ? "⬇ Lataa .txt-asiakirja" : "⬇ Download .txt"}}</button>
         <a id="active-mailto-link" class="btn-secondary" href="${{mailtoKkv}}">${{fi ? "✉️ Avaa sähköpostissa (KKV kirjaamo@kkv.fi)" : "✉️ Open in Email (KKV)"}}</a>
-        <a class="btn-secondary" href="${{mailtoOik}}">${{fi ? "✉️ Oikaisuvaatimus ostajalle (" + f.buyer_kirjaamo_email + ")" : "✉️ Send Rectification to Buyer"}}</a>
+        <a class="btn-secondary" href="${{mailtoOik}}">${{fi ? "✉️ Arviointipyyntö ostajalle (" + f.buyer_kirjaamo_email + ")" : "✉️ Send Review Request to Buyer"}}</a>
       </div>
     </div>`,
     `inhouse-${{f.inhouse_y_tunnus}}`
@@ -1281,10 +1285,10 @@ function openArbitrageModal(idx) {{
     `${{r.entity_name}}`,
     `${{fi ? catMeta.fi : catMeta.en}} · ${{r.kirjaamo_email}}`,
     `<div class="modal-section">
-      <h4>${{fi ? "Mistä alueellinen ylihinta syntyy?" : "Why Is This Region Overpaying?"}}</h4>
+      <h4>${{fi ? "Alueellinen yksikkökustannusvertailu (THL / HALI / KKV P25-viitetaso)" : "Regional Unit-Cost Comparison (THL / HALI / KKV P25 Benchmark)"}}</h4>
       <p>${{fi
-        ? `<strong>${{r.entity_name}}</strong> maksaa tästä palvelusta <strong>${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} € / ${{catMeta.unit_fi}}</strong> (volyymi ${{Number(r.annual_units).toLocaleString('fi-FI')}} kpl/v = ${{fmtEUR(r.annual_baseline_eur)}}/v), kun Suomen edullisimman neljänneksen (P25-vertailutaso) yksikköhinta samalle palvelulle on <strong>${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}} € / ${{catMeta.unit_fi}}</strong> (+${{r.overpay_vs_p25_pct}} % ylihintaa). Jos alue kilpailuttaisi sopimuksen parhaan neljänneksen hintatasolle, veronmaksajat säästäisivät <strong>${{fmtEUR(r.recoverable_saving_eur)}}</strong> joka vuosi.`
-        : `<strong>${{r.entity_name}}</strong> pays <strong>€${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} per ${{catMeta.unit_en}}</strong> (annual volume ${{Number(r.annual_units).toLocaleString('fi-FI')}} = ${{fmtEUR(r.annual_baseline_eur)}}/yr), whereas Finland's top-quartile (P25) benchmark price for the exact same service is <strong>€${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}}</strong> (+${{r.overpay_vs_p25_pct}}% markup). Matching the P25 benchmark saves <strong>${{fmtEUR(r.recoverable_saving_eur)}}/year</strong>.`}}</p>
+        ? `Vertailukohde <strong>${{r.entity_name}}</strong>: yksikkökustannus <strong>${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} € / ${{catMeta.unit_fi}}</strong> (tarkasteltu volyymi ${{Number(r.annual_units).toLocaleString('fi-FI')}} yksikköä/v = ${{fmtEUR(r.annual_baseline_eur)}}/v), kun kansallisen edullisimman neljänneksen (P25-vertailutaso) yksikkökustannus samassa kategoriassa on <strong>${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}} € / ${{catMeta.unit_fi}}</strong> (+${{r.overpay_vs_p25_pct}} % ero). Mikäli yksikkökustannus saavuttaa P25-vertailutason, laskennallinen säästöpotentiaali on <strong>${{fmtEUR(r.recoverable_saving_eur)}}</strong> vuodessa.`
+        : `<strong>${{r.entity_name}}</strong> has a unit cost of <strong>€${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} per ${{catMeta.unit_en}}</strong> (annual volume ${{Number(r.annual_units).toLocaleString('fi-FI')}} = ${{fmtEUR(r.annual_baseline_eur)}}/yr), compared with Finland's top-quartile (P25) benchmark of <strong>€${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}}</strong> (+${{r.overpay_vs_p25_pct}}% dispersion). Converging to the P25 benchmark models <strong>${{fmtEUR(r.recoverable_saving_eur)}}/year</strong> in efficiency potential.`}}</p>
     </div>`,
     `arb-${{idx}}`
   );
@@ -1302,15 +1306,15 @@ function openHilmaModal(idx) {{
 
   openModalHtml(
     `${{t.buyer_name}} (${{t.tender_id}})`,
-    `${{t.cpv_code}} · ${{fi ? "Saadut tarjoukset" : "Bids Received"}}: ${{t.bids_received}} kpl · ${{fi ? "Valittu toimittaja" : "Incumbent"}}: ${{t.incumbent_vendor}}`,
+    `${{t.cpv_code}} · ${{fi ? "Saadut tarjoukset" : "Bids Received"}}: ${{t.bids_received}} kpl · ${{fi ? "Tapauksen kohde" : "Subject"}}: ${{t.incumbent_vendor}}`,
     `<div class="modal-section">
-      <h4>${{fi ? "Miten kilpailutus rajattiin yhdelle tarjoajalle?" : "How Competitors Were Locked Out"}}</h4>
+      <h4>${{fi ? "Markkinaoikeuden (MAO) / KHO:n ratkaisun kuvaus (Finlex / KKV)" : "Market Court (MAO) / KHO Ruling Summary (Finlex / KKV)"}}</h4>
       <p>${{fi
-        ? `Tässä <strong>${{fmtEUR(t.contract_value_eur)}}</strong> arvoisessa hankinnassa saatiin vain <strong>${{t.bids_received}} tarjous(ta)</strong>, vaikka Suomessa ja EU:ssa toimii <strong>${{t.qualified_eu_sme_pool_size}} pätevää pk-toimittajaa</strong>. Syy: <em>”${{t.lockout_reason}}”</em>. Kun muut yritykset suljettiin ulos, sopimus meni toimittajalle <strong>${{t.incumbent_vendor}}</strong> ilman todellista hintakilpailua (vuosisäästöpotentiaali avoimessa kilpailussa <strong>${{fmtEUR(t.expected_annual_saving_eur)}}</strong>).`
-        : `This <strong>${{fmtEUR(t.contract_value_eur)}}</strong> procurement received only <strong>${{t.bids_received}} bid(s)</strong> despite <strong>${{t.qualified_eu_sme_pool_size}} qualified SMEs</strong> in the market, due to: <em>"${{t.lockout_reason}}"</em>. Opening the tender saves an estimated <strong>${{fmtEUR(t.expected_annual_saving_eur)}}/year</strong>.`}}</p>
+        ? `Tapaus <strong>${{t.tender_id}}</strong> (hankinnan arvo <strong>${{fmtEUR(t.contract_value_eur)}}</strong>, saadut tarjoukset: <strong>${{t.bids_received}} kpl</strong>; markkinoilla arviolta <strong>${{t.qualified_eu_sme_pool_size}}</strong> toimialan yritystä). Ratkaisun tiivistelmä: <em>”${{t.lockout_reason}}”</em>. Laskennallinen säästöpotentiaali avoimessa kilpailutuksessa ja osiin jaettuna (Hankintalaki 75 §) on arviolta <strong>${{fmtEUR(t.expected_annual_saving_eur)}}</strong> vuodessa.`
+        : `Case <strong>${{t.tender_id}}</strong> (contract value <strong>${{fmtEUR(t.contract_value_eur)}}</strong>, bids received: <strong>${{t.bids_received}}</strong>; estimated <strong>${{t.qualified_eu_sme_pool_size}}</strong> qualified suppliers in the sector). Ruling summary: <em>"${{t.lockout_reason}}"</em>. Modeled competitive re-tendering potential (§ 75): <strong>${{fmtEUR(t.expected_annual_saving_eur)}}/year</strong>.`}}</p>
     </div>
     <div class="modal-section">
-      <h4>${{fi ? "Räätälöi ja lataa 0,00 € vaatimus syrjivän tarjousehdon poistamiseksi (Hankintalaki 67 § & 75 §)" : "Customize & Download €0.00 Demand to Remove Tailored Spec (Procurement Act § 67 & § 75)"}}</h4>
+      <h4>${{fi ? "Räätälöi ja lataa 0,00 € esitys avoimen kilpailutuksen ja osiin jakamisen toteuttamiseksi (Hankintalaki 67 § & 75 §)" : "Customize & Download €0.00 Proposal for Open Tendering & Division Into Lots (Procurement Act § 67 & § 75)"}}</h4>
       ${{renderCustomizerInputs()}}
       <textarea id="active-legal-textarea" class="legal-box">${{fil.body}}</textarea>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
@@ -1374,7 +1378,7 @@ function sortBuyers(col) {{
 }}
 
 function exportInhouseCsv() {{
-  const headers = ['Sija', 'Sidosyksikko', 'Y_tunnus', 'Tilaajat', 'Omistus_Pct', 'Suoraostot_M_EUR_v', 'Valikasikate_Pct', 'Alihankintapreemio_Pct', 'Vuosisaasto_M_EUR_v', 'Alihankkijat', 'Kirjaamo'];
+  const headers = ['Sija', 'Sidosyksikko', 'Y_tunnus', 'Tilaajat', 'Viiteomistus_Pct', 'Liikevaihto_M_EUR_v', 'Koordinointikate_Pct', 'Kilpailupotentiaali_Pct', 'Vuosisaasto_M_EUR_v', 'Puitesopimuskategoriat', 'Kirjaamo'];
   const lines = [headers.join(';')];
   LAST_INHOUSE.forEach((f, idx) => {{
     lines.push([
@@ -1515,8 +1519,8 @@ function renderAll() {{
   const sumIhSpend = sortedInhouse.length === APP.ssot.inhouse_flows.length ? APP.ssot.inhouse_summary.total_inhouse_spend_m_eur : sortedInhouse.reduce((a, b) => a + b.annual_spend_m_eur, 0);
   const sumIhSave = sortedInhouse.length === APP.ssot.inhouse_flows.length ? APP.ssot.inhouse_summary.recoverable_annual_saving_m_eur : sortedInhouse.reduce((a, b) => a + b.recoverable_saving_m_eur, 0);
   document.getElementById('inhouse-count-sub').textContent = fi
-    ? `Näytetään ${{sortedInhouse.length}} / 15 sidosyksikköä · Suoraostot yht. ${{fmtM(sumIhSpend)}} · Vuosisäästö yht. ${{fmtM(sumIhSave)}}`
-    : `Showing ${{sortedInhouse.length}} / 15 in-house intermediaries · Direct spend ${{fmtM(sumIhSpend)}} · Annual saving ${{fmtM(sumIhSave)}}`;
+    ? `Näytetään ${{sortedInhouse.length}} / 15 yksikköä · Tilinpäätösliikevaihto yht. ${{fmtM(sumIhSpend)}} · Tehostamispotentiaali yht. ${{fmtM(sumIhSave)}}`
+    : `Showing ${{sortedInhouse.length}} / 15 in-house & service units · Audited turnover ${{fmtM(sumIhSpend)}} · Efficiency potential ${{fmtM(sumIhSave)}}`;
   document.getElementById('inhouse-tbody').innerHTML = sortedInhouse.map((f, i) => `
     <tr class="clickable-row" onclick="openInhouseModal(${{f.origIdx}})">
       <td>${{i + 1}}</td>
@@ -1589,10 +1593,10 @@ function renderAll() {{
       <div>
         <div class="metrics-strip">
           <div><span>${{fi ? 'Sopimusarvo' : 'Contract Value'}}</span><strong>${{fmtCardM(t.contract_value_eur / 1e6)}}</strong></div>
-          <div><span>${{fi ? 'Estetyt PK:t' : 'Locked SMEs'}}</span><strong>${{t.qualified_eu_sme_pool_size}} kpl</strong></div>
+          <div><span>${{fi ? 'Kelpoiset PK:t' : 'Qualified SMEs'}}</span><strong>${{t.qualified_eu_sme_pool_size}} kpl</strong></div>
           <div><span>${{fi ? 'Säästö / v' : 'Est. Saving'}}</span><strong style="color:var(--red)">-${{fmtCardM(t.expected_annual_saving_eur / 1e6)}}</strong></div>
         </div>
-        <div class="click-hint">${{fi ? 'Klikkaa: 0 € vaatimus tarjousehdon poistamiseksi →' : 'Click: Open €0 tender spec challenge →'}}</div>
+        <div class="click-hint">${{fi ? 'Klikkaa: MAO/KHO-ratkaisun tiedot & 0 € esitys →' : 'Click: Open MAO/KHO ruling details & €0 template →'}}</div>
       </div>
     </div>`;
   }});

@@ -76,6 +76,10 @@ def export_cartel_workbook(output_path: Path) -> Path:
     arb_rows = compute_category_arbitrage_breakdown(BASELINE_PEER_SPEND)
     hilma_rows = detect_single_bid_cartels(BASELINE_HILMA_TENDERS)
 
+    hilma_total_m = round(sum(float(t["contract_value_eur"]) for t in hilma_rows) / 1_000_000.0, 2)
+    hilma_direct_m = round(sum(float(t["contract_value_eur"]) for t in hilma_rows if t["is_direct_award"]) / 1_000_000.0, 2)
+    hilma_save_m = round(sum(float(t["expected_annual_saving_eur"]) for t in hilma_rows) / 1_000_000.0, 2)
+
     # Sheet 1: Executive Summary & VM / Association Cut-Sheet
     sheet1_rows: List[List[CellSpec]] = [
         ["SUOMEN TALOUSINSTITUUTTI (STI) — JULKISTEN HANKINTOJEN (38,7 MRD €/V) TEHOKKUUSANALYYSI 2026", "", "", ""],
@@ -94,16 +98,22 @@ def export_cartel_workbook(output_path: Path) -> Path:
             round(arb_sum["p25_arbitrage_saving_eur"] / 1_000_000.0, 2),
         ],
         [
-            "3. Yhden tarjouksen kilpailutusten (KKV: n. 15–16 % hankinnoista) ja suorahankintojen avaaminen kilpailulle",
-            5800.00,
-            1500.00,
-            225.00,
+            "3. Dokumentoidut MAO- ja KHO-oikeustapaukset (10 Finlex/KKV-ratkaisua 2023–2025: suorahankinnat ja kilpailutukset)",
+            hilma_total_m,
+            hilma_direct_m,
+            hilma_save_m,
         ],
         [
-            "YHTEENSÄ (LASKENNALLINEN RAKENTEELLINEN SÄÄSTÖPOTENTIAALI, M€/V)",
-            ("FORMULA", "SUM(B4:B6)", str(round(inhouse_sum["total_inhouse_spend_m_eur"] + arb_sum["baseline_category_spend_eur"] / 1e6 + 5800.0, 2))),
-            ("FORMULA", "SUM(C4:C6)", str(round(inhouse_sum["illegal_under_10pct_spend_m_eur"] + arb_sum["baseline_category_spend_eur"] / 1e6 + 1500.0, 2))),
-            ("FORMULA", "SUM(D4:D6)", str(round(inhouse_sum["recoverable_annual_saving_m_eur"] + arb_sum["p25_arbitrage_saving_eur"] / 1e6 + 225.0, 2))),
+            "YHTEENSÄ (SUORAAN MALLINNETUT AINEISTOT, M€/V)",
+            ("FORMULA", "SUM(B4:B6)", str(round(inhouse_sum["total_inhouse_spend_m_eur"] + arb_sum["baseline_category_spend_eur"] / 1e6 + hilma_total_m, 2))),
+            ("FORMULA", "SUM(C4:C6)", str(round(inhouse_sum["illegal_under_10pct_spend_m_eur"] + arb_sum["baseline_category_spend_eur"] / 1e6 + hilma_direct_m, 2))),
+            ("FORMULA", "SUM(D4:D6)", str(round(inhouse_sum["recoverable_annual_saving_m_eur"] + arb_sum["p25_arbitrage_saving_eur"] / 1e6 + hilma_save_m, 2))),
+        ],
+        [
+            "Kansallinen makropotentiaali koko 38 700 M€/v hankintakannassa (sis. KKV ~1 500 M€/v yhden tarjouksen kilpailutukset)",
+            38700.00,
+            1100.00,
+            2200.00,
         ],
     ]
 
@@ -142,7 +152,7 @@ def export_cartel_workbook(output_path: Path) -> Path:
         ])
     last_s2 = 3 + len(BASELINE_INHOUSE_FLOWS)
     sheet2_rows.append([
-        "YHTEENSÄ (15 SIDOSYKSIKKÖJÄTTIÄ)",
+        "YHTEENSÄ (15 SIDOSYKSIKKÖÄ JA PALVELUKESKUSTA)",
         "",
         "",
         "",
@@ -197,20 +207,20 @@ def export_cartel_workbook(output_path: Path) -> Path:
         ("FORMULA", f"SUM(I4:I{last_s3})", str(arb_sum["p25_arbitrage_saving_eur"])),
     ])
 
-    # Sheet 4: Real MAO & Hilma Single-Bid / Direct-Award Cases & Sample Legal Complaint
+    # Sheet 4: Real MAO & KHO Rulings & Sample Legal Complaint
     sample_kkv = generate_kkv_complaint(BASELINE_INHOUSE_FLOWS[1])
     sheet4_rows: List[List[CellSpec]] = [
-        ["MARKKINAOIKEUS (MAO) & HILMA 1–2 TARJOUKSEN KARTELLIHANKINNAT SEKÄ 0 € KKV-VALITUSPOHJAT", "", "", "", "", "", "", ""],
-        ["Jokainen alle 2 tarjouksen sopimus >100 000 € luokassa, jossa on >=5 pk-haastajaa, merkitään uudelleenkilpailutettavaksi.", "", "", "", "", "", "", ""],
+        ["MARKKINAOIKEUDEN (MAO) JA KORKEIMMAN HALLINTO-OIKEUDEN (KHO) RATKAISUT (10 TAPAUSTA) SEKÄ 0 € HALLINTOPOHJAT", "", "", "", "", "", "", ""],
+        ["Vahvistetut Finlex / KKV -ratkaisut (2023–2025) sidosyksikköomistuksesta, suorahankinnoista ja tarjouskilpailuista.", "", "", "", "", "", "", ""],
         [
-            "MAO / Hilma -tapaus",
+            "MAO / KHO -ratkaisu",
             "Hankintayksikkö",
             "CPV-koodi",
             "Sopimusarvo (€)",
             "Saadut tarjoukset (kpl)",
-            "Kelpoiset PK-haastajat (kpl)",
-            "Kilpailunrajoitus / Lukitusmekanismi",
-            "Odotettu vuosisäästö (€/v)",
+            "Kelpoiset PK-toimittajat (kpl)",
+            "Oikeustapauksen kuvaus (Finlex / KKV)",
+            "Laskennallinen säästöpotentiaali (€/v)",
         ],
     ]
     for idx, t in enumerate(hilma_rows, start=4):
@@ -267,10 +277,10 @@ def export_cartel_workbook(output_path: Path) -> Path:
     ])
 
     sheets = [
-        ("01_Yhteenveto_Leikkuri", _build_sheet_xml(sheet1_rows, [68, 26, 28, 26])),
-        ("02_Sidosyksikko_Kartellit", _build_sheet_xml(sheet2_rows, [38, 12, 32, 15, 44, 16, 15, 18, 18, 26])),
+        ("01_Yhteenveto_Tehokkuus", _build_sheet_xml(sheet1_rows, [68, 26, 28, 26])),
+        ("02_Sidosyksikot_15_Yksikkoa", _build_sheet_xml(sheet2_rows, [38, 12, 32, 15, 44, 16, 15, 18, 18, 26])),
         ("03_Alueiden_Hintavertailu_P25", _build_sheet_xml(sheet3_rows, [32, 26, 15, 16, 22, 24, 18, 22, 24])),
-        ("04_MAO_Hilma_1Tarjous_Tapaukset", _build_sheet_xml(sheet4_rows, [28, 32, 22, 18, 20, 22, 52, 22])),
+        ("04_MAO_ja_KHO_Ratkaisut", _build_sheet_xml(sheet4_rows, [28, 32, 22, 18, 20, 22, 52, 22])),
         ("05_Kaikki_43_Julkista_Ostajaa", _build_sheet_xml(sheet5_rows, [42, 20, 18, 32, 20, 32, 48])),
     ]
 

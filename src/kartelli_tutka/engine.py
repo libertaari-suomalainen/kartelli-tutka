@@ -276,8 +276,8 @@ BASELINE_PEER_SPEND: List[PeerCategorySpend] = [
     PeerCategorySpend("Siun sote (Mediatri — viitetaso)",      "48814000-EHR", "clinician-year",  6500, 1820.0, "kirjaamo@siunsote.fi"),
     PeerCategorySpend("Pirha (Kokonais-APTJ-vertailu)",        "48814000-EHR", "clinician-year", 16500, 2850.0, "kirjaamo@pirha.fi"),
     PeerCategorySpend("Hyvaks (Keski-Suomi APTJ-vertailu)",    "48814000-EHR", "clinician-year",  9500, 3150.0, "kirjaamo@hyvaks.fi"),
-    PeerCategorySpend("Vake (Apotti-kokonaiskustannus/käyttäjä)", "48814000-EHR", "clinician-year", 4800, 5800.0, "kirjaamo@vakehyva.fi"),
-    PeerCategorySpend("HUS-yhtymä (Apotti-kokonaiskustannus/käyttäjä)", "48814000-EHR", "clinician-year", 22000, 6200.0, "kirjaamo@hus.fi"),
+    PeerCategorySpend("Vake (Apotti-osuus 18,7 % — kustannus/käyttäjä)", "48814000-EHR", "clinician-year", 4800, 5800.0, "kirjaamo@vakehyva.fi"),
+    PeerCategorySpend("HUS & Helsingin sote (Apotti-osuus 81,3 % — kustannus/käyttäjä)", "48814000-EHR", "clinician-year", 19330, 6200.0, "kirjaamo@hus.fi"),
 
     # 4. Ikäihmisten ympärivuorokautinen palveluasuminen (CPV 85311100, THL / HALI ry yksikkökustannus €/hoitopäivä)
     PeerCategorySpend("Etelä-Pohjanmaa (Ostopalvelun P25-viitetaso)", "85311100-ElderlyCare", "resident-day",  820000, 172.0, "kirjaamo@hyvaep.fi"),
@@ -342,9 +342,9 @@ BASELINE_HILMA_TENDERS: List[HilmaTenderRecord] = [
         0,
         True,
         15,
-        "Matkailu- ja markkinointipalvelut (vuoden 2010 sopimuksen jatkaminen)",
+        "Matkailu- ja markkinointipalvelut (vuoden 2011 sopimuksen jatkaminen)",
         "kirjaamo@rovaniemi.fi",
-        "KKV:n esitys: Kaupunki jatkoi matkailu- ja markkinointipalveluiden ostoja vanhan vuoden 2010 sopimuksen nojalla ilman kilpailutusta. Markkinaoikeus määräsi 40 000 € seuraamusmaksun.",
+        "KKV:n esitys: Kaupunki jatkoi matkailu- ja markkinointipalveluiden ostoja vanhan vuoden 2011 sopimuksen nojalla ilman kilpailutusta. Markkinaoikeus määräsi 40 000 € seuraamusmaksun.",
     ),
     HilmaTenderRecord(
         "MAO:202/2025 (D:610/2024)",
@@ -425,7 +425,7 @@ BASELINE_HILMA_TENDERS: List[HilmaTenderRecord] = [
 # All 21 Wellbeing Counties (Hyvinvointialueet) + HUS-yhtymä + 21 Largest Finnish Municipalities
 PUBLIC_BUYER_DIRECTORY: List[PublicBuyerProfile] = [
     # --- HUS + ALL 21 WELLBEING COUNTIES (HYVINVOINTIALUEET) ---
-    PublicBuyerProfile("HUS-yhtymä", "HUS", "1567535-0", "kirjaamo@hus.fi", 1480.0, True, "Oy Apotti Ab, Valtori"),
+    PublicBuyerProfile("HUS-yhtymä", "HUS", "1567535-0", "kirjaamo@hus.fi", 1480.0, True, "Oy Apotti Ab, HUS Diagnostiikkakeskus / Hansel"),
     PublicBuyerProfile("Pirkanmaan hyvinvointialue (Pirha)", "HVA", "3221308-6", "kirjaamo@pirha.fi", 1320.0, True, "Istekki Oy, Fimlab Oy, Tuomi Logistiikka Oy, Monetra"),
     PublicBuyerProfile("Varsinais-Suomen hyvinvointialue (Varha)", "HVA", "3221065-1", "kirjaamo@varha.fi", 1190.0, False, "2M-IT Oy, Numera/Sarastia, Kaarea Oy"),
     PublicBuyerProfile("Pohjois-Pohjanmaan hyvinvointialue (Pohde)", "HVA", "3221326-2", "kirjaamo@pohde.fi", 1080.0, False, "Monetra Oy, Istekki Oy, Esko Systems Oy"),
@@ -641,9 +641,9 @@ def build_ssot_payload() -> Dict[str, object]:
         })
 
     return {
-        "schema_version": "2026.10.2",
+        "schema_version": "2026.10.3",
         "national_procurement_pool_b_eur": 38.7,
-        "target_annual_saving_range_b_eur": [1.5, 3.5],
+        "target_annual_saving_range_b_eur": [1.1, 2.2],
         "inhouse_summary": inhouse_summary,
         "inhouse_flows": inhouse_rows,
         "arbitrage_summary": arbitrage_summary,
