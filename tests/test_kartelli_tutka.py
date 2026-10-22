@@ -110,6 +110,12 @@ class TestKartelliTutkaEngine(unittest.TestCase):
             self.assertIn("582,71 milj. €/v", html_text)
             self.assertIn("832,63 miljoonan euron", html_text)
             self.assertIn("MAO:611/2025", html_text)
+            self.assertIn("exportArbitrageCsv()", html_text)
+            self.assertIn("exportHilmaCsv()", html_text)
+            self.assertIn("switchInhouseDoc('oik')", html_text)
+            self.assertIn("body.modal-open", html_text)
+            self.assertIn("Toimenpide_esitys_", html_text)
+            self.assertNotIn("ylihinta", html_text)
             self.assertNotIn("MAO:412/2023", html_text)
             self.assertNotIn("ketjuttaa työtä suoraan yksityisille suuryrityksille", html_text)
             with zipfile.ZipFile(root / summary["xlsx_path"], "r") as zf:
@@ -117,10 +123,15 @@ class TestKartelliTutkaEngine(unittest.TestCase):
                 self.assertIn("01_Yhteenveto_Tehokkuus", wb_xml)
                 self.assertIn("02_Sidosyksikot_15_Yksikkoa", wb_xml)
                 self.assertIn("04_MAO_ja_KHO_Ratkaisut", wb_xml)
+                sheet1 = zf.read("xl/worksheets/sheet1.xml").decode("utf-8")
                 sheet2 = zf.read("xl/worksheets/sheet2.xml").decode("utf-8")
+                sheet3 = zf.read("xl/worksheets/sheet3.xml").decode("utf-8")
                 sheet5 = zf.read("xl/worksheets/sheet5.xml").decode("utf-8")
+                self.assertIn("Hajautetun omistuksen (&lt;10 %) yhtiöt / Vertailukanta", sheet1)
                 self.assertIn("Istekki Oy", sheet2)
                 self.assertIn("<f>ROUND(", sheet2)
+                self.assertIn("Ero vs. P25-vertailutaso (%)", sheet3)
+                self.assertNotIn("Ylihinta vs. P25", sheet3)
                 self.assertIn("KAIKKI 43 SUURINTA JULKISTA OSTAJAA", sheet5)
 
 

@@ -620,11 +620,11 @@ def build_static_web_app(output_path: Path) -> Path:
   }}
   footer a {{ color: var(--accent-dark); font-weight: 600; text-decoration: none; }}
   @media print {{
-    body * {{ visibility: hidden; }}
-    #detail-modal, #detail-modal * {{ visibility: visible; }}
-    #detail-modal {{ position: absolute; left: 0; top: 0; width: 100%; background: #fff; padding: 0; display: block !important; }}
-    .modal-card {{ max-height: none; box-shadow: none; border: none; width: 100%; max-width: 100%; padding: 0; }}
-    .modal-close, .modal-toolbar {{ display: none !important; }}
+    body.modal-open * {{ visibility: hidden; }}
+    body.modal-open #detail-modal, body.modal-open #detail-modal * {{ visibility: visible; }}
+    body.modal-open #detail-modal {{ position: absolute; left: 0; top: 0; width: 100%; background: #fff; padding: 0; display: block !important; }}
+    body.modal-open .modal-card {{ max-height: none; box-shadow: none; border: none; width: 100%; max-width: 100%; padding: 0; }}
+    .modal-close, .modal-toolbar, .topbar, .search-hub {{ display: none !important; }}
   }}
   @media (max-width: 960px) {{
     .topbar {{ position: relative; }}
@@ -808,12 +808,48 @@ def build_static_web_app(output_path: Path) -> Path:
 
   <section class="section-block" id="sec-arbitrage">
     <div class="section-head">
-      <h2 data-i18n="s2_title">2. Alueellinen yksikkökustannusvertailu (THL / HALI / KKV): P25-vertailutaso (582,71 M€/v)</h2>
+      <h2 data-i18n="s2_title">2. Alueellinen yksikkökustannusvertailu (THL / HALI / KKV): P25-vertailutaso (31 aluevertailua = 582,71 M€/v)</h2>
       <p data-i18n="s2_sub">
-        Klikkaa mitä tahansa alueellista vertailukorttia nähdäksesi, kuinka suuri säästöpotentiaali syntyy, jos yli 25. persentiilin (P25) yksikkökustannustason alueet saavuttavat edullisimman neljänneksen kustannustason.
+        Alla ovat kaikki 31 alueellista yksikkökustannusvertailua (11 P25-vertailualuetta vihreällä ja 20 yli P25-tason aluetta keltaisella). Klikkaa mitä tahansa vertailukorttia tai taulukon riviä nähdäksesi, kuinka suuri säästöpotentiaali syntyy, jos yli 25. persentiilin (P25) yksikkökustannustason alueet saavuttavat edullisimman neljänneksen vertailutason.
       </p>
+      <div class="quick-chips" style="margin-top:12px;">
+        <span class="chip-label" data-i18n="arb_chip_lbl">CPV-kategoria:</span>
+        <button type="button" class="chip arb-chip active" data-cpv="" onclick="setArbCategory('')" data-i18n="arb_chip_all">Kaikki 5 kategoriaa (31)</button>
+        <button type="button" class="chip arb-chip" data-cpv="85121000-LocumMD" onclick="setArbCategory('85121000-LocumMD')">Vuokralääkärit (85121000)</button>
+        <button type="button" class="chip arb-chip" data-cpv="72260000-ITWorkstation" onclick="setArbCategory('72260000-ITWorkstation')">IT-työasemat (72260000)</button>
+        <button type="button" class="chip arb-chip" data-cpv="48814000-EHR" onclick="setArbCategory('48814000-EHR')">Potilastietojärjestelmät APTJ (48814000)</button>
+        <button type="button" class="chip arb-chip" data-cpv="85311100-ElderlyCare" onclick="setArbCategory('85311100-ElderlyCare')">Ympärivuorokautinen hoiva (85311100)</button>
+        <button type="button" class="chip arb-chip" data-cpv="60130000-SoteTransport" onclick="setArbCategory('60130000-SoteTransport')">Sote- &amp; koulukuljetukset (60130000)</button>
+      </div>
     </div>
     <div class="cards-grid" id="arbitrage-cards"></div>
+
+    <div class="table-wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <div>
+          <h3 style="font-size:18.5px;" data-i18n="arb_tbl_title">Kaikki 31 alueellista P25-yksikkökustannusvertailua taulukossa (11 P25-verrokkia + 20 yli P25-tason aluetta)</h3>
+          <p style="font-size:13.5px;color:var(--muted);" id="arbitrage-count-sub"></p>
+        </div>
+        <button type="button" class="btn-secondary" onclick="exportArbitrageCsv()" data-i18n="arb_csv_btn">⬇ Vie kaikki 31 P25-vertailua (.csv)</button>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th class="sortable" onclick="sortArbitrage('entity_name')"><span data-i18n="th_ar_ent">Alue / Hankintayksikkö</span> <span id="sort-ar-entity_name"></span></th>
+              <th class="sortable" onclick="sortArbitrage('cpv_category')"><span data-i18n="th_ar_cat">CPV-kategoria</span> <span id="sort-ar-cpv_category"></span></th>
+              <th class="sortable" onclick="sortArbitrage('unit_price_eur')"><span data-i18n="th_ar_up">Yksikköhinta (€)</span> <span id="sort-ar-unit_price_eur"></span></th>
+              <th class="sortable" onclick="sortArbitrage('p25_benchmark_eur')"><span data-i18n="th_ar_p25">P25-vertailuhinta (€)</span> <span id="sort-ar-p25_benchmark_eur"></span></th>
+              <th class="sortable" onclick="sortArbitrage('overpay_vs_p25_pct')"><span data-i18n="th_ar_pct">Ero vs. P25 (%)</span> <span id="sort-ar-overpay_vs_p25_pct"></span></th>
+              <th class="sortable" onclick="sortArbitrage('annual_baseline_eur')"><span data-i18n="th_ar_base">Nykykustannus (M€/v)</span> <span id="sort-ar-annual_baseline_eur"></span></th>
+              <th class="sortable" onclick="sortArbitrage('recoverable_saving_eur')"><span data-i18n="th_ar_save">P25-säästöpotentiaali (M€/v)</span> <span id="sort-ar-recoverable_saving_eur">▼</span></th>
+            </tr>
+          </thead>
+          <tbody id="arbitrage-tbody"></tbody>
+        </table>
+      </div>
+    </div>
   </section>
 
   <section class="section-block" id="sec-hilma">
@@ -824,6 +860,32 @@ def build_static_web_app(output_path: Path) -> Path:
       </p>
     </div>
     <div class="cards-grid" id="hilma-cards"></div>
+
+    <div class="table-wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <div>
+          <h3 style="font-size:18.5px;" data-i18n="hilma_tbl_title">Kaikki 10 vahvistettua MAO- ja KHO-oikeustapausta taulukossa (Finlex / KKV 2023–2025)</h3>
+          <p style="font-size:13.5px;color:var(--muted);" id="hilma-count-sub"></p>
+        </div>
+        <button type="button" class="btn-secondary" onclick="exportHilmaCsv()" data-i18n="hilma_csv_btn">⬇ Vie kaikki 10 MAO/KHO-ratkaisua (.csv)</button>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th class="sortable" onclick="sortHilma('tender_id')"><span data-i18n="th_hi_id">MAO / KHO -ratkaisu</span> <span id="sort-hi-tender_id"></span></th>
+              <th class="sortable" onclick="sortHilma('buyer_name')"><span data-i18n="th_hi_buy">Hankintayksikkö</span> <span id="sort-hi-buyer_name"></span></th>
+              <th class="sortable" onclick="sortHilma('incumbent_vendor')"><span data-i18n="th_hi_sub">Tapauksen kohde &amp; CPV</span> <span id="sort-hi-incumbent_vendor"></span></th>
+              <th class="sortable" onclick="sortHilma('bids_received')"><span data-i18n="th_hi_bid">Tarjoukset</span> <span id="sort-hi-bids_received"></span></th>
+              <th class="sortable" onclick="sortHilma('contract_value_eur')"><span data-i18n="th_hi_val">Sopimusarvo (M€)</span> <span id="sort-hi-contract_value_eur"></span></th>
+              <th class="sortable" onclick="sortHilma('expected_annual_saving_eur')"><span data-i18n="th_hi_sav">Säästöpotentiaali (M€/v)</span> <span id="sort-hi-expected_annual_saving_eur">▼</span></th>
+            </tr>
+          </thead>
+          <tbody id="hilma-tbody"></tbody>
+        </table>
+      </div>
+    </div>
   </section>
 
   <section class="section-block" id="sec-foia">
@@ -886,12 +948,19 @@ def build_static_web_app(output_path: Path) -> Path:
 const APP = {json_blob};
 let LANG = 'fi';
 let INHOUSE_SORT = {{ col: 'annual_spend_m_eur', asc: false }};
+let ARBITRAGE_SORT = {{ col: 'recoverable_saving_eur', asc: false }};
+let HILMA_SORT = {{ col: 'expected_annual_saving_eur', asc: false }};
 let BUYER_SORT = {{ col: 'annual_purchases_m_eur', asc: false }};
+let ARB_CPV_FILTER = '';
 let LAST_INHOUSE = [];
+let LAST_ARBITRAGE = [];
+let LAST_HILMA = [];
 let LAST_BUYERS = [];
 let ACTIVE_BASE_LEGAL_TEXT = '';
 let ACTIVE_RECIPIENT_EMAIL = '';
 let ACTIVE_SUBJECT = '';
+let ACTIVE_INHOUSE_YID = '';
+let ACTIVE_INHOUSE_DOC_TYPE = 'kkv';
 
 const fmtM = (n) => Number(n).toLocaleString('fi-FI', {{minimumFractionDigits: 2, maximumFractionDigits: 2}}) + ' milj. €';
 const fmtCardM = (n) => {{
@@ -985,10 +1054,29 @@ const I18N = {{
     th_ih_sp: "Liikevaihto (M€/v)",
     th_ih_mk: "Koordinointi (%)",
     th_ih_sv: "Säästöpotentiaali (M€/v)",
-    s2_title: "2. Alueellinen yksikkökustannusvertailu (THL / HALI / KKV): P25-vertailutaso (582,71 M€/v)",
-    s2_sub: "Klikkaa mitä tahansa alueellista vertailukorttia nähdäksesi, kuinka suuri säästöpotentiaali syntyy, jos yli 25. persentiilin (P25) yksikkökustannustason alueet saavuttavat edullisimman neljänneksen kustannustason.",
+    s2_title: "2. Alueellinen yksikkökustannusvertailu (THL / HALI / KKV): P25-vertailutaso (31 aluevertailua = 582,71 M€/v)",
+    s2_sub: "Alla ovat kaikki 31 alueellista yksikkökustannusvertailua (11 P25-vertailualuetta vihreällä ja 20 yli P25-tason aluetta keltaisella). Klikkaa mitä tahansa vertailukorttia tai taulukon riviä nähdäksesi, kuinka suuri säästöpotentiaali syntyy, jos yli 25. persentiilin (P25) yksikkökustannustason alueet saavuttavat edullisimman neljänneksen vertailutason.",
+    arb_chip_lbl: "CPV-kategoria:",
+    arb_chip_all: "Kaikki 5 kategoriaa (31)",
+    arb_tbl_title: "Kaikki 31 alueellista P25-yksikkökustannusvertailua taulukossa (11 P25-verrokkia + 20 yli P25-tason aluetta)",
+    arb_csv_btn: "⬇ Vie kaikki 31 P25-vertailua (.csv)",
+    th_ar_ent: "Alue / Hankintayksikkö",
+    th_ar_cat: "CPV-kategoria",
+    th_ar_up: "Yksikköhinta (€)",
+    th_ar_p25: "P25-vertailuhinta (€)",
+    th_ar_pct: "Ero vs. P25 (%)",
+    th_ar_base: "Nykykustannus (M€/v)",
+    th_ar_save: "P25-säästöpotentiaali (M€/v)",
     s3_title: "3. Markkinaoikeuden (MAO) ja KHO:n vahvistetut julkisten hankintojen ratkaisut (10 Finlex/KKV-tapausta)",
     s3_sub: "Klikkaa dokumentoitua markkinaoikeuden (MAO) tai korkeimman hallinto-oikeuden (KHO) ratkaisua (2023–2025) nähdäksesi ratkaisun oikeudellisen sisällön sekä mallipohjan avoimen kilpailutuksen ja osiin jakamisen (Hankintalaki 75 §) edistämiseksi.",
+    hilma_tbl_title: "Kaikki 10 vahvistettua MAO- ja KHO-oikeustapausta taulukossa (Finlex / KKV 2023–2025)",
+    hilma_csv_btn: "⬇ Vie kaikki 10 MAO/KHO-ratkaisua (.csv)",
+    th_hi_id: "MAO / KHO -ratkaisu",
+    th_hi_buy: "Hankintayksikkö",
+    th_hi_sub: "Tapauksen kohde & CPV",
+    th_hi_bid: "Tarjoukset",
+    th_hi_val: "Sopimusarvo (M€)",
+    th_hi_sav: "Säästöpotentiaali (M€/v)",
     s4_title: "4. Julkisuuslain (621/1999 13 §) ostolaskutietopyyntö (Kaikki 21 hyvinvointialuetta + HUS + 21 kaupunkia = 43 viranomaista)",
     s4_sub: "Julkisuuslain (621/1999) mukaan jokaisella on oikeus saada viranomaisen julkiset ostolaskutiedot koneluettavassa muodossa 14 vuorokauden kuluessa. Klikkaa mitä tahansa 43 viranomaisesta avataksesi valmiin tietopyynnön.",
     buyer_tbl_title: "Kaikki 43 julkista ostajaa (21 hyvinvointialuetta + HUS + 21 suurinta kaupunkia)",
@@ -1047,10 +1135,29 @@ const I18N = {{
     th_ih_sp: "Turnover (M€/yr)",
     th_ih_mk: "Coordination (%)",
     th_ih_sv: "Efficiency Potential (M€/yr)",
-    s2_title: "2. Regional Unit-Cost Benchmark (THL / HALI / KKV): P25 Quartile Comparison (€582.71M/yr)",
-    s2_sub: "Click any regional benchmark card to see the modeled cost reduction if regions above the 25th percentile (P25) converge to the P25 benchmark.",
+    s2_title: "2. Regional Unit-Cost Benchmark (THL / HALI / KKV): P25 Quartile Comparison (31 Benchmarks = €582.71M/yr)",
+    s2_sub: "Below are all 31 regional unit-cost benchmarks (11 top-quartile P25 reference regions in green and 20 above-P25 regions in amber). Click any card or table row to see the modeled cost reduction if regions above the 25th percentile (P25) converge to the P25 benchmark.",
+    arb_chip_lbl: "CPV Category:",
+    arb_chip_all: "All 5 Categories (31)",
+    arb_tbl_title: "All 31 Regional P25 Unit-Cost Benchmarks in Table View (11 P25 References + 20 Above-P25 Regions)",
+    arb_csv_btn: "⬇ Export All 31 P25 Benchmarks (.csv)",
+    th_ar_ent: "Region / Public Buyer",
+    th_ar_cat: "CPV Category",
+    th_ar_up: "Unit Cost (€)",
+    th_ar_p25: "P25 Benchmark (€)",
+    th_ar_pct: "Diff vs. P25 (%)",
+    th_ar_base: "Current Spend (M€/yr)",
+    th_ar_save: "P25 Saving Potential (M€/yr)",
     s3_title: "3. Market Court (MAO) & Supreme Administrative Court (KHO) Rulings (10 Verified Finlex/KKV Cases)",
     s3_sub: "Click any verified MAO or KHO ruling (2023–2025) to inspect the court's legal findings and download an administrative template promoting open competition and division into lots (§ 75).",
+    hilma_tbl_title: "All 10 Verified MAO & KHO Rulings in Table View (Finlex / KKV 2023–2025)",
+    hilma_csv_btn: "⬇ Export All 10 MAO/KHO Rulings (.csv)",
+    th_hi_id: "MAO / KHO Ruling",
+    th_hi_buy: "Contracting Authority",
+    th_hi_sub: "Case Subject & CPV",
+    th_hi_bid: "Bids",
+    th_hi_val: "Contract Value (M€)",
+    th_hi_sav: "Saving Potential (M€/yr)",
     s4_title: "4. Request Public Purchase Invoices Under the Openness of Government Activities Act (All 21 Wellbeing Counties + HUS + 21 Cities = 43 Authorities)",
     s4_sub: "Under Finland's Openness Act (621/1999 § 13 & § 16.3), citizens have the right to receive machine-readable public purchase invoice data within 14 days.",
     buyer_tbl_title: "All 43 Major Public Buyers (All 21 Wellbeing Counties + HUS + 21 Largest Cities)",
@@ -1103,10 +1210,12 @@ function openModalHtml(title, subtitle, sectionsHtml, hashId) {{
     ${{sectionsHtml}}
   `;
   document.getElementById('detail-modal').classList.add('open');
+  document.body.classList.add('modal-open');
 }}
 
 function closeModal() {{
   document.getElementById('detail-modal').classList.remove('open');
+  document.body.classList.remove('modal-open');
   if (history.replaceState) {{
     history.replaceState(null, '', window.location.pathname + window.location.search);
   }}
@@ -1233,12 +1342,32 @@ function openFlowModal(step) {{
   openModalHtml(item.t, item.s, `<div class="modal-section"><h4>${{fi ? "Mitä tässä vaiheessa tapahtuu?" : "What Happens in This Step?"}}</h4><p>${{item.b}}</p></div>`, `flow-${{step}}`);
 }}
 
+function switchInhouseDoc(docType) {{
+  ACTIVE_INHOUSE_DOC_TYPE = docType;
+  const kkv = APP.kkv_filings[ACTIVE_INHOUSE_YID];
+  const oik = APP.oikaisu_filings[ACTIVE_INHOUSE_YID];
+  if (!kkv || !oik) return;
+  const activeDoc = docType === 'oik' ? oik : kkv;
+  ACTIVE_BASE_LEGAL_TEXT = activeDoc.body;
+  ACTIVE_RECIPIENT_EMAIL = activeDoc.recipient_email;
+  ACTIVE_SUBJECT = activeDoc.subject;
+  const btnKkv = document.getElementById('btn-doc-kkv');
+  const btnOik = document.getElementById('btn-doc-oik');
+  if (btnKkv && btnOik) {{
+    btnKkv.classList.toggle('active', docType === 'kkv');
+    btnOik.classList.toggle('active', docType === 'oik');
+  }}
+  updateCustomizedLegalText();
+}}
+
 function openInhouseModal(idx) {{
   const f = APP.ssot.inhouse_flows[idx];
   if (!f) return;
   const kkv = APP.kkv_filings[f.inhouse_y_tunnus];
   const oik = APP.oikaisu_filings[f.inhouse_y_tunnus];
   const fi = LANG === 'fi';
+  ACTIVE_INHOUSE_YID = f.inhouse_y_tunnus;
+  ACTIVE_INHOUSE_DOC_TYPE = 'kkv';
   ACTIVE_BASE_LEGAL_TEXT = kkv.body;
   ACTIVE_RECIPIENT_EMAIL = kkv.recipient_email;
   ACTIVE_SUBJECT = kkv.subject;
@@ -1261,15 +1390,19 @@ function openInhouseModal(idx) {{
     <div class="modal-section">
       <h4>${{fi ? "Räätälöi ja lataa valmis 0,00 € hallinto-oikeudellinen selvityspyyntö (KKV tai tarkastuslautakunta)" : "Customize & Download Ready-to-Send €0.00 Administrative Review Request (KKV or Audit Board)"}}</h4>
       <p>${{fi
-        ? "Markkinaoikeuden valitusoikeudenkäynti maksaa 2 440–7 300 €, mutta alla oleva toimenpidepyyntö KKV:lle (kirjaamo@kkv.fi) tai arviointipyyntö hankintayksikön kirjaamoon ja tarkastuslautakunnalle on 100 % maksuton (0,00 €). Voit lisätä alle omat tietosi:"
-        : "Filing a Market Court appeal costs €2,440–€7,300, but submitting this statutory review request to KKV (kirjaamo@kkv.fi) or the buyer's audit board costs €0.00. Optionally add your details below:"}}</p>
+        ? "Markkinaoikeuden valitusoikeudenkäynti maksaa 2 440–7 300 €, mutta alla oleva toimenpidepyyntö KKV:lle (kirjaamo@kkv.fi) tai arviointi- ja oikaisupyyntö hankintayksikön kirjaamoon ja tarkastuslautakunnalle on 100 % maksuton (0,00 €). Valitse asiakirjatyyppi ja lisää halutessasi omat tietosi:"
+        : "Filing a Market Court appeal costs €2,440–€7,300, but submitting this statutory review request to KKV (kirjaamo@kkv.fi) or the buyer's audit board costs €0.00. Select the template type and optionally add your details below:"}}</p>
+      <div class="quick-chips" style="margin:10px 0;">
+        <button type="button" id="btn-doc-kkv" class="chip active" onclick="switchInhouseDoc('kkv')">${{fi ? "1. KKV-toimenpidepyyntö (Hankintalaki 139 §)" : "1. KKV Review Request (§ 139)"}}</button>
+        <button type="button" id="btn-doc-oik" class="chip" onclick="switchInhouseDoc('oik')">${{fi ? "2. Tarkastuslautakunta & oikaisuvaatimus (125 § / 133 §)" : "2. Audit Board & Rectification (§ 125 / § 133)"}}</button>
+      </div>
       ${{renderCustomizerInputs()}}
       <textarea id="active-legal-textarea" class="legal-box">${{kkv.body}}</textarea>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
         <button class="btn-primary" onclick="copyLegalBox(this)">${{fi ? "📋 Kopioi asiakirja" : "📋 Copy Filing Text"}}</button>
-        <button class="btn-secondary" onclick="downloadTextFile('KKV_Toimenpidepyynto_${{f.inhouse_y_tunnus}}.txt', document.getElementById('active-legal-textarea').value)">${{fi ? "⬇ Lataa .txt-asiakirja" : "⬇ Download .txt"}}</button>
-        <a id="active-mailto-link" class="btn-secondary" href="${{mailtoKkv}}">${{fi ? "✉️ Avaa sähköpostissa (KKV kirjaamo@kkv.fi)" : "✉️ Open in Email (KKV)"}}</a>
-        <a class="btn-secondary" href="${{mailtoOik}}">${{fi ? "✉️ Arviointipyyntö ostajalle (" + f.buyer_kirjaamo_email + ")" : "✉️ Send Review Request to Buyer"}}</a>
+        <button class="btn-secondary" onclick="downloadTextFile((ACTIVE_INHOUSE_DOC_TYPE === 'oik' ? 'Arviointipyynto_' : 'KKV_Toimenpidepyynto_') + '${{f.inhouse_y_tunnus}}.txt', document.getElementById('active-legal-textarea').value)">${{fi ? "⬇ Lataa .txt-asiakirja" : "⬇ Download .txt"}}</button>
+        <a id="active-mailto-link" class="btn-secondary" href="${{mailtoKkv}}">${{fi ? "✉️ Avaa valittu asiakirja sähköpostissa" : "✉️ Open Selected Document in Email"}}</a>
+        <a class="btn-secondary" href="${{mailtoOik}}">${{fi ? "✉️ Suora sähköposti ostajalle (" + f.buyer_kirjaamo_email + ")" : "✉️ Direct Email to Buyer"}}</a>
       </div>
     </div>`,
     `inhouse-${{f.inhouse_y_tunnus}}`
@@ -1281,14 +1414,22 @@ function openArbitrageModal(idx) {{
   if (!r) return;
   const fi = LANG === 'fi';
   const catMeta = CPV_NAMES[r.cpv_category] || {{ fi: r.cpv_category, en: r.cpv_category, unit_fi: r.unit_name, unit_en: r.unit_name }};
+  const isP25Ref = r.overpay_vs_p25_pct <= 0;
   openModalHtml(
     `${{r.entity_name}}`,
     `${{fi ? catMeta.fi : catMeta.en}} · ${{r.kirjaamo_email}}`,
     `<div class="modal-section">
       <h4>${{fi ? "Alueellinen yksikkökustannusvertailu (THL / HALI / KKV P25-viitetaso)" : "Regional Unit-Cost Comparison (THL / HALI / KKV P25 Benchmark)"}}</h4>
       <p>${{fi
-        ? `Vertailukohde <strong>${{r.entity_name}}</strong>: yksikkökustannus <strong>${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} € / ${{catMeta.unit_fi}}</strong> (tarkasteltu volyymi ${{Number(r.annual_units).toLocaleString('fi-FI')}} yksikköä/v = ${{fmtEUR(r.annual_baseline_eur)}}/v), kun kansallisen edullisimman neljänneksen (P25-vertailutaso) yksikkökustannus samassa kategoriassa on <strong>${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}} € / ${{catMeta.unit_fi}}</strong> (+${{r.overpay_vs_p25_pct}} % ero). Mikäli yksikkökustannus saavuttaa P25-vertailutason, laskennallinen säästöpotentiaali on <strong>${{fmtEUR(r.recoverable_saving_eur)}}</strong> vuodessa.`
-        : `<strong>${{r.entity_name}}</strong> has a unit cost of <strong>€${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} per ${{catMeta.unit_en}}</strong> (annual volume ${{Number(r.annual_units).toLocaleString('fi-FI')}} = ${{fmtEUR(r.annual_baseline_eur)}}/yr), compared with Finland's top-quartile (P25) benchmark of <strong>€${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}}</strong> (+${{r.overpay_vs_p25_pct}}% dispersion). Converging to the P25 benchmark models <strong>${{fmtEUR(r.recoverable_saving_eur)}}/year</strong> in efficiency potential.`}}</p>
+        ? (isP25Ref
+            ? `Vertailukohde <strong>${{r.entity_name}}</strong> toimii tässä kategoriassa <strong>kansallisen edullisimman neljänneksen (P25-vertailutaso)</strong> kustannusverrokkina: yksikkökustannus on <strong>${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} € / ${{catMeta.unit_fi}}</strong> (tarkasteltu volyymi ${{Number(r.annual_units).toLocaleString('fi-FI')}} yksikköä/v = ${{fmtEUR(r.annual_baseline_eur)}}/v), kun P25-raja on <strong>${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}} € / ${{catMeta.unit_fi}}</strong>.`
+            : `Vertailukohde <strong>${{r.entity_name}}</strong>: yksikkökustannus <strong>${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} € / ${{catMeta.unit_fi}}</strong> (tarkasteltu volyymi ${{Number(r.annual_units).toLocaleString('fi-FI')}} yksikköä/v = ${{fmtEUR(r.annual_baseline_eur)}}/v), kun kansallisen edullisimman neljänneksen (P25-vertailutaso) yksikkökustannus samassa kategoriassa on <strong>${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}} € / ${{catMeta.unit_fi}}</strong> (+${{r.overpay_vs_p25_pct}} % yli P25-tason). Mikäli yksikkökustannus saavuttaa P25-vertailutason, laskennallinen säästöpotentiaali on <strong>${{fmtEUR(r.recoverable_saving_eur)}}</strong> vuodessa.`)
+        : (isP25Ref
+            ? `<strong>${{r.entity_name}}</strong> operates within Finland's top-quartile (P25) cost benchmark in this category: unit cost is <strong>€${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} per ${{catMeta.unit_en}}</strong> (annual volume ${{Number(r.annual_units).toLocaleString('fi-FI')}} = ${{fmtEUR(r.annual_baseline_eur)}}/yr) vs. the P25 threshold of <strong>€${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}}</strong>.`
+            : `<strong>${{r.entity_name}}</strong> has a unit cost of <strong>€${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} per ${{catMeta.unit_en}}</strong> (annual volume ${{Number(r.annual_units).toLocaleString('fi-FI')}} = ${{fmtEUR(r.annual_baseline_eur)}}/yr), compared with Finland's top-quartile (P25) benchmark of <strong>€${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}}</strong> (+${{r.overpay_vs_p25_pct}}% above P25). Converging to the P25 benchmark models <strong>${{fmtEUR(r.recoverable_saving_eur)}}/year</strong> in efficiency potential.` )}}</p>
+      <p style="margin-top:10px;font-size:13.5px;color:var(--muted);">${{fi
+        ? "<em>Huomautus menetelmästä: Alueelliset yksikkökustannuserot heijastavat sekä ostopalvelusopimusten hintatasoa että alueellisia etäisyyksiä, palvelurakennetta ja oman tuotannon vs. ostopalvelun kirjaustapoja (THL / HALI ry / KKV).</em>"
+        : "<em>Methodological note: Regional unit-cost differences reflect contract pricing as well as geographic distances, service mix, and in-house vs. outsourced accounting conventions (THL / HALI / KKV).</em>"}}</p>
     </div>`,
     `arb-${{idx}}`
   );
@@ -1318,8 +1459,8 @@ function openHilmaModal(idx) {{
       ${{renderCustomizerInputs()}}
       <textarea id="active-legal-textarea" class="legal-box">${{fil.body}}</textarea>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
-        <button class="btn-primary" onclick="copyLegalBox(this)">${{fi ? "📋 Kopioi vaatimus" : "📋 Copy Challenge Text"}}</button>
-        <button class="btn-secondary" onclick="downloadTextFile('Hankintaoikaisu_${{idx + 1}}.txt', document.getElementById('active-legal-textarea').value)">${{fi ? "⬇ Lataa .txt-asiakirja" : "⬇ Download .txt"}}</button>
+        <button class="btn-primary" onclick="copyLegalBox(this)">${{fi ? "📋 Kopioi toimenpide-esitys" : "📋 Copy Policy Proposal"}}</button>
+        <button class="btn-secondary" onclick="downloadTextFile('Toimenpide_esitys_${{idx + 1}}.txt', document.getElementById('active-legal-textarea').value)">${{fi ? "⬇ Lataa .txt-asiakirja" : "⬇ Download .txt"}}</button>
         <a id="active-mailto-link" class="btn-secondary" href="${{mailto}}">${{fi ? "✉️ Lähetä hankintayksikölle (" + fil.recipient_email + ")" : "✉️ Send via Email"}}</a>
       </div>
     </div>`,
@@ -1367,6 +1508,26 @@ function sortInhouse(col) {{
   renderAll();
 }}
 
+function sortArbitrage(col) {{
+  if (ARBITRAGE_SORT.col === col) {{
+    ARBITRAGE_SORT.asc = !ARBITRAGE_SORT.asc;
+  }} else {{
+    ARBITRAGE_SORT.col = col;
+    ARBITRAGE_SORT.asc = (col === 'entity_name' || col === 'cpv_category');
+  }}
+  renderAll();
+}}
+
+function sortHilma(col) {{
+  if (HILMA_SORT.col === col) {{
+    HILMA_SORT.asc = !HILMA_SORT.asc;
+  }} else {{
+    HILMA_SORT.col = col;
+    HILMA_SORT.asc = (col === 'tender_id' || col === 'buyer_name' || col === 'incumbent_vendor');
+  }}
+  renderAll();
+}}
+
 function sortBuyers(col) {{
   if (BUYER_SORT.col === col) {{
     BUYER_SORT.asc = !BUYER_SORT.asc;
@@ -1374,6 +1535,14 @@ function sortBuyers(col) {{
     BUYER_SORT.col = col;
     BUYER_SORT.asc = (col === 'entity_name' || col === 'entity_type');
   }}
+  renderAll();
+}}
+
+function setArbCategory(cpv) {{
+  ARB_CPV_FILTER = cpv;
+  document.querySelectorAll('.arb-chip').forEach(btn => {{
+    btn.classList.toggle('active', btn.getAttribute('data-cpv') === cpv);
+  }});
   renderAll();
 }}
 
@@ -1400,6 +1569,63 @@ function exportInhouseCsv() {{
   const a = document.createElement('a');
   a.href = url;
   a.download = 'STI_Sidosyksikot_15_kpl_2026.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}}
+
+function exportArbitrageCsv() {{
+  const headers = ['Sija', 'Alue_Hankintayksikko', 'CPV_Kategoria', 'Yksikko', 'Volyymi_Vuosi', 'Yksikkohinta_EUR', 'P25_Vertailuhinta_EUR', 'Ero_vs_P25_Pct', 'Nykykustannus_EUR_v', 'P25_Saastopotentiaali_EUR_v', 'Kirjaamo'];
+  const lines = [headers.join(';')];
+  LAST_ARBITRAGE.forEach((r, idx) => {{
+    lines.push([
+      idx + 1,
+      `"${{String(r.entity_name).replace(/"/g, '""')}}"`,
+      `"${{r.cpv_category}}"`,
+      `"${{r.unit_name}}"`,
+      r.annual_units,
+      r.unit_price_eur,
+      r.p25_benchmark_eur,
+      r.overpay_vs_p25_pct,
+      r.annual_baseline_eur,
+      r.recoverable_saving_eur,
+      `"${{r.kirjaamo_email}}"`
+    ].join(';'));
+  }});
+  const blob = new Blob(['\\uFEFF' + lines.join('\\r\\n')], {{ type: 'text/csv;charset=utf-8;' }});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'STI_Alueellinen_P25_Hintavertailu_31_kpl_2026.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}}
+
+function exportHilmaCsv() {{
+  const headers = ['Sija', 'MAO_KHO_Ratkaisu', 'Hankintayksikko', 'CPV_Koodi', 'Tapauksen_Kohde', 'Saadut_Tarjoukset_Kpl', 'Suorahankinta', 'Sopimusarvo_EUR', 'Saastopotentiaali_EUR_v', 'Oikeustapauksen_Kuvaus'];
+  const lines = [headers.join(';')];
+  LAST_HILMA.forEach((t, idx) => {{
+    lines.push([
+      idx + 1,
+      `"${{t.tender_id}}"`,
+      `"${{String(t.buyer_name).replace(/"/g, '""')}}"`,
+      `"${{t.cpv_code}}"`,
+      `"${{String(t.incumbent_vendor).replace(/"/g, '""')}}"`,
+      t.bids_received,
+      t.is_direct_award ? 'KYLLA' : 'EI',
+      t.contract_value_eur,
+      t.expected_annual_saving_eur,
+      `"${{String(t.lockout_reason).replace(/"/g, '""')}}"`
+    ].join(';'));
+  }});
+  const blob = new Blob(['\\uFEFF' + lines.join('\\r\\n')], {{ type: 'text/csv;charset=utf-8;' }});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'STI_MAO_ja_KHO_Ratkaisut_10_kpl_2026.csv';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -1435,7 +1661,7 @@ function exportBuyersCsv() {{
 function setSearch(val) {{
   const box = document.getElementById('search-box');
   box.value = val;
-  document.querySelectorAll('.chip').forEach(btn => {{
+  document.querySelectorAll('#haku .chip').forEach(btn => {{
     const txt = btn.textContent.trim().toLowerCase();
     btn.classList.toggle('active', (val === '' && (txt.includes('kaikki') || txt.includes('all'))) || (val !== '' && txt.includes(val.toLowerCase())));
   }});
@@ -1533,54 +1759,100 @@ function renderAll() {{
     </tr>
   `).join('');
 
-  // 2. Arbitrage cards (show rows where overpay_vs_p25_pct > 0)
-  let arbMatches = 0;
-  let arbHtml = '';
-  APP.ssot.arbitrage_rows.forEach((r, idx) => {{
-    if (r.overpay_vs_p25_pct <= 0) return;
-    const catMeta = CPV_NAMES[r.cpv_category] || {{ fi: r.cpv_category, en: r.cpv_category, unit_fi: r.unit_name, unit_en: r.unit_name }};
+  // 2. Arbitrage cards & sortable table (all 31 regional benchmarks: 11 P25 references + 20 above-P25 regions)
+  const filteredArbitrage = APP.ssot.arbitrage_rows.map((r, origIdx) => ({{ ...r, origIdx }})).filter(r => {{
+    if (ARB_CPV_FILTER && r.cpv_category !== ARB_CPV_FILTER) return false;
+    const catMeta = CPV_NAMES[r.cpv_category] || {{ fi: r.cpv_category, en: r.cpv_category }};
     const txt = `${{r.entity_name}} ${{r.cpv_category}} ${{catMeta.fi}} ${{catMeta.en}}`.toLowerCase();
-    if (q && !txt.includes(q)) return;
-    arbMatches++;
+    return !q || txt.includes(q);
+  }});
+  let arbMatches = filteredArbitrage.length;
+  let arbHtml = '';
+  filteredArbitrage.forEach(r => {{
+    const catMeta = CPV_NAMES[r.cpv_category] || {{ fi: r.cpv_category, en: r.cpv_category, unit_fi: r.unit_name, unit_en: r.unit_name }};
     const unitLbl = fi ? catMeta.unit_fi : catMeta.unit_en;
-    arbHtml += `<div class="story-card amber-accent clickable-card" onclick="openArbitrageModal(${{idx}})">
+    const isP25Ref = r.overpay_vs_p25_pct <= 0;
+    const cardAccent = isP25Ref ? 'green-accent' : 'amber-accent';
+    const cardBadge = isP25Ref
+      ? `<span class="badge badge-green">${{fi ? 'P25-vertailutaso (Edullisin 25 %)' : 'P25 Benchmark (Top 25%)'}}</span>`
+      : `<span class="badge badge-amber">+${{r.overpay_vs_p25_pct}} % ${{fi ? 'yli P25-tason' : 'above P25'}}</span>`;
+    const priceColor = isP25Ref ? 'var(--accent-dark)' : 'var(--amber)';
+    const saveDisplay = isP25Ref ? (fi ? '0 € (Verrokki)' : '€0 (Ref.)') : ('-' + fmtCardM(r.recoverable_saving_eur / 1e6));
+    const saveColor = isP25Ref ? 'var(--accent-dark)' : 'var(--red)';
+    arbHtml += `<div class="story-card ${{cardAccent}} clickable-card" onclick="openArbitrageModal(${{r.origIdx}})">
       <div class="story-top">
         <div class="card-kicker-row">
-          <span class="badge badge-red">+${{r.overpay_vs_p25_pct}} % ${{fi ? 'ylihinta' : 'markup'}}</span>
+          ${{cardBadge}}
           <span class="card-id-pill">${{r.cpv_category.split('-')[0]}}</span>
         </div>
         <h3>${{r.entity_name}}</h3>
         <div class="story-subtitle">${{fi ? catMeta.fi : catMeta.en}}</div>
         <p class="story-commentary">${{fi
-          ? `Maksaa ${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} € / ${{unitLbl}}, kun Suomen edullisimman neljänneksen (P25) vertailuhinta on ${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}} €.`
-          : `Pays €${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} per ${{unitLbl}} vs. top-quartile (P25) benchmark of €${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}}.`}}</p>
+          ? (isP25Ref
+              ? `Toimii kategorian P25-vertailualueena (${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} € / ${{unitLbl}}; P25-raja ${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}} €).`
+              : `Yksikkökustannus ${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} € / ${{unitLbl}}, kun Suomen edullisimman neljänneksen (P25) vertailutaso on ${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}} €.`)
+          : (isP25Ref
+              ? `Operates within the top-quartile P25 benchmark (€${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} per ${{unitLbl}}; P25 threshold €${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}}).`
+              : `Unit cost €${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} per ${{unitLbl}} vs. top-quartile (P25) benchmark of €${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}}.`)}}</p>
       </div>
       <div>
         <div class="metrics-strip">
-          <div><span>${{fi ? 'Alueen hinta' : 'Unit Price'}}</span><strong style="color:var(--red)">${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} €</strong></div>
-          <div><span>${{fi ? 'P25-vertailu' : 'P25 Benchmark'}}</span><strong style="color:var(--accent-dark)">${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}} €</strong></div>
-          <div><span>${{fi ? 'Säästö / v' : 'Saving / yr'}}</span><strong style="color:var(--red)">-${{fmtCardM(r.recoverable_saving_eur / 1e6)}}</strong></div>
+          <div><span>${{fi ? 'Yksikkökustannus' : 'Unit Cost'}}</span><strong style="color:${{priceColor}}">${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} €</strong></div>
+          <div><span>${{fi ? 'P25-vertailutaso' : 'P25 Benchmark'}}</span><strong style="color:var(--accent-dark)">${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}} €</strong></div>
+          <div><span>${{fi ? 'Säästö / v' : 'Saving / yr'}}</span><strong style="color:${{saveColor}}">${{saveDisplay}}</strong></div>
         </div>
-        <div class="click-hint">${{fi ? 'Klikkaa: Yksikköhintojen erittely →' : 'Click: Inspect unit-price breakdown →'}}</div>
+        <div class="click-hint">${{fi ? 'Klikkaa: Yksikkökustannusten erittely →' : 'Click: Inspect unit-cost breakdown →'}}</div>
       </div>
     </div>`;
   }});
   if (!arbHtml) {{
-    arbHtml = `<div class="empty-box"><span>${{fi ? `Ei hintavertailuosumia haulle ”${{safeQ}}”.` : `No price benchmark matches for "${{safeQ}}".`}}</span><button type="button" class="btn-secondary" onclick="setSearch('')">${{fi ? 'Näytä kaikki' : 'Show all'}}</button></div>`;
+    arbHtml = `<div class="empty-box"><span>${{fi ? `Ei hintavertailuosumia haulle ”${{safeQ}}”.` : `No price benchmark matches for "${{safeQ}}".`}}</span><button type="button" class="btn-secondary" onclick="setSearch('');setArbCategory('');">${{fi ? 'Näytä kaikki' : 'Show all'}}</button></div>`;
   }}
   document.getElementById('arbitrage-cards').innerHTML = arbHtml;
 
-  // 3. Hilma single-bid cards
-  let hilmaMatches = 0;
-  let hilmaHtml = '';
-  APP.ssot.flagged_hilma_tenders.forEach((t, idx) => {{
+  const sortedArbitrage = [...filteredArbitrage].sort((a, b) => {{
+    const va = a[ARBITRAGE_SORT.col];
+    const vb = b[ARBITRAGE_SORT.col];
+    let cmp = (typeof va === 'number' && typeof vb === 'number') ? (va - vb) : String(va || '').localeCompare(String(vb || ''), 'fi');
+    return ARBITRAGE_SORT.asc ? cmp : -cmp;
+  }});
+  LAST_ARBITRAGE = sortedArbitrage;
+  ['entity_name', 'cpv_category', 'unit_price_eur', 'p25_benchmark_eur', 'overpay_vs_p25_pct', 'annual_baseline_eur', 'recoverable_saving_eur'].forEach(col => {{
+    const el = document.getElementById('sort-ar-' + col);
+    if (el) el.textContent = ARBITRAGE_SORT.col === col ? (ARBITRAGE_SORT.asc ? '▲' : '▼') : '';
+  }});
+  const sumArbBaseM = sortedArbitrage.reduce((a, b) => a + b.annual_baseline_eur, 0) / 1e6;
+  const sumArbSaveM = sortedArbitrage.reduce((a, b) => a + b.recoverable_saving_eur, 0) / 1e6;
+  document.getElementById('arbitrage-count-sub').textContent = fi
+    ? `Näytetään ${{sortedArbitrage.length}} / 31 aluevertailua · Tarkasteltu volyymi yht. ${{fmtM(sumArbBaseM)}} · P25-säästöpotentiaali yht. ${{fmtM(sumArbSaveM)}}`
+    : `Showing ${{sortedArbitrage.length}} / 31 regional benchmarks · Baseline spend ${{fmtM(sumArbBaseM)}} · P25 efficiency potential ${{fmtM(sumArbSaveM)}}`;
+  document.getElementById('arbitrage-tbody').innerHTML = sortedArbitrage.map((r, i) => {{
+    const catMeta = CPV_NAMES[r.cpv_category] || {{ fi: r.cpv_category, en: r.cpv_category, unit_fi: r.unit_name, unit_en: r.unit_name }};
+    const isP25Ref = r.overpay_vs_p25_pct <= 0;
+    return `<tr class="clickable-row" onclick="openArbitrageModal(${{r.origIdx}})">
+      <td>${{i + 1}}</td>
+      <td><strong>${{escHtml(r.entity_name)}}</strong></td>
+      <td>${{escHtml(fi ? catMeta.fi : catMeta.en)}}</td>
+      <td><strong>${{Number(r.unit_price_eur).toLocaleString('fi-FI')}} €</strong> / ${{fi ? catMeta.unit_fi : catMeta.unit_en}}</td>
+      <td>${{Number(r.p25_benchmark_eur).toLocaleString('fi-FI')}} €</td>
+      <td><span class="badge ${{isP25Ref ? 'badge-green' : 'badge-amber'}}">${{isP25Ref ? (fi ? 'P25-verrokki (0 %)' : 'P25 Ref (0%)') : ('+' + r.overpay_vs_p25_pct + ' %')}}</span></td>
+      <td>${{fmtM(r.annual_baseline_eur / 1e6)}}</td>
+      <td style="color:${{isP25Ref ? 'var(--accent-dark)' : 'var(--red)'}};font-weight:700;">${{isP25Ref ? '0,00 milj. €' : ('-' + fmtM(r.recoverable_saving_eur / 1e6))}}</td>
+    </tr>`;
+  }}).join('');
+
+  // 3. Hilma / MAO / KHO rulings cards & sortable table
+  const filteredHilma = APP.ssot.flagged_hilma_tenders.map((t, origIdx) => ({{ ...t, origIdx }})).filter(t => {{
     const txt = `${{t.buyer_name}} ${{t.tender_id}} ${{t.cpv_code}} ${{t.incumbent_vendor}} ${{t.lockout_reason}}`.toLowerCase();
-    if (q && !txt.includes(q)) return;
-    hilmaMatches++;
+    return !q || txt.includes(q);
+  }});
+  let hilmaMatches = filteredHilma.length;
+  let hilmaHtml = '';
+  filteredHilma.forEach(t => {{
     const bidBadge = t.is_direct_award
       ? `<span class="badge badge-red">${{fi ? '0 tarjousta (Suorahankinta)' : '0 Bids (Direct Award)'}}</span>`
       : `<span class="badge badge-red">${{t.bids_received}} ${{fi ? 'tarjous(ta)' : 'bid(s)'}}</span>`;
-    hilmaHtml += `<div class="story-card red-accent clickable-card" onclick="openHilmaModal(${{idx}})">
+    hilmaHtml += `<div class="story-card red-accent clickable-card" onclick="openHilmaModal(${{t.origIdx}})">
       <div class="story-top">
         <div class="card-kicker-row">
           ${{bidBadge}}
@@ -1604,6 +1876,34 @@ function renderAll() {{
     hilmaHtml = `<div class="empty-box"><span>${{fi ? `Ei MAO/Hilma-kilpailutusosumia haulle ”${{safeQ}}”.` : `No MAO/Hilma tender matches for "${{safeQ}}".`}}</span><button type="button" class="btn-secondary" onclick="setSearch('')">${{fi ? 'Näytä kaikki' : 'Show all'}}</button></div>`;
   }}
   document.getElementById('hilma-cards').innerHTML = hilmaHtml;
+
+  const sortedHilma = [...filteredHilma].sort((a, b) => {{
+    const va = a[HILMA_SORT.col];
+    const vb = b[HILMA_SORT.col];
+    let cmp = (typeof va === 'number' && typeof vb === 'number') ? (va - vb) : String(va || '').localeCompare(String(vb || ''), 'fi');
+    return HILMA_SORT.asc ? cmp : -cmp;
+  }});
+  LAST_HILMA = sortedHilma;
+  ['tender_id', 'buyer_name', 'incumbent_vendor', 'bids_received', 'contract_value_eur', 'expected_annual_saving_eur'].forEach(col => {{
+    const el = document.getElementById('sort-hi-' + col);
+    if (el) el.textContent = HILMA_SORT.col === col ? (HILMA_SORT.asc ? '▲' : '▼') : '';
+  }});
+  const sumHilmaValM = sortedHilma.reduce((a, b) => a + b.contract_value_eur, 0) / 1e6;
+  const sumHilmaSaveM = sortedHilma.reduce((a, b) => a + b.expected_annual_saving_eur, 0) / 1e6;
+  document.getElementById('hilma-count-sub').textContent = fi
+    ? `Näytetään ${{sortedHilma.length}} / 10 MAO/KHO-ratkaisua · Sopimusarvo yht. ${{fmtM(sumHilmaValM)}} · Säästöpotentiaali yht. ${{fmtM(sumHilmaSaveM)}}`
+    : `Showing ${{sortedHilma.length}} / 10 MAO/KHO rulings · Contract value ${{fmtM(sumHilmaValM)}} · Saving potential ${{fmtM(sumHilmaSaveM)}}`;
+  document.getElementById('hilma-tbody').innerHTML = sortedHilma.map((t, i) => `
+    <tr class="clickable-row" onclick="openHilmaModal(${{t.origIdx}})">
+      <td>${{i + 1}}</td>
+      <td><strong>${{escHtml(t.tender_id)}}</strong></td>
+      <td>${{escHtml(t.buyer_name)}}</td>
+      <td><strong>${{escHtml(t.incumbent_vendor)}}</strong><br/><span style="font-size:11.5px;color:var(--muted);">${{escHtml(t.cpv_code)}}</span></td>
+      <td><span class="badge badge-red">${{t.is_direct_award ? (fi ? '0 (Suorahankinta)' : '0 (Direct)') : (t.bids_received + (fi ? ' kpl' : ' bid'))}}</span></td>
+      <td><strong>${{fmtM(t.contract_value_eur / 1e6)}}</strong></td>
+      <td style="color:var(--red);font-weight:700;">-${{fmtM(t.expected_annual_saving_eur / 1e6)}}</td>
+    </tr>
+  `).join('');
 
   // 4. Buyer FOIA directory cards & sortable table (All 43 Public Buyers)
   const filteredBuyers = APP.ssot.public_buyer_directory.map((b, origIdx) => ({{ ...b, origIdx }})).filter(b => {{

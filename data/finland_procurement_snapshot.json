@@ -76,7 +76,9 @@
       "legal_status": "Tilinpäätös 2024: konsernin liikevaihto 115,6 M€ (emoyhtiö 76,3 M€). KHO 8.10.2025 (T2250) ja MAO:154/2024 vahvistivat, ettei 0,04 % pienomistus täyttänyt hankintalain 15 §:n määräysvaltaedellytystä.",
       "recoverable_saving_m_eur": 15.57,
       "is_illegal_under_5pct": true,
-      "is_illegal_under_10pct": true
+      "is_illegal_under_10pct": true,
+      "prh_verified_business_id": "2360731-5",
+      "prh_registration_date": "2010-09-29"
     },
     {
       "buyer_name": "Oulu, Tampere, Jyväskylä, Kuopio, HVA:t sekä pienomistajakunnat",
@@ -91,7 +93,9 @@
       "legal_status": "Tilinpäätös 2025: konsernin liikevaihto 114,7 M€. Alueellisilla pääomistajilla merkittävä osuus tytäryhtiöissä, mutta pienosakaskunnilla alle 10 % omistusosuus.",
       "recoverable_saving_m_eur": 13.57,
       "is_illegal_under_5pct": true,
-      "is_illegal_under_10pct": true
+      "is_illegal_under_10pct": true,
+      "prh_verified_business_id": "2930159-5",
+      "prh_registration_date": "2018-08-06"
     },
     {
       "buyer_name": "Yli 300 kuntaa, kuntayhtymää ja hyvinvointialuetta",
@@ -106,7 +110,9 @@
       "legal_status": "Tilinpäätös 2025: liikevaihto 76,0 M€. Laajasti hajautettu yli 300 julkisyhteisön omistus (yksittäinen pienosakas tyypillisesti 0,01–2,5 %); KKV:n sidosyksikkövalvonnan kohteena.",
       "recoverable_saving_m_eur": 10.23,
       "is_illegal_under_5pct": true,
-      "is_illegal_under_10pct": true
+      "is_illegal_under_10pct": true,
+      "prh_verified_business_id": "2362180-3",
+      "prh_registration_date": "2010-10-05"
     },
     {
       "buyer_name": "Valtion virastot ja laitokset (lakisääteinen käyttövelvoite, Laki 1226/2013)",
@@ -170,7 +176,9 @@
       "legal_status": "Tilinpäätös 2024–2025: liikevaihto n. 58,5 M€. Kaakkois- ja Itä-Suomen kuntien sekä hyvinvointialueiden ICT- ja taloussidosyksikkö; pienosakkailla alle 10 % osuus.",
       "recoverable_saving_m_eur": 6.92,
       "is_illegal_under_5pct": true,
-      "is_illegal_under_10pct": true
+      "is_illegal_under_10pct": true,
+      "prh_verified_business_id": "2945110-4",
+      "prh_registration_date": "2018-10-09"
     },
     {
       "buyer_name": "Varha, Turun kaupunki (pääomistajat) & Varsinais-Suomen kunnat",

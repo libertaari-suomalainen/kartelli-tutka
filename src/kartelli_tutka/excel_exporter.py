@@ -84,7 +84,7 @@ def export_cartel_workbook(output_path: Path) -> Path:
     sheet1_rows: List[List[CellSpec]] = [
         ["SUOMEN TALOUSINSTITUUTTI (STI) — JULKISTEN HANKINTOJEN (38,7 MRD €/V) TEHOKKUUSANALYYSI 2026", "", "", ""],
         ["Lähde: Tilastokeskus S.13, PRH YTJ, Tilinpäätökset 2024–2025, THL, KKV, Finlex MAO & KHO 8.10.2025 (T2250)", "", "", ""],
-        ["Rakenteellinen tehostamiskohde / Kategoria", "Tarkasteltu volyymi (M€/v)", "Pienomistus / Vertailukanta (M€/v)", "Laskennallinen säästöpotentiaali (M€/v)"],
+        ["Rakenteellinen tehostamiskohde / Kategoria", "Tarkasteltu volyymi (M€/v)", "Hajautetun omistuksen (<10 %) yhtiöt / Vertailukanta (M€/v)", "Laskennallinen säästöpotentiaali (M€/v)"],
         [
             "1. Sidosyksiköt ja valtion TVT-keskus (15 yksikköä: Istekki, 2M-IT, Apotti, Fimlab, Sarastia, Monetra, Valtori ym.)",
             inhouse_sum["total_inhouse_spend_m_eur"],
@@ -175,7 +175,7 @@ def export_cartel_workbook(output_path: Path) -> Path:
             "Volyymi / vuosi",
             "Maksettu yksikköhinta (€)",
             "Kansallinen P25-vertailuhinta (€)",
-            "Ylihinta vs. P25 (%)",
+            "Ero vs. P25-vertailutaso (%)",
             "Nykykustannus (€/v)",
             "P25-Säästöpotentiaali (€/v)",
         ],

@@ -27,8 +27,8 @@ Suomen valtio, **kaikki 21 hyvinvointialuetta**, **HUS-yhtymä** ja **308 kuntaa
 
 ## 2. Tuotanto-ominaisuudet Selainsovelluksessa ja Excelissä
 
-* **Interaktiivinen hallintoasiakirjojen räätälöinti (`.txt` & PDF-tulostus):** Käyttäjä voi täyttää oman nimensä ja organisaationsa suoraan modaalissa, ladata valmiin `.txt`-asiakirjan, tulostaa sen PDF:ksi tai avata suoraan sähköpostissa (`0,00 €` käsittelymaksu).
-* **Kaksisuuntainen sarakelajittelu (`▲`/`▼`) & välitön CSV-vienti (`UTF-8 BOM`):** Sekä 15 sidosyksikön taulukko että kaikkien 43 julkisen ostajan taulukko ovat lajiteltavissa ja vietävissä `.csv`-muotoon.
+* **Interaktiivinen hallintoasiakirjojen räätälöinti (`.txt` & PDF-tulostus):** Käyttäjä voi valita sidosyksikkömodaalissa joko **KKV-toimenpidepyynnön (`Hankintalaki 139 §`)** tai **tarkastuslautakunnan arviointi- ja oikaisupyynnön (`125 § / 133 §`)**, täyttää oman nimensä ja organisaationsa, ladata valmiin `.txt`-asiakirjan, tulostaa sen PDF:ksi tai avata suoraan sähköpostissa (`0,00 €` käsittelymaksu).
+* **Kaksisuuntainen sarakelajittelu (`▲`/`▼`) & välitön CSV-vienti (`UTF-8 BOM`) kaikissa 4 osiossa:** Kaikki 15 sidosyksikköä, kaikki 31 alueellista P25-hintavertailua (11 P25-verrokkia + 20 yli P25-tason aluetta), kaikki 10 MAO/KHO-oikeustapausta sekä kaikki 43 julkista ostajaa ovat lajiteltavissa taulukossa ja vietävissä yhdellä klikkauksella `.csv`-muotoon.
 * **Suorat URL-syvälinkit (`#inhouse-<y_tunnus>`, `#buyer-<y_tunnus>`, `#tender-<idx>`, `#arb-<idx>`):** Jokaisen kortin ja modaalin voi jakaa suoralla linkillä.
 
 ---

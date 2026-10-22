@@ -52,7 +52,7 @@ def write_ssot_snapshot(output_path: Path, enrich_live_prh: bool = False) -> Dic
     payload = build_ssot_payload()
     if enrich_live_prh:
         for flow in payload.get("inhouse_flows", []):  # type: ignore[union-attr]
-            meta = fetch_prh_company_metadata(flow["inhouse_vendor"])
+            meta = fetch_prh_company_metadata(flow["inhouse_y_tunnus"])
             if meta:
                 flow["prh_verified_business_id"] = meta["business_id"]
                 flow["prh_registration_date"] = meta["registration_date"]
