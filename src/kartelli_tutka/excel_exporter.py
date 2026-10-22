@@ -78,50 +78,50 @@ def export_cartel_workbook(output_path: Path) -> Path:
 
     # Sheet 1: Executive Summary & VM / Association Cut-Sheet
     sheet1_rows: List[List[CellSpec]] = [
-        ["KARTELLI-PURKAJA 2026 — JULKISTEN HANKINTOJEN (38,7 MRD €/V) LEIKKURI & OIKEUSOHJUS", "", "", ""],
-        ["Lähde: Tutkihankintoja.fi, Hilma OCDS, PRH Avoindata, MAO:154/2024 & KHO 8.10.2025 taltio 2250", "", "", ""],
-        ["Leikkausmekanismi / Kartellikategoria", "Vuotuinen ostovolyymi (M€/v)", "Laiton / Ylihintainen kanta (M€/v)", "Välitön vuosisäästö (M€/v)"],
+        ["SUOMEN TALOUSINSTITUUTTI (STI) — JULKISTEN HANKINTOJEN (38,7 MRD €/V) TEHOKKUUSANALYYSI 2026", "", "", ""],
+        ["Lähde: Tilastokeskus S.13, PRH YTJ, Tilinpäätökset 2024–2025, THL, KKV, Finlex MAO & KHO 8.10.2025 (T2250)", "", "", ""],
+        ["Rakenteellinen tehostamiskohde / Kategoria", "Tarkasteltu volyymi (M€/v)", "Pienomistus / Vertailukanta (M€/v)", "Laskennallinen säästöpotentiaali (M€/v)"],
         [
-            "1. Sidosyksikkökartellit (15 välikäsiyhtiötä: Istekki, Apotti, 2M-IT, Sarastia, Monetra, Tiera, Valtori, Fimlab, Tuomi ym.)",
+            "1. Sidosyksiköt ja valtion TVT-keskus (15 yksikköä: Istekki, 2M-IT, Apotti, Fimlab, Sarastia, Monetra, Valtori ym.)",
             inhouse_sum["total_inhouse_spend_m_eur"],
             inhouse_sum["illegal_under_10pct_spend_m_eur"],
             inhouse_sum["recoverable_annual_saving_m_eur"],
         ],
         [
-            "2. Hyvinvointialueiden & kuntien yksikköhintojen P25-arbitraasi (5 kärkikategoriaa, 31 aluevertailua)",
+            "2. Hyvinvointialueiden ja kuntien yksikkökustannusten P25-vertailu (5 CPV-kategoriaa, 31 aluevertailua, THL/HALI/KKV)",
             round(arb_sum["baseline_category_spend_eur"] / 1_000_000.0, 2),
             round(arb_sum["baseline_category_spend_eur"] / 1_000_000.0, 2),
             round(arb_sum["p25_arbitrage_saving_eur"] / 1_000_000.0, 2),
         ],
         [
-            "3. Hilma & MAO 1–2 tarjouksen kilpailutukset & suorahankinnat (kansallinen skaalaus 45 % kantaan)",
-            8400.00,
-            3780.00,
-            1620.00,
+            "3. Yhden tarjouksen kilpailutusten (KKV: n. 15–16 % hankinnoista) ja suorahankintojen avaaminen kilpailulle",
+            5800.00,
+            1500.00,
+            225.00,
         ],
         [
-            "YHTEENSÄ (VÄLITÖN RAKENTEELLINEN SÄÄSTÖPOTENTIAALI, M€/V)",
-            ("FORMULA", "SUM(B4:B6)", str(round(inhouse_sum["total_inhouse_spend_m_eur"] + arb_sum["baseline_category_spend_eur"] / 1e6 + 8400.0, 2))),
-            ("FORMULA", "SUM(C4:C6)", str(round(inhouse_sum["illegal_under_10pct_spend_m_eur"] + arb_sum["baseline_category_spend_eur"] / 1e6 + 3780.0, 2))),
-            ("FORMULA", "SUM(D4:D6)", str(round(inhouse_sum["recoverable_annual_saving_m_eur"] + arb_sum["p25_arbitrage_saving_eur"] / 1e6 + 1620.0, 2))),
+            "YHTEENSÄ (LASKENNALLINEN RAKENTEELLINEN SÄÄSTÖPOTENTIAALI, M€/V)",
+            ("FORMULA", "SUM(B4:B6)", str(round(inhouse_sum["total_inhouse_spend_m_eur"] + arb_sum["baseline_category_spend_eur"] / 1e6 + 5800.0, 2))),
+            ("FORMULA", "SUM(C4:C6)", str(round(inhouse_sum["illegal_under_10pct_spend_m_eur"] + arb_sum["baseline_category_spend_eur"] / 1e6 + 1500.0, 2))),
+            ("FORMULA", "SUM(D4:D6)", str(round(inhouse_sum["recoverable_annual_saving_m_eur"] + arb_sum["p25_arbitrage_saving_eur"] / 1e6 + 225.0, 2))),
         ],
     ]
 
-    # Sheet 2: Sidosyksikkö (15 In-House Intermediaries) Illegal Direct Awards & Lock-Ins
+    # Sheet 2: Sidosyksikkö (15 In-House Intermediaries) Turnover & Ownership Structure
     sheet2_rows: List[List[CellSpec]] = [
-        ["SIDOSYKSIKKÖKARTELLIT (HANKINTALAKI 15 §, MAO:154/2024 & KHO 8.10.2025) — 15 VÄLIKÄSIYHTIÖTÄ", "", "", "", "", "", "", "", "", ""],
-        ["Huom: Alle 10 % omistusosuus ilman tosiasiallista määräysvaltaa tekee jokaisesta suorahankinnasta laittoman (0 € KKV-toimenpidepyyntö).", "", "", "", "", "", "", "", "", ""],
+        ["SIDOSYKSIKÖT JA PALVELUKESKUKSET (HANKINTALAKI 15 §, MAO:154/2024 & KHO 8.10.2025) — 15 YKSIKKÖÄ", "", "", "", "", "", "", "", "", ""],
+        ["Huom: Tilinpäätösten (2024–2025) mukainen liikevaihto. Kaupalliset puitesopimustoimittajat toimivat laillisesti; tarkastelu koskee julkista omistusrakennetta.", "", "", "", "", "", "", "", "", ""],
         [
-            "Ostajaryhmä (HVA / Kunnat / Valtio)",
-            "Omistus-%",
-            "Sidosyksikkö (Välikäsi)",
+            "Omistaja- ja tilaajaryhmä (HVA / Kunnat / Valtio)",
+            "Viiteomistus-%",
+            "Sidosyksikkö / Palvelukeskus",
             "PRH Y-tunnus",
-            "Todelliset alihankkijat (Ilman kilpailutusta)",
-            "Vuosiostot (M€/v)",
-            "Välikäsikate (%)",
-            "Alihankintapreemio (%)",
-            "Vuosisäästö (M€/v)",
-            "Kirjaamo (1-Click Oikaisu)",
+            "Keskeiset puitesopimus- ja toimittajakategoriat",
+            "Liikevaihto (M€/v)",
+            "Koordinointikate (%)",
+            "Kilpailupotentiaali (%)",
+            "Tehokkuuspotentiaali (M€/v)",
+            "Kirjaamo (Oikaisu / Tietopyyntö)",
         ],
     ]
     for idx, f in enumerate(BASELINE_INHOUSE_FLOWS, start=4):

@@ -41,10 +41,10 @@ class TestKartelliTutkaEngine(unittest.TestCase):
 
     def test_inhouse_sidosyksikko_leakage(self) -> None:
         res = compute_inhouse_leakage()
-        self.assertAlmostEqual(res["total_inhouse_spend_m_eur"], 1980.00, places=2)
-        self.assertGreater(res["illegal_token_share_spend_m_eur"], 1100.0)
-        self.assertEqual(res["illegal_under_10pct_spend_m_eur"], 1207.0)
-        self.assertAlmostEqual(res["recoverable_annual_saving_m_eur"], 699.95, places=2)
+        self.assertAlmostEqual(res["total_inhouse_spend_m_eur"], 1963.40, places=2)
+        self.assertGreater(res["illegal_token_share_spend_m_eur"], 1200.0)
+        self.assertAlmostEqual(res["illegal_under_10pct_spend_m_eur"], 1254.70, places=2)
+        self.assertAlmostEqual(res["recoverable_annual_saving_m_eur"], 230.99, places=2)
 
     def test_price_spread_arbitrage(self) -> None:
         sample = [
@@ -62,13 +62,13 @@ class TestKartelliTutkaEngine(unittest.TestCase):
 
     def test_single_bid_cartel_detector(self) -> None:
         tenders = [
-            HilmaTenderRecord("MAO:292/2023", "Keski-Suomen HVA", "72260000-IT", 2400000.0, 1, False, 18),
+            HilmaTenderRecord("MAO:500/2024", "Varsinais-Suomen HVA", "79940000-Collections", 1900000.0, 0, True, 18),
             HilmaTenderRecord("HILMA-OPEN", "Tampere", "45233120-Infra", 5000000.0, 6, False, 25),
         ]
         flagged = detect_single_bid_cartels(tenders)
         self.assertEqual(len(flagged), 1)
-        self.assertEqual(flagged[0]["tender_id"], "MAO:292/2023")
-        self.assertEqual(flagged[0]["expected_annual_saving_eur"], 600000.0)
+        self.assertEqual(flagged[0]["tender_id"], "MAO:500/2024")
+        self.assertEqual(flagged[0]["expected_annual_saving_eur"], 475000.0)
 
     def test_zero_fee_legal_generators(self) -> None:
         istekki_flow = BASELINE_INHOUSE_FLOWS[1]
@@ -87,7 +87,7 @@ class TestKartelliTutkaEngine(unittest.TestCase):
 
         oikaisu = generate_hankintaoikaisu(istekki_flow, istekki_flow.buyer_kirjaamo_email)
         self.assertIn("133 §", oikaisu["subject"])
-        self.assertIn("RL 40:9", oikaisu["body"])
+        self.assertNotIn("RL 40:9", oikaisu["body"])
 
         foia = generate_julkisuuslaki_foia("Tampereen kaupunki", "kirjaamo@tampere.fi")
         self.assertIn("14 vuorokauden", foia["body"])
@@ -106,9 +106,10 @@ class TestKartelliTutkaEngine(unittest.TestCase):
             self.assertTrue((root / summary["xlsx_path"]).exists())
             self.assertTrue((root / summary["html_path"]).exists())
             html_text = (root / summary["html_path"]).read_text(encoding="utf-8")
-            self.assertIn("700 milj. €/v", html_text)
-            self.assertIn("532 milj. €/v", html_text)
-            self.assertNotIn("504 milj. €/v", html_text)
+            self.assertIn("230,99 milj. €/v", html_text)
+            self.assertIn("594,40 milj. €/v", html_text)
+            self.assertIn("MAO:611/2025", html_text)
+            self.assertNotIn("MAO:412/2023", html_text)
             with zipfile.ZipFile(root / summary["xlsx_path"], "r") as zf:
                 sheet2 = zf.read("xl/worksheets/sheet2.xml").decode("utf-8")
                 sheet5 = zf.read("xl/worksheets/sheet5.xml").decode("utf-8")

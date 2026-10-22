@@ -15,7 +15,7 @@ from .excel_exporter import export_cartel_workbook
 from .ingest import write_ssot_snapshot
 from .web_builder import build_static_web_app
 
-# Superseded placeholder Y-tunnus IDs replaced by live PRH Open Data IDs
+# Superseded placeholder Y-tunnus IDs and unverified docket strings blocked from all derived artifacts
 SUPERSEDED_Y_TUNNUS = [
     "2267617-6",
     "2181290-4",
@@ -23,6 +23,11 @@ SUPERSEDED_Y_TUNNUS = [
     "2446810-2",
     "2342126-4",
     "2594476-3",
+    "MAO:412/2023",
+    "MAO:112/2024",
+    "MAO:38/2024",
+    "MAO:534/2023",
+    "RL 40:9",
 ]
 
 

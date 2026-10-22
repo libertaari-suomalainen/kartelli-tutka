@@ -672,14 +672,14 @@ def build_static_web_app(output_path: Path) -> Path:
 <main class="container">
   <section class="hero-card">
     <div class="kicker" data-i18n="hero_kicker">JULKISET HANKINNAT · TUTKIMUSRAPORTTI 2026 · 38,7 MRD. €/V</div>
-    <h1 class="hero-title" data-i18n="hero_title">38,7 miljardin euron ostokartelli: Miksi kuntien ja hyvinvointialueiden rahat eivät riitä hoitajiin?</h1>
+    <h1 class="hero-title" data-i18n="hero_title">Julkisten hankintojen (38,7 mrd. €/v) rakenteellinen tehokkuus- ja sidosyksikköanalyysi</h1>
     <p class="hero-lead" data-i18n="hero_lead">
-      Valtio, kaikki 21 hyvinvointialuetta, HUS ja 308 kuntaa ostavat ulkopuolisilta yrityksiltä IT-järjestelmiä, hoivapalveluita, laboratoriotutkimuksia ja urakoita <strong>38,7 miljardilla eurolla vuodessa</strong>. Tutkimuksemme osoittaa, että tästä potista <strong>1,43–3,5 miljardia euroa vuodessa</strong> (tämän aineiston suoraan mallinnetut säästöt <strong>1,43 mrd. €/v</strong>, koko 38,7 mrd. € hankintakantaan skaalattuna <strong>3,03–3,5 mrd. €/v</strong>) hupenee 15 sidosyksikkövälikäteen (1,98 mrd. €/v), 2–3-kertaisiin alueellisiin ylihintoihin ja 1–2 tarjouksen näennäiskilpailutuksiin.
+      Valtio, kaikki 21 hyvinvointialuetta, HUS ja 308 kuntaa ostavat ulkopuolisilta toimittajilta IT-järjestelmiä, hoivapalveluita, laboratoriotutkimuksia ja urakoita <strong>38,7 miljardilla eurolla vuodessa</strong> (Tilastokeskus S.13). Virallisiin tilinpäätöksiin (2024–2025), THL:n ja HALI ry:n yksikkökustannusvertailuihin sekä markkinaoikeuden (MAO) ja korkeimman hallinto-oikeuden (KHO) ratkaisuihin perustuva analyysimme osoittaa <strong>844 miljoonan euron suoraan mallinnetun vuotuisen tehostamispotentiaalin</strong> (ja koko 38,7 mrd. € hankintakantaan suhteutettuna <strong>1,1–2,2 mrd. €/v</strong>). <em>Huom: Yksityiset sopimustoimittajat toimivat laillisesti; tarkastelu kohdistuu julkisen sektorin omiin hankintarakenteisiin (Hankintalaki 15 § ja 75 §).</em>
     </p>
     <div class="callout-stone">
-      <h3 data-i18n="summary_box_title">Miten luet tätä julkaisua? (Kaikki 15 sidosyksikköä, 31 hintavertailua, 10 MAO-tapausta ja 43 ostajaa ovat klikattavia)</h3>
+      <h3 data-i18n="summary_box_title">Miten luet tätä julkaisua? (Kaikki 15 sidosyksikköä, 31 yksikkökustannusvertailua, 10 MAO/KHO-ratkaisua ja 43 viranomaista ovat klikattavia)</h3>
       <p data-i18n="summary_box_body">
-        <strong>Klikkaa mitä tahansa lukukorttia, sidosyksikköyhtiötä (Istekki, Apotti, Sarastia, 2M-IT, Monetra, Tiera, Valtori, Fimlab, Tuomi, Meita, Kaarea, Polkka, ISLAB, Sansia, Hetapalvelut), alueellista hintavertailua, MAO-tapausta tai mitä tahansa Suomen 21 hyvinvointialueesta ja 21 suurimmasta kaupungista</strong>. Voit täyttää omat tietosi suoraan valmiiseen 0 € viranomaisilmoitukseen ja ladata sen .txt- tai PDF-muodossa.
+        <strong>Klikkaa mitä tahansa lukukorttia, sidosyksikköä tai palvelukeskusta (Istekki, Apotti, Sarastia/Numera, 2M-IT, Monetra, Tiera, Valtori, Fimlab, Tuomi, Meita, Kaarea, Polkka, ISLAB, Sansia, Hetapalvelut), alueellista yksikkökustannusvertailua, Finlex/KKV MAO-oikeustapausta tai mitä tahansa Suomen 21 hyvinvointialueesta ja 21 suurimmasta kaupungista</strong>. Voit ladata jokaisesta kohteesta valmiin hallinto-oikeudellisen tietopyynnön tai selvityspyynnön (.txt tai PDF).
       </p>
     </div>
 
@@ -688,36 +688,36 @@ def build_static_web_app(output_path: Path) -> Path:
         <div>
           <div class="kpi-label" data-i18n="kpi1_lbl">Julkiset ulkoiset ostot</div>
           <div class="kpi-val">38,70 mrd. €/v</div>
-          <div class="kpi-sub" data-i18n="kpi1_sub">Valtion, 21 hyvinvointialueen, HUS:n ja kuntien vuotuiset ostot yrityksiltä</div>
+          <div class="kpi-sub" data-i18n="kpi1_sub">Valtion, 21 hyvinvointialueen, HUS:n ja kuntien vuotuiset ostot (Tilastokeskus S.13)</div>
         </div>
         <div class="click-hint" data-i18n="click_1">Klikkaa: Minne 38,7 mrd. € menee? →</div>
       </div>
 
       <div class="kpi-card clickable-card" onclick="openKpiModal('inhouse_leak')">
         <div>
-          <div class="kpi-label" data-i18n="kpi2_lbl">15 Sidosyksikköä (”In-House”)</div>
-          <div class="kpi-val red">1,98 mrd. €/v</div>
-          <div class="kpi-sub" data-i18n="kpi2_sub">15 välikäsiyhtiötä (Istekki, Apotti, Sarastia, 2M-IT, Fimlab, Tuomi, Valtori ym.) — vuosisäästö 699,95 M€/v</div>
+          <div class="kpi-label" data-i18n="kpi2_lbl">15 Sidosyksikköä &amp; TVT-keskus</div>
+          <div class="kpi-val red">1,96 mrd. €/v</div>
+          <div class="kpi-sub" data-i18n="kpi2_sub">Tilinpäätösten (2024–2025) mukainen liikevaihto — kilpailupotentiaali 230,99 M€/v (KKV/VATT-malli)</div>
         </div>
-        <div class="click-hint" data-i18n="click_2">Klikkaa: Mikä on 0,04 % ”kuoriosake”? →</div>
+        <div class="click-hint" data-i18n="click_2">Klikkaa: Hankintalain 15 § &amp; KHO 8.10.2025 →</div>
       </div>
 
       <div class="kpi-card clickable-card" onclick="openKpiModal('price_spread')">
         <div>
-          <div class="kpi-label" data-i18n="kpi3_lbl">Alueiden välinen 2–3x ylihinta</div>
-          <div class="kpi-val green">711,23 milj. €/v</div>
-          <div class="kpi-sub" data-i18n="kpi3_sub">Vuosisäästö, kun kalleimmat alueet laskevat yksikköhinnat parhaan neljänneksen tasolle</div>
+          <div class="kpi-label" data-i18n="kpi3_lbl">Alueellinen P25-kustannusvertailu</div>
+          <div class="kpi-val green">594,40 milj. €/v</div>
+          <div class="kpi-sub" data-i18n="kpi3_sub">Säästöpotentiaali, kun kalleimmat alueet saavuttavat edullisimman neljänneksen (P25) yksikkökustannuksen</div>
         </div>
-        <div class="click-hint" data-i18n="click_3">Klikkaa: Miksi sama palvelu maksaa 3x? →</div>
+        <div class="click-hint" data-i18n="click_3">Klikkaa: THL / HALI yksikkökustannuserot →</div>
       </div>
 
       <div class="kpi-card clickable-card" onclick="openKpiModal('single_bid')">
         <div>
-          <div class="kpi-label" data-i18n="kpi4_lbl">1–2 tarjouksen kilpailutukset</div>
-          <div class="kpi-val red">45 % hankinnoista</div>
-          <div class="kpi-sub" data-i18n="kpi4_sub">Räätälöidyt tarjousehdot sulkevat pk-yritykset ulos (n. 25 % vain 1 tarjous) ja nostavat hintoja 15–30 %</div>
+          <div class="kpi-label" data-i18n="kpi4_lbl">Yhden tarjouksen kilpailutukset</div>
+          <div class="kpi-val red">~15–16 % (KKV)</div>
+          <div class="kpi-sub" data-i18n="kpi4_sub">KKV:n mukaan n. 15–16 % tarjouskilpailuista saa vain 1 tarjouksen (~1,5 mrd. €/v) — osiin jakaminen (75 §) lisää kilpailua</div>
         </div>
-        <div class="click-hint" data-i18n="click_4">Klikkaa: Miten ehdot räätälöidään? →</div>
+        <div class="click-hint" data-i18n="click_4">Klikkaa: 10 MAO/KHO-ratkaisua (Finlex) →</div>
       </div>
     </div>
   </section>
@@ -747,42 +747,42 @@ def build_static_web_app(output_path: Path) -> Path:
 
   <section class="section-block" id="sec-inhouse">
     <div class="section-head">
-      <h2 data-i18n="s1_title">1. Miten ”kuoriosakkeella” kierretään kilpailutuslaki? (15 sidosyksikköjättiä = 1,98 mrd. €/v)</h2>
+      <h2 data-i18n="s1_title">1. Sidosyksikköjärjestelmä ja Hankintalain 15 § (15 yksikköä = 1,96 mrd. €/v tilinpäätösliikevaihto)</h2>
       <p data-i18n="s1_sub">
-        Korkein hallinto-oikeus (KHO 8.10.2025 taltio 2250) ja markkinaoikeus (MAO:154/2024) linjasivat, ettei hyvinvointialue saa ostaa palveluita ilman kilpailutusta yhtiöltä, josta se omistaa vain nimellisen murto-osan eikä käytä todellista määräysvaltaa. Klikkaa vaihetta, yhtiökorttia tai alla olevan kokonaistaulukon riviä.
+        Korkein hallinto-oikeus (KHO 8.10.2025 taltio 2250) ja markkinaoikeus (MAO:154/2024 &amp; MAO:500/2024) vahvistivat, ettei julkinen hankintayksikkö voi tehdä suorahankintoja sidosyksikköpoikkeuksella (Hankintalaki 15 §), jos sen omistusosuus on muodollinen (esim. 0,04–0,09 %) eikä se käytä yhtiössä tosiasiallista määräysvaltaa. Klikkaa vaihetta, yhtiökorttia tai taulukon riviä.
       </p>
     </div>
 
     <div class="flow-steps">
       <div class="flow-step clickable-card" onclick="openFlowModal(1)">
         <span class="flow-badge" data-i18n="f1_step">Vaihe 1 · Klikkaa</span>
-        <h4 data-i18n="f1_title">0,04 % nimellinen ”kuoriosake”</h4>
-        <p data-i18n="f1_desc">Kunta tai hyvinvointialue ostaa muutaman sadan euron nimellisen osakkeen yhteisestä IT-, laboratorio- tai talousyhtiöstä (esim. Sarastia, Istekki, Tiera, Sansia).</p>
+        <h4 data-i18n="f1_title">Hajautettu pienomistus (&lt;10 %)</h4>
+        <p data-i18n="f1_desc">Kunta tai hyvinvointialue merkitsee pienen osakeosuuden (esim. 0,04–2,5 %) yhteisestä ICT-, laboratorio- tai taloushallintoyhtiöstä.</p>
       </div>
       <div class="flow-step clickable-card" onclick="openFlowModal(2)">
         <span class="flow-badge" data-i18n="f2_step">Vaihe 2 · Klikkaa</span>
-        <h4 data-i18n="f2_title">Miljoonien suorahankinta ilman kilpaa</h4>
-        <p data-i18n="f2_desc">Osakkeen varjolla virkamiehet tilaavat yhtiöltä kymmenillä miljoonilla euroilla IT-, tukipalvelu- ja talouspalveluita järjestämättä avointa tarjouskilpailua.</p>
+        <h4 data-i18n="f2_title">Sidosyksikkösuorahankinta (15 §)</h4>
+        <p data-i18n="f2_desc">Sidosyksikköpoikkeukseen vedoten palvelut tilataan suoraan yhtiöltä ilman omaa avointa tarjouskilpailua (KHO 8.10.2025 T2250 &amp; HE 2/2026 vp).</p>
       </div>
       <div class="flow-step danger clickable-card" onclick="openFlowModal(3)">
-        <span class="flow-badge" data-i18n="f3_step">Vaihe 3 · Vuotokohta</span>
-        <h4 data-i18n="f3_title">Välikäsi ottaa 16–30 % katteen</h4>
-        <p data-i18n="f3_desc">Välikäsiyhtiö ei tee kaikkea itse, vaan ketjuttaa sopimukset pörssiyhtiöille (Tietoevry, CGI, Atea, Accountor, laitejätit) ja ottaa välistä 16–30 % hallintokatteen.</p>
+        <span class="flow-badge" data-i18n="f3_step">Vaihe 3 · Rakenne</span>
+        <h4 data-i18n="f3_title">Hallintoporras ja puitesopimukset</h4>
+        <p data-i18n="f3_desc">Sidosyksikkö kokoaa hankinnat ja hankkii osan järjestelmistä kaupallisilta sopimustoimittajilta; moniportainen rakenne lisää hallinto- ja koordinointikustannuksia.</p>
       </div>
       <div class="flow-step danger clickable-card" onclick="openFlowModal(4)">
-        <span class="flow-badge" data-i18n="f4_step">Vaihe 4 · Lopputulos</span>
-        <h4 data-i18n="f4_title">700 milj. €/v ylihintaa (532 milj. €/v 7 IT-jätissä)</h4>
-        <p data-i18n="f4_desc">Paikalliset pk-yritykset eivät pääse tarjoamaan lainkaan, ja hyvinvointialue joutuu säästämään hoitajista maksaakseen välikäsien laskut.</p>
+        <span class="flow-badge" data-i18n="f4_step">Vaihe 4 · Säästöpotentiaali</span>
+        <h4 data-i18n="f4_title">230,99 milj. €/v tehostamispotentiaali</h4>
+        <p data-i18n="f4_desc">KKV:n ja VATT:n tutkimuksiin pohjautuvalla 11–14 % kilpailu- ja koordinointihyödyllä avoin kilpailutus ja osiin jakaminen vapauttaisi n. 231 M€/v.</p>
       </div>
     </div>
 
-    <h3 style="font-size:19px; margin: 20px 0 12px;" data-i18n="inhouse_heading">Klikkaa sidosyksikköyhtiötä nähdäksesi rahan reitin ja valmiin 0 € KKV-ilmoituksen:</h3>
+    <h3 style="font-size:19px; margin: 20px 0 12px;" data-i18n="inhouse_heading">Klikkaa sidosyksikköä nähdäksesi tilinpäätöstiedot (2024–2025) ja hallinto-oikeudellisen selvityspyynnön:</h3>
     <div class="cards-grid" id="inhouse-cards"></div>
 
     <div class="table-wrap">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
         <div>
-          <h3 style="font-size:18.5px;" data-i18n="inhouse_tbl_title">Kaikki 15 sidosyksikköä taulukossa (Klikkaa saraketta lajitellaksesi tai riviä avataksesi)</h3>
+          <h3 style="font-size:18.5px;" data-i18n="inhouse_tbl_title">Kaikki 15 sidosyksikköä ja palvelukeskusta taulukossa (Klikkaa saraketta lajitellaksesi tai riviä avataksesi)</h3>
           <p style="font-size:13.5px;color:var(--muted);" id="inhouse-count-sub"></p>
         </div>
         <button type="button" class="btn-secondary" onclick="exportInhouseCsv()" data-i18n="inhouse_csv_btn">⬇ Vie sidosyksikkötaulukko (.csv)</button>
@@ -793,11 +793,11 @@ def build_static_web_app(output_path: Path) -> Path:
             <tr>
               <th>#</th>
               <th class="sortable" onclick="sortInhouse('inhouse_vendor')"><span data-i18n="th_ih_name">Sidosyksikkö &amp; Y-tunnus</span> <span id="sort-ih-inhouse_vendor"></span></th>
-              <th class="sortable" onclick="sortInhouse('buyer_name')"><span data-i18n="th_ih_buy">Tilaajaryhmä</span> <span id="sort-ih-buyer_name"></span></th>
-              <th class="sortable" onclick="sortInhouse('buyer_equity_share_pct')"><span data-i18n="th_ih_eq">Omistus-%</span> <span id="sort-ih-buyer_equity_share_pct"></span></th>
-              <th class="sortable" onclick="sortInhouse('annual_spend_m_eur')"><span data-i18n="th_ih_sp">Suoraostot (M€/v)</span> <span id="sort-ih-annual_spend_m_eur">▼</span></th>
-              <th class="sortable" onclick="sortInhouse('inhouse_markup_pct')"><span data-i18n="th_ih_mk">Välikäsikate (%)</span> <span id="sort-ih-inhouse_markup_pct"></span></th>
-              <th class="sortable" onclick="sortInhouse('recoverable_saving_m_eur')"><span data-i18n="th_ih_sv">Vuosisäästö (M€/v)</span> <span id="sort-ih-recoverable_saving_m_eur"></span></th>
+              <th class="sortable" onclick="sortInhouse('buyer_name')"><span data-i18n="th_ih_buy">Omistaja- / tilaajaryhmä</span> <span id="sort-ih-buyer_name"></span></th>
+              <th class="sortable" onclick="sortInhouse('buyer_equity_share_pct')"><span data-i18n="th_ih_eq">Viiteomistus-%</span> <span id="sort-ih-buyer_equity_share_pct"></span></th>
+              <th class="sortable" onclick="sortInhouse('annual_spend_m_eur')"><span data-i18n="th_ih_sp">Liikevaihto (M€/v)</span> <span id="sort-ih-annual_spend_m_eur">▼</span></th>
+              <th class="sortable" onclick="sortInhouse('inhouse_markup_pct')"><span data-i18n="th_ih_mk">Koordinointi (%)</span> <span id="sort-ih-inhouse_markup_pct"></span></th>
+              <th class="sortable" onclick="sortInhouse('recoverable_saving_m_eur')"><span data-i18n="th_ih_sv">Säästöpotentiaali (M€/v)</span> <span id="sort-ih-recoverable_saving_m_eur"></span></th>
             </tr>
           </thead>
           <tbody id="inhouse-tbody"></tbody>
@@ -808,9 +808,9 @@ def build_static_web_app(output_path: Path) -> Path:
 
   <section class="section-block" id="sec-arbitrage">
     <div class="section-head">
-      <h2 data-i18n="s2_title">2. Alueellinen hintavertailu: Miksi sama palvelu maksaa naapurialueella 2–3 kertaa enemmän?</h2>
+      <h2 data-i18n="s2_title">2. Alueellinen yksikkökustannusvertailu (THL / HALI / KKV): P25-vertailutaso (594,40 M€/v)</h2>
       <p data-i18n="s2_sub">
-        Klikkaa mitä tahansa hintavertailukorttia nähdäksesi, kuinka paljon kyseinen hyvinvointialue maksaa ylihintaa verrattuna Suomen edullisimpaan neljännekseen (P25-vertailuhinta).
+        Klikkaa mitä tahansa alueellista vertailukorttia nähdäksesi, kuinka suuri säästöpotentiaali syntyy, jos yli 25. persentiilin (P25) yksikkökustannustason alueet saavuttavat edullisimman neljänneksen kustannustason.
       </p>
     </div>
     <div class="cards-grid" id="arbitrage-cards"></div>
@@ -818,9 +818,9 @@ def build_static_web_app(output_path: Path) -> Path:
 
   <section class="section-block" id="sec-hilma">
     <div class="section-head">
-      <h2 data-i18n="s3_title">3. Markkinaoikeus (MAO) &amp; Hilma: 1–2 tarjouksen näennäiskilpailutukset ja suorahankinnat (10 tapausta)</h2>
+      <h2 data-i18n="s3_title">3. Markkinaoikeuden (MAO) ja KHO:n vahvistetut julkisten hankintojen ratkaisut (10 Finlex/KKV-tapausta)</h2>
       <p data-i18n="s3_sub">
-        Klikkaa dokumentoitua markkinaoikeus- tai Hilma-tapausta nähdäksesi, millä keinotekoisella ehdolla muut tarjoajat suljettiin ulos ja miten pk-yrittäjä voi vaatia syrjivän ehdon poistamista maksutta (Hankintalaki 67 §, 75 § &amp; 133 §).
+        Klikkaa dokumentoitua markkinaoikeuden (MAO) tai korkeimman hallinto-oikeuden (KHO) ratkaisua (2023–2025) nähdäksesi ratkaisun oikeudellisen sisällön sekä mallipohjan avoimen kilpailutuksen ja osiin jakamisen (Hankintalaki 75 §) edistämiseksi.
       </p>
     </div>
     <div class="cards-grid" id="hilma-cards"></div>
@@ -828,9 +828,9 @@ def build_static_web_app(output_path: Path) -> Path:
 
   <section class="section-block" id="sec-foia">
     <div class="section-head">
-      <h2 data-i18n="s4_title">4. Vaadi oman hyvinvointialueesi tai kuntasi ostolaskut julkisiksi (Kaikki 21 hyvinvointialuetta + HUS + 21 kaupunkia = 43 viranomaista)</h2>
+      <h2 data-i18n="s4_title">4. Julkisuuslain (621/1999 13 §) ostolaskutietopyyntö (Kaikki 21 hyvinvointialuetta + HUS + 21 kaupunkia = 43 viranomaista)</h2>
       <p data-i18n="s4_sub">
-        Julkisuuslain (621/1999) mukaan jokaisella kansalaisella on oikeus saada hyvinvointialueen ja kunnan ostolaskut koneluettavassa muodossa 14 vuorokauden kuluessa. Klikkaa mitä tahansa 43 viranomaisesta avataksesi valmiin tietopyynnön.
+        Julkisuuslain (621/1999) mukaan jokaisella on oikeus saada viranomaisen julkiset ostolaskutiedot koneluettavassa muodossa 14 vuorokauden kuluessa. Klikkaa mitä tahansa 43 viranomaisesta avataksesi valmiin tietopyynnön.
       </p>
     </div>
     <div class="cards-grid" id="buyer-cards"></div>
@@ -872,12 +872,12 @@ def build_static_web_app(output_path: Path) -> Path:
 <footer>
   <div>
     <strong>Suomen Talousinstituutti · Avoin Tutkimusjulkaisu (2026)</strong><br/>
-    Lähdeaineisto: Tutkihankintoja.fi, Hilma, KKV sidosyksikköselvitykset, MAO:154/2024, KHO 8.10.2025 taltio 2250 &amp; PRH YTJ.
+    Lähdeaineisto: Tilastokeskus S.13, PRH YTJ, Tilinpäätökset 2024–2025, THL, HALI ry, KKV sekä Finlex (MAO &amp; KHO 8.10.2025 taltio 2250).
   </div>
   <div>
     <a href="Sote_ja_Kunta_Kartelli_Matriisi_2026.xlsx" download>Lataa 5-välilehtinen Excel (.xlsx)</a> ·
     <a href="https://github.com/libertaari-suomalainen/kartelli-tutka">Avoin lähdekoodi (GitHub)</a> ·
-    <a href="https://libertaari-suomalainen.github.io/tukipalkkio-purku/">Tutkimus I: Yritys- ja järjestötukien läpivalaisu (11,5 mrd. €)</a>
+    <a href="https://libertaari-suomalainen.github.io/tukipalkkio-purku/">Tutkimus I: Yritys- ja järjestötukien läpivalaisu (STEA &amp; Business Finland)</a>
   </div>
 </footer>
 """
@@ -940,57 +940,57 @@ const I18N = {{
   fi: {{
     brand_title: "Suomen Talousinstituutti · Julkisten Hankintojen Tutkimus",
     brand_sub: "Tutkimusraportti 2026 · 15 sidosyksikköä, kaikki 21 hyvinvointialuetta + HUS + 21 kaupunkia",
-    nav_sister: "← Tutkimus I: Yritys- & järjestötuet (11,5 mrd. €)",
+    nav_sister: "← Tutkimus I: Yritys- & järjestötuet",
     nav_xlsx: "⬇ Lataa Excel-aineisto (.xlsx)",
     hero_kicker: "JULKISET HANKINNAT · TUTKIMUSRAPORTTI 2026 · 38,7 MRD. €/V",
-    hero_title: "38,7 miljardin euron ostokartelli: Miksi kuntien ja hyvinvointialueiden rahat eivät riitä hoitajiin?",
-    hero_lead: "Valtio, kaikki 21 hyvinvointialuetta, HUS ja 308 kuntaa ostavat ulkopuolisilta yrityksiltä IT-järjestelmiä, hoivapalveluita, laboratoriotutkimuksia ja urakoita <strong>38,7 miljardilla eurolla vuodessa</strong>. Tutkimuksemme osoittaa, että tästä potista <strong>1,43–3,5 miljardia euroa vuodessa</strong> (tämän aineiston suoraan mallinnetut säästöt <strong>1,43 mrd. €/v</strong>, koko 38,7 mrd. € hankintakantaan skaalattuna <strong>3,03–3,5 mrd. €/v</strong>) hupenee 15 sidosyksikkövälikäteen (1,98 mrd. €/v), 2–3-kertaisiin alueellisiin ylihintoihin ja 1–2 tarjouksen näennäiskilpailutuksiin.",
-    summary_box_title: "Miten luet tätä julkaisua? (Kaikki 15 sidosyksikköä, 31 hintavertailua, 10 MAO-tapausta ja 43 ostajaa ovat klikattavia)",
-    summary_box_body: "<strong>Klikkaa mitä tahansa lukukorttia, sidosyksikköyhtiötä (Istekki, Apotti, Sarastia, 2M-IT, Monetra, Tiera, Valtori, Fimlab, Tuomi, Meita, Kaarea, Polkka, ISLAB, Sansia, Hetapalvelut), alueellista hintavertailua, MAO-tapausta tai mitä tahansa Suomen 21 hyvinvointialueesta ja 21 suurimmasta kaupungista</strong>. Voit täyttää omat tietosi suoraan valmiiseen 0 € viranomaisilmoitukseen ja ladata sen .txt- tai PDF-muodossa.",
+    hero_title: "Julkisten hankintojen (38,7 mrd. €/v) rakenteellinen tehokkuus- ja sidosyksikköanalyysi",
+    hero_lead: "Valtio, kaikki 21 hyvinvointialuetta, HUS ja 308 kuntaa ostavat ulkopuolisilta toimittajilta IT-järjestelmiä, hoivapalveluita, laboratoriotutkimuksia ja urakoita <strong>38,7 miljardilla eurolla vuodessa</strong> (Tilastokeskus S.13). Virallisiin tilinpäätöksiin (2024–2025), THL:n ja HALI ry:n yksikkökustannusvertailuihin sekä markkinaoikeuden (MAO) ja korkeimman hallinto-oikeuden (KHO) ratkaisuihin perustuva analyysimme osoittaa <strong>844 miljoonan euron suoraan mallinnetun vuotuisen tehostamispotentiaalin</strong> (ja koko 38,7 mrd. € hankintakantaan suhteutettuna <strong>1,1–2,2 mrd. €/v</strong>). <em>Huom: Yksityiset sopimustoimittajat toimivat laillisesti; tarkastelu kohdistuu julkisen sektorin omiin hankintarakenteisiin (Hankintalaki 15 § ja 75 §).</em>",
+    summary_box_title: "Miten luet tätä julkaisua? (Kaikki 15 sidosyksikköä, 31 yksikkökustannusvertailua, 10 MAO/KHO-ratkaisua ja 43 viranomaista ovat klikattavia)",
+    summary_box_body: "<strong>Klikkaa mitä tahansa lukukorttia, sidosyksikköä tai palvelukeskusta (Istekki, Apotti, Sarastia/Numera, 2M-IT, Monetra, Tiera, Valtori, Fimlab, Tuomi, Meita, Kaarea, Polkka, ISLAB, Sansia, Hetapalvelut), alueellista yksikkökustannusvertailua, Finlex/KKV MAO-oikeustapausta tai mitä tahansa Suomen 21 hyvinvointialueesta ja 21 suurimmasta kaupungista</strong>. Voit ladata jokaisesta kohteesta valmiin hallinto-oikeudellisen tietopyynnön tai selvityspyynnön (.txt tai PDF).",
     kpi1_lbl: "Julkiset ulkoiset ostot",
-    kpi1_sub: "Valtion, 21 hyvinvointialueen, HUS:n ja kuntien vuotuiset ostot yrityksiltä",
+    kpi1_sub: "Valtion, 21 hyvinvointialueen, HUS:n ja kuntien vuotuiset ostot (Tilastokeskus S.13)",
     click_1: "Klikkaa: Minne 38,7 mrd. € menee? →",
-    kpi2_lbl: "15 Sidosyksikköä (”In-House”)",
-    kpi2_sub: "15 välikäsiyhtiötä (Istekki, Apotti, Sarastia, 2M-IT, Fimlab, Tuomi, Valtori ym.) — vuosisäästö 699,95 M€/v",
-    click_2: "Klikkaa: Mikä on 0,04 % ”kuoriosake”? →",
-    kpi3_lbl: "Alueiden välinen 2–3x ylihinta",
-    kpi3_sub: "Vuosisäästö, kun kalleimmat alueet laskevat yksikköhinnat parhaan neljänneksen tasolle",
-    click_3: "Klikkaa: Miksi sama palvelu maksaa 3x? →",
-    kpi4_lbl: "1–2 tarjouksen kilpailutukset",
-    kpi4_sub: "Räätälöidyt tarjousehdot sulkevat pk-yritykset ulos (n. 25 % vain 1 tarjous) ja nostavat hintoja 15–30 %",
-    click_4: "Klikkaa: Miten ehdot räätälöidään? →",
+    kpi2_lbl: "15 Sidosyksikköä & TVT-keskus",
+    kpi2_sub: "Tilinpäätösten (2024–2025) mukainen liikevaihto — kilpailupotentiaali 230,99 M€/v (KKV/VATT-malli)",
+    click_2: "Klikkaa: Hankintalain 15 § & KHO 8.10.2025 →",
+    kpi3_lbl: "Alueellinen P25-kustannusvertailu",
+    kpi3_sub: "Säästöpotentiaali, kun kalleimmat alueet saavuttavat edullisimman neljänneksen (P25) yksikkökustannuksen",
+    click_3: "Klikkaa: THL / HALI yksikkökustannuserot →",
+    kpi4_lbl: "Yhden tarjouksen kilpailutukset",
+    kpi4_sub: "KKV:n mukaan n. 15–16 % tarjouskilpailuista saa vain 1 tarjouksen (~1,5 mrd. €/v) — osiin jakaminen (75 §) lisää kilpailua",
+    click_4: "Klikkaa: 10 MAO/KHO-ratkaisua (Finlex) →",
     lbl_search: "Hae sidosyksikköä (15 kpl), hyvinvointialuetta tai kaupunkia (43 kpl), MAO-tapausta tai palvelua",
     chip_lbl: "Pikavalinnat:",
     chip_all: "Näytä kaikki",
-    s1_title: "1. Miten ”kuoriosakkeella” kierretään kilpailutuslaki? (15 sidosyksikköjättiä = 1,98 mrd. €/v)",
-    s1_sub: "Korkein hallinto-oikeus (KHO 8.10.2025 taltio 2250) ja markkinaoikeus (MAO:154/2024) linjasivat, ettei hyvinvointialue saa ostaa palveluita ilman kilpailutusta yhtiöltä, josta se omistaa vain nimellisen murto-osan eikä käytä todellista määräysvaltaa. Klikkaa vaihetta, yhtiökorttia tai alla olevan kokonaistaulukon riviä.",
+    s1_title: "1. Sidosyksikköjärjestelmä ja Hankintalain 15 § (15 yksikköä = 1,96 mrd. €/v tilinpäätösliikevaihto)",
+    s1_sub: "Korkein hallinto-oikeus (KHO 8.10.2025 taltio 2250) ja markkinaoikeus (MAO:154/2024 & MAO:500/2024) vahvistivat, ettei julkinen hankintayksikkö voi tehdä suorahankintoja sidosyksikköpoikkeuksella (Hankintalaki 15 §), jos sen omistusosuus on muodollinen (esim. 0,04–0,09 %) eikä se käytä yhtiössä tosiasiallista määräysvaltaa. Klikkaa vaihetta, yhtiökorttia tai taulukon riviä.",
     f1_step: "Vaihe 1 · Klikkaa",
-    f1_title: "0,04 % nimellinen ”kuoriosake”",
-    f1_desc: "Kunta tai hyvinvointialue ostaa muutaman sadan euron nimellisen osakkeen yhteisestä IT-, laboratorio- tai talousyhtiöstä (esim. Sarastia, Istekki, Tiera, Sansia).",
+    f1_title: "Hajautettu pienomistus (<10 %)",
+    f1_desc: "Kunta tai hyvinvointialue merkitsee pienen osakeosuuden (esim. 0,04–2,5 %) yhteisestä ICT-, laboratorio- tai taloushallintoyhtiöstä.",
     f2_step: "Vaihe 2 · Klikkaa",
-    f2_title: "Miljoonien suorahankinta ilman kilpaa",
-    f2_desc: "Osakkeen varjolla virkamiehet tilaavat yhtiöltä kymmenillä miljoonilla euroilla IT-, tukipalvelu- ja talouspalveluita järjestämättä avointa tarjouskilpailua.",
-    f3_step: "Vaihe 3 · Vuotokohta",
-    f3_title: "Välikäsi ottaa 16–30 % katteen",
-    f3_desc: "Välikäsiyhtiö ei tee kaikkea itse, vaan ketjuttaa sopimukset pörssiyhtiöille (Tietoevry, CGI, Atea, Accountor, laitejätit) ja ottaa välistä 16–30 % hallintokatteen.",
-    f4_step: "Vaihe 4 · Lopputulos",
-    f4_title: "700 milj. €/v ylihintaa (532 milj. €/v 7 IT-jätissä)",
-    f4_desc: "Paikalliset pk-yritykset eivät pääse tarjoamaan lainkaan, ja hyvinvointialue joutuu säästämään hoitajista maksaakseen välikäsien laskut.",
-    inhouse_heading: "Klikkaa sidosyksikköyhtiötä nähdäksesi rahan reitin ja valmiin 0 € KKV-ilmoituksen:",
-    inhouse_tbl_title: "Kaikki 15 sidosyksikköä taulukossa (Klikkaa saraketta lajitellaksesi tai riviä avataksesi)",
+    f2_title: "Sidosyksikkösuorahankinta (15 §)",
+    f2_desc: "Sidosyksikköpoikkeukseen vedoten palvelut tilataan suoraan yhtiöltä ilman omaa avointa tarjouskilpailua (KHO 8.10.2025 T2250 & HE 2/2026 vp).",
+    f3_step: "Vaihe 3 · Rakenne",
+    f3_title: "Hallintoporras ja puitesopimukset",
+    f3_desc: "Sidosyksikkö kokoaa hankinnat ja hankkii osan järjestelmistä kaupallisilta sopimustoimittajilta; moniportainen rakenne lisää hallinto- ja koordinointikustannuksia.",
+    f4_step: "Vaihe 4 · Säästöpotentiaali",
+    f4_title: "230,99 milj. €/v tehostamispotentiaali",
+    f4_desc: "KKV:n ja VATT:n tutkimuksiin pohjautuvalla 11–14 % kilpailu- ja koordinointihyödyllä avoin kilpailutus ja osiin jakaminen vapauttaisi n. 231 M€/v.",
+    inhouse_heading: "Klikkaa sidosyksikköä nähdäksesi tilinpäätöstiedot (2024–2025) ja hallinto-oikeudellisen selvityspyynnön:",
+    inhouse_tbl_title: "Kaikki 15 sidosyksikköä ja palvelukeskusta taulukossa (Klikkaa saraketta lajitellaksesi tai riviä avataksesi)",
     inhouse_csv_btn: "⬇ Vie sidosyksikkötaulukko (.csv)",
     th_ih_name: "Sidosyksikkö & Y-tunnus",
-    th_ih_buy: "Tilaajaryhmä",
-    th_ih_eq: "Omistus-%",
-    th_ih_sp: "Suoraostot (M€/v)",
-    th_ih_mk: "Välikäsikate (%)",
-    th_ih_sv: "Vuosisäästö (M€/v)",
-    s2_title: "2. Alueellinen hintavertailu: Miksi sama palvelu maksaa naapurialueella 2–3 kertaa enemmän?",
-    s2_sub: "Klikkaa mitä tahansa hintavertailukorttia nähdäksesi, kuinka paljon kyseinen hyvinvointialue maksaa ylihintaa verrattuna Suomen edullisimpaan neljännekseen (P25-vertailuhinta).",
-    s3_title: "3. Markkinaoikeus (MAO) & Hilma: 1–2 tarjouksen näennäiskilpailutukset ja suorahankinnat (10 tapausta)",
-    s3_sub: "Klikkaa dokumentoitua markkinaoikeus- tai Hilma-tapausta nähdäksesi, millä keinotekoisella ehdolla muut tarjoajat suljettiin ulos ja miten pk-yrittäjä voi vaatia syrjivän ehdon poistamista maksutta (Hankintalaki 67 §, 75 § & 133 §).",
-    s4_title: "4. Vaadi oman hyvinvointialueesi tai kuntasi ostolaskut julkisiksi (Kaikki 21 hyvinvointialuetta + HUS + 21 kaupunkia = 43 viranomaista)",
-    s4_sub: "Julkisuuslain (621/1999) mukaan jokaisella kansalaisella on oikeus saada hyvinvointialueen ja kunnan ostolaskut koneluettavassa muodossa 14 vuorokauden kuluessa. Klikkaa mitä tahansa 43 viranomaisesta avataksesi valmiin tietopyynnön.",
+    th_ih_buy: "Omistaja- / tilaajaryhmä",
+    th_ih_eq: "Viiteomistus-%",
+    th_ih_sp: "Liikevaihto (M€/v)",
+    th_ih_mk: "Koordinointi (%)",
+    th_ih_sv: "Säästöpotentiaali (M€/v)",
+    s2_title: "2. Alueellinen yksikkökustannusvertailu (THL / HALI / KKV): P25-vertailutaso (594,40 M€/v)",
+    s2_sub: "Klikkaa mitä tahansa alueellista vertailukorttia nähdäksesi, kuinka suuri säästöpotentiaali syntyy, jos yli 25. persentiilin (P25) yksikkökustannustason alueet saavuttavat edullisimman neljänneksen kustannustason.",
+    s3_title: "3. Markkinaoikeuden (MAO) ja KHO:n vahvistetut julkisten hankintojen ratkaisut (10 Finlex/KKV-tapausta)",
+    s3_sub: "Klikkaa dokumentoitua markkinaoikeuden (MAO) tai korkeimman hallinto-oikeuden (KHO) ratkaisua (2023–2025) nähdäksesi ratkaisun oikeudellisen sisällön sekä mallipohjan avoimen kilpailutuksen ja osiin jakamisen (Hankintalaki 75 §) edistämiseksi.",
+    s4_title: "4. Julkisuuslain (621/1999 13 §) ostolaskutietopyyntö (Kaikki 21 hyvinvointialuetta + HUS + 21 kaupunkia = 43 viranomaista)",
+    s4_sub: "Julkisuuslain (621/1999) mukaan jokaisella on oikeus saada viranomaisen julkiset ostolaskutiedot koneluettavassa muodossa 14 vuorokauden kuluessa. Klikkaa mitä tahansa 43 viranomaisesta avataksesi valmiin tietopyynnön.",
     buyer_tbl_title: "Kaikki 43 julkista ostajaa (21 hyvinvointialuetta + HUS + 21 suurinta kaupunkia)",
     buyer_csv_btn: "⬇ Vie kaikki 43 kirjaamoa (.csv)",
     th_b_name: "Hankintayksikkö & Y-tunnus",
@@ -1000,66 +1000,66 @@ const I18N = {{
     th_b_sh: "Sidosyksiköt & Kirjaamo"
   }},
   en: {{
-    brand_title: "Finnish Economic Institute (STI) · Public Procurement Audit",
-    brand_sub: "2026 Empirical Report · 15 In-House Monopolies, All 21 Wellbeing Counties + HUS + 21 Cities",
-    nav_sister: "← Study I: Corporate & NGO Subsidies (€11.5B)",
+    brand_title: "Finnish Economic Institute (STI) · Public Procurement Analysis",
+    brand_sub: "2026 Empirical Report · 15 In-House Units, All 21 Wellbeing Counties + HUS + 21 Cities",
+    nav_sister: "← Study I: Corporate & NGO Grants",
     nav_xlsx: "⬇ Download Excel Dataset (.xlsx)",
     hero_kicker: "PUBLIC PROCUREMENT · RESEARCH REPORT 2026 · €38.7B/YR",
-    hero_title: "The €38.7 Billion Procurement Cartel: Why Public Money Never Reaches Frontline Care",
-    hero_lead: "Finland's state, all 21 Wellbeing Counties, HUS, and 308 municipalities spend <strong>€38.7 billion per year</strong> buying IT systems, healthcare services, lab diagnostics, and contracts from outside vendors. Our research shows that <strong>€1.43B–€3.5B per year</strong> (directly modeled savings in this dataset <strong>€1.43B/yr</strong>, scaled across the full €38.7B procurement base <strong>€3.03B–€3.5B/yr</strong>) is lost to 15 'in-house' middlemen (€1.98B/yr), 2–3x regional price markups, and 1–2 bid tenders.",
-    summary_box_title: "How to Read This Interactive Report (All 15 In-House Entities, 31 Price Benchmarks, 10 MAO Cases & 43 Buyers Are Clickable)",
-    summary_box_body: "<strong>Click any metric card, in-house intermediary (Istekki, Apotti, Sarastia, 2M-IT, Monetra, Tiera, Valtori, Fimlab, Tuomi, Meita, Kaarea, Polkka, ISLAB, Sansia, Hetapalvelut), regional price comparison, MAO case, or any of Finland's 21 Wellbeing Counties and 21 largest cities</strong>. Customize the €0 legal filing with your own details and download as .txt or PDF.",
+    hero_title: "Structural Efficiency & In-House Governance Analysis of Finnish Public Procurement (€38.7B/yr)",
+    hero_lead: "Finland's state, all 21 Wellbeing Counties, HUS, and 308 municipalities spend <strong>€38.7 billion per year</strong> purchasing IT systems, healthcare services, lab diagnostics, and contracts (Statistics Finland S.13). Grounded in audited 2024–2025 financial statements, THL/HALI unit-cost benchmarks, and Finlex Market Court (MAO) & Supreme Administrative Court (KHO) rulings, our analysis models <strong>€844M/yr in direct structural efficiency potential</strong> (and <strong>€1.1B–€2.2B/yr</strong> across the full €38.7B procurement base). <em>Note: Private framework vendors act lawfully; the policy analysis focuses on public procurement governance (Procurement Act § 15 & § 75).</em>",
+    summary_box_title: "How to Read This Interactive Report (All 15 In-House Entities, 31 Cost Benchmarks, 10 MAO/KHO Rulings & 43 Buyers Are Clickable)",
+    summary_box_body: "<strong>Click any metric card, in-house unit (Istekki, Apotti, Sarastia/Numera, 2M-IT, Monetra, Tiera, Valtori, Fimlab, Tuomi, Meita, Kaarea, Polkka, ISLAB, Sansia, Hetapalvelut), regional unit-cost benchmark, Finlex MAO case, or any of Finland's 21 Wellbeing Counties and 21 largest cities</strong> to inspect primary-source figures and download administrative requests.",
     kpi1_lbl: "Total Public External Purchases",
-    kpi1_sub: "Annual purchases by the state, 21 Wellbeing Counties, HUS, and 308 municipalities",
+    kpi1_sub: "Annual external purchases by the state, 21 Wellbeing Counties, HUS, and 308 municipalities",
     click_1: "Click: Where does the €38.7B go? →",
-    kpi2_lbl: "15 In-House 'Sidosyksikkö' Middlemen",
-    kpi2_sub: "15 middlemen (Istekki, Apotti, Sarastia, 2M-IT, Fimlab, Tuomi, Valtori, etc.) — €699.95M/yr saving",
-    click_2: "Click: What is the 0.04% 'token share' loophole? →",
-    kpi3_lbl: "2–3x Regional Overpricing",
-    kpi3_sub: "Annual savings when overpriced counties match top-quartile (P25) unit prices",
-    click_3: "Click: Why does the same service cost 3x more? →",
-    kpi4_lbl: "1–2 Bid 'Rigged' Tenders",
-    kpi4_sub: "Tailored requirements lock out SMEs (~25% receive only 1 bid) and inflate prices by 15–30%",
-    click_4: "Click: How are tender specs rigged? →",
-    lbl_search: "Search in-house company (15), Wellbeing County or city (43), MAO case, or category",
+    kpi2_lbl: "15 In-House & State IT Units",
+    kpi2_sub: "Audited 2024–2025 turnover (€1.96B/yr) — €230.99M/yr competitive efficiency benchmark",
+    click_2: "Click: Procurement Act § 15 & KHO 8.10.2025 →",
+    kpi3_lbl: "Regional P25 Cost Benchmark",
+    kpi3_sub: "Annual efficiency potential when high-cost counties converge to top-quartile (P25) unit costs",
+    click_3: "Click: THL / HALI unit-cost dispersion →",
+    kpi4_lbl: "Single-Bid Public Tenders",
+    kpi4_sub: "KKV reports ~15–16% of tenders receive only 1 bid (~€1.5B/yr) — dividing contracts into lots (§ 75) boosts competition",
+    click_4: "Click: 10 Verified MAO/KHO Rulings →",
+    lbl_search: "Search in-house unit (15), Wellbeing County or city (43), MAO ruling, or category",
     chip_lbl: "Quick filters:",
     chip_all: "Show all",
-    s1_title: "1. How a 0.04% 'Token Share' Bypasses Procurement Law (15 In-House Giants = €1.98B/yr)",
-    s1_sub: "Finland's Supreme Administrative Court (KHO 8.10.2025 taltio 2250) and Market Court (MAO:154/2024) ruled that a public authority cannot buy services without competitive bidding from an in-house company in which it holds only a nominal token share and exercises no real control.",
+    s1_title: "1. In-House Entities & Procurement Act § 15 (15 Units = €1.96B/yr Audited Turnover)",
+    s1_sub: "Finland's Supreme Administrative Court (KHO 8.10.2025 T2250) and Market Court (MAO:154/2024 & MAO:500/2024) confirmed that a public authority cannot make direct in-house awards (§ 15) when it holds only a nominal share (e.g. 0.04%–0.09%) without genuine governance control.",
     f1_step: "Step 1 · Click",
-    f1_title: "0.04% Nominal 'Token Share'",
-    f1_desc: "A municipality or Wellbeing County buys a tiny nominal share in a joint IT, lab, or payroll company (e.g., Sarastia, Istekki, Tiera, Sansia).",
+    f1_title: "Dispersed Minority Equity (<10%)",
+    f1_desc: "A municipality or Wellbeing County holds a small minority share (0.04%–2.5%) in a joint ICT, laboratory, or financial services company.",
     f2_step: "Step 2 · Click",
-    f2_title: "Multi-Million Direct Award",
-    f2_desc: "Using that single share as an excuse, officials award tens of millions in contracts with zero open competitive bidding.",
-    f3_step: "Step 3 · The Leak",
-    f3_title: "Middleman Takes a 16–30% Markup",
-    f3_desc: "The middleman subcontracts the actual work to large conglomerates (Tietoevry, CGI, Atea, Accountor) while skimming a 16–30% fee.",
-    f4_step: "Step 4 · Outcome",
-    f4_title: "€700M/yr Overcharge (€532M/yr in Top 7 IT)",
-    f4_desc: "Local SMEs are locked out of the market, and counties cut frontline nurses to pay inflated IT and administrative bills.",
-    inhouse_heading: "Click any in-house intermediary to inspect the money trail & ready-to-send €0 KKV complaint:",
-    inhouse_tbl_title: "All 15 In-House Intermediaries in Table View (Click Header to Sort or Row to Open)",
+    f2_title: "In-House Direct Award (§ 15)",
+    f2_desc: "Relying on the in-house exemption, services are ordered directly without an open tender (reviewed in KHO 8.10.2025 T2250 & HE 2/2026 vp).",
+    f3_step: "Step 3 · Structure",
+    f3_title: "Administrative Layer & Frameworks",
+    f3_desc: "The in-house unit aggregates demand and procures components from commercial vendors; multi-tier structures add coordination overhead.",
+    f4_step: "Step 4 · Efficiency Potential",
+    f4_title: "€230.99M/yr Efficiency Benchmark",
+    f4_desc: "Applying a conservative 11–14% KKV/VATT competitive tendering benchmark across the €1.96B volume yields ~€231M/yr in savings.",
+    inhouse_heading: "Click any in-house unit to inspect 2024–2025 financial statement figures & administrative review templates:",
+    inhouse_tbl_title: "All 15 In-House Units & Service Centers in Table View (Click Header to Sort or Row to Open)",
     inhouse_csv_btn: "⬇ Export In-House Table (.csv)",
     th_ih_name: "In-House Entity & ID",
-    th_ih_buy: "Buyer Group",
-    th_ih_eq: "Equity %",
-    th_ih_sp: "Direct Spend (M€/yr)",
-    th_ih_mk: "Markup (%)",
-    th_ih_sv: "Annual Saving (M€/yr)",
-    s2_title: "2. Regional Price Audit: Why Does the Exact Same Service Cost 2–3x More Next Door?",
-    s2_sub: "Click any regional price card to see how much that Wellbeing County overpays compared to Finland's best-performing quartile (P25 benchmark).",
-    s3_title: "3. Market Court (MAO) & Hilma: 1–2 Bid 'Fake Competitions' & Direct Awards (10 Cases)",
-    s3_sub: "Click any documented MAO or Hilma procurement case to see which artificial requirement locked out competitors and how any entrepreneur can demand its removal for €0.",
-    s4_title: "4. Demand Your Wellbeing County's Purchase Invoices Under the Freedom of Information Act (All 21 Wellbeing Counties + HUS + 21 Cities = 43 Authorities)",
-    s4_sub: "Under Finland's Openness of Government Activities Act (621/1999), every citizen has the right to receive machine-readable purchase invoice data within 14 days. Click any of the 43 authorities to open a ready-to-send request.",
+    th_ih_buy: "Owner / Buyer Group",
+    th_ih_eq: "Ref. Equity %",
+    th_ih_sp: "Turnover (M€/yr)",
+    th_ih_mk: "Coordination (%)",
+    th_ih_sv: "Efficiency Potential (M€/yr)",
+    s2_title: "2. Regional Unit-Cost Benchmark (THL / HALI / KKV): P25 Quartile Comparison (€594.40M/yr)",
+    s2_sub: "Click any regional benchmark card to see the modeled cost reduction if regions above the 25th percentile (P25) converge to the P25 benchmark.",
+    s3_title: "3. Market Court (MAO) & Supreme Administrative Court (KHO) Rulings (10 Verified Finlex/KKV Cases)",
+    s3_sub: "Click any verified MAO or KHO ruling (2023–2025) to inspect the court's legal findings and download an administrative template promoting open competition and division into lots (§ 75).",
+    s4_title: "4. Request Public Purchase Invoices Under the Openness of Government Activities Act (All 21 Wellbeing Counties + HUS + 21 Cities = 43 Authorities)",
+    s4_sub: "Under Finland's Openness Act (621/1999 § 13 & § 16.3), citizens have the right to receive machine-readable public purchase invoice data within 14 days.",
     buyer_tbl_title: "All 43 Major Public Buyers (All 21 Wellbeing Counties + HUS + 21 Largest Cities)",
     buyer_csv_btn: "⬇ Export All 43 Buyers (.csv)",
     th_b_name: "Public Authority & ID",
     th_b_type: "Type",
     th_b_sp: "External Spend (M€/yr)",
     th_b_op: "Open Invoice Ledger",
-    th_b_sh: "In-House Shells & Registry"
+    th_b_sh: "In-House Units & Registry"
   }}
 }};
 
@@ -1157,44 +1157,44 @@ function openKpiModal(key) {{
       `<div class="modal-section">
         <h4>${{fi ? "Selkokielinen kokonaiskuva" : "Plain-English Overview"}}</h4>
         <p>${{fi
-          ? "Suomen julkisyhteisöt käyttävät joka vuosi 38,7 miljardia euroa tavaroiden, IT-järjestelmien, hoivapalveluiden, laboratoriotutkimusten, kuljetusten ja rakennusurakoiden ostamiseen yksityisiltä ja julkisomisteisilta yrityksiltä. Tässä tutkimuksessa suoraan mallinnetut kolme leikkuria tuottavat 1,43 mrd. €/v välittömän säästön (699,95 M€ 15 sidosyksiköstä + 711,23 M€ P25-hintavertailusta + 19,70 M€ 10 MAO/Hilma-tapauksesta), ja koko kansalliseen hankintakantaan skaalattuna 3,03–3,5 mrd. €/v."
-          : "Finland's public sector spends €38.7 billion every year buying goods, IT systems, healthcare services, and construction from external vendors. The three directly modeled modules in this report identify €1.43B/yr in immediate savings (€699.95M across 15 in-house intermediaries + €711.23M P25 unit-price compression + €19.70M across 10 MAO/Hilma cases), scaling to €3.03B–€3.5B/yr nationwide."}}</p>
+          ? "Suomen julkisyhteisöt käyttävät joka vuosi 38,7 miljardia euroa tavaroiden, IT-järjestelmien, hoivapalveluiden, laboratoriotutkimusten, kuljetusten ja rakennusurakoiden ostamiseen. Tässä tutkimuksessa mallinnetut kolme osa-aluetta osoittavat 844,32 milj. €/v suoran tehostamispotentiaalin (230,99 M€ 15 sidosyksikön ja palvelukeskuksen kilpailuttamisesta + 594,40 M€ P25-yksikkökustannusvertailusta + 18,93 M€ 10 dokumentoidusta MAO/KHO-tapauksesta), ja koko kansalliseen hankintakantaan suhteutettuna 1,1–2,2 mrd. €/v."
+          : "Finland's public sector spends €38.7 billion every year purchasing goods, IT systems, healthcare services, and construction. The three empirical modules in this report identify €844.32M/yr in direct efficiency potential (€230.99M across 15 in-house units + €594.40M P25 unit-cost convergence + €18.93M across 10 MAO/KHO rulings), scaling to €1.1B–€2.2B/yr nationwide."}}</p>
       </div>`,
       'kpi-total'
     );
   }} else if (key === 'inhouse_leak') {{
     openModalHtml(
-      fi ? "Mikä on sidosyksikkö- eli ”in-house”-kuoriosakekikkailu? (15 välikättä = 1,98 mrd. €/v)" : "What Is the In-House 'Token Share' Loophole? (15 Middlemen = €1.98B/yr)",
-      fi ? "KHO 8.10.2025 taltio 2250, MAO:154/2024 & Hankintalaki 15 §" : "Supreme Administrative Court KHO 8.10.2025, MAO:154/2024 & Procurement Act § 15",
+      fi ? "Sidosyksikköjärjestelmä ja Hankintalain 15 § (15 yksikköä = 1,96 mrd. €/v)" : "In-House Governance & Procurement Act § 15 (15 Units = €1.96B/yr)",
+      fi ? "KHO 8.10.2025 taltio 2250, MAO:154/2024, MAO:500/2024 & HE 2/2026 vp" : "Supreme Administrative Court KHO 8.10.2025, MAO:154/2024 & Procurement Act § 15",
       `<div class="modal-section">
-        <h4>${{fi ? "Näin kilpailutuslaki kierretään" : "How the Law Is Bypassed"}}</h4>
+        <h4>${{fi ? "Mitä KHO 8.10.2025 (T2250) ja MAO:154/2024 linjasivat?" : "What Did KHO 8.10.2025 (T2250) and MAO:154/2024 Rule?"}}</h4>
         <p>${{fi
-          ? "Hankintalain mukaan julkinen viranomainen saa ostaa palveluita ilman kilpailutusta vain omalta yksiköltään, jota se tosiasiallisesti hallitsee. Kunnat ja hyvinvointialueet ovat kuitenkin kiertäneet lakia ostamalla 0,04–2,5 prosentin nimellisen ”kuoriosakkeen” yhteisyrityksistä (Istekki, Sarastia/Numera, 2M-IT, Monetra, Tiera, Fimlab, Tuomi Logistiikka, Meita, Kaarea, Polkka, Sansia, Hetapalvelut) tai lukittautumalla kilpailuttamattomiin alihankintaketjuihin (Apotti, Valtori, ISLAB) yhteensä 1,98 miljardilla eurolla vuodessa."
-          : "Under procurement law, a public buyer can skip competitive bidding only when buying from an entity it genuinely controls. Finnish counties and municipalities bypassed the law by buying a tiny 0.04%–2.5% 'token share' in giant joint companies or locking into uncompeted subcontracting chains totaling €1.98B/year."}}</p>
+          ? "Hankintalain 15 §:n mukaan julkinen hankintayksikkö voi tehdä suorahankinnan sidosyksiköltään vain, jos se käyttää yhtiöön tosiasiallista määräysvaltaa samalla tavoin kuin omiin toimipaikkoihinsa. KHO ja MAO vahvistivat, ettei muodollinen pienomistus (esim. 0,04–0,09 %) ilman todellista päätösvaltaa täytä lain edellytyksiä. Tarkastellun 15 yksikön yhteenlaskettu tilinpäätösliikevaihto (2024–2025) on 1 963,40 M€/v ja konservatiivinen KKV/VATT-vertailumallin mukainen tehostamispotentiaali 230,99 M€/v."
+          : "Under Procurement Act § 15, a public buyer can make direct awards to an in-house unit only when exercising genuine control over it. KHO and MAO confirmed that nominal minority shareholdings (0.04%–0.09%) without real governance power do not qualify. Total audited turnover across the 15 units is €1,963.40M/yr, with a conservative €230.99M/yr competitive efficiency potential."}}</p>
       </div>`,
       'kpi-inhouse'
     );
   }} else if (key === 'price_spread') {{
     openModalHtml(
-      fi ? "Miksi sama palvelu maksaa yhdellä alueella 2–3 kertaa enemmän kuin naapurissa?" : "Why Does the Same Service Cost 2–3x More in Neighboring Regions?",
-      fi ? "Viiden suurimman sote- ja IT-hankintakategorian yksikköhintavertailu" : "Unit-Price Audit Across 5 Major Healthcare & IT Categories",
+      fi ? "Alueelliset yksikkökustannuserot (THL / HALI ry / KKV)" : "Regional Unit-Cost Dispersion (THL / HALI / KKV Benchmarks)",
+      fi ? "Viiden keskeisen sote- ja ICT-kategorian P25-vertailu" : "P25 Benchmark Comparison Across 5 Major Healthcare & ICT Categories",
       `<div class="modal-section">
-        <h4>${{fi ? "711,23 miljoonan euron vuosisäästö pelkällä hintakaton asettamisella" : "€711.23M Annual Saving by Capping Unit Prices at the Best Quartile (P25)"}}</h4>
+        <h4>${{fi ? "594,40 miljoonan euron säästöpotentiaali edullisimman neljänneksen (P25) kustannustasolla" : "€594.40M Annual Efficiency Potential at the Top-Quartile (P25) Benchmark"}}</h4>
         <p>${{fi
-          ? "Koska hyvinvointialueet eivät julkaise eivätkä vertaa maksamiaan yksikköhintoja, sama potilastietojärjestelmän lisenssi, vuokralääkäritunti tai ikäihmisten ympärivuorokautinen hoivavuorokausi maksaa kalleimmilla alueilla jopa 2–3 kertaa enemmän kuin Suomen edullisimmassa neljänneksessä (P25-taso)."
-          : "Because Wellbeing Counties do not benchmark unit prices, the exact same EHR software seat, locum doctor hour, or elderly care day costs up to 3x more in the most expensive regions than in the best-performing quartile (P25)."}}</p>
+          ? "THL:n ja HALI ry:n julkaisemien yksikkökustannustietojen mukaan saman palvelun (kuten ikäihmisten ympärivuorokautisen palveluasumisen hoitopäivän tai potilastietojärjestelmän) yksikkökustannus vaihtelee merkittävästi alueittain ja oman tuotannon sekä ostopalvelun välillä. Kun yli 25. persentiilin (P25) kustannustason alueet saavuttavat P25-vertailutason, laskennallinen säästöpotentiaali tarkastelluissa 31 vertailupisteessä on 594,40 M€/v."
+          : "Published unit-cost statistics from THL and HALI show significant regional dispersion in identical healthcare and ICT services. Converging regions above the 25th percentile (P25) to the P25 benchmark yields €594.40M/yr across the 31 regional comparisons."}}</p>
       </div>`,
       'kpi-spread'
     );
   }} else if (key === 'single_bid') {{
     openModalHtml(
-      fi ? "1–2 tarjouksen näennäiskilpailutukset (45 % hankinnoista)" : "1–2 Bid 'Rigged' Tenders (45% of Public Procurements)",
-      fi ? "Markkinaoikeuden (MAO) ratkaisukäytäntö & Hankintalain 67 § ja 75 §" : "Market Court (MAO) Case Law & Procurement Act § 67 & § 75",
+      fi ? "Yhden tarjouksen kilpailutukset (KKV: n. 15–16 %) ja MAO-oikeuskäytäntö" : "Single-Bid Tenders (KKV: ~15–16%) & Market Court Case Law",
+      fi ? "10 vahvistettua Finlex / KKV MAO- ja KHO-ratkaisua (2023–2025)" : "10 Verified Finlex / KKV Market Court & Supreme Administrative Court Rulings",
       `<div class="modal-section">
-        <h4>${{fi ? "Miten tarjouspyyntö räätälöidään vanhalle toimittajalle?" : "How Tender Specifications Are Tailored to the Incumbent"}}</h4>
+        <h4>${{fi ? "Miten kilpailua voidaan lisätä hankintalain 75 §:n mukaisella osiin jakamisella?" : "How Dividing Contracts Into Lots (§ 75) Increases Competition"}}</h4>
         <p>${{fi
-          ? "Noin 45 prosentissa Suomen julkisista hankinnoista saadaan vain 1–2 tarjousta (ja noin neljänneksessä vain 1 tarjous). Tyypillinen keino on kirjata tarjouspyyntöön suhteeton liikevaihtovaatimus, suljettu rajapinta tai jättää hankinta jakamatta osiin (Hankintalaki 75 §). Tällöin pk-yritykset putoavat pois ja nykyinen toimittaja voi hinnoitella palvelun ilman kilpailupainetta."
-          : "Roughly 45% of Finnish public tenders receive only 1–2 bids (and ~25% receive just 1 bid) because tender specifications require disproportionate turnover, proprietary interfaces, or fail to divide contracts into lots (§ 75)—allowing the incumbent vendor to name its price."}}</p>
+          ? "Kilpailu- ja kuluttajaviraston (KKV) tutkimusten mukaan noin 15–16 prosenttia Suomen julkisista hankinnoista saa vain yhden tarjouksen (yhteensä n. 1,5 mrd. €/v), ja merkittävä osa saa vain 1–2 tarjousta. Kun hankinnat jaetaan hankintalain 75 §:n mukaisesti osakokonaisuuksiin ja soveltuvuusvaatimukset mitoitetaan suhteellisuusperiaatteen (85 §) mukaisesti, useampi pk-yritys pystyy osallistumaan tarjouskilpailuun."
+          : "According to the Finnish Competition and Consumer Authority (KKV), roughly 15–16% of Finnish public tenders receive only a single bid (~€1.5B/yr). Dividing large contracts into lots (§ 75) and setting proportionate qualification criteria (§ 85) enables broader SME participation and stronger price competition."}}</p>
       </div>`,
       'kpi-singlebid'
     );
@@ -1205,28 +1205,28 @@ function openFlowModal(step) {{
   const fi = LANG === 'fi';
   const steps = {{
     1: {{
-      t: fi ? "Vaihe 1: Kunta tai hyvinvointialue ostaa 0,04 % ”kuoriosakkeen”" : "Step 1: Authority Buys a 0.04% Nominal 'Token Share'",
-      s: fi ? "Nimellinen omistus ilman todellista päätösvaltaa" : "Nominal Ownership With Zero Real Governance Control",
-      b: fi ? "Hyvinvointialue ostaa esimerkiksi yhden osakkeen (0,04 % – 2,5 % osakekannasta) satojen kuntien ja alueiden yhteisestä yhtiöstä. Yhtiökokouksessa yksittäisellä hyvinvointialueella ei ole minkäänlaista todellista määräysvaltaa yhtiön hinnoitteluun tai johtoon."
-            : "A Wellbeing County buys a tiny fraction (0.04%–2.5%) of shares in a joint company owned by hundreds of municipalities, giving it zero real control over pricing or management."
+      t: fi ? "Vaihe 1: Hajautettu pienomistus (<10 %) yhteisessä sidosyksikössä" : "Step 1: Dispersed Minority Shareholding (<10%) in a Joint In-House Company",
+      s: fi ? "Muodollinen osakeomistus ilman yksittäisen tilaajan määräysvaltaa" : "Nominal Shareholding Without Individual Governance Control",
+      b: fi ? "Kunta tai hyvinvointialue merkitsee pienen osakeosuuden (esim. 0,04 % – 2,5 % osakekannasta) kymmenien tai satojen julkisyhteisöjen yhteisestä yhtiöstä. KHO:n ennakkopäätöksen (8.10.2025 taltio 2250) mukaan pelkkä muodollinen pienomistus ilman todellista päätösvaltaa yhtiön strategisiin tavoitteisiin ei täytä hankintalain 15 §:n edellytyksiä."
+            : "A municipality or Wellbeing County holds a small fraction (0.04%–2.5%) of shares in a joint company owned by dozens or hundreds of public authorities. Under KHO 8.10.2025 (T2250), nominal minority ownership without real strategic control does not satisfy Procurement Act § 15."
     }},
     2: {{
-      t: fi ? "Vaihe 2: Virkamies tilaa kymmenillä miljoonilla ilman kilpailutusta" : "Step 2: Officials Award Tens of Millions Without Competitive Bidding",
-      s: fi ? "Hankintalain 15 §:n väärinkäyttö (MAO:154/2024 & KHO 8.10.2025)" : "Abuse of Procurement Act § 15 (Ruled Illegal in MAO:154/2024 & KHO 8.10.2025)",
-      b: fi ? "Koska yhtiötä kutsutaan ”sidosyksiköksi” (in-house), hankintajohtaja ei julkaise lainkaan tarjouspyyntöä Hilmassa. Sopimus annetaan suoraan välikäsiyhtiölle, vaikka markkinoilla olisi kymmeniä edullisempia suomalaisia yrityksiä."
-            : "Claiming the vendor is an 'in-house' unit, procurement officials skip public tenders entirely and hand multi-million contracts directly to the intermediary."
+      t: fi ? "Vaihe 2: Sidosyksikkösuorahankinta ilman avointa tarjouskilpailua" : "Step 2: Direct In-House Award Without Open Tendering",
+      s: fi ? "Hankintalain 15 § ja 10 % vähimmäisomistusraja (HE 2/2026 vp)" : "Procurement Act § 15 and the 10% Minimum Ownership Reform (HE 2/2026 vp)",
+      b: fi ? "Sidosyksikköpoikkeukseen vedoten hankintayksikkö tilaa IT-, taloushallinto- tai tukipalvelut suoraan yhtiöltä julkaisematta hankintailmoitusta Hilmassa. Hankintalain uudistus (HE 2/2026 vp) asettaa sidosyksikköomistukselle selkeän 10 prosentin vähimmäisomistusrajan."
+            : "Relying on the in-house exemption, the contracting authority orders services directly without publishing an open Hilma tender notice. Finland's procurement law reform (HE 2/2026 vp) establishes a statutory 10% minimum equity threshold."
     }},
     3: {{
-      t: fi ? "Vaihe 3: Välikäsiyhtiö ottaa 16–30 % katteen ja ketjuttaa työn pörssiyhtiöille" : "Step 3: Middleman Skims 16–30% and Subcontracts to Big Tech",
-      s: fi ? "Tuplabyrokratia veronmaksajan piikkiin" : "Double Bureaucracy Paid by the Taxpayer",
-      b: fi ? "Välikäsiyhtiö (kuten Istekki, Tiera, Sarastia, Fimlab tai Tuomi) ei suinkaan tuota kaikkia ohjelmistoja ja laitteita itse, vaan ostaa ne edelleen suurilta pörssiyhtiöiltä (Tietoevry, CGI, Atea, Accountor, Roche) ja lisää laskuun oman 16–30 % hallinto- ja johtopalkkiokatteensa."
-            : "The in-house intermediary subcontracts the actual software, lab, and hardware delivery to large conglomerates (Tietoevry, CGI, Atea) and adds its own 16–30% administrative margin on top."
+      t: fi ? "Vaihe 3: Moniportainen hallintorakenne ja puitesopimusketjut" : "Step 3: Multi-Tier Governance & Framework Subcontracting",
+      s: fi ? "Koordinointikustannus ja rajapintojen avoimuus" : "Coordination Overhead and Open Standards",
+      b: fi ? "Sidosyksikkö tuottaa osan palveluista itse ja hankkii osan ohjelmistoista, laitteista ja asiantuntijatyöstä kaupallisilta puitesopimustoimittajilta. Kaupalliset toimittajat toimivat täysin laillisesti; rakenteellinen kysymys koskee sitä, milloin suora yhteishankinta (Hansel / oma kilpailutus) on moniportaista sidosyksikkörakennetta kustannustehokkaampi."
+            : "The in-house unit produces part of the services internally and procures software, hardware, and specialist work from commercial framework vendors. Commercial vendors act lawfully; the structural question is when direct open tendering is more cost-efficient than a multi-tier in-house structure."
     }},
     4: {{
-      t: fi ? "Vaihe 4: Lopputulos — 700 milj. €/v ylihintaa (532 milj. €/v 7 IT-jätissä)" : "Step 4: Outcome — €700M/yr Overcharge & Frontline Care Cuts",
-      s: fi ? "Hallinto ja välikädet syövät hoitobudjetin (699,95 milj. €/v kaikissa 15 sidosyksikössä)" : "Middleman Markups Drain the Frontline Care Budget (€699.95M/yr across 15 middlemen)",
-      b: fi ? "Kun hyvinvointialueet, kunnat ja valtion virastot maksavat 15 sidosyksikkövälikädelle yhteensä 699,95 miljoonaa euroa vuodessa ylihintaa ja ketjutuskustannuksia (josta 532,38 milj. €/v pelkästään 7 suurimmassa IT- ja talousvälikädessä), lakisääteinen alijäämä katetaan sulkemalla terveysasemia ja vähentämällä hoitohenkilökuntaa."
-            : "When Wellbeing Counties, municipalities, and state agencies overpay €699.95M/yr across the 15 middlemen (€532.38M/yr in the top 7 IT/admin intermediaries alone), they balance their budgets by closing local clinics and cutting nursing staff."
+      t: fi ? "Vaihe 4: Tehostamispotentiaali — 230,99 milj. €/v (15 yksikköä)" : "Step 4: Efficiency Potential — €230.99M/yr Across 15 Units",
+      s: fi ? "KKV:n ja VATT:n tutkimuksiin perustuva 11–14 % kilpailupotentiaali" : "11–14% Competitive Benchmark Grounded in KKV & VATT Research",
+      b: fi ? "Kun 15 tarkastellun sidosyksikön ja palvelukeskuksen 1 963,40 miljoonan euron vuotuiseen tilinpäätösliikevaihtoon sovelletaan konservatiivista 11–14 % kilpailu- ja koordinointisäästöä, laskennallinen tehostamispotentiaali on 230,99 miljoonaa euroa vuodessa."
+            : "Applying a conservative 11–14% competitive and coordination efficiency benchmark across the €1,963.40M/yr audited turnover of the 15 units yields €230.99M/yr in modeled savings."
     }}
   }};
   const item = steps[step];
@@ -1467,15 +1467,15 @@ function renderAll() {{
     const eqStr = Number(f.buyer_equity_share_pct).toLocaleString('fi-FI');
     const accent = isToken ? 'red-accent' : 'amber-accent';
     const badge = isToken
-      ? `<span class="badge badge-red">${{fi ? 'Kuoriosake ' + eqStr + ' %' : 'Token Share ' + eqStr + '%'}}</span>`
-      : `<span class="badge badge-amber">${{fi ? 'Suorahankintamonopoli' : 'In-House Monopoly'}}</span>`;
+      ? `<span class="badge badge-red">${{fi ? 'Pienosakkaat ' + eqStr + ' % (<10 %)' : 'Minority Share ' + eqStr + '%'}}</span>`
+      : `<span class="badge badge-amber">${{fi ? 'Enemmistö / Lakisääteinen' : 'Majority / Statutory'}}</span>`;
     const inComment = isToken
       ? (fi
-          ? `Vähemmistöosakkaan osuus vain ${{eqStr}} %, suoraosto ilman kilpailutusta ${{fmtCardM(f.annual_spend_m_eur)}}/v. Ketjuttaa työtä: ${{f.subcontractor_vendor}}.`
-          : `Minority buyer owns just ${{eqStr}}% yet awards ${{fmtCardM(f.annual_spend_m_eur)}}/yr without tenders. Subcontracted to: ${{f.subcontractor_vendor}}.`)
+          ? `${{f.legal_status}}`
+          : `Audited turnover ${{fmtCardM(f.annual_spend_m_eur)}}/yr · Minority shareholder ref. ${{eqStr}}%. Framework categories: ${{f.subcontractor_vendor}}.`)
       : (fi
-          ? `${{f.legal_status}}. Suoraosto ilman kilpailutusta ${{fmtCardM(f.annual_spend_m_eur)}}/v. Ketjuttaa työtä: ${{f.subcontractor_vendor}}.`
-          : `Uncompeted in-house monopoly (${{eqStr}}% equity), ${{fmtCardM(f.annual_spend_m_eur)}}/yr direct spend. Subcontracted to: ${{f.subcontractor_vendor}}.`);
+          ? `${{f.legal_status}}`
+          : `Audited turnover ${{fmtCardM(f.annual_spend_m_eur)}}/yr (${{eqStr}}% ref. share). Framework categories: ${{f.subcontractor_vendor}}.`);
     inHtml += `<div class="story-card ${{accent}} clickable-card" onclick="openInhouseModal(${{f.origIdx}})">
       <div class="story-top">
         <div class="card-kicker-row">
@@ -1483,16 +1483,16 @@ function renderAll() {{
           <span class="card-id-pill">Y: ${{f.inhouse_y_tunnus}}</span>
         </div>
         <h3>${{f.inhouse_vendor}}</h3>
-        <div class="story-subtitle">${{fi ? 'Tilaajat:' : 'Buyers:'}} ${{f.buyer_name}}</div>
+        <div class="story-subtitle">${{fi ? 'Omistajat / tilaajat:' : 'Owners / Buyers:'}} ${{f.buyer_name}}</div>
         <p class="story-commentary">${{inComment}}</p>
       </div>
       <div>
         <div class="metrics-strip">
-          <div><span>${{fi ? 'Suora osto / v' : 'Direct Spend'}}</span><strong>${{fmtCardM(f.annual_spend_m_eur)}}</strong></div>
-          <div><span>${{fi ? 'Välikäden kate' : 'Markup'}}</span><strong style="color:var(--amber)">${{f.inhouse_markup_pct}} %</strong></div>
-          <div><span>${{fi ? 'Vuosisäästö' : 'Annual Saving'}}</span><strong style="color:var(--red)">-${{fmtCardM(f.recoverable_saving_m_eur)}}</strong></div>
+          <div><span>${{fi ? 'Liikevaihto / v' : 'Turnover / yr'}}</span><strong>${{fmtCardM(f.annual_spend_m_eur)}}</strong></div>
+          <div><span>${{fi ? 'Koordinointi' : 'Coordination'}}</span><strong style="color:var(--amber)">${{f.inhouse_markup_pct}} %</strong></div>
+          <div><span>${{fi ? 'Säästöpotentiaali' : 'Efficiency Pot.'}}</span><strong style="color:var(--red)">-${{fmtCardM(f.recoverable_saving_m_eur)}}</strong></div>
         </div>
-        <div class="click-hint">${{fi ? 'Klikkaa: Rahan reitti & 0 € KKV-ilmoitus →' : 'Click: Money trail & €0 KKV complaint →'}}</div>
+        <div class="click-hint">${{fi ? 'Klikkaa: Tilinpäätöstiedot & 0 € KKV-selvityspyyntö →' : 'Click: Financial data & €0 KKV review request →'}}</div>
       </div>
     </div>`;
   }});

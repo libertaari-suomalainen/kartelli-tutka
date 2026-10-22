@@ -1,4 +1,4 @@
-name: Deploy Static Pages
+name: Build & Deploy Static Web App to GitHub Pages
 
 on:
   push:
@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  build_and_deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -23,12 +23,26 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Configure Pages
+
+      - name: Set up Python 3.12 (Zero External Dependencies)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run Unit & SSOT Verification Tests
+        run: PYTHONPATH=src python3 -B -m unittest discover -v -s tests
+
+      - name: Compile SSOT Snapshot, Excel Workbook & Static Web App
+        run: PYTHONPATH=src python3 -B -m kartelli_tutka.build_all
+
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Upload Static Artifact (dist/)
+
+      - name: Upload dist/ artifact to GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: "dist"
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
